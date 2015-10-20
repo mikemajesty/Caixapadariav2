@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using View.Enum;
 using View.UI.ViewLogin;
+using Model.BO;
 
 namespace View.UI.ViewLogin
 {
@@ -48,7 +49,7 @@ namespace View.UI.ViewLogin
                         break;
                     case EnumTipoOperacao.Alterar:
                         PopularTxt(_usuarios);
-                        MudarTextosDoForm(textoForm: "Alterar Usuário",textoButton:"Alterar");
+                        MudarTextosDoForm(textoForm: "Alterar Usuário", textoButton: "Alterar");
                         MudarCorDoBotao(_tipoOperacao);
                         EsconderUltimoAcesso();
                         break;
@@ -223,7 +224,7 @@ namespace View.UI.ViewLogin
 
                     txtSenha.PasswordChar = '\0';
                     txtConfirmarSenha.PasswordChar = '\0';
-                }      
+                }
                 cbbPermissao.Text = usuarios.Permicao;
                 txtUltimoAcesso.Text = usuarios.UltimoAcesso != null
                 && _tipoOperacao == EnumTipoOperacao.Detalhes
@@ -320,8 +321,19 @@ namespace View.UI.ViewLogin
 
                         break;
                     case EnumTipoOperacao.Deletar:
-                        if (SeTxtEstaVazio() == 0)
+
+                        if (_usuarios.ID == Usuarios.IDStatic)
                         {
+                            DialogMessage.MessageFullComButtonOkIconeDeInformacao("Não é possível excluir o seu próprio usuário enquanto estiver logado no sistema.", "Aviso");
+                            
+                        }
+                        else if (new UsuariosBO().VerificarSeExisteAdministrador(usuario: PreencherUsuario()))
+                        {
+                            DialogMessage.MessageFullComButtonOkIconeDeInformacao("Você não pode excluir o unico administrador do sistema.","Aviso");
+                        }
+                        else if (SeTxtEstaVazio() == 0)
+                        {
+
                             if (_usuarioRepositorio.Deletar(PreencherUsuario()) == Sucesso)
                             {
                                 MensagemDeSucesso("Usuário deletado com sucesso");
@@ -339,11 +351,11 @@ namespace View.UI.ViewLogin
                         break;
                 }
             }
-           
+
             catch (CustomException erro)
             {
                 DialogMessage.MessageFullComButtonOkIconeDeInformacao(erro.Message, "Aviso");
-                LimparTxt(new List<TextBox> { txtLogin});
+                LimparTxt(new List<TextBox> { txtLogin });
                 ColocarFocnoNotxt(txtLogin);
             }
             catch (DbUpdateException erro)

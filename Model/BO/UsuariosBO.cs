@@ -19,7 +19,15 @@ namespace Model.BO
             {
                  
                 Usuarios usuario = banco.Usuarios.FirstOrDefault(c => c.Login == nomeUsuarios.Login && c.Senha == nomeUsuarios.Senha);
-                return usuario == null ? false : true;
+                if (usuario == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    Usuarios.IDStatic = usuario.ID;
+                    return true;
+                }
 
             }
             catch (CustomException erro)
@@ -60,7 +68,27 @@ namespace Model.BO
             }
 
         }
-  
+        public bool VerificarSeExisteAdministrador(Usuarios usuario)
+        {
+            try
+            {
+                bool retorno = false;
+                if (banco.Usuarios.Where(c=>c.Permicao == "Administrador").Count() == 2)
+                {
+                    retorno = true;
+                }
+                return retorno;
+            }
+            catch (CustomException erro)
+            {
+                throw new CustomException(erro.Message);
+            }
+            catch (Exception erro)
+            {
+                throw new Exception(erro.Message);
+            }
+
+        }
 
 
     }

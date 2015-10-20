@@ -904,28 +904,41 @@ namespace View.UI.ViewCaixa
                     }
                     else
                     {
-                        if (txtQuantidade.Text == "0" || txtQuantidade.Text == "00" || txtQuantidade.Text == "000")
+                        DialogResult dialogResult = DialogResult.OK;
+                        if (Convert.ToInt32(txtQuantidade.Text) > 20)
                         {
-                            LimparTxt(new List<TextBox>() { txtQuantidade });
-                            FocarNoTxt(txtQuantidade);
-                            DialogMessage.MessageFullComButtonOkIconeDeInformacao("Não é possível vende um produto com o campo Quantidade com 0", "Aviso");
+                            dialogResult = DialogMessage.MessageFullQuestion("Deseja vender " + txtQuantidade.Text + " produtos?", "Aviso");
                         }
-                        else if (txtQuantidade.Text.Length == 0)
+                        if (dialogResult == DialogResult.OK || dialogResult == DialogResult.Yes)
                         {
-                            FocarNoTxt(txtQuantidade);
-                            DialogMessage.MessageFullComButtonOkIconeDeInformacao("Não é possível vende um produto com o campo Quantidade vazio.", "Aviso");
+                            if (txtQuantidade.Text == "0" || txtQuantidade.Text == "00" || txtQuantidade.Text == "000")
+                            {
+                                LimparTxt(new List<TextBox>() { txtQuantidade });
+                                FocarNoTxt(txtQuantidade);
+                                DialogMessage.MessageFullComButtonOkIconeDeInformacao("Não é possível vende um produto com o campo Quantidade com 0", "Aviso");
+                            }
+                            else if (txtQuantidade.Text.Length == 0)
+                            {
+                                FocarNoTxt(txtQuantidade);
+                                DialogMessage.MessageFullComButtonOkIconeDeInformacao("Não é possível vende um produto com o campo Quantidade vazio.", "Aviso");
+                            }
+                            else
+                            {
+                                InstanciarProdutoRepositorio();
+                                _produtoRepositorio.AdicionarProdutoParaVenda(ltvProdutos, txtCodigoDoProduto.Text, Convert.ToInt32(txtQuantidade.Text));
+                                GetValorNaComanda();
+                                LimparTxt(new List<TextBox>() { txtCodigoDoProduto });
+                                MostrarBotaoVendaSeExisteItensNaComanda();
+                                EsconderGroupBoxOuMostrar(new List<GroupBox>() { gpbValorPorPeso }, Esconder);
+                                DesmarcarCheckBox();
+                                LimparTxt(new List<TextBox>() { txtValorPago });
+                                CarregarTxtQuantidadeComUm();
+                            }
                         }
                         else
                         {
-                            InstanciarProdutoRepositorio();
-                            _produtoRepositorio.AdicionarProdutoParaVenda(ltvProdutos, txtCodigoDoProduto.Text, Convert.ToInt32(txtQuantidade.Text));
-                            GetValorNaComanda();
-                            LimparTxt(new List<TextBox>() { txtCodigoDoProduto });
-                            MostrarBotaoVendaSeExisteItensNaComanda();
-                            EsconderGroupBoxOuMostrar(new List<GroupBox>() { gpbValorPorPeso }, Esconder);
-                            DesmarcarCheckBox();
-                            LimparTxt(new List<TextBox>() { txtValorPago });
-                            CarregarTxtQuantidadeComUm();
+                            FocarNoTxt(txt:txtQuantidade);
+                            LimparTxt(new List<TextBox> { txtQuantidade});
                         }
 
                     }

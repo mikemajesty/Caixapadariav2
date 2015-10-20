@@ -3,6 +3,7 @@ using Controller.Repositorio;
 using Mike.Utilities.Desktop;
 using Model.Entidades;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace View.UI.ViewCaixa
@@ -140,7 +141,7 @@ namespace View.UI.ViewCaixa
             {
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
-            finally { EsconderBotao(); LimparTxt(); };
+            finally { EsconderBotao(); LimparTxt(new List<TextBox> { txtValorPago, txtTroco }); };
         }
 
         private void InstanciarMovimentacaoCaixa()
@@ -181,9 +182,10 @@ namespace View.UI.ViewCaixa
             cbbTipoDePagamento.SelectedIndex = 0;
         }
 
-        private void LimparTxt()
+        private void LimparTxt(List<TextBox> txtList)
         {
-            txtValorPago.Text = string.Empty;
+            txtList.ForEach(c => c.Text = string.Empty);
+
         }
 
         private void txtValorPago_KeyPress(object sender, KeyPressEventArgs e)
@@ -222,28 +224,52 @@ namespace View.UI.ViewCaixa
 
             try
             {
-
-
-                if ((sender as TextBox).Text.Length > 0)
+                if (cbbTipoDePagamento.Text == EnumTipoPagamento.Dinheiro.ToString())
                 {
-                    decimal valorPago = Decimal.Parse((sender as TextBox).Text);
-                    decimal ValorTotal = _fiado.Valor;
-
-                    if (valorPago > ValorTotal)
+                    if (txtValorPago.Text.Length > 0)
                     {
-                        throw new CustomException("Digite um valor menor ou igual ao valor da dívida.");
+                        decimal valorPago = Decimal.Parse((sender as TextBox).Text);
+                        decimal ValorTotal = _fiado.Valor;
 
+                        if (valorPago >= ValorTotal)
+                        {
+                            txtTroco.Text = Troco.GerarTroco(valorPago, ValorTotal);
+                            MostrarBotao();
+                            
+                        }
+                        else
+                        {
+                            EsconderBotao();
+                            LimparTxt(new List<TextBox> { txtTroco });
+                        }
                     }
                     else
                     {
-                        MostrarBotao();
+                        EsconderBotao();
+                        LimparTxt(new List<TextBox> { txtTroco });
                     }
                 }
-                else
-                {
-                    EsconderBotao();
+                
+                //if ((sender as TextBox).Text.Length > 0)
+                //{
+                //    decimal valorPago = Decimal.Parse((sender as TextBox).Text);
+                //    decimal ValorTotal = _fiado.Valor;
 
-                }
+                //    if (valorPago > ValorTotal)
+                //    {
+                //        throw new CustomException("Digite um valor menor ou igual ao valor da dívida.");
+
+                //    }
+                //    else
+                //    {
+                //        MostrarBotao();
+                //    }
+                //}
+                //else
+                //{
+                //    EsconderBotao();
+
+                //}
 
             }
             catch (CustomException erro)
@@ -274,21 +300,25 @@ namespace View.UI.ViewCaixa
                 switch (cbbTipoDePagamento.Text)
                 {
                     case "Cartão":
-                        EsconderBotao();
                         MostrarGruopBox(gpbValorPago);
-                        LimparTxt();
+                        LimparTxt(new List<TextBox> { txtValorPago, txtTroco });
+                        EsconderGroupBox(gpb: gpbValorPago);
+                        EsconderGroupBox(gpb: gpbTroco);
                         FocoNoTextBox();
+                        MostrarBotao();
                         break;
                     case "Dinheiro":
                         EsconderBotao();
-                        LimparTxt();
+                        LimparTxt(new List<TextBox> { txtValorPago, txtTroco });
                         MostrarGruopBox(gpbValorPago);
+                        MostrarGruopBox(gpb: gpbTroco);
                         FocoNoTextBox();
                         break;
                     case "Creditar":
                         EsconderBotao();
                         EsconderGroupBox(gpb: gpbValorPago);
-                        LimparTxt();
+                        EsconderGroupBox(gpb: gpbTroco);
+                        LimparTxt(new List<TextBox> { txtValorPago, txtTroco });
                         break;
 
                 }
