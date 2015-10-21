@@ -26,23 +26,7 @@ namespace View.UI.ViewEstoque
             try
             {
                 PlaceLowerRight();
-                _estoqueRepositorio = new EstoqueRepositorio();
-                _estoqueRepositorio.VerificarSeEstaAbaixoDoEstoque().ForEach(c => listaDeProdutosAbaixoNoEstoque.Add(c));
-                lblExpirar.Text = "Faltam \n" + new KeyGenRepositorio().GetDiasTrail() + "\ndias\n" +
-                    "para expirar\no programa";
-
-                if (listaDeProdutosAbaixoNoEstoque.Count > 0)
-                {
-                    dgvAvisosEstoque.Visible = true;
-                    tabAvisos.Visible = true;
-                    lblSemRecado.Visible = false;
-                    AtualizarGrid();
-                }
-                else
-                {
-                    dgvAvisosEstoque.Visible = false;
-                    lblSemRecado.Visible = true;
-                }
+                CarregarDgv();
             }
             catch (Exception)
             {
@@ -53,19 +37,49 @@ namespace View.UI.ViewEstoque
 
         }
 
+        public void CarregarDgv()
+        {
+            try
+            {
+                lblExpirar.Text = "Faltam \n" + new KeyGenRepositorio().GetDiasTrail() + "\ndias\n" +
+                  "para expirar\no programa";
+                AtualizarGrid();               
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+           
+        }     
         private void AtualizarGrid()
         {
             try
             {
+                _estoqueRepositorio = new EstoqueRepositorio();
+                listaDeProdutosAbaixoNoEstoque.Clear();
+                _estoqueRepositorio.VerificarSeEstaAbaixoDoEstoque().ForEach(c => listaDeProdutosAbaixoNoEstoque.Add(c));
                 _produtoRepositorio = new ProdutoRepositorio();
-                foreach (var item in listaDeProdutosAbaixoNoEstoque)
+
+                if (listaDeProdutosAbaixoNoEstoque.Count > 0)
                 {
-                    listProd.Add(_produtoRepositorio.GetProdutoPorID(item));
+                    dgvAvisosEstoque.Visible = true;
+                    tabAvisos.Visible = true;
+                    lblSemRecado.Visible = false;
+                    listProd.Clear();
+                    listaDeProdutosAbaixoNoEstoque.ForEach(c=> listProd.Add(_produtoRepositorio.GetProdutoPorID(c)));                  
+                    lblSemRecado.Visible = false;
+                    dgvAvisosEstoque.Columns.Clear();
+                    dgvAvisosEstoque.DataSource = listProd.Select(item => new { Nome = item.Nome, Código = item.Codigo, Qtd = item.Quantidade }).ToList();
+                    dgvAvisosEstoque.EsconderColuna("Código");
+                    dgvAvisosEstoque.AjustartamanhoDoDataGridView(new List<TamanhoGrid>() { new TamanhoGrid { ColunaNome = "Nome", Tamanho = 250 }, new TamanhoGrid { ColunaNome = "Qtd", Tamanho = 80 } });
                 }
-                lblSemRecado.Visible = false;
-                dgvAvisosEstoque.DataSource = listProd.Select(item => new { Nome = item.Nome, Código = item.Codigo, Qtd = item.Quantidade }).ToList();
-                dgvAvisosEstoque.EsconderColuna("Código");
-                dgvAvisosEstoque.AjustartamanhoDoDataGridView(new List<TamanhoGrid>() { new TamanhoGrid { ColunaNome = "Nome", Tamanho = 250 }, new TamanhoGrid { ColunaNome = "Qtd", Tamanho = 80 } });
+                else
+                {
+                    dgvAvisosEstoque.Visible = false;
+                    lblSemRecado.Visible = true;
+                }
+             
             }
             catch (Exception)
             {

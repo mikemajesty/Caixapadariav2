@@ -7,8 +7,8 @@ using Model.Entidades;
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using View.Enum;
-using View.UI.ViewLogin;
 using Model.BO;
+using System.Linq;
 
 namespace View.UI.ViewLogin
 {
@@ -115,30 +115,15 @@ namespace View.UI.ViewLogin
 
         }
 
-        private void DesabilitarComboBox(ComboBox cbb)
-        {
-            cbb.Enabled = false;
-        }
+        private void DesabilitarComboBox(ComboBox cbb) => cbb.Enabled = false;
+       
+        private void MudarLocalizacaoDoBotaoParaBaixo() => btnCadastrar.Location = new Point(12, 350);      
 
-        private void MudarLocalizacaoDoBotaoParaBaixo()
-        {
-            btnCadastrar.Location = new Point(12, 350);
-        }
-
-        private void MudarTamanhoDoFormParaMais()
-        {
-            this.Size = new Size(359, 550);
-        }
-
-        private void MudarLocalizacaoDoGroupBoxUlmimoAcesso()
-        {
-            gpbUltimoAcesso.Location = new Point(12, 278);
-        }
-
-        private void EsconderUltimoAcesso()
-        {
-            gpbUltimoAcesso.Visible = false;
-        }
+        private void MudarTamanhoDoFormParaMais() => this.Size = new Size(359, 550);
+      
+        private void MudarLocalizacaoDoGroupBoxUlmimoAcesso() => gpbUltimoAcesso.Location = new Point(12, 278);
+      
+        private void EsconderUltimoAcesso() => gpbUltimoAcesso.Visible = false;       
 
         private void MudarCorDoBotao(EnumTipoOperacao _tipoOperacao)
         {
@@ -160,30 +145,15 @@ namespace View.UI.ViewLogin
             }
         }
 
-        private void MudarCorDoBotao(Color cor)
-        {
-            btnCadastrar.BackColor = cor;
-        }
+        private void MudarCorDoBotao(Color cor) => btnCadastrar.BackColor = cor;
+      
+        private void MudarTamanhoDoFormParaMenos() => this.Size = new Size(359, 475);
+       
+        private void MudarLocalizacaoDoBotaoParaCima() => btnCadastrar.Location = new Point(12, 277);
+       
+        private void MudarLocalizacaoDoGroupBoxPermissao() => gpbPermicao.Location = new Point(12, 203);       
 
-        private void MudarTamanhoDoFormParaMenos()
-        {
-            this.Size = new Size(359, 475);
-        }
-
-        private void MudarLocalizacaoDoBotaoParaCima()
-        {
-            btnCadastrar.Location = new Point(12, 277);
-        }
-
-        private void MudarLocalizacaoDoGroupBoxPermissao()
-        {
-            gpbPermicao.Location = new Point(12, 203);
-        }
-
-        private void RedimencionarGroupBoxDadosDoLogin()
-        {
-            gpbDadosDoUsuario.Height = 109;
-        }
+        private void RedimencionarGroupBoxDadosDoLogin() => gpbDadosDoUsuario.Height = 109;    
 
         private void EsconderConfirmarSenha()
         {
@@ -192,7 +162,7 @@ namespace View.UI.ViewLogin
         }
 
         private void DesabilitarCampos()
-        {
+        {            
             foreach (Control gpb in this.Controls)
             {
                 if (gpb is GroupBox)
@@ -221,7 +191,6 @@ namespace View.UI.ViewLogin
                 txtConfirmarSenha.Text = usuarios.Senha;
                 if (Usuarios.PermissaoStatic == "Administrador")
                 {
-
                     txtSenha.PasswordChar = '\0';
                     txtConfirmarSenha.PasswordChar = '\0';
                 }
@@ -243,10 +212,8 @@ namespace View.UI.ViewLogin
 
         }
 
-        private void ColocarFocnoNotxt(TextBox txt)
-        {
-            this.FocoNoTxt(txt);
-        }
+        private void ColocarFocnoNotxt(TextBox txt) => this.FocoNoTxt(txt);
+
 
         private void CarregarPermissao()
         {
@@ -255,14 +222,10 @@ namespace View.UI.ViewLogin
         }
 
 
-        private void MensagemDeSucesso(string mensagem)
-        {
-            DialogMessage.MessageFullComButtonOkIconeDeInformacao(mensagem, "Aviso");
-        }
-        private void InstanciarUsuarioRepositorio()
-        {
-            _usuarioRepositorio = new UsuarioRepositorio();
-        }
+        private void MensagemDeSucesso(string mensagem) => DialogMessage.MessageFullComButtonOkIconeDeInformacao(mensagem, "Aviso");
+
+        private void InstanciarUsuarioRepositorio() => _usuarioRepositorio = new UsuarioRepositorio();
+
 
         private void PosSalvamento()
         {
@@ -275,10 +238,16 @@ namespace View.UI.ViewLogin
                 OpenMdiForm.OpenForWithShow(new frmLogin(), this);
             }
         }
-        private Usuarios PreencherUsuario()
+        private Usuarios PreencherUsuario() =>
+        new Usuarios()
         {
-            return new Usuarios() { ID = _usuarios.ID, Login = txtLogin.Text, Senha = txtSenha.Text, Confirmar = txtConfirmarSenha.Text, Permicao = cbbPermissao.Text, NomeCompleto = txtNome.Text.UpperCaseOnlyFirst() };
-        }
+            ID = _usuarios.ID,
+            Login = txtLogin.Text,
+            Senha = txtSenha.Text,
+            Confirmar = txtConfirmarSenha.Text,
+            Permicao = cbbPermissao.Text,
+            NomeCompleto = txtNome.Text.UpperCaseOnlyFirst()
+        };
 
         private void btnCadastrar_Click(object sender, EventArgs e)
         {
@@ -310,6 +279,16 @@ namespace View.UI.ViewLogin
                         {
                             if (_usuarioRepositorio.Alterar(PreencherUsuario()) == Sucesso)
                             {
+                                var nomeCompleto  = PreencherUsuario().NomeCompleto;
+                                if (Usuarios.NomeCompletoStatic != nomeCompleto)
+                                {
+                                    frmMenu form = (frmMenu)Application.OpenForms[name:nameof(frmMenu)];
+                                    if (form != null)
+                                    {
+                                        form.LblUsuarioTexto = nomeCompleto;
+                                    }
+                                   
+                                }
                                 MensagemDeSucesso("Usuário alterado com sucesso");
                                 this.DialogResult = DialogResult.Yes;
                             }
@@ -325,11 +304,11 @@ namespace View.UI.ViewLogin
                         if (_usuarios.ID == Usuarios.IDStatic)
                         {
                             DialogMessage.MessageFullComButtonOkIconeDeInformacao("Não é possível excluir o seu próprio usuário enquanto estiver logado no sistema.", "Aviso");
-                            
+
                         }
                         else if (new UsuariosBO().VerificarSeExisteAdministrador(usuario: PreencherUsuario()))
                         {
-                            DialogMessage.MessageFullComButtonOkIconeDeInformacao("Você não pode excluir o unico administrador do sistema.","Aviso");
+                            DialogMessage.MessageFullComButtonOkIconeDeInformacao("Você não pode excluir o unico administrador do sistema.", "Aviso");
                         }
                         else if (SeTxtEstaVazio() == 0)
                         {
@@ -368,13 +347,7 @@ namespace View.UI.ViewLogin
             }
         }
 
-        private void LimparTxt(List<TextBox> listTxt)
-        {
-            foreach (var txt in listTxt)
-            {
-                txt.Text = string.Empty;
-            }
-        }
+        private void LimparTxt(List<TextBox> listTxt) => listTxt.ForEach(c => c.Text = string.Empty);
 
         public int SeTxtEstaVazio()
         {
@@ -382,13 +355,7 @@ namespace View.UI.ViewLogin
             {
                 TextBox[] txtList = { txtNome, txtLogin, txtSenha, txtConfirmarSenha };
                 int retorno = 0;
-                foreach (var txt in txtList)
-                {
-                    if (txt.Text == "")
-                    {
-                        retorno = 1;
-                    }
-                }
+                txtList.ToList().ForEach(c=> retorno = c.Text == "" ? 1 : 0);                
                 return retorno;
             }
             catch (CustomException erro)
@@ -402,22 +369,10 @@ namespace View.UI.ViewLogin
 
         }
 
-
-        private void FecharForm()
-        {
-            this.Close();
-        }
-
-        private void txtNome_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            ValidatorField.Letter(e: e);
-        }
-
-        private void cbbPermissao_SelectedValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
+        private void FecharForm() => this.Close();
+        
+        private void txtNome_KeyPress(object sender, KeyPressEventArgs e) => ValidatorField.Letter(e: e);
+       
         private void cbbPermissao_SelectedIndexChanged(object sender, EventArgs e)
         {
             ltbDadosDoAcesso.Items.Clear();

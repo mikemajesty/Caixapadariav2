@@ -51,6 +51,7 @@ namespace Controller.Repositorio
             {
 
                 List<int> listProdID = new List<int>();
+                listProdID.Clear();
                 foreach (var item in SelectNoEstoqueAbaixoDoAceitavel())
                 {
                     listProdID.Add(item.ID);
@@ -75,7 +76,6 @@ namespace Controller.Repositorio
 
             try
             {
-
                 dgv.DataSource = SelectNoEstoque();
             }
             catch (CustomException erro)
@@ -125,9 +125,6 @@ namespace Controller.Repositorio
         }
         public dynamic SelectNoEstoqueAbaixoDoAceitavel()
         {
-
-
-
             try
             {
 

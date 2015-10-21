@@ -134,7 +134,7 @@ namespace Model.Entidades
             set { _ultimoAcesso = value; }
         }
         public static string NomeCompletoStatic { get; set; }
-        public static string NomeStatic { get; set; }
+        public static string LoginStatic { get; set; }
         public static int IDStatic { get; set; }
         public static string PermissaoStatic { get; set; }
     }

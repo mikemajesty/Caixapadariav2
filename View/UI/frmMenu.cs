@@ -31,18 +31,17 @@ namespace View
             _usuario = usuario;
             InitializeComponent();
         }
-      
+
         private void InstanciaCaixaRepositorio()
         {
             _caixaRepositorio = new CaixaRepositorio();
-        }       
-
+        }
+     
         private void frmMenu_Load(object sender, EventArgs e)
         {
 
             try
             {
-
                 ContainerContext.Context = this;
                 OpenMdiForm.LoadNewKeepAnother(this, new frmAlertaEstoque());
                 VerificaQuantidadesDeDatas();
@@ -63,10 +62,10 @@ namespace View
                     else
                     {
                         Properties.Settings.Default.CaixaAberto = false;
-                    }  
-                   
+                    }
+
                 }
-                   
+
                 if (_keyGenRepositorio.GetDiasTrail() == 0)
                 {
                     new frmKeyGen().Show();
@@ -85,15 +84,20 @@ namespace View
 
         }
 
-      
+        public string LblUsuarioTexto
+        {
+            
+            get { return this.lblUsuarioLogado.Text; }
+           
+            set { this.lblUsuarioLogado.Text = value; }
+        }
+
 
         private void VerificaQuantidadesDeDatas()
         {
 
             try
             {
-
-
                 InstanciarKeyGenRepositorio();
                 if (_keyGenRepositorio.GetQuantidade() >= 30)
                 {
@@ -121,9 +125,9 @@ namespace View
 
                 InstanciarKeyGenRepositorio();
                 return _keyGenRepositorio.InsertDatas(new Datas()
-                 {
-                     Data = DateTime.Now.ToDataCertaSemHora()
-                 });
+                {
+                    Data = DateTime.Now.ToDataCertaSemHora()
+                });
 
             }
             catch (CustomException erro)
@@ -173,7 +177,7 @@ namespace View
         {
             try
             {
-                Usuarios.NomeStatic = _usuario.Login;
+                Usuarios.LoginStatic = _usuario.Login;
                 Usuarios.NomeCompletoStatic = _usuario.NomeCompleto;
                 Usuarios.IDStatic = _usuario.ID;
                 Usuarios.PermissaoStatic = _usuario.Permicao;
@@ -294,6 +298,6 @@ namespace View
             OpenMdiForm.LoadNewKeepAnother(this, new frmRelatorio());
         }
 
-     
+
     }
 }

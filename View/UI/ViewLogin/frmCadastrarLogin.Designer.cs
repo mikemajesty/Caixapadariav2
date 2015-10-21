@@ -177,7 +177,6 @@
             this.cbbPermissao.Size = new System.Drawing.Size(270, 33);
             this.cbbPermissao.TabIndex = 5;
             this.cbbPermissao.SelectedIndexChanged += new System.EventHandler(this.cbbPermissao_SelectedIndexChanged);
-            this.cbbPermissao.SelectedValueChanged += new System.EventHandler(this.cbbPermissao_SelectedValueChanged);
             // 
             // btnCadastrar
             // 

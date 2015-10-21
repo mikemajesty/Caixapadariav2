@@ -386,12 +386,8 @@ namespace View.UI.ViewProduto
         }
         private void btnCadastrar_Click(object sender, EventArgs e)
         {
-            frmAlertaEstoque formAlertEstoque = null;
-
             try
             {
-                formAlertEstoque = new frmAlertaEstoque();
-                GerenciarGerenciamentoDeEstoque.FecharForm(formAlertEstoque);
                 switch (_tipoOperacao)
                 {
                     case EnumTipoOperacao.Salvar:
@@ -487,17 +483,24 @@ namespace View.UI.ViewProduto
                         }
                         break;
                 }
-                
+
             }
             catch (CustomException erro)
-            {                
+            {
                 DialogMessage.MessageFullComButtonOkIconeDeInformacao(erro.Message, "Aviso");
             }
             catch (Exception erro)
             {
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
-            finally { GerenciarGerenciamentoDeEstoque.AbrirForm(formAlertEstoque); }
+            finally
+            {
+                frmAlertaEstoque form = (frmAlertaEstoque)Application.OpenForms[name: nameof(frmAlertaEstoque)];
+                if (form != null)
+                {
+                    form.CarregarDgv();
+                }
+            }
 
 
         }

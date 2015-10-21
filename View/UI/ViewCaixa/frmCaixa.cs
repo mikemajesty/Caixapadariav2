@@ -518,12 +518,16 @@ namespace View.UI.ViewCaixa
                     InstanciarEstoqueRepositorio();
 
                     if (_vendaRepositorio.Cadastrar(PopularVenda()) == Sucesso)
-                    {
-                        var alertStoque = new frmAlertaEstoque();
-                        GerenciarGerenciamentoDeEstoque.FecharForm(formParaFechar: alertStoque);
+                    {  
                         InstanciarMovimentacaoProdutoRepositorio();
                         DarBaixaNoEstoque();
-                        GerenciarGerenciamentoDeEstoque.AbrirForm(alertStoque);
+                        frmAlertaEstoque form = (frmAlertaEstoque)Application.OpenForms[name: nameof(frmAlertaEstoque)];
+                        if (form != null)
+                        {
+                            form.CarregarDgv();
+                        }
+
+
                         InserirVendaNoCaixa();
                         if (cbbTipoDePagamento.Text == EnumTipoPagamento.Creditar.ToString())
                         {
