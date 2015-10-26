@@ -164,9 +164,6 @@
         4IXTQk/tAAAAAElFTkSuQmCC
 </value>
   </data>
-  <metadata name="tlp.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>219, 17</value>
-  </metadata>
   <data name="ptbValorTotalPago.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
@@ -408,13 +405,10 @@
         TzpnfTL/TWKKU1lkpdPzALV+p7eHOJW5kHs5v8QS/2sQ5E+UilgCG7ccFQAAAABJRU5ErkJggg==
 </value>
   </data>
-  <metadata name="rodape.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
   <data name="ptbKilograma.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADr8AAA6/ATgFUyQAAAIrSURBVFhH7ZdBZx1RGIYPIZSsQlah5AeE/oBQQggl29BV
+        YQUAAAAJcEhZcwAADr0AAA69AUf7kK0AAAIrSURBVFhH7ZdBZx1RGIYPIZSsQlah5AeE/oBQQggl29BV
         V6FkFboKWZVsQ35AKaWrkm1W+QGh/yCUEEpXXYWSvs9kXvc4zlx3zhkzd5GXx5nvO3O/+cydOeed8KIl
         0Io4EbfiXzsSk59cNHEjnjKQn7zJU0Ez9+JArLYjMXnmJ9WdoJG9JprprSDP/KR6FDSy1kQzcSfJMz+p
         fAd3m2imHbEUd9DPII3sk2hHNz75M7j0bzGiCda9uLmlWQdjxQ2Ork0RN1DLazGoDkXuQqVQb1BdityF

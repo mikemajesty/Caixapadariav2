@@ -28,6 +28,7 @@ namespace Controller.Repositorio
             _vendaComComandaAtivaRepositorio = new VendaComComandaAtivaRepositorio();
 
         }
+       
         public bool Inserir(List<Comanda> comandList, Comanda comanda)
         {
             try

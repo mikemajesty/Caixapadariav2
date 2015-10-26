@@ -1,7 +1,6 @@
 ﻿using Controller.Enum;
 using Controller.Repositorio;
 using Mike.Utilities.Desktop;
-using Model.BO;
 using Model.Entidades;
 using System;
 using System.Collections.Generic;
@@ -15,7 +14,7 @@ namespace View.UI.ViewCaixa
 {
     public partial class frmCaixa : Form
     {
-        frmMensagemDeEspera mensagem = null;
+        private frmMensagemDeEspera mensagem = null;
         private List<Comanda> comandList = new List<Comanda>();
         private TipoPagamentoRepositorio _tipoPagamentoRepositorio;
         private VendaComComandaAtivaRepositorio _vendaComComandaAtivaRepositorio;
@@ -31,6 +30,7 @@ namespace View.UI.ViewCaixa
         private List<Comanda> comandaLista;
         private MovimentacaoCaixaRepositorio _movimentacaoCaixaRepositorio;
         private MovimentacaoProdutoRepositorio _movimentacaoProdutoRepositorio;
+        private frmGerenciarComanda formComanda;
         private const bool Esconder = false, Mostrar = true, NaoExiste = false;
         private decimal VendaTotal;
         private const int Sucesso = 1, Insucesso = 0;
@@ -115,7 +115,6 @@ namespace View.UI.ViewCaixa
                 EsconderGroupBoxOuMostrar(new List<GroupBox>() { gpbValorPorPeso }, Esconder);
                 CarregarValorDoCaixaAtualiza();
                 EsconderGpb();
-                AtribuirUsuarioAoRodape();
                 CarregarTxtQuantidadeComUm();
                 EsconderOuMostrarButtonVenda(Esconder);
                 InstanciaTipoPagamentoRepositorio();
@@ -165,25 +164,6 @@ namespace View.UI.ViewCaixa
 
         }
 
-        private void AtribuirUsuarioAoRodape()
-        {
-
-            try
-            {
-                lblUsuarioLogado.Text = Usuarios.NomeCompletoStatic;
-            }
-            catch (CustomException erro)
-            {
-                DialogMessage.MessageFullComButtonOkIconeDeInformacao(erro.Message, "Aviso");
-            }
-            catch (Exception erro)
-            {
-                DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
-            }
-
-
-        }
-
         private void CarregarTxtQuantidadeComUm()
         {
             txtQuantidade.Text = "1";
@@ -220,9 +200,6 @@ namespace View.UI.ViewCaixa
 
 
         }
-
-
-
         private void InstanciaTipoPagamentoRepositorio()
         {
             _tipoPagamentoRepositorio = new TipoPagamentoRepositorio();
@@ -261,14 +238,7 @@ namespace View.UI.ViewCaixa
                     }
                     else
                     {
-                        if (ckbPorPeso.Checked == true)
-                        {
-                            FocarNoTxt(txt: txtPesoDoProduto);
-                        }
-                        else
-                        {
-                            FocarNoTxt(txt: txtQuantidade);
-                        }
+                        CarregarComandaEmUso();
 
                     }
 
@@ -284,6 +254,29 @@ namespace View.UI.ViewCaixa
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
+        }
+
+        private void CarregarComandaEmUso()
+        {
+            try
+            {
+                formComanda = new frmGerenciarComanda(EnumComanda.Comanda);
+                if (formComanda.ShowDialog() == DialogResult.Yes)
+                {
+                    txtCodigoDaComanda.Text = Comanda.CodigoComanda.ToString();
+                    SendKeys.SendWait("{ENTER}");
+                }
+            }
+            catch (CustomException erro2)
+            {
+                throw new CustomException(erro2.Message);
+            }
+            catch (Exception erro)
+            {
+                throw new Exception(erro.Message);
+            }
+         
+         
         }
 
         private void MostrarBotaoVendaSeExisteItensNaComanda()
@@ -985,8 +978,6 @@ namespace View.UI.ViewCaixa
             {
                 if (cbbTipoDePagamento.Text == EnumTipoPagamento.Dinheiro.ToString())
                 {
-
-
                     decimal valorPago = ValorPago.ValorPagoPeloCliente(txtValorPago);
                     decimal valorDaComanda = GetValorNaComanda();
                     if (ltvProdutos.Items.Count > 0 && valorPago >= valorDaComanda)
@@ -1228,6 +1219,41 @@ namespace View.UI.ViewCaixa
                 }
 
 
+            }
+            catch (CustomException erro)
+            {
+                DialogMessage.MessageFullComButtonOkIconeDeInformacao(erro.Message, "Aviso");
+            }
+            catch (Exception erro)
+            {
+                DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
+            }
+        }
+
+        private void ltvProdutos_Click(object sender, EventArgs e)
+        {
+
+            try
+            {
+                ltvProdutos_DoubleClick(sender, e);
+            }
+            catch (CustomException erro)
+            {
+                DialogMessage.MessageFullComButtonOkIconeDeInformacao(erro.Message, "Aviso");
+            }
+            catch (Exception erro)
+            {
+                DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
+            }
+            
+        }
+
+        private void txtCodigoDaComanda_DoubleClick(object sender, EventArgs e)
+        {
+            try
+            {
+                CarregarComandaEmUso();
+                
             }
             catch (CustomException erro)
             {

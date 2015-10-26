@@ -74,6 +74,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enum\EnumComanda.cs" />
     <Compile Include="Enum\EnumMovimentacao.cs" />
     <Compile Include="Enum\EnumTipoCreditar.cs" />
     <Compile Include="Enum\EnumTipoOperacao.cs" />

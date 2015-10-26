@@ -1,4 +1,5 @@
 ﻿using Mike.Utilities.Desktop;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Model.Entidades
 {
@@ -44,6 +45,8 @@ namespace Model.Entidades
 
             }
         }
-        
+        [NotMapped]
+        public static int CodigoComanda { get; set; }
+
     }
 }

@@ -5,6 +5,9 @@ using System.Linq;
 using Model.Entidades;
 using System.Windows.Forms;
 using System.Data.Entity;
+using System.Collections.Generic;
+using System.Data;
+
 namespace Controller.Repositorio
 {
     public class VendaComComandaAtivaRepositorio
@@ -24,6 +27,33 @@ namespace Controller.Repositorio
         private void InstanciarVendaComComandaAtiva()
         {
             _vendaComComandaAtiva = new VendaComComandaAtiva();
+        }
+        public List<VendaComComandaAtivaViewModel> GetComandasEmUso()
+        {
+            
+            try
+            {
+                InstanciaBanco();   
+                return (from venda in _banco.VendaComComandaAtiva join coman in _banco.Comanda on venda.IDComanda equals coman.ID
+                        group venda by new {venda.IDComanda,coman.Codigo} into g
+                       select new VendaComComandaAtivaViewModel
+                       {                           
+                           ID = g.Key.IDComanda,
+                           Código = g.Key.Codigo,
+                           Total = g.Sum(c=>c.PrecoTotal)
+                       }).Distinct().ToList();
+
+               
+            }
+            catch (CustomException erro)
+            {
+                throw new CustomException(erro.Message);
+            }
+            catch (Exception erro)
+            {
+                throw new Exception(erro.Message);
+            }
+
         }
         public void GetItensnaComandaPorCodigo(string codigo, ListView ltv)
         {
@@ -155,14 +185,14 @@ namespace Controller.Repositorio
             {
                 InstanciaBanco();
                 int retorno = 0;
-                Comanda comanda = _banco.Comanda.FirstOrDefault(c=>c.Codigo == codigo);
+                Comanda comanda = _banco.Comanda.FirstOrDefault(c => c.Codigo == codigo);
                 var listaVenda = _banco.VendaComComandaAtiva.Where(c => c.IDComanda == comanda.ID);
                 foreach (var venda in listaVenda)
-	            {
-		           _banco.Entry(venda).State = EntityState.Deleted;
+                {
+                    _banco.Entry(venda).State = EntityState.Deleted;
                     retorno = _banco.SaveChanges();
-	            }
-             return retorno;
+                }
+                return retorno;
             }
             catch (CustomException erro)
             {
@@ -187,8 +217,8 @@ namespace Controller.Repositorio
             try
             {
 
-                InstanciaBanco(); 
-                bool retorno = _banco.VendaComComandaAtiva.Where(c=>c.IDComanda == comanda.ID).Count() >  0 ? Existe : NaoExiste;
+                InstanciaBanco();
+                bool retorno = _banco.VendaComComandaAtiva.Where(c => c.IDComanda == comanda.ID).Count() > 0 ? Existe : NaoExiste;
                 return retorno;
             }
             catch (CustomException erro)
@@ -200,7 +230,7 @@ namespace Controller.Repositorio
                 throw new Exception(erro.Message);
             }
 
-            
+
         }
     }
 }

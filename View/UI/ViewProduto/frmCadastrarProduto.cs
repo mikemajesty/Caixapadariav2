@@ -44,7 +44,7 @@ namespace View.UI.ViewProduto
                         txtQtdMaxima.ReadOnly = true;
                         ckbEstoque.Enabled = false;
                         gpbDadosPeso.Visible = false;
-                        gpbDadosUnidade.Visible = false;
+                        //gpbDadosUnidade.Visible = false;
                         btnAdicionarCategoria.Visible = false;
                         MudarTamanhoDoComboBoxCategoria(new Size(558, 31));
                         MudarTamanhoDotxtDescricao(new Size(558, 106));
@@ -98,7 +98,6 @@ namespace View.UI.ViewProduto
                         MudarTextoDoBotao("Deletar");
                         DesabilitarCampos();
                         DesabilitarGroupBoxDeTipoDeCadastro();
-                        DesabilitarGroupBoxDadosDoPeso(gpbDadosPeso);
                         DesabilitarCheckBox();
 
                         break;
@@ -109,7 +108,6 @@ namespace View.UI.ViewProduto
                         MudarTextoDoBotao("Sair");
                         DesabilitarCampos();
                         DesabilitarGroupBoxDeTipoDeCadastro();
-                        DesabilitarGroupBoxDadosDoPeso(gpbDadosPeso);
                         DesabilitarCheckBox();
 
                         break;
@@ -133,15 +131,25 @@ namespace View.UI.ViewProduto
                         MudarTextoDoBotao("Deletar");
                         DesabilitarCampos();
                         DesabilitarGroupBoxDeTipoDeCadastro();
-                        DesabilitarGroupBoxDadosDoPeso(gpbDadosPeso);
+                        MudarTamanhoDotxtDescricao(new Size(248, 106));
                         if (Usuarios.PermissaoStatic != ("Administrador"))
                         {
                             MudarTamanhoDoComboBoxCategoria(new Size(558, 31));
                             MudarPosicaoDaLabel(posicao: new Point(13, 46), lbl: lblPrecoVenda);
-                            MudarPosicaoDoTextBox(posicao: new Point(146, 44), txt: txtPrecoVenda);
-                            lblPrecoCompra.Visible = false;
-                            txtPrecoCompra.Visible = false;
-                            gpbDadosPeso.Visible = false;
+                            MudarPosicaoDoPictureBox(ptb: ptbPrecoVenda, location: new Point(108, 44));
+                            if (cbbTipoCadastro.Text == "Peso")
+                            {
+                                MudarPosicaoDoTextBox(posicao: new Point(97, 44), txt: txtPrecoVenda);
+                            }
+                            else
+                            {
+                                MudarPosicaoDoTextBox(posicao: new Point(136, 44), txt: txtPrecoVenda);
+                            }                            
+                            EsconderLabel(lbl: lblPrecoCompra);
+                            MudarPosicaoDoPictureBox(ptb: ptbPrecoVenda, location: new Point(263, 44));
+                            EsconderPtb(ptb: ptbPrecoCompra);
+                            EsconderGruopBox(gpbDadosPeso);
+                            EsconderTextBox(txt:txtPrecoCompra);
                         }
 
                         break;
@@ -159,6 +167,26 @@ namespace View.UI.ViewProduto
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
+        }
+
+        private void EsconderLabel(Label lbl)
+        {
+            lbl.Visible = false;
+        }
+
+        private void EsconderTextBox(TextBox txt)
+        {
+            txt.Visible = false;
+        }
+
+        private void EsconderPtb(PictureBox ptb)
+        {
+            ptb.Visible = false;
+        }
+
+        private void MudarPosicaoDoPictureBox(PictureBox ptb, Point location)
+        {
+            ptbPrecoVenda.Location = location;
         }
 
         private void MudarPosicaoDaLabel(Point posicao, Label lbl)
@@ -756,7 +784,7 @@ namespace View.UI.ViewProduto
                         MudarTamanhoDotxtDescricao(new Size(248, 106));
                         AparecerGruopBox(gpbEstoque);
                         AparecerGruopBox(gpbDadosUnidade);
-                        DesabilitarGroupBoxDadosDoPeso(gpbDadosPeso);
+                        //DesabilitarGroupBoxDadosDoPeso(gpbDadosPeso);
                         DeixarTxtComoObrigatorio(ListaTxtUnidade());
                         MudarPosicaoDoGroupBoxTipoCadastro(new Point(12, 4));
                         MostrarCheck();
@@ -775,12 +803,12 @@ namespace View.UI.ViewProduto
                     case "Peso":
                         MudarTamanhoDoform(new Size(701, 485));
                         EsconderGruopBox(gpbEstoque);
-                        DesabilitarGroupBoxDadosDoPeso(gpbDadosPeso);
+                        //DesabilitarGroupBoxDadosDoPeso(gpbDadosPeso);
                         MudarPosicaoDoBotao(new Point(12, 385));
-                        MudarTamanhoDotxt(txt: txtPrecoVenda, size: new Size(164, 29));
-                        MudarTamanhoDotxt(txt: txtPrecoCompra, size: new Size(164, 29));
                         MudarPosicaoDoTextBox(new Point(100, 29), txtPrecoCompra);
                         MudarPosicaoDoTextBox(new Point(100, 69), txtPrecoVenda);
+                        MudarTamanhoDotxt(txt: txtPrecoVenda, size: new Size(164, 29));
+                        MudarTamanhoDotxt(txt: txtPrecoCompra, size: new Size(164, 29));
                         DeixarTxtComoObrigatorio(ListaTxtPeso());
                         DefinirMaxLenghtDoTxtEstoque(tamanho: 3);
                         EsconderCheckBox();

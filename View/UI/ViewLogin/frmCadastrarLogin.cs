@@ -9,6 +9,7 @@ using System.Data.Entity.Infrastructure;
 using View.Enum;
 using Model.BO;
 using System.Linq;
+using View.UI.ViewCaixa;
 
 namespace View.UI.ViewLogin
 {
@@ -285,7 +286,7 @@ namespace View.UI.ViewLogin
                                     frmMenu form = (frmMenu)Application.OpenForms[name:nameof(frmMenu)];
                                     if (form != null)
                                     {
-                                        form.LblUsuarioTexto = nomeCompleto;
+                                        form.LblUsuarioTexto = nomeCompleto;                                      
                                     }
                                    
                                 }

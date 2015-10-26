@@ -52,9 +52,6 @@
             this.txtQuantidade = new System.Windows.Forms.TextBox();
             this.gpbTipoDePagamento = new System.Windows.Forms.GroupBox();
             this.cbbTipoDePagamento = new System.Windows.Forms.ComboBox();
-            this.rodape = new System.Windows.Forms.StatusStrip();
-            this.lblProfissao = new System.Windows.Forms.ToolStripStatusLabel();
-            this.lblUsuarioLogado = new System.Windows.Forms.ToolStripStatusLabel();
             this.gpbValorPorPeso = new System.Windows.Forms.GroupBox();
             this.ptbKilograma = new System.Windows.Forms.PictureBox();
             this.txtPesoDoProduto = new System.Windows.Forms.TextBox();
@@ -82,7 +79,6 @@
             this.gpbQuantidadeDoProduto.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ptbQuantidade)).BeginInit();
             this.gpbTipoDePagamento.SuspendLayout();
-            this.rodape.SuspendLayout();
             this.gpbValorPorPeso.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ptbKilograma)).BeginInit();
             this.MenuCaixa.SuspendLayout();
@@ -120,6 +116,7 @@
             this.txtCodigoDaComanda.TabIndex = 1;
             this.txtCodigoDaComanda.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tlp.SetToolTip(this.txtCodigoDaComanda, "Digite o código de barra da comanda\r\n");
+            this.txtCodigoDaComanda.DoubleClick += new System.EventHandler(this.txtCodigoDaComanda_DoubleClick);
             this.txtCodigoDaComanda.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCodigoDaComanda_KeyPress);
             // 
             // gpbCodigoDoProduto
@@ -352,32 +349,6 @@
             this.tlp.SetToolTip(this.cbbTipoDePagamento, "Escolha a forma de pagamento\r\n");
             this.cbbTipoDePagamento.SelectedIndexChanged += new System.EventHandler(this.cbbTipoDePagamento_SelectedIndexChanged);
             // 
-            // rodape
-            // 
-            this.rodape.BackColor = System.Drawing.Color.White;
-            this.rodape.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lblProfissao,
-            this.lblUsuarioLogado});
-            this.rodape.Location = new System.Drawing.Point(0, 505);
-            this.rodape.Name = "rodape";
-            this.rodape.Size = new System.Drawing.Size(860, 22);
-            this.rodape.TabIndex = 9;
-            this.rodape.Text = "statusStrip1";
-            // 
-            // lblProfissao
-            // 
-            this.lblProfissao.Font = new System.Drawing.Font("Showcard Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblProfissao.Name = "lblProfissao";
-            this.lblProfissao.Size = new System.Drawing.Size(105, 17);
-            this.lblProfissao.Text = "Funcionario: ";
-            this.lblProfissao.ToolTipText = "Nome do funcionario\r\n";
-            // 
-            // lblUsuarioLogado
-            // 
-            this.lblUsuarioLogado.Font = new System.Drawing.Font("Showcard Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUsuarioLogado.Name = "lblUsuarioLogado";
-            this.lblUsuarioLogado.Size = new System.Drawing.Size(0, 17);
-            // 
             // gpbValorPorPeso
             // 
             this.gpbValorPorPeso.Controls.Add(this.ptbKilograma);
@@ -444,6 +415,7 @@
             this.ltvProdutos.UseCompatibleStateImageBehavior = false;
             this.ltvProdutos.View = System.Windows.Forms.View.Details;
             this.ltvProdutos.ColumnWidthChanging += new System.Windows.Forms.ColumnWidthChangingEventHandler(this.ltvProdutos_ColumnWidthChanging);
+            this.ltvProdutos.Click += new System.EventHandler(this.ltvProdutos_Click);
             this.ltvProdutos.DoubleClick += new System.EventHandler(this.ltvProdutos_DoubleClick);
             // 
             // MenuCaixa
@@ -537,7 +509,6 @@
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(860, 527);
             this.Controls.Add(this.ckbPorPeso);
-            this.Controls.Add(this.rodape);
             this.Controls.Add(this.MenuCaixa);
             this.Controls.Add(this.ltvProdutos);
             this.Controls.Add(this.gpbTipoDePagamento);
@@ -577,15 +548,12 @@
             this.gpbQuantidadeDoProduto.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ptbQuantidade)).EndInit();
             this.gpbTipoDePagamento.ResumeLayout(false);
-            this.rodape.ResumeLayout(false);
-            this.rodape.PerformLayout();
             this.gpbValorPorPeso.ResumeLayout(false);
             this.gpbValorPorPeso.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ptbKilograma)).EndInit();
             this.MenuCaixa.ResumeLayout(false);
             this.MenuCaixa.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -608,9 +576,8 @@
         private System.Windows.Forms.GroupBox gpbTipoDePagamento;
         private System.Windows.Forms.ComboBox cbbTipoDePagamento;
         private System.Windows.Forms.TextBox txtQuantidade;
-        private System.Windows.Forms.StatusStrip rodape;
         private System.Windows.Forms.ToolStripStatusLabel lblProfissao;
-        private System.Windows.Forms.ToolStripStatusLabel lblUsuarioLogado;
+        //private System.Windows.Forms.ToolStripStatusLabel lblUsuarioLogado;
         private System.Windows.Forms.GroupBox gpbValorPorPeso;
         private System.Windows.Forms.TextBox txtPesoDoProduto;
         private System.Windows.Forms.CheckBox ckbPorPeso;

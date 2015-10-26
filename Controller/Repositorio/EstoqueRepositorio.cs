@@ -91,12 +91,8 @@ namespace Controller.Repositorio
         }
         public IEnumerable SelectNoEstoque()
         {
-
-
-
             try
             {
-
                 int TipoCadastro = GetIDTipoCategoria("Unidade");
                 InstanciarDbContext();
                 return (from prod in _banco.Produto

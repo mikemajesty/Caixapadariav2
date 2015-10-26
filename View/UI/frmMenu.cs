@@ -228,7 +228,7 @@ namespace View
 
         private void btnGerenciarComanda_Click(object sender, EventArgs e)
         {
-            OpenMdiForm.LoadNewKeepAnother(this, new frmGerenciarComanda());
+            OpenMdiForm.LoadNewKeepAnother(this, new frmGerenciarComanda(EnumComanda.Seleção));
         }
 
         private void btnGerenciarCategoria_Click(object sender, EventArgs e)
