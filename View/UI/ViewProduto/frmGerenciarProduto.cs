@@ -23,13 +23,13 @@ namespace View.UI.ViewProduto
             _tipoCadastroRepositorio = new TipoCadastroRepositorio();
         }
         private void CarregarTextoDePermissao()
-        { 
+        {
             switch (Usuarios.PermissaoStatic)
             {
                 case "Caixa":
                     btnDeletar.Visible = false;
                     break;
-               
+
 
 
 
@@ -40,10 +40,11 @@ namespace View.UI.ViewProduto
 
             try
             {
-              
+
                 InstanciarProdutoRepositorio();
                 CarregaGrid();
                 CarregarTextoDePermissao();
+                FocarNoTxt(txtPesquisar);
             }
             catch (CustomException erro)
             {
@@ -67,7 +68,7 @@ namespace View.UI.ViewProduto
 
             try
             {
-              
+
                 _produtoRepositorio.Listar(dgv: dgvProdutos);
                 dgvProdutos.AjustartamanhoDoDataGridView(new List<TamanhoGrid> {
                 new TamanhoGrid() { Tamanho = -1, ColunaNome="ID"} ,
@@ -76,8 +77,8 @@ namespace View.UI.ViewProduto
                 new TamanhoGrid() { Tamanho = 120, ColunaNome="Categoria" },
                  new TamanhoGrid() { Tamanho = 110, ColunaNome="Estoque" },
                 new TamanhoGrid() { Tamanho =  90, ColunaNome="Preço" }});
-               
-               
+
+
             }
             catch (CustomException erro)
             {
@@ -220,14 +221,31 @@ namespace View.UI.ViewProduto
                 InstanciarProdutoRepositorio();
                 if (e.RowIndex >= 0)
                 {
-                    if (dgvProdutos.Rows.Count > 0 && _produtoRepositorio.GetQuantidade() > 0)
-                    {
-                        int linha = PegaLinhaDoGrid();
-                        Produto produto = _produtoRepositorio.GetProdutoPorID(linha);
-                        OpenMdiForm.OpenForWithShowDialog(new frmCadastrarProduto(produto, EnumTipoOperacao.Detalhes));
-                        LimparTxt();
-                        FocarNoTxt(txtPesquisar);
-                    }
+                    CarregarGridPelaLinha();
+                }
+            }
+            catch (CustomException erro)
+            {
+                DialogMessage.MessageFullComButtonOkIconeDeInformacao(erro.Message, "Aviso");
+            }
+            catch (Exception erro)
+            {
+                DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
+            }
+
+        }
+
+        private void CarregarGridPelaLinha()
+        {
+            try
+            {
+                if (dgvProdutos.Rows.Count > 0 && _produtoRepositorio.GetQuantidade() > 0)
+                {
+                    int linha = PegaLinhaDoGrid();
+                    Produto produto = _produtoRepositorio.GetProdutoPorID(linha);
+                    OpenMdiForm.OpenForWithShowDialog(new frmCadastrarProduto(produto, EnumTipoOperacao.Detalhes));
+                    LimparTxt();
+                    FocarNoTxt(txtPesquisar);
                 }
             }
             catch (CustomException erro)
@@ -276,8 +294,8 @@ namespace View.UI.ViewProduto
             try
             {
                 (sender as DataGridView).DefaultCellStyle.Format = "C2";
-                
-              
+
+
 
             }
             catch (CustomException erro)
@@ -289,7 +307,27 @@ namespace View.UI.ViewProduto
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
-           
+
+        }
+
+        private void dgvProdutos_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+            try
+            {
+                if ((Keys)e.KeyChar == Keys.Enter)
+                {
+                    CarregarGridPelaLinha();
+                }
+            }
+            catch (CustomException erro)
+            {
+                DialogMessage.MessageFullComButtonOkIconeDeInformacao(erro.Message, "Aviso");
+            }
+            catch (Exception erro)
+            {
+                DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
+            }
         }
     }
 }

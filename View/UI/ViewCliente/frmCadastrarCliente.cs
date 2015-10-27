@@ -1,5 +1,6 @@
 ﻿using Controller.Repositorio;
 using Mike.Utilities.Desktop;
+using Model.Entidades;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -9,17 +10,19 @@ namespace View.UI.ViewComanda
 {
     public partial class frmCadastrarCliente : Form
     {
-        private Model.Entidades.Cliente _cliente;
+        private Cliente _cliente;
         private EnumTipoOperacao _tipoOperacao;
         private ClienteRepositorio _clienteRepositorio;
+        private FiadoRepositorio _fiadoRepositorio;
         private const int Sucesso = 1;
-        public frmCadastrarCliente(Model.Entidades.Cliente cliente, EnumTipoOperacao tipoOpercacao)
+        public frmCadastrarCliente(Cliente cliente, EnumTipoOperacao tipoOpercacao)
         {
            
             InitializeComponent();
             CarregaClienteTipoOperacao(cliente, tipoOpercacao);
         }
-
+        private void InstanciarFiadoRepositorio() => _fiadoRepositorio = new FiadoRepositorio();
+        
         private void CarregaClienteTipoOperacao(Model.Entidades.Cliente cliente, EnumTipoOperacao tipoOpercacao)
         {
             _cliente = cliente;
@@ -143,10 +146,19 @@ namespace View.UI.ViewComanda
                         if (SeTxtEstaVazio() == 0)
                         {
                             InstanciarClienteRepositorio();
-                            if (_clienteRepositorio.Deletar(PreencheCliente()) == Sucesso)
+                            InstanciarFiadoRepositorio();
+                            Cliente cliente = PreencheCliente();
+                            if (_fiadoRepositorio.GetValorpeloCpf(cliente.CPF) == false)
                             {
-                                MesagemDeAviso(mensagem: "Cliente deletado com sucesso.");
-                                PosSalvamento();
+                                if (_clienteRepositorio.Deletar(cliente) == Sucesso)
+                                {
+                                    MesagemDeAviso(mensagem: "Cliente deletado com sucesso.");
+                                    PosSalvamento();
+                                }
+                            }
+                            else
+                            {
+                                MyErro.MyCustomException("Não é possível excluir um cliente que esta em débito com o estabelecimento.");
                             }
                         }
                         else
@@ -164,6 +176,7 @@ namespace View.UI.ViewComanda
             }
             catch (CustomException erro)
             {
+                FocarNoTxt(txt:txtNome);
                 DialogMessage.MessageFullComButtonOkIconeDeInformacao(erro.Message, "Aviso");
             }
             catch (Exception erro)
@@ -171,6 +184,11 @@ namespace View.UI.ViewComanda
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
+        }
+
+        private void FocarNoTxt(TextBox txt)
+        {
+            this.FocoNoTxt(txt);
         }
 
         private int SeTxtEstaVazio()
@@ -258,16 +276,38 @@ namespace View.UI.ViewComanda
         private void txtNome_KeyPress(object sender, KeyPressEventArgs e)
         {
             ValidatorField.Letter(e: e);
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                FocarNoMtb(mtb: mtbTelefone);
+            }
+        }
+
+        private void FocarNoMtb(MaskedTextBox mtb)
+        {
+            this.ActiveControl = mtb;
         }
 
         private void mtbTelefone_KeyPress(object sender, KeyPressEventArgs e)
         {
             ValidatorField.Integer(e: e);
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                FocarNoMtb(mtb: mtbCpf);
+            }
         }
 
         private void mtbCpf_KeyPress(object sender, KeyPressEventArgs e)
         {
             ValidatorField.IntegerAndLetter(e: e);
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                FocarNoButton(btn: btnCadastrar);
+            }
+        }
+
+        private void FocarNoButton(Button btn)
+        {
+            this.ActiveControl = btn;
         }
     }
 }

@@ -68,7 +68,7 @@
             this.ckbPorCodigo.Size = new System.Drawing.Size(279, 63);
             this.ckbPorCodigo.TabIndex = 9;
             this.ckbPorCodigo.TabStop = true;
-            this.ckbPorCodigo.Text = "Por Código";
+            this.ckbPorCodigo.Text = "Código";
             this.ckbPorCodigo.UseVisualStyleBackColor = true;
             this.ckbPorCodigo.CheckedChanged += new System.EventHandler(this.ckbPorCodigo_CheckedChanged);
             // 
@@ -83,7 +83,7 @@
             this.ckbPorNome.Size = new System.Drawing.Size(279, 63);
             this.ckbPorNome.TabIndex = 9;
             this.ckbPorNome.TabStop = true;
-            this.ckbPorNome.Text = "Por Nome";
+            this.ckbPorNome.Text = "Nome";
             this.ckbPorNome.UseVisualStyleBackColor = true;
             this.ckbPorNome.CheckedChanged += new System.EventHandler(this.ckbPorNome_CheckedChanged);
             // 
@@ -111,7 +111,7 @@
             this.dgvEstoque.BackgroundColor = System.Drawing.Color.White;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.White;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
@@ -121,7 +121,7 @@
             this.dgvEstoque.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.White;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;

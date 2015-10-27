@@ -105,12 +105,23 @@ namespace View.UI.ViewCaixa
                     switch (cbbTipoDePagamento.Text)
                     {
                         case "Dinheiro":
-                            decimal valor = Decimal.Parse(txtValorPago.Text);
-
-                            _caixaRepositorio.Cadastrar(new Caixa() { IDUsuario = Usuarios.IDStatic, Valor = valor });
-                            InstanciarMovimentacaoCaixa();
-                            _movimentacaoCaixaRepositorio.Salvar(new MovimentacaoCaixa() { Valor = valor, Data = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day) });
-                            _fiado.Valor = GetTxtValorPago();
+                            decimal valorPago = Decimal.Parse(txtValorPago.Text);
+                            decimal valorTotal = GetValorTotal();
+                            if (valorPago >= valorTotal)
+                            {
+                                _caixaRepositorio.Cadastrar(new Caixa() { IDUsuario = Usuarios.IDStatic, Valor = valorTotal });
+                                InstanciarMovimentacaoCaixa();
+                                _movimentacaoCaixaRepositorio.Salvar(new MovimentacaoCaixa() { Valor = valorTotal, Data = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day) });
+                                _fiado.Valor = GetTxtValorPago();
+                            }
+                            else
+                            {
+                                _caixaRepositorio.Cadastrar(new Caixa() { IDUsuario = Usuarios.IDStatic, Valor = valorPago });
+                                InstanciarMovimentacaoCaixa();
+                                _movimentacaoCaixaRepositorio.Salvar(new MovimentacaoCaixa() { Valor = valorPago, Data = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day) });
+                                _fiado.Valor = GetTxtValorPago();
+                            }
+                          
                             if (_fiadoRepositorio.Alterar(_fiado) == Sucesso)
                             {
                                 DialogMessage.MessageFullComButtonOkIconeDeInformacao("Opercação concluída com sucesso.", "Aviso");
@@ -120,7 +131,7 @@ namespace View.UI.ViewCaixa
 
                             break;
                         case "Cartão":
-                            _fiado.Valor = GetTxtValorPago();
+                            _fiado.Valor = GetValorTotal();
                             if (_fiadoRepositorio.Alterar(_fiado) == Sucesso)
                             {
                                 DialogMessage.MessageFullComButtonOkIconeDeInformacao("Opercação concluída com sucesso.", "Aviso");
@@ -142,6 +153,11 @@ namespace View.UI.ViewCaixa
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
             finally { EsconderBotao(); LimparTxt(new List<TextBox> { txtValorPago, txtTroco }); };
+        }
+
+        private decimal GetValorTotal()
+        {
+            return Convert.ToDecimal(lblTotalVenda.Text.Substring(2,lblTotalVenda.Text.Length - 2));
         }
 
         private void InstanciarMovimentacaoCaixa()
@@ -230,7 +246,7 @@ namespace View.UI.ViewCaixa
                     {
                         decimal valorPago = Decimal.Parse((sender as TextBox).Text);
                         decimal ValorTotal = _fiado.Valor;
-
+                        MostrarBotao();
                         if (valorPago >= ValorTotal)
                         {
                             txtTroco.Text = Troco.GerarTroco(valorPago, ValorTotal);
@@ -239,7 +255,6 @@ namespace View.UI.ViewCaixa
                         }
                         else
                         {
-                            EsconderBotao();
                             LimparTxt(new List<TextBox> { txtTroco });
                         }
                     }

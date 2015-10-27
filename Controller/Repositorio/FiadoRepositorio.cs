@@ -29,26 +29,26 @@ namespace Controller.Repositorio
             try
             {
                 int retorno = 0;
-                InstanciarBanco();               
+                InstanciarBanco();
                 _fiado = _banco.Fiado.FirstOrDefault(c => c.IDCliente == fiado.IDCliente);
                 if (_fiado != null)
                 {
-                   
-                        fiado.ID = _fiado.ID;
-                        InstanciarBanco(); 
-                        fiado.Valor += _fiado.Valor;
-                        if (fiado.Valor <= 0)
-                        {
-                            _banco.Entry(fiado).State = EntityState.Deleted;
-                            retorno = _banco.SaveChanges();
-                        }
-                        else
-                        {
-                            _banco.Entry(fiado).State = EntityState.Modified;
-                            retorno = _banco.SaveChanges();
-                        }
-                   
-                }               
+
+                    fiado.ID = _fiado.ID;
+                    InstanciarBanco();
+                    fiado.Valor += _fiado.Valor;
+                    if (fiado.Valor <= 0)
+                    {
+                        _banco.Entry(fiado).State = EntityState.Deleted;
+                        retorno = _banco.SaveChanges();
+                    }
+                    else
+                    {
+                        _banco.Entry(fiado).State = EntityState.Modified;
+                        retorno = _banco.SaveChanges();
+                    }
+
+                }
                 else
                 {
                     _banco.Entry(fiado).State = EntityState.Added;
@@ -182,7 +182,7 @@ namespace Controller.Repositorio
             {
                 throw new Exception(erro.Message);
             }
-            
+
         }
 
         public int GetQuantidade()
@@ -212,7 +212,7 @@ namespace Controller.Repositorio
             try
             {
                 InstanciarBanco();
-                Fiado fiado = _banco.Fiado.FirstOrDefault(c=>c.IDCliente == idCliente);
+                Fiado fiado = _banco.Fiado.FirstOrDefault(c => c.IDCliente == idCliente);
                 return fiado == null ? 0 : fiado.Valor;
             }
             catch (CustomException erro)
@@ -227,33 +227,29 @@ namespace Controller.Repositorio
 
         public void ListarClientePorNomePagar(DataGridView dgvCliente, string nome)
         {
-       
+
             try
             {
-
-
-
-
                 InstanciarBanco();
                 dgvCliente.DataSource = (from fia in _banco.Fiado
-                                  join cli in _banco.Cliente on new { IDCLIENTE = fia.IDCliente } equals new { IDCLIENTE = cli.ID }
-                                  where
-                                    fia.Valor > 0 && cli.Nome.Contains(nome)
-                                  group new { cli, fia } by new
-                                  {
-                                      cli.Nome,
-                                      cli.Celular,
-                                      cli.CPF,
-                                      cli.ID
-                                  } into g
-                                  select new
-                                  {
-                                      g.Key.ID,
-                                      g.Key.Nome,
-                                      g.Key.Celular,
-                                      g.Key.CPF,
-                                      Total = g.Sum(p => p.fia.Valor)
-                                  }).Distinct().ToList();
+                                         join cli in _banco.Cliente on new { IDCLIENTE = fia.IDCliente } equals new { IDCLIENTE = cli.ID }
+                                         where
+                                           fia.Valor > 0 && cli.Nome.Contains(nome)
+                                         group new { cli, fia } by new
+                                         {
+                                             cli.Nome,
+                                             cli.Celular,
+                                             cli.CPF,
+                                             cli.ID
+                                         } into g
+                                         select new
+                                         {
+                                             g.Key.ID,
+                                             g.Key.Nome,
+                                             g.Key.Celular,
+                                             g.Key.CPF,
+                                             Total = g.Sum(p => p.fia.Valor)
+                                         }).Distinct().ToList();
 
 
             }
@@ -266,6 +262,27 @@ namespace Controller.Repositorio
                 throw new Exception(erro.Message);
             }
 
+        }
+        public bool GetValorpeloCpf(string cpf)
+        {
+            try
+            {
+                InstanciarBanco();
+                var cliente = (from cli in _banco.Cliente
+                                 join fia in _banco.Fiado on cli.ID equals fia.IDCliente
+                                 where
+                                 cpf == cli.CPF
+                                 select cli);
+                return cliente.Count() > 0;
+            }
+            catch (CustomException erro)
+            {
+                throw new CustomException(erro.Message);
+            }
+            catch (Exception erro)
+            {
+                throw new Exception(erro.Message);
+            }
         }
     }
 }

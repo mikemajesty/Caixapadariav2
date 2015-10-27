@@ -26,7 +26,7 @@ namespace View.UI.ViewProduto
             try
             {
                 CarregarGrid();
-                ChecarRadioButtonNome();                
+                ChecarRadioButtonNome();
                 FocarNoTxt();
             }
             catch (CustomException erro)
@@ -58,7 +58,7 @@ namespace View.UI.ViewProduto
                 new TamanhoGrid() { Tamanho = -1, ColunaNome="ID"} ,
                 new TamanhoGrid() { Tamanho = 145, ColunaNome = "Código" },
                 new TamanhoGrid() { Tamanho = 220, ColunaNome = "Nome" },
-                new TamanhoGrid() { Tamanho = 120, ColunaNome="Categoria" },              
+                new TamanhoGrid() { Tamanho = 120, ColunaNome="Categoria" },
                 new TamanhoGrid() { Tamanho = 100, ColunaNome="Preço" }  ,
                 new TamanhoGrid() { Tamanho = 90, ColunaNome="Estoque" }});
 
@@ -300,6 +300,27 @@ namespace View.UI.ViewProduto
 
             try
             {
+
+                if (dgvProdutos.Rows.Count >0)
+                {
+                    CarregarInformacaoComTeclaEnter();
+                }
+            }
+            catch (CustomException erro)
+            {
+                DialogMessage.MessageFullComButtonOkIconeDeInformacao(erro.Message, "Aviso");
+            }
+            catch (Exception erro)
+            {
+                DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
+            }
+
+        }
+
+        private void CarregarInformacaoComTeclaEnter()
+        {
+            try
+            {
                 InstanciarProdutoRepositorio();
                 if (_enumMovimentacao == EnumMovimentacao.Movimentacao)
                 {
@@ -308,7 +329,7 @@ namespace View.UI.ViewProduto
                     LimparTxt(txtPesquisar);
                     FocarNoTxt();
                 }
-                else if(_enumMovimentacao == EnumMovimentacao.Pesquisa)
+                else if (_enumMovimentacao == EnumMovimentacao.Pesquisa)
                 {
                     Produto prod = GetProdutoPorID();
                     if (prod != null)
@@ -332,6 +353,7 @@ namespace View.UI.ViewProduto
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
+
         }
 
         private Produto GetProdutoPorID()
@@ -350,7 +372,7 @@ namespace View.UI.ViewProduto
             {
                 throw new Exception(erro.Message);
             }
-          
+
         }
 
         private void FocarNoTxt()
@@ -377,6 +399,30 @@ namespace View.UI.ViewProduto
             }
 
         }
-    }
 
+        private void dgvProdutos_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+            if ((Keys)e.KeyChar == Keys.Enter)
+            {
+                try
+                {
+                    CarregarInformacaoComTeclaEnter();
+
+                }
+                catch (CustomException erro)
+                {
+                    throw new CustomException(erro.Message);
+                }
+                catch (Exception erro)
+                {
+                    throw new Exception(erro.Message);
+                }
+            }
+        }
+
+
+    }
 }
+
+

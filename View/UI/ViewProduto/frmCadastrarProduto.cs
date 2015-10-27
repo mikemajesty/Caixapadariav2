@@ -43,7 +43,7 @@ namespace View.UI.ViewProduto
                         txtQtdMinima.ReadOnly = true;
                         txtQtdMaxima.ReadOnly = true;
                         ckbEstoque.Enabled = false;
-                        gpbDadosPeso.Visible = false;
+                        gpbPorcentagemLucro.Visible = false;
                         //gpbDadosUnidade.Visible = false;
                         btnAdicionarCategoria.Visible = false;
                         MudarTamanhoDoComboBoxCategoria(new Size(558, 31));
@@ -79,6 +79,7 @@ namespace View.UI.ViewProduto
                 CarregarCategoria();
                 CarregarTipoDeCadastro();
                 CarregarTextoDePermissao();
+                DesabilitarGroupBox(new GroupBox[] {gpbPorcentagemLucro});
                 switch (_tipoOperacao)
                 {
                     case EnumTipoOperacao.Salvar:
@@ -109,7 +110,7 @@ namespace View.UI.ViewProduto
                         DesabilitarCampos();
                         DesabilitarGroupBoxDeTipoDeCadastro();
                         DesabilitarCheckBox();
-
+                        FocarNoBotao();
                         break;
                     case EnumTipoOperacao.Estoque:
                         PopulaTxt();
@@ -117,7 +118,7 @@ namespace View.UI.ViewProduto
                         DeixarTxtComoNaoObrigatorio();
                         MudarTextoDoForm("Alterar Estoque");
                         MudarTextoDoBotao("Alterar");
-                        DesabilitarGroupBox(new GroupBox[] { gpbDadosUnidade, gpbDadosPeso, gpbTipoCadastro, gpbProduto });
+                        DesabilitarGroupBox(new GroupBox[] { gpbDadosUnidade, gpbTipoCadastro, gpbProduto });
                         FocarNoTxt(txt: txtEstoque);
                         DeixarTxtComoObrigatorio(new TextBox[] { txtEstoque });
 
@@ -148,7 +149,7 @@ namespace View.UI.ViewProduto
                             EsconderLabel(lbl: lblPrecoCompra);
                             MudarPosicaoDoPictureBox(ptb: ptbPrecoVenda, location: new Point(263, 44));
                             EsconderPtb(ptb: ptbPrecoCompra);
-                            EsconderGruopBox(gpbDadosPeso);
+                            EsconderGruopBox(gpbPorcentagemLucro);
                             EsconderTextBox(txt:txtPrecoCompra);
                         }
 
@@ -784,13 +785,12 @@ namespace View.UI.ViewProduto
                         MudarTamanhoDotxtDescricao(new Size(248, 106));
                         AparecerGruopBox(gpbEstoque);
                         AparecerGruopBox(gpbDadosUnidade);
-                        //DesabilitarGroupBoxDadosDoPeso(gpbDadosPeso);
                         DeixarTxtComoObrigatorio(ListaTxtUnidade());
                         MudarPosicaoDoGroupBoxTipoCadastro(new Point(12, 4));
                         MostrarCheck();
                         LimparCheckBox();
                         ComboBoxCheckado();
-                        MudarTextoDoComboBox(gpb: gpbDadosPeso, texto: "Porcentagem do Lucro do Produto");
+                        MudarTextoDoComboBox(gpb: gpbPorcentagemLucro, texto: "Porcentagem do Lucro do Produto");
                         MudarTextoDoComboBox(gpb: gpbDadosUnidade, texto: "Dados da venda por Unidade");
                         MudarTextoDaLabel(lbl: lblPrecoCompra, texto: "Preço de Compra");
                         MudarTextoDaLabel(lbl: lblPrecoVenda, texto: "Preço de Venda");
@@ -803,7 +803,6 @@ namespace View.UI.ViewProduto
                     case "Peso":
                         MudarTamanhoDoform(new Size(701, 485));
                         EsconderGruopBox(gpbEstoque);
-                        //DesabilitarGroupBoxDadosDoPeso(gpbDadosPeso);
                         MudarPosicaoDoBotao(new Point(12, 385));
                         MudarPosicaoDoTextBox(new Point(100, 29), txtPrecoCompra);
                         MudarPosicaoDoTextBox(new Point(100, 69), txtPrecoVenda);
@@ -815,10 +814,9 @@ namespace View.UI.ViewProduto
                         MudarPosicaoDoGroupBoxTipoCadastro(new Point(174, 4));
                         LimparCheckBox();
                         MudarTextoDoComboBox(gpb: gpbDadosUnidade, texto: "Dados da venda por Peso");
-                        MudarTextoDoComboBox(gpb: gpbDadosPeso, texto: "Porcentagem do lucro da venda");
+                        MudarTextoDoComboBox(gpb: gpbPorcentagemLucro, texto: "Porcentagem do lucro da venda");
                         MudarTextoDaLabel(lbl: lblPrecoCompra, texto: "Custo kilo");
                         MudarTextoDaLabel(lbl: lblPrecoVenda, texto: "Preço kilo");
-                        //LimparTodosOsTxt();
                         break;
 
 

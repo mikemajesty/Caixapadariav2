@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using View.Enum;
-using View.UI.ViewComanda;
 
 namespace View.UI.ViewComanda
 {
@@ -65,7 +64,7 @@ namespace View.UI.ViewComanda
                 if (_enumComanda == EnumComanda.Seleção)
                 {
                     InstanciarComandaRepositorio();
-                    CarregaGrid();
+                    CarregaGridSelecao();
                     CarregarTextoDePermissao();
                     //MudartamanhoDoButton(btn: btnDeletar, size: new Size(67, 28));
                     //MudarLocationDoButton(btn: btnDeletar, location: new Point(227, 9));
@@ -74,6 +73,7 @@ namespace View.UI.ViewComanda
                 }
                 else if (_enumComanda == EnumComanda.Comanda)
                 {
+                    MudarTextoDoForm(txt: "Comandas em Uso");
                     MudarTextoDoGruopBox(gpb: gpbPesquisar, txt: "");
                     MudarTextoDoButton(btn: btnDeletar, txt: "Deletar itens da comanda.");
                     Button[] btn = { btnAlterar, btnNovo };
@@ -82,8 +82,7 @@ namespace View.UI.ViewComanda
                     MudarLocationDoButton(btn: btnDeletar, location: new Point(20, 9));
                     MudartamanhoDoGrid(btn: dgvComanda, size: new Size(423, 189));
                     MudarLocationDoGrid(btn: dgvComanda, location: new Point(9, 19));
-                    InstanciarVendaComComandaAtivaRepositorio();
-                    dgvComanda.DataSource = _vendaComComandaAtivaRepositorio.GetComandasEmUso();
+                    CarregarGridComanda();
                     EsconderTxt(txt: txtPesquisar);
                 }
             }
@@ -96,6 +95,29 @@ namespace View.UI.ViewComanda
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
+        }
+
+        private void CarregarGridComanda()
+        {
+            try
+            {
+                InstanciarVendaComComandaAtivaRepositorio();
+                dgvComanda.DataSource = _vendaComComandaAtivaRepositorio.GetComandasEmUso();
+            }
+            catch (CustomException erro)
+            {
+                DialogMessage.MessageFullComButtonOkIconeDeInformacao(erro.Message, "Aviso");
+            }
+            catch (Exception erro)
+            {
+                DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
+            }
+            
+        }
+
+        private void MudarTextoDoForm(string txt)
+        {
+            this.Text = txt;
         }
 
         private void MudarTextoDoButton(Button btn, string txt)
@@ -142,7 +164,7 @@ namespace View.UI.ViewComanda
         {
             if (OpenMdiForm.OpenForWithShowDialog(new frmCadastrarComanda(EnumTipoOperacao.Salvar, new Comanda())) == DialogResult.Yes)
             {
-                CarregaGrid();
+                CarregaGridSelecao();
             }
         }
 
@@ -159,7 +181,7 @@ namespace View.UI.ViewComanda
                     Comanda comanda = _comandaRepositorio.GetComandaPorID(PegaLinhaSelecionadaDoGrid());
                     if (OpenMdiForm.OpenForWithShowDialog(new frmCadastrarComanda(EnumTipoOperacao.Alterar, comanda)) == DialogResult.Yes)
                     {
-                        CarregaGrid();
+                        CarregaGridSelecao();
                     }
                 }
                 else
@@ -197,7 +219,7 @@ namespace View.UI.ViewComanda
                         Comanda comanda = _comandaRepositorio.GetComandaPorID(PegaLinhaSelecionadaDoGrid());
                         if (OpenMdiForm.OpenForWithShowDialog(new frmCadastrarComanda(EnumTipoOperacao.Deletar, comanda)) == DialogResult.Yes)
                         {
-                            CarregaGrid();
+                            CarregaGridSelecao();
                         }
                     }
                     else if (_enumComanda == EnumComanda.Comanda)
@@ -205,7 +227,13 @@ namespace View.UI.ViewComanda
                         if (DialogMessage.MessageFullQuestion("Deseja Realmente excluir os itens dessa camanda?", "Aviso") == DialogResult.Yes)
                         {
                             InstanciarVendaComComandaAtivaRepositorio();
-                            _vendaComComandaAtivaRepositorio.DeletaItensDaComandaPorCodigo(dgvComanda.CurrentRow.Cells["Código"].Value.ToString());
+                            int resultado = _vendaComComandaAtivaRepositorio.DeletaItensDaComandaPorCodigo(dgvComanda.CurrentRow.Cells["Código"].Value.ToString());
+                            if (resultado > 0)
+                            {
+                                DialogMessage.MessageFullComButtonOkIconeDeInformacao("Itens da Comanda deletado com Sucesso.","Titulo");
+                                CarregarGridComanda();
+                            }
+                           
                         }
                         else
                         {
@@ -271,7 +299,7 @@ namespace View.UI.ViewComanda
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
         }
-        private void CarregaGrid()
+        private void CarregaGridSelecao()
         {
 
             try
@@ -332,23 +360,52 @@ namespace View.UI.ViewComanda
             ValidatorField.Integer(e: e);
         }
 
-        private void dgvComanda_CellClick(object sender, DataGridViewCellEventArgs e)
+      
+
+        private void PegarCodigoDaComanda()
+        {
+            int codigo = Convert.ToInt32(dgvComanda.CurrentRow.Cells["Código"].Value);
+            if (codigo > 0)
+            {
+                Comanda.CodigoComanda = codigo;
+                this.DialogResult = DialogResult.Yes;
+            }
+            else
+            {
+                MyErro.MyCustomException("Você deve escolher uma comanda.");
+            }
+        }
+
+        private void dgvComanda_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+
+            if ((Keys)e.KeyChar == Keys.Enter)
+            {
+                try
+                {
+                    PegarCodigoDaComanda();
+                }
+                catch (CustomException erro)
+                {
+                    DialogMessage.MessageFullComButtonOkIconeDeInformacao(erro.Message, "Aviso");
+                }
+                catch (Exception erro)
+                {
+                    DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
+                }
+            }
+
+        }
+
+        private void dgvComanda_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
 
                 if (_enumComanda == EnumComanda.Comanda && e.RowIndex >= 0)
                 {
-                    int codigo = Convert.ToInt32(dgvComanda.CurrentRow.Cells["Código"].Value);
-                    if (codigo > 0)
-                    {
-                        Comanda.CodigoComanda = codigo;
-                        this.DialogResult = DialogResult.Yes;
-                    }
-                    else
-                    {
-                        MyErro.MyCustomException("Você deve escolher uma comanda.");
-                    }
+                    PegarCodigoDaComanda();
                 }
 
             }
@@ -360,7 +417,6 @@ namespace View.UI.ViewComanda
             {
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
-
         }
     }
 }

@@ -85,11 +85,11 @@
             // 
             // btnLogin
             // 
-            this.btnLogin.Font = new System.Drawing.Font("Impact", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLogin.Font = new System.Drawing.Font("Arial Black", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogin.Image = ((System.Drawing.Image)(resources.GetObject("btnLogin.Image")));
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Padding = new System.Windows.Forms.Padding(0);
-            this.btnLogin.Size = new System.Drawing.Size(57, 50);
+            this.btnLogin.Size = new System.Drawing.Size(68, 50);
             this.btnLogin.Text = "Login";
             this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
@@ -97,17 +97,17 @@
             // 
             this.menuUsuario.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnGerenciarLogin});
-            this.menuUsuario.Font = new System.Drawing.Font("Impact", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.menuUsuario.Font = new System.Drawing.Font("Arial Black", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menuUsuario.Image = ((System.Drawing.Image)(resources.GetObject("menuUsuario.Image")));
             this.menuUsuario.Name = "menuUsuario";
             this.menuUsuario.Padding = new System.Windows.Forms.Padding(0);
-            this.menuUsuario.Size = new System.Drawing.Size(70, 50);
+            this.menuUsuario.Size = new System.Drawing.Size(84, 50);
             this.menuUsuario.Text = "Usuário";
             // 
             // btnGerenciarLogin
             // 
             this.btnGerenciarLogin.Name = "btnGerenciarLogin";
-            this.btnGerenciarLogin.Size = new System.Drawing.Size(129, 22);
+            this.btnGerenciarLogin.Size = new System.Drawing.Size(152, 22);
             this.btnGerenciarLogin.Text = "Gerenciar";
             this.btnGerenciarLogin.Click += new System.EventHandler(this.btnGerenciar_Click);
             // 
@@ -115,17 +115,17 @@
             // 
             this.menuComanda.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnGerenciarComanda});
-            this.menuComanda.Font = new System.Drawing.Font("Impact", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.menuComanda.Font = new System.Drawing.Font("Arial Black", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menuComanda.Image = ((System.Drawing.Image)(resources.GetObject("menuComanda.Image")));
             this.menuComanda.Name = "menuComanda";
             this.menuComanda.Padding = new System.Windows.Forms.Padding(0);
-            this.menuComanda.Size = new System.Drawing.Size(78, 50);
+            this.menuComanda.Size = new System.Drawing.Size(96, 50);
             this.menuComanda.Text = "Comanda";
             // 
             // btnGerenciarComanda
             // 
             this.btnGerenciarComanda.Name = "btnGerenciarComanda";
-            this.btnGerenciarComanda.Size = new System.Drawing.Size(129, 22);
+            this.btnGerenciarComanda.Size = new System.Drawing.Size(152, 22);
             this.btnGerenciarComanda.Text = "Gerenciar";
             this.btnGerenciarComanda.Click += new System.EventHandler(this.btnGerenciarComanda_Click);
             // 
@@ -133,17 +133,17 @@
             // 
             this.categoriaMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnGerenciarCategoria});
-            this.categoriaMenu.Font = new System.Drawing.Font("Impact", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.categoriaMenu.Font = new System.Drawing.Font("Arial Black", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.categoriaMenu.Image = ((System.Drawing.Image)(resources.GetObject("categoriaMenu.Image")));
             this.categoriaMenu.Name = "categoriaMenu";
             this.categoriaMenu.Padding = new System.Windows.Forms.Padding(0);
-            this.categoriaMenu.Size = new System.Drawing.Size(82, 50);
+            this.categoriaMenu.Size = new System.Drawing.Size(99, 50);
             this.categoriaMenu.Text = "Categoria";
             // 
             // btnGerenciarCategoria
             // 
             this.btnGerenciarCategoria.Name = "btnGerenciarCategoria";
-            this.btnGerenciarCategoria.Size = new System.Drawing.Size(129, 22);
+            this.btnGerenciarCategoria.Size = new System.Drawing.Size(152, 22);
             this.btnGerenciarCategoria.Text = "Gerenciar";
             this.btnGerenciarCategoria.Click += new System.EventHandler(this.btnGerenciarCategoria_Click);
             // 
@@ -152,11 +152,11 @@
             this.produtoMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnGerenciarProduto,
             this.btnPesuisarProduto});
-            this.produtoMenu.Font = new System.Drawing.Font("Impact", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.produtoMenu.Font = new System.Drawing.Font("Arial Black", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.produtoMenu.Image = ((System.Drawing.Image)(resources.GetObject("produtoMenu.Image")));
             this.produtoMenu.Name = "produtoMenu";
             this.produtoMenu.Padding = new System.Windows.Forms.Padding(0);
-            this.produtoMenu.Size = new System.Drawing.Size(71, 50);
+            this.produtoMenu.Size = new System.Drawing.Size(85, 50);
             this.produtoMenu.Text = "Produto";
             // 
             // btnGerenciarProduto
@@ -177,17 +177,17 @@
             // 
             this.menuCliente.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnGerenciarCliente});
-            this.menuCliente.Font = new System.Drawing.Font("Impact", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.menuCliente.Font = new System.Drawing.Font("Arial Black", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menuCliente.Image = ((System.Drawing.Image)(resources.GetObject("menuCliente.Image")));
             this.menuCliente.Name = "menuCliente";
             this.menuCliente.Padding = new System.Windows.Forms.Padding(0);
-            this.menuCliente.Size = new System.Drawing.Size(67, 50);
+            this.menuCliente.Size = new System.Drawing.Size(79, 50);
             this.menuCliente.Text = "Cliente";
             // 
             // btnGerenciarCliente
             // 
             this.btnGerenciarCliente.Name = "btnGerenciarCliente";
-            this.btnGerenciarCliente.Size = new System.Drawing.Size(129, 22);
+            this.btnGerenciarCliente.Size = new System.Drawing.Size(152, 22);
             this.btnGerenciarCliente.Text = "Gerenciar";
             this.btnGerenciarCliente.Click += new System.EventHandler(this.btnGerenciarCliente_Click);
             // 
@@ -195,17 +195,17 @@
             // 
             this.menuEstoque.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnGerenciarEstoque});
-            this.menuEstoque.Font = new System.Drawing.Font("Impact", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.menuEstoque.Font = new System.Drawing.Font("Arial Black", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menuEstoque.Image = ((System.Drawing.Image)(resources.GetObject("menuEstoque.Image")));
             this.menuEstoque.Name = "menuEstoque";
             this.menuEstoque.Padding = new System.Windows.Forms.Padding(0);
-            this.menuEstoque.Size = new System.Drawing.Size(71, 50);
+            this.menuEstoque.Size = new System.Drawing.Size(87, 50);
             this.menuEstoque.Text = "Estoque";
             // 
             // btnGerenciarEstoque
             // 
             this.btnGerenciarEstoque.Name = "btnGerenciarEstoque";
-            this.btnGerenciarEstoque.Size = new System.Drawing.Size(129, 22);
+            this.btnGerenciarEstoque.Size = new System.Drawing.Size(152, 22);
             this.btnGerenciarEstoque.Text = "Gerenciar";
             this.btnGerenciarEstoque.Click += new System.EventHandler(this.btnGerenciarEstoque_Click);
             // 
@@ -213,17 +213,17 @@
             // 
             this.menuCaixa.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnCaixa});
-            this.menuCaixa.Font = new System.Drawing.Font("Impact", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.menuCaixa.Font = new System.Drawing.Font("Arial Black", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menuCaixa.Image = ((System.Drawing.Image)(resources.GetObject("menuCaixa.Image")));
             this.menuCaixa.Name = "menuCaixa";
             this.menuCaixa.Padding = new System.Windows.Forms.Padding(0);
-            this.menuCaixa.Size = new System.Drawing.Size(59, 50);
+            this.menuCaixa.Size = new System.Drawing.Size(69, 50);
             this.menuCaixa.Text = "Caixa";
             // 
             // btnCaixa
             // 
             this.btnCaixa.Name = "btnCaixa";
-            this.btnCaixa.Size = new System.Drawing.Size(106, 22);
+            this.btnCaixa.Size = new System.Drawing.Size(152, 22);
             this.btnCaixa.Text = "Caixa";
             this.btnCaixa.Click += new System.EventHandler(this.btnCaixa_Click);
             // 
@@ -233,11 +233,11 @@
             this.btnMovimentacaoVenda,
             this.btnMovimentacaoCaixa,
             this.btnMovimentacaoProduto});
-            this.menuMovimentacao.Font = new System.Drawing.Font("Impact", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.menuMovimentacao.Font = new System.Drawing.Font("Arial Black", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menuMovimentacao.Image = ((System.Drawing.Image)(resources.GetObject("menuMovimentacao.Image")));
             this.menuMovimentacao.Name = "menuMovimentacao";
             this.menuMovimentacao.Padding = new System.Windows.Forms.Padding(0);
-            this.menuMovimentacao.Size = new System.Drawing.Size(108, 50);
+            this.menuMovimentacao.Size = new System.Drawing.Size(134, 50);
             this.menuMovimentacao.Text = "Movimentação";
             // 
             // btnMovimentacaoVenda
@@ -265,11 +265,11 @@
             // 
             this.menuRelatorios.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnRelatorioCompra});
-            this.menuRelatorios.Font = new System.Drawing.Font("Impact", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.menuRelatorios.Font = new System.Drawing.Font("Arial Black", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menuRelatorios.Image = ((System.Drawing.Image)(resources.GetObject("menuRelatorios.Image")));
             this.menuRelatorios.Name = "menuRelatorios";
             this.menuRelatorios.Padding = new System.Windows.Forms.Padding(0);
-            this.menuRelatorios.Size = new System.Drawing.Size(79, 50);
+            this.menuRelatorios.Size = new System.Drawing.Size(94, 50);
             this.menuRelatorios.Text = "Relatorio";
             // 
             // btnRelatorioCompra
@@ -281,11 +281,11 @@
             // 
             // btnSair
             // 
-            this.btnSair.Font = new System.Drawing.Font("Impact", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSair.Font = new System.Drawing.Font("Arial Black", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSair.Image = ((System.Drawing.Image)(resources.GetObject("btnSair.Image")));
             this.btnSair.Name = "btnSair";
             this.btnSair.Padding = new System.Windows.Forms.Padding(0);
-            this.btnSair.Size = new System.Drawing.Size(50, 50);
+            this.btnSair.Size = new System.Drawing.Size(56, 50);
             this.btnSair.Text = "Sair";
             this.btnSair.Click += new System.EventHandler(this.btnSair_Click);
             // 

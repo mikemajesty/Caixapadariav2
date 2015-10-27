@@ -160,7 +160,7 @@
   <data name="ptbPrecoVenda.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADr4AAA6+AepCscAAAAI9SURBVFhH5ZY9SFZRGMfvued9CWkTXYoGjRSaGlxcIogm
+        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAI9SURBVFhH5ZY9SFZRGMfvued9CWkTXYoGjRSaGlxcIogm
         Q6WpaEmHFkGHhqRBG3KoNgfRxaXBwWhSJB1a+lgkaBBd3AI/EDIQFPOj33nP48vL8Vy9nvfet6E//LmX
         c57n/3/O571RKOI4XlRKTfPsL0bFW9JcO+hY/4THwh1prh3+ZQEKNmG6VVHAH630G5bjmda6g/76UmTG
         uITBAGYrFcZJPGR/fKKYe5JbNVoQXXZMziUFD0p+VbiG2IYrnoaFqNAmGuFgKmd84sJtRvnDkPd1p+8X
@@ -176,7 +176,7 @@
   <data name="ptbPrecoCompra.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADr4AAA6+AepCscAAAAI9SURBVFhH5ZY9SFZRGMfvued9CWkTXYoGjRSaGlxcIogm
+        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAI9SURBVFhH5ZY9SFZRGMfvued9CWkTXYoGjRSaGlxcIogm
         Q6WpaEmHFkGHhqRBG3KoNgfRxaXBwWhSJB1a+lgkaBBd3AI/EDIQFPOj33nP48vL8Vy9nvfet6E//LmX
         c57n/3/O571RKOI4XlRKTfPsL0bFW9JcO+hY/4THwh1prh3+ZQEKNmG6VVHAH630G5bjmda6g/76UmTG
         uITBAGYrFcZJPGR/fKKYe5JbNVoQXXZMziUFD0p+VbiG2IYrnoaFqNAmGuFgKmd84sJtRvnDkPd1p+8X
@@ -192,7 +192,7 @@
   <data name="ptbPorcentagem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADr4AAA6+AepCscAAAAWvSURBVFhH3VdNiBtlGE5YpdJDK93m/28zmcnPJDOZmUwm
+        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAWvSURBVFhH3VdNiBtlGE5YpdJDK93m/28zmcnPJDOZmUwm
         k2SS2Uz+JslqXXBvlR5EkUKFvYioWFBaEHorUuhBrBcJ9LDiyT0seFisILW0IBU87MHSgktLlT0YzDe+
         3+Tb7Gbp7mY9CPrAw5v3eZ/3/d6dzMzuOv63eNk0xV6v19Z1/QUiHQ2mabowz+j6i5A6R+rheKVen13o
         dj8HDm32encXTLNOyocDDtW6ZuvaQsdcw+x1O9/02u1PQY8Ry4HottuvLXQ7T+FwNGIH9brmKinvj1wu
@@ -226,7 +226,7 @@
   <data name="ckbEstoque.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsAAAA7AAWrWiQkAAAK3SURBVDhPtZBbTJJhGIDptNq67cbaaq1Wbs7VRovmdIjK
+        YQUAAAAJcEhZcwAADr4AAA6+AepCscAAAAK3SURBVDhPtZBbTJJhGIDptNq67cbaaq1Wbs7VRovmdIjK
         PJCWG8jvz6+geCjwhBiSsli2atMK8ECSgCJpiuUhs4MXqSvATcKUAjmlOF3icq3ZslX6xk9s3bRWWz13
         7773efbuI/wXQCrdDEDYFBr/HFx0aVh0Vws27VGjRrcapUw0YqSxa4wmZ1tR4WxXcYNDnbs7tP4TXHRr
         WBlObabNo8XA15MH/jEhzBl4MKVmr5oVyILnNn/creOZLUrOm+cyermqgLgtKPt6eBFuNTaJi7OdOeB/

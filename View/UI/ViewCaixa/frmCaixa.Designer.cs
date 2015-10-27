@@ -576,7 +576,7 @@
         private System.Windows.Forms.GroupBox gpbTipoDePagamento;
         private System.Windows.Forms.ComboBox cbbTipoDePagamento;
         private System.Windows.Forms.TextBox txtQuantidade;
-        private System.Windows.Forms.ToolStripStatusLabel lblProfissao;
+       // private System.Windows.Forms.ToolStripStatusLabel lblProfissao;
         //private System.Windows.Forms.ToolStripStatusLabel lblUsuarioLogado;
         private System.Windows.Forms.GroupBox gpbValorPorPeso;
         private System.Windows.Forms.TextBox txtPesoDoProduto;

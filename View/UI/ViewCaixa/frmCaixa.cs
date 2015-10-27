@@ -31,6 +31,7 @@ namespace View.UI.ViewCaixa
         private MovimentacaoCaixaRepositorio _movimentacaoCaixaRepositorio;
         private MovimentacaoProdutoRepositorio _movimentacaoProdutoRepositorio;
         private frmGerenciarComanda formComanda;
+        private TipoCadastroRepositorio _tipoCadastroRepositorio;
         private const bool Esconder = false, Mostrar = true, NaoExiste = false;
         private decimal VendaTotal;
         private const int Sucesso = 1, Insucesso = 0;
@@ -38,6 +39,10 @@ namespace View.UI.ViewCaixa
         public frmCaixa()
         {
             InitializeComponent();
+        }
+        private void InstanciarTipoCadastroRepositorio()
+        {
+            _tipoCadastroRepositorio = new TipoCadastroRepositorio();
         }
         private void InstanciarMovimentacaoProdutoRepositorio()
         {
@@ -275,8 +280,8 @@ namespace View.UI.ViewCaixa
             {
                 throw new Exception(erro.Message);
             }
-         
-         
+
+
         }
 
         private void MostrarBotaoVendaSeExisteItensNaComanda()
@@ -511,25 +516,11 @@ namespace View.UI.ViewCaixa
                     InstanciarEstoqueRepositorio();
 
                     if (_vendaRepositorio.Cadastrar(PopularVenda()) == Sucesso)
-                    {  
+                    {
                         InstanciarMovimentacaoProdutoRepositorio();
-                        DarBaixaNoEstoque();
-                        frmAlertaEstoque form = (frmAlertaEstoque)Application.OpenForms[name: nameof(frmAlertaEstoque)];
-                        if (form != null)
-                        {
-                            form.CarregarDgv();
-                        }
-
-
-                        InserirVendaNoCaixa();
-                        if (cbbTipoDePagamento.Text == EnumTipoPagamento.Creditar.ToString())
-                        {
-                            if (ConcluirVendaComCreditar() == false)
-                            {
-                                _vendaRepositorio.ExcluirUltimaVenda();
-                                DialogMessage.MessageFullComButtonOkIconeDeInformacao("Para concluir a venda no modo CREDITAR é necessário selecionar o cliente.", "Aviso");
-                            }
-                        }
+                        AtualizarQuandroDeAvisos();
+                        ConcluirVendaComDinheiro();
+                        ConcluirVendaComCreditar();
                         ConcluirVendaComCartao();
                     }
                 }
@@ -545,6 +536,57 @@ namespace View.UI.ViewCaixa
             }
         }
 
+        private static void AtualizarQuandroDeAvisos()
+        {
+
+
+            try
+            {
+                frmAlertaEstoque form = (frmAlertaEstoque)Application.OpenForms[name: nameof(frmAlertaEstoque)];
+                if (form != null)
+                {
+                    form.CarregarDgv();
+                }
+            }
+            catch (CustomException erro)
+            {
+                DialogMessage.MessageFullComButtonOkIconeDeInformacao(erro.Message, "Aviso");
+            }
+            catch (Exception erro)
+            {
+                DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
+            }
+        }
+
+        private void ConcluirVendaComCreditar()
+        {
+
+            try
+            {
+                if (cbbTipoDePagamento.Text == EnumTipoPagamento.Creditar.ToString())
+                {
+                    if (VendaComCreditar() == false)
+                    {
+                        _vendaRepositorio.ExcluirUltimaVenda();
+                        DialogMessage.MessageFullComButtonOkIconeDeInformacao("Para concluir a venda no modo CREDITAR é necessário selecionar o cliente.", "Aviso");
+                    }
+                    else
+                    {
+                        DarBaixaNoEstoque();
+                    }
+                }
+            }
+            catch (CustomException erro)
+            {
+                DialogMessage.MessageFullComButtonOkIconeDeInformacao(erro.Message, "Aviso");
+            }
+            catch (Exception erro)
+            {
+                DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
+            }
+
+        }
+
         private void ConcluirVendaComCartao()
         {
 
@@ -552,6 +594,7 @@ namespace View.UI.ViewCaixa
             {
                 if (cbbTipoDePagamento.Text == EnumTipoPagamento.Cartão.ToString())
                 {
+                    DarBaixaNoEstoque();
                     PosSalvamentoPadrao();
                     MensagemDeAviso();
                 }
@@ -586,7 +629,7 @@ namespace View.UI.ViewCaixa
 
         }
 
-        private bool ConcluirVendaComCreditar()
+        private bool VendaComCreditar()
         {
 
             try
@@ -623,7 +666,7 @@ namespace View.UI.ViewCaixa
 
         }
 
-        private void InserirVendaNoCaixa()
+        private void ConcluirVendaComDinheiro()
         {
 
             try
@@ -634,10 +677,15 @@ namespace View.UI.ViewCaixa
                     if (_caixaRepositorio.Cadastrar(caixa: new Caixa() { IDUsuario = Usuarios.IDStatic, Valor = VendaTotal }) == 1)
                     {
                         InstanciarMovimentacaoCaixa();
-                        _movimentacaoCaixaRepositorio.Salvar(new MovimentacaoCaixa() { Valor = VendaTotal, Data = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day) });
-                        JogarNovoValorParaCaixa();
-                        PosSalvamentoPadrao();
-                        MensagemDeAviso();
+                        int resultado = _movimentacaoCaixaRepositorio.Salvar(new MovimentacaoCaixa() { Valor = VendaTotal, Data = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day) });
+                        if (resultado > 0)
+                        {
+                            DarBaixaNoEstoque();
+                            JogarNovoValorParaCaixa();
+                            PosSalvamentoPadrao();
+                            MensagemDeAviso();
+                        }
+
 
                     }
                 }
@@ -837,10 +885,10 @@ namespace View.UI.ViewCaixa
             try
             {
                 InstanciaCaixaRepositorio();
-                decimal valorTroco = Convert.ToDecimal(txtTroco.Text.Substring(2, txtTroco.Text.Length - 2));
+                decimal valorTroco = GetValorTroco();
                 if (_caixaRepositorio.GetValor().Valor < valorTroco)
                 {
-                    MyErro.MyCustomException("É necessário abrir o caixa para a venda ocorrer corretamente.");
+                    MyErro.MyCustomException($"Você não possui {GetValorTroco()} no caixa. Atualize o valor ou adicione valor ao mesmo.");
                 }
                 venda = new Venda();
                 venda.Data = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
@@ -860,89 +908,61 @@ namespace View.UI.ViewCaixa
             }
         }
 
+        private decimal GetValorTroco()
+        {
+            try
+            {
+                return Convert.ToDecimal(txtTroco.Text.Substring(2, txtTroco.Text.Length - 2));
+            }
+            catch (CustomException erro)
+            {
+                throw new CustomException(erro.Message);
+            }
+            catch (Exception erro)
+            {
+                throw new Exception(erro.Message);
+            }
+
+        }
+
         private void txtCodigoDoProduto_KeyPress(object sender, KeyPressEventArgs e)
         {
             try
             {
                 ValidatorField.IntegerAndLetter(e);
                 ValidatorField.NoSpace(e);
-                if ((Keys)e.KeyChar == Keys.Enter && txtCodigoDoProduto.Text.Length > 0)
+                string codigo = txtCodigoDoProduto.Text;
+                if ((Keys)e.KeyChar == Keys.Enter && codigo.Length > 0)
                 {
                     if (ckbPorPeso.Checked)
                     {
-                        decimal peso = 0;
-                        if (txtPesoDoProduto.Text.Contains("0,"))
+
+                        InstanciarProdutoRepositorio();
+                        InstanciarTipoCadastroRepositorio();
+                        Produto prod = _produtoRepositorio.GetProdutoPorCodigo(codigo);
+                        if (prod.TipoCadastro == _tipoCadastroRepositorio.GetIDPeloNome(EnumTipoCadastro.Unidade.ToString()))
                         {
-                            string temp = txtPesoDoProduto.Text.Substring(2, txtPesoDoProduto.Text.Length - 2);
-                            peso = txtPesoDoProduto.Text == "" ? 0 : Convert.ToDecimal(temp);
+                            ChecarChebox(ckb: ckbPorPeso, checado: false);
+                            LimparTxt(new List<TextBox> { txtPesoDoProduto });
+                            VenderPorUnidade(codigo);
+                            //FocarNoTxt(txtCodigoDoProduto);
                         }
                         else
                         {
-                            peso = txtPesoDoProduto.Text == "" ? 0 : Convert.ToDecimal(txtPesoDoProduto.Text.Replace(",", ""));
+                            VenderPorPeso(codigo);
                         }
 
-                        if (peso > 0)
-                        {
-                            InstanciarProdutoRepositorio();
-                            _produtoRepositorio.AdicionarProdutoParaVendaPorPeso(ltvProdutos, txtCodigoDoProduto.Text, peso);
-                            GetValorNaComanda();
-                            LimparTxt(new List<TextBox>() { txtCodigoDoProduto });
-                            MostrarBotaoVendaSeExisteItensNaComanda();
-                            EsconderGroupBoxOuMostrar(new List<GroupBox>() { gpbValorPorPeso }, Esconder);
-                            DesmarcarCheckBox();
-                            LimparTxt(new List<TextBox>() { txtValorPago });
-                            CarregarTxtQuantidadeComUm();
-                        }
-                        else
-                        {
-                            MyErro.MyCustomException("Digite o peso do item vendido.");
-                            FocarNoTxt(txtPesoDoProduto);
-                        }
                     }
                     else
                     {
-                        DialogResult dialogResult = DialogResult.OK;
-                        if (Convert.ToInt32(txtQuantidade.Text) > 20)
-                        {
-                            dialogResult = DialogMessage.MessageFullQuestion("Deseja vender " + txtQuantidade.Text + " produtos?", "Aviso");
-                        }
-                        if (dialogResult == DialogResult.OK || dialogResult == DialogResult.Yes)
-                        {
-                            if (txtQuantidade.Text == "0" || txtQuantidade.Text == "00" || txtQuantidade.Text == "000")
-                            {
-                                LimparTxt(new List<TextBox>() { txtQuantidade });
-                                FocarNoTxt(txtQuantidade);
-                                DialogMessage.MessageFullComButtonOkIconeDeInformacao("Não é possível vende um produto com o campo Quantidade com 0", "Aviso");
-                            }
-                            else if (txtQuantidade.Text.Length == 0)
-                            {
-                                FocarNoTxt(txtQuantidade);
-                                DialogMessage.MessageFullComButtonOkIconeDeInformacao("Não é possível vende um produto com o campo Quantidade vazio.", "Aviso");
-                            }
-                            else
-                            {
-                                InstanciarProdutoRepositorio();
-                                _produtoRepositorio.AdicionarProdutoParaVenda(ltvProdutos, txtCodigoDoProduto.Text, Convert.ToInt32(txtQuantidade.Text));
-                                GetValorNaComanda();
-                                LimparTxt(new List<TextBox>() { txtCodigoDoProduto });
-                                MostrarBotaoVendaSeExisteItensNaComanda();
-                                EsconderGroupBoxOuMostrar(new List<GroupBox>() { gpbValorPorPeso }, Esconder);
-                                DesmarcarCheckBox();
-                                LimparTxt(new List<TextBox>() { txtValorPago });
-                                CarregarTxtQuantidadeComUm();
-                            }
-                        }
-                        else
-                        {
-                            FocarNoTxt(txt:txtQuantidade);
-                            LimparTxt(new List<TextBox> { txtQuantidade});
-                        }
-
+                        VenderPorUnidade(codigo);
                     }
+
 
                 }
                 else if ((Keys)e.KeyChar == Keys.Enter && txtCodigoDoProduto.Text.Length == 0)
                 {
+
                     txtCodigoDoProduto_DoubleClick(txtCodigoDoProduto, e);
                 }
             }
@@ -956,6 +976,112 @@ namespace View.UI.ViewCaixa
             {
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
+        }
+
+        private void VenderPorPeso(string codigo)
+        {
+            try
+            {
+                decimal peso = 0;
+                if (txtPesoDoProduto.Text.Contains("0,"))
+                {
+                    string temp = txtPesoDoProduto.Text.Substring(2, txtPesoDoProduto.Text.Length - 2);
+                    peso = txtPesoDoProduto.Text == "" ? 0 : Convert.ToDecimal(temp);
+                }
+                else
+                {
+                    peso = txtPesoDoProduto.Text == "" ? 0 : Convert.ToDecimal(txtPesoDoProduto.Text.Replace(",", ""));
+                }
+
+                if (peso > 0)
+                {
+
+                    _produtoRepositorio.AdicionarProdutoParaVendaPorPeso(ltvProdutos, codigo, peso);
+                    GetValorNaComanda();
+                    LimparTxt(new List<TextBox>() { txtCodigoDoProduto });
+                    MostrarBotaoVendaSeExisteItensNaComanda();
+                    EsconderGroupBoxOuMostrar(new List<GroupBox>() { gpbValorPorPeso }, Esconder);
+                    DesmarcarCheckBox();
+                    LimparTxt(new List<TextBox>() { txtValorPago });
+                    CarregarTxtQuantidadeComUm();
+                }
+                else
+                {
+                    MyErro.MyCustomException("Digite o peso do item vendido.");
+                    FocarNoTxt(txtPesoDoProduto);
+                }
+            }
+            catch (CustomException erro)
+            {
+                DialogMessage.MessageFullComButtonOkIconeDeInformacao(erro.Message, "Aviso");
+                LimparTxt(new List<TextBox>() { txtCodigoDoProduto });
+                FocarNoTxt(txtCodigoDoProduto);
+            }
+            catch (Exception erro)
+            {
+                DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
+            }
+
+        }
+
+        private void VenderPorUnidade(string codigo)
+        {
+            try
+            {
+                DialogResult dialogResult = DialogResult.OK;
+                if (Convert.ToInt32(txtQuantidade.Text) > 20)
+                {
+                    dialogResult = DialogMessage.MessageFullQuestion("Deseja vender " + txtQuantidade.Text + " produtos?", "Aviso");
+                }
+                if (dialogResult == DialogResult.OK || dialogResult == DialogResult.Yes)
+                {
+                    if (txtQuantidade.Text == "0" || txtQuantidade.Text == "00" || txtQuantidade.Text == "000")
+                    {
+                        LimparTxt(new List<TextBox>() { txtQuantidade });
+                        FocarNoTxt(txtQuantidade);
+                        DialogMessage.MessageFullComButtonOkIconeDeInformacao("Não é possível vende um produto com o campo Quantidade com 0", "Aviso");
+                    }
+                    else if (txtQuantidade.Text.Length == 0)
+                    {
+                        FocarNoTxt(txtQuantidade);
+                        DialogMessage.MessageFullComButtonOkIconeDeInformacao("Não é possível vende um produto com o campo Quantidade vazio.", "Aviso");
+                    }
+                    else
+                    {
+                        InstanciarProdutoRepositorio();
+                        _produtoRepositorio.AdicionarProdutoParaVenda(ltvProdutos, codigo, Convert.ToInt32(txtQuantidade.Text));
+                        GetValorNaComanda();
+                        LimparTxt(new List<TextBox>() { txtCodigoDoProduto });
+                        MostrarBotaoVendaSeExisteItensNaComanda();
+                        EsconderGroupBoxOuMostrar(new List<GroupBox>() { gpbValorPorPeso }, Esconder);
+                        DesmarcarCheckBox();
+                        LimparTxt(new List<TextBox>() { txtValorPago });
+                        CarregarTxtQuantidadeComUm();
+                    }
+                }
+                else
+                {
+                    FocarNoTxt(txt: txtQuantidade);
+                    LimparTxt(new List<TextBox> { txtQuantidade });
+                }
+            }
+            catch (CustomException erro)
+            {
+                DialogMessage.MessageFullComButtonOkIconeDeInformacao(erro.Message, "Aviso");
+                LimparTxt(new List<TextBox>() { txtCodigoDoProduto });
+                FocarNoTxt(txtCodigoDoProduto);
+            }
+            catch (Exception erro)
+            {
+                DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
+            }
+
+
+        }
+
+        private void ChecarChebox(CheckBox ckb, bool checado)
+        {
+            ckb.Checked = false;
         }
 
         private void DesmarcarCheckBox()
@@ -1245,7 +1371,7 @@ namespace View.UI.ViewCaixa
             {
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
-            
+
         }
 
         private void txtCodigoDaComanda_DoubleClick(object sender, EventArgs e)
@@ -1253,7 +1379,7 @@ namespace View.UI.ViewCaixa
             try
             {
                 CarregarComandaEmUso();
-                
+
             }
             catch (CustomException erro)
             {
@@ -1291,7 +1417,6 @@ namespace View.UI.ViewCaixa
 
         private void btnFecharCaixa_Click(object sender, EventArgs e)
         {
-
             try
             {
 

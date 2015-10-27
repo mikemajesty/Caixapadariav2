@@ -75,12 +75,13 @@ namespace View.UI.ViewProduto
                 {
                     if (dgvProdutos.Rows.Count > 0)
                     {
+                        MudarTextoDaLabel(lbl:lblQuantidade,texto:"KG");
                         dgvProdutos.EsconderColuna("Quantidade");
                         decimal pesoKilo = _produto.PrecoVenda;
                         decimal valorVendido = Convert.ToDecimal(dgvProdutos.Rows[0].Cells[3].Value);
                         if (valorVendido >= pesoKilo)
                         {
-                            txtQuantidade.Text = (valorVendido / pesoKilo).ToString() + " Kg";
+                            txtQuantidade.Text = (valorVendido / pesoKilo).ToString("C2") + " Kg";
                         }
                         else
                         {
@@ -169,6 +170,10 @@ namespace View.UI.ViewProduto
                     txtTotalLucro.Text = vendido.ToString("C2");
                     txtQuantidade.Text = quantidade.ToString();
 
+                }
+                else
+                {
+                    txtQuantidade.Text = "Nenhuma venda";
                 }
 
             }

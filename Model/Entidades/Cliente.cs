@@ -55,7 +55,11 @@ namespace Model.Entidades
                 {
                     MyErro.MyCustomException("CPF não pode ser vazio.");
                 }
-                else if (value.Length > 50)
+                else if (value.Length < 10)
+                {
+                    MyErro.MyCustomException("CPF deve conter 11 digitos.");
+                }
+                else if (value.Length > 11)
                 {
                     MyErro.MyCustomException("CPF não pode conter mais de 11 numeros ou letras.");
                 }
@@ -76,6 +80,10 @@ namespace Model.Entidades
                 if (value.Length == 0)
                 {
                     MyErro.MyCustomException("Telefone não pode ser vazio.");
+                }
+                else if (value.Length < 10)
+                {
+                    MyErro.MyCustomException("Telefone deve ter no mínimo 10 numeros.");
                 }
                 else if (value.Length > 50)
                 {

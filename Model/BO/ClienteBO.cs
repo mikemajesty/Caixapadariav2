@@ -19,7 +19,7 @@ namespace Model.BO
             try
             {
                 InstanciarBanco();
-                return _banco.Cliente.FirstOrDefault(c => c.CPF == cliente.CPF) != null ? Existe.RetornaErro("CPF já existe.") : NaoExiste;
+                return _banco.Cliente.FirstOrDefault(c => c.CPF == cliente.CPF) != null ? Existe.RetornaErro($"Cliente com o CPF: {cliente.CPF} já esta cadastrado.") : NaoExiste;
             }
             catch (CustomException erro)
             {

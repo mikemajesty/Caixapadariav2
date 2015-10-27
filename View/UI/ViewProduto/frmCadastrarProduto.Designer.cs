@@ -43,7 +43,7 @@
             this.txtPrecoCompra = new System.Windows.Forms.TextBox();
             this.lblPrecoVenda = new System.Windows.Forms.Label();
             this.lblPrecoCompra = new System.Windows.Forms.Label();
-            this.gpbDadosPeso = new System.Windows.Forms.GroupBox();
+            this.gpbPorcentagemLucro = new System.Windows.Forms.GroupBox();
             this.ptbPorcentagem = new System.Windows.Forms.PictureBox();
             this.Porcentagem = new System.Windows.Forms.Label();
             this.txtPorcentagem = new System.Windows.Forms.TextBox();
@@ -67,7 +67,7 @@
             this.gpbDadosUnidade.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ptbPrecoVenda)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptbPrecoCompra)).BeginInit();
-            this.gpbDadosPeso.SuspendLayout();
+            this.gpbPorcentagemLucro.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ptbPorcentagem)).BeginInit();
             this.gpbEstoque.SuspendLayout();
             this.gpbTipoCadastro.SuspendLayout();
@@ -122,7 +122,7 @@
             // 
             this.gpbProduto.Controls.Add(this.btnAdicionarCategoria);
             this.gpbProduto.Controls.Add(this.gpbDadosUnidade);
-            this.gpbProduto.Controls.Add(this.gpbDadosPeso);
+            this.gpbProduto.Controls.Add(this.gpbPorcentagemLucro);
             this.gpbProduto.Controls.Add(this.txtDescricao);
             this.gpbProduto.Controls.Add(this.lblDescricao);
             this.gpbProduto.Controls.Add(this.lblCategoria);
@@ -229,17 +229,17 @@
             this.lblPrecoCompra.TabIndex = 9;
             this.lblPrecoCompra.Text = "Preço de Compra";
             // 
-            // gpbDadosPeso
+            // gpbPorcentagemLucro
             // 
-            this.gpbDadosPeso.Controls.Add(this.ptbPorcentagem);
-            this.gpbDadosPeso.Controls.Add(this.Porcentagem);
-            this.gpbDadosPeso.Controls.Add(this.txtPorcentagem);
-            this.gpbDadosPeso.Location = new System.Drawing.Point(346, 105);
-            this.gpbDadosPeso.Name = "gpbDadosPeso";
-            this.gpbDadosPeso.Size = new System.Drawing.Size(304, 74);
-            this.gpbDadosPeso.TabIndex = 8;
-            this.gpbDadosPeso.TabStop = false;
-            this.gpbDadosPeso.Text = "Dados do Lucro";
+            this.gpbPorcentagemLucro.Controls.Add(this.ptbPorcentagem);
+            this.gpbPorcentagemLucro.Controls.Add(this.Porcentagem);
+            this.gpbPorcentagemLucro.Controls.Add(this.txtPorcentagem);
+            this.gpbPorcentagemLucro.Location = new System.Drawing.Point(346, 105);
+            this.gpbPorcentagemLucro.Name = "gpbPorcentagemLucro";
+            this.gpbPorcentagemLucro.Size = new System.Drawing.Size(304, 74);
+            this.gpbPorcentagemLucro.TabIndex = 8;
+            this.gpbPorcentagemLucro.TabStop = false;
+            this.gpbPorcentagemLucro.Text = "Dados do Lucro";
             // 
             // ptbPorcentagem
             // 
@@ -263,10 +263,12 @@
             // 
             // txtPorcentagem
             // 
+            this.txtPorcentagem.BackColor = System.Drawing.Color.White;
             this.txtPorcentagem.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPorcentagem.Location = new System.Drawing.Point(146, 32);
             this.txtPorcentagem.MaxLength = 5;
             this.txtPorcentagem.Name = "txtPorcentagem";
+            this.txtPorcentagem.ReadOnly = true;
             this.txtPorcentagem.Size = new System.Drawing.Size(117, 29);
             this.txtPorcentagem.TabIndex = 4;
             this.txtPorcentagem.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -466,8 +468,8 @@
             this.gpbDadosUnidade.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ptbPrecoVenda)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptbPrecoCompra)).EndInit();
-            this.gpbDadosPeso.ResumeLayout(false);
-            this.gpbDadosPeso.PerformLayout();
+            this.gpbPorcentagemLucro.ResumeLayout(false);
+            this.gpbPorcentagemLucro.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ptbPorcentagem)).EndInit();
             this.gpbEstoque.ResumeLayout(false);
             this.gpbEstoque.PerformLayout();
@@ -497,7 +499,7 @@
         private System.Windows.Forms.Label lblEstoque;
         private System.Windows.Forms.Label Porcentagem;
         private System.Windows.Forms.TextBox txtPorcentagem;
-        private System.Windows.Forms.GroupBox gpbDadosPeso;
+        private System.Windows.Forms.GroupBox gpbPorcentagemLucro;
         private System.Windows.Forms.GroupBox gpbTipoCadastro;
         private System.Windows.Forms.ComboBox cbbTipoCadastro;
         private System.Windows.Forms.GroupBox gpbDadosUnidade;
