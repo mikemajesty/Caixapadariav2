@@ -1,6 +1,5 @@
 ﻿using Controller.Repositorio;
 using Mike.Utilities.Desktop;
-using Model.BO;
 using Model.Entidades;
 using System;
 using System.Collections.Generic;
@@ -9,7 +8,7 @@ using System.Windows.Forms;
 using View.Enum;
 using View.UI.ViewCetegoria;
 using View.UI.ViewEstoque;
-
+using System.Linq;
 namespace View.UI.ViewProduto
 {
     public partial class frmCadastrarProduto : Form
@@ -75,11 +74,11 @@ namespace View.UI.ViewProduto
             try
             {
 
-                FocarNoTxt(txt: txtCodigo);
+
                 CarregarCategoria();
                 CarregarTipoDeCadastro();
                 CarregarTextoDePermissao();
-                DesabilitarGroupBox(new GroupBox[] {gpbPorcentagemLucro});
+                DesabilitarGroupBox(new GroupBox[] { gpbPorcentagemLucro });
                 switch (_tipoOperacao)
                 {
                     case EnumTipoOperacao.Salvar:
@@ -91,6 +90,7 @@ namespace View.UI.ViewProduto
                         MudarTextoDoForm("Alterar Produto");
                         MudarTextoDoBotao("Alterar");
                         DesabilitarGroupBoxDeTipoDeCadastro();
+                        FocarNoTxt(txtNome);
                         break;
                     case EnumTipoOperacao.Deletar:
                         PopulaTxt();
@@ -100,7 +100,7 @@ namespace View.UI.ViewProduto
                         DesabilitarCampos();
                         DesabilitarGroupBoxDeTipoDeCadastro();
                         DesabilitarCheckBox();
-
+                        FocarNoBotao(btnCadastrar);
                         break;
                     case EnumTipoOperacao.Detalhes:
                         PopulaTxt();
@@ -110,7 +110,7 @@ namespace View.UI.ViewProduto
                         DesabilitarCampos();
                         DesabilitarGroupBoxDeTipoDeCadastro();
                         DesabilitarCheckBox();
-                        FocarNoBotao();
+                        FocarNoBotao(btnCadastrar);
                         break;
                     case EnumTipoOperacao.Estoque:
                         PopulaTxt();
@@ -121,7 +121,6 @@ namespace View.UI.ViewProduto
                         DesabilitarGroupBox(new GroupBox[] { gpbDadosUnidade, gpbTipoCadastro, gpbProduto });
                         FocarNoTxt(txt: txtEstoque);
                         DeixarTxtComoObrigatorio(new TextBox[] { txtEstoque });
-
                         break;
                     case EnumTipoOperacao.ListView:
                         DesabilitarCheckBox();
@@ -133,6 +132,7 @@ namespace View.UI.ViewProduto
                         DesabilitarCampos();
                         DesabilitarGroupBoxDeTipoDeCadastro();
                         MudarTamanhoDotxtDescricao(new Size(248, 106));
+                        FocarNoBotao(btnCadastrar);
                         if (Usuarios.PermissaoStatic != ("Administrador"))
                         {
                             MudarTamanhoDoComboBoxCategoria(new Size(558, 31));
@@ -145,12 +145,12 @@ namespace View.UI.ViewProduto
                             else
                             {
                                 MudarPosicaoDoTextBox(posicao: new Point(136, 44), txt: txtPrecoVenda);
-                            }                            
+                            }
                             EsconderLabel(lbl: lblPrecoCompra);
                             MudarPosicaoDoPictureBox(ptb: ptbPrecoVenda, location: new Point(263, 44));
                             EsconderPtb(ptb: ptbPrecoCompra);
                             EsconderGruopBox(gpbPorcentagemLucro);
-                            EsconderTextBox(txt:txtPrecoCompra);
+                            EsconderTextBox(txt: txtPrecoCompra);
                         }
 
                         break;
@@ -441,7 +441,8 @@ namespace View.UI.ViewProduto
                         }
                         else
                         {
-                            MyErro.MyCustomException("Todos os campos em amarelo são obrigatórios.");
+                            AvisarUsuarioComCamposEmBranco();
+
                         }
                         break;
                     case EnumTipoOperacao.Alterar:
@@ -457,11 +458,11 @@ namespace View.UI.ViewProduto
                         }
                         else
                         {
-                            MyErro.MyCustomException("Todos os campos em amarelo são obrigatórios.");
+                            AvisarUsuarioComCamposEmBranco();
                         }
                         break;
                     case EnumTipoOperacao.Deletar:
-                        if (VerificarTxtNulos() == 0)
+                        if (_produto.ID != 0)
                         {
                             InstanciarProdutoRepositorio();
                             if (_produtoRepositorio.Deletar(PupularProduto()) == Sucesso)
@@ -470,10 +471,7 @@ namespace View.UI.ViewProduto
                                 PosSalvamento();
                             }
                         }
-                        else
-                        {
-                            MyErro.MyCustomException("Todos os campos em amarelo são obrigatórios.");
-                        }
+
                         break;
                     case EnumTipoOperacao.Detalhes:
                         FecharForm();
@@ -532,6 +530,27 @@ namespace View.UI.ViewProduto
             }
 
 
+        }
+
+        private void AvisarUsuarioComCamposEmBranco()
+        {
+            if (cbbTipoCadastro.Text == EnumTipoCadastro.Peso.ToString())
+            {
+                var lista = ListaTxtPeso().Cast<TextBox>().ToList().Where(c => c.BackColor == Color.Yellow && c.Text.Trim() == "");
+                DialogMessage.MessageFullComButtonOkIconeDeInformacao("Todos os campos em amarelo são obrigatórios.", "Aviso");
+                FocarNoTxt(lista.FirstOrDefault());
+            }
+            else
+            {
+                var lista = ListaTxtUnidade().Cast<TextBox>().ToList().Where(c => c.BackColor == Color.Yellow && c.Text.Trim() == "");
+                DialogMessage.MessageFullComButtonOkIconeDeInformacao("Todos os campos em amarelo são obrigatórios.", "Aviso");
+                FocarNoTxt(lista.FirstOrDefault());
+            }
+        }
+
+        private void Dosamthing()
+        {
+            throw new NotImplementedException();
         }
 
         private void FecharForm()
@@ -607,7 +626,7 @@ namespace View.UI.ViewProduto
                             TextBox[] txtListUnidade = ListaTxtUnidade();
                             foreach (TextBox txt in txtListUnidade)
                             {
-                                if (txt.Text == "" || txt.Text == null)
+                                if (txt.Text.Trim() == "" || txt.Text.Trim() == null)
                                 {
                                     retorno = 1;
                                     break;
@@ -626,7 +645,7 @@ namespace View.UI.ViewProduto
                             TextBox[] txtListUnidade = ListaTxtUnidadeSemEstoque();
                             foreach (TextBox txt in txtListUnidade)
                             {
-                                if (txt.Text == "" || txt.Text == null)
+                                if (txt.Text.Trim() == "" || txt.Text.Trim() == null)
                                 {
                                     retorno = 1;
                                     break;
@@ -637,7 +656,7 @@ namespace View.UI.ViewProduto
                             TextBox[] txtListPeso = ListaTxtPeso();
                             foreach (TextBox txt in txtListPeso)
                             {
-                                if (txt.Text == "" || txt.Text == null)
+                                if (txt.Text.Trim() == "" || txt.Text.Trim() == null)
                                 {
                                     retorno = 1;
                                     break;
@@ -725,10 +744,10 @@ namespace View.UI.ViewProduto
                 {
                     produto.Categoria = _categoriaRepositorio.GetIdDaCategoriaPeloNome(cbbCategoria.Text);
                     produto.ID = _produto.ID;
-                    produto.Nome = txtNome.Text.UpperCaseOnlyFirst();
+                    produto.Nome = txtNome.Text.Trim().UpperCaseOnlyFirst();
                     produto.TipoCadastro = _tipoCadastroRepositorio.GetIDPeloNome(cbbTipoCadastro.Text);
-                    produto.Descricao = txtDescricao.Text != null && txtDescricao.Text != "" ? txtDescricao.Text.UpperCaseOnlyFirst() : "";
-                    produto.Codigo = txtCodigo.Text;
+                    produto.Descricao = txtDescricao.Text.Trim() != null && txtDescricao.Text.Trim() != "" ? txtDescricao.Text.Trim().UpperCaseOnlyFirst() : "";
+                    produto.Codigo = txtCodigo.Text.Trim();
                     produto.GerenciarEstoque = ckbEstoque.Checked;
                     produto.PrecoCompra = Convert.ToDecimal(txtPrecoCompra.Text.Length == 0 ? 0 : Convert.ToDecimal(txtPrecoCompra.Text));
                     produto.PrecoVenda = Convert.ToDecimal(txtPrecoVenda.Text.Length == 0 ? 0 : Convert.ToDecimal(txtPrecoVenda.Text));
@@ -790,7 +809,7 @@ namespace View.UI.ViewProduto
                         MostrarCheck();
                         LimparCheckBox();
                         ComboBoxCheckado();
-                        MudarTextoDoComboBox(gpb: gpbPorcentagemLucro, texto: "Porcentagem do Lucro do Produto");
+                        MudarTextoDoComboBox(gpb: gpbPorcentagemLucro, texto: "Porcentagem de venda do Produto");
                         MudarTextoDoComboBox(gpb: gpbDadosUnidade, texto: "Dados da venda por Unidade");
                         MudarTextoDaLabel(lbl: lblPrecoCompra, texto: "Preço de Compra");
                         MudarTextoDaLabel(lbl: lblPrecoVenda, texto: "Preço de Venda");
@@ -814,7 +833,7 @@ namespace View.UI.ViewProduto
                         MudarPosicaoDoGroupBoxTipoCadastro(new Point(174, 4));
                         LimparCheckBox();
                         MudarTextoDoComboBox(gpb: gpbDadosUnidade, texto: "Dados da venda por Peso");
-                        MudarTextoDoComboBox(gpb: gpbPorcentagemLucro, texto: "Porcentagem do lucro da venda");
+                        MudarTextoDoComboBox(gpb: gpbPorcentagemLucro, texto: "Porcentagem de venda do Produto");
                         MudarTextoDaLabel(lbl: lblPrecoCompra, texto: "Custo kilo");
                         MudarTextoDaLabel(lbl: lblPrecoVenda, texto: "Preço kilo");
                         break;
@@ -1084,8 +1103,21 @@ namespace View.UI.ViewProduto
             ValidatorField.IntegerAndLetter(e: e);
             if ((Keys)e.KeyChar == Keys.Enter)
             {
-                FocarNoTxt(txtDescricao);
+                if (cbbCategoria.Items.Count > 0)
+                {
+                    FocarNoCbb(cbbCategoria);
+                }
+                else
+                {
+                    FocarNoBotao(btnAdicionarCategoria);
+                }
+
             }
+        }
+
+        private void FocarNoCbb(ComboBox cbb)
+        {
+            this.ActiveControl = cbb;
         }
 
         private void txtDescricao_KeyPress(object sender, KeyPressEventArgs e)
@@ -1116,13 +1148,13 @@ namespace View.UI.ViewProduto
             ValidatorField.Money(e: e);
             if ((Keys)e.KeyChar == Keys.Enter)
             {
-                FocarNoBotao();
+                FocarNoBotao(btnCadastrar);
             }
         }
 
-        private void FocarNoBotao()
+        private void FocarNoBotao(Button btn)
         {
-            this.FocoNoBotao(btnCadastrar);
+            this.FocoNoBotao(btn);
         }
 
         private void txtEstoque_KeyPress(object sender, KeyPressEventArgs e)
@@ -1149,7 +1181,7 @@ namespace View.UI.ViewProduto
             ValidatorField.Integer(e: e);
             if ((Keys)e.KeyChar == Keys.Enter)
             {
-                FocarNoBotao();
+                FocarNoBotao(btnCadastrar);
             }
         }
 
@@ -1198,7 +1230,15 @@ namespace View.UI.ViewProduto
                     AparecerGruopBox(gpbEstoque);
                     MudarTamanhoDoform(new Size(701, 572));
                     MudarPosicaoDoBotao(new Point(12, 471));
-                    FocarNoTxt(txt: txtEstoque);
+                    if (_tipoOperacao == EnumTipoOperacao.Estoque || _tipoOperacao == EnumTipoOperacao.Alterar)
+                    {
+                        FocarNoTxt(txt: txtEstoque);
+                    }
+                    else
+                    {
+                        FocarNoTxt(txtCodigo);
+                    }
+
                 }
                 else if (ckbEstoque.Checked == false)
                 {
@@ -1217,6 +1257,18 @@ namespace View.UI.ViewProduto
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
+        }
+
+        private void cbbCategoria_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                FocarNoTxt(txtDescricao);
+            }
+            else
+            {
+                FocarNoCbb(cbbCategoria);
+            }
         }
     }
 }

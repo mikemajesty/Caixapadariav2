@@ -82,6 +82,7 @@
             this.txtSenha.Size = new System.Drawing.Size(224, 31);
             this.txtSenha.TabIndex = 2;
             this.txtSenha.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtSenha.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSenha_KeyPress);
             // 
             // txtLogin
             // 
@@ -93,6 +94,7 @@
             this.txtLogin.Size = new System.Drawing.Size(224, 31);
             this.txtLogin.TabIndex = 1;
             this.txtLogin.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtLogin.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtLogin_KeyPress);
             // 
             // btnSair
             // 

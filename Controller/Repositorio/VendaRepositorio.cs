@@ -13,7 +13,7 @@ namespace Controller.Repositorio
         private _DbContext _banco;
         private TipoPagamentoRepositorio _tipoPagamentoRePositorio;
         private const int Sucesso = 1, Insucesso = 0;
-        private void IntanciarVendaRepositorio()
+        private void InstanciarBanco()
         {
             _banco = new _DbContext();
         }
@@ -21,11 +21,45 @@ namespace Controller.Repositorio
         {
             _tipoPagamentoRePositorio = new TipoPagamentoRepositorio();
         }
+        public DateTime GetMininumDate()
+        {
+            try
+            {
+                InstanciarBanco();
+                var venda = _banco.Venda.Min(c=>c.Data);
+                return venda;
+            }
+            catch (CustomException erro)
+            {
+                throw new CustomException(erro.Message);
+            }
+            catch (Exception erro)
+            {
+                throw new Exception(erro.Message);
+            }
+        }
+        public DateTime GetMaximunDate()
+        {
+            try
+            {
+                InstanciarBanco();
+                var venda = _banco.Venda.ToList().Max(c=>c.Data);
+                return venda;
+            }
+            catch (CustomException erro)
+            {
+                throw new CustomException(erro.Message);
+            }
+            catch (Exception erro)
+            {
+                throw new Exception(erro.Message);
+            }
+        }
         public int Cadastrar(Venda venda)
         {
             try
             {
-                IntanciarVendaRepositorio();
+                InstanciarBanco();
                 _banco.Entry(venda).State = EntityState.Added;
                 return _banco.SaveChanges() == Sucesso ? Sucesso : Insucesso;
             }
@@ -44,7 +78,7 @@ namespace Controller.Repositorio
         {
             try
             {
-                IntanciarVendaRepositorio();
+                InstanciarBanco();
 
                 dgv.DataSource = _banco.Venda.ToList();
             }
@@ -65,7 +99,7 @@ namespace Controller.Repositorio
             try
             {
 
-                IntanciarVendaRepositorio();
+                InstanciarBanco();
                 InstanciarTipoDePagamentoRepositorio();
 
                 if (tipoMovimentacao != "Todos")
@@ -124,7 +158,7 @@ namespace Controller.Repositorio
             try
             {
 
-                IntanciarVendaRepositorio();
+                InstanciarBanco();
                 dgv.DataSource = (from venda in _banco.Venda
                                   join usu in _banco.Usuarios on venda.IdUsuario equals usu.ID
                                   join tipoPag in _banco.TipoPagamento on venda.IDTIPOPAGAMENTO equals tipoPag.ID
@@ -154,7 +188,7 @@ namespace Controller.Repositorio
         {
             try
             {
-                IntanciarVendaRepositorio();
+                InstanciarBanco();
                 Venda venda = _banco.Venda.OrderByDescending(u => u.ID).FirstOrDefault();
                 _banco.Entry(venda).State = EntityState.Deleted;
                 return _banco.SaveChanges();
@@ -177,7 +211,7 @@ namespace Controller.Repositorio
             try
             {
 
-                IntanciarVendaRepositorio();
+                InstanciarBanco();
                 InstanciarTipoDePagamentoRepositorio();
                 if (tipoMovimentacao != "Todos")
                 {

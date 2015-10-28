@@ -20,7 +20,8 @@ namespace View.UI.ViewLogin
 
             try
             {
-                this.FocoNoTxt(txt: txtLogin);
+                FocarNotxt(txt:txtLogin);
+               
                 InstanciarKeyGenRepositorio();
                 if (_keyGenRepositorio.GetDiasTrail() == 0)
                 {
@@ -43,6 +44,11 @@ namespace View.UI.ViewLogin
             }
 
 
+        }
+
+        private void FocarNotxt(TextBox txt)
+        {
+            this.FocoNoTxt(txt: txt);
         }
 
         private void InstanciarKeyGenRepositorio()
@@ -84,24 +90,25 @@ namespace View.UI.ViewLogin
                 {
                     DialogMessage.MessageFullComButtonOkIconeDeInformacao("O Login: "+ PreencherLogin().Login+" não esta cadastrado.", "Aviso");
                     LimparTxt(new List<TextBox> {txtLogin});
-                    this.FocoNoTxt(txt: txtLogin);
+                    FocarNotxt(txt:txtLogin);
                 }
                 else if (_usuarioRepositorio.GetUsuarioPorSenha(PreencherLogin().Senha) == null && _usuarioRepositorio.GetUsuarioPorLogin(PreencherLogin().Login) != null)
                 {
                     DialogMessage.MessageFullComButtonOkIconeDeInformacao("Senha incorreta.", "Aviso");
                     LimparTxt(new List<TextBox> { txtSenha });
-                    this.FocoNoTxt(txt: txtSenha);
+                    FocarNotxt(txt: txtSenha);
                 }
                 else
                 {
                     DialogMessage.MessageFullComButtonOkIconeDeInformacao("Login e senha incorretos.", "Aviso");
                     LimparTxt(new List<TextBox> { txtLogin,txtSenha});
-                    this.FocoNoTxt(txt: txtLogin);
+                    FocarNotxt(txt: txtLogin);
                 }
             }
             catch (CustomException erro)
             {
                 DialogMessage.MessageFullComButtonOkIconeDeInformacao(message: erro.Message, title: "Aviso");
+                
             }
             catch (Exception erro)
             {
@@ -130,10 +137,25 @@ namespace View.UI.ViewLogin
             Application.Exit();
         }
 
-      
+        private void txtLogin_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                FocarNotxt(txt:txtSenha);
+            }
+        }
 
+        private void txtSenha_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                FocarNoBtn(btn: btnEntrar);
+            }
+        }
 
-
-
+        private void FocarNoBtn(Button btn)
+        {
+            this.FocoNoBotao(btn);
+        }
     }
 }

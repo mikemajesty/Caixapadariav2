@@ -105,6 +105,43 @@ namespace Controller.Repositorio
             }
         }
 
+        public DateTime GetMinimunDate()
+        {
+            try
+            {
+                InstanciarBanco();
+                var date = _banco.MovimentacaoProduto.Min(c => c.Data);
+                return date;
+            }
+            catch (CustomException erro)
+            {
+                throw new CustomException(erro.Message);
+            }
+            catch (Exception erro)
+            {
+                throw new Exception(erro.Message);
+            }
+
+        }
+        public DateTime GetMaximunDate()
+        {
+            try
+            {
+                InstanciarBanco();
+                var date = _banco.MovimentacaoProduto.Max(c => c.Data);
+                return date;
+            }
+            catch (CustomException erro)
+            {
+                throw new CustomException(erro.Message);
+            }
+            catch (Exception erro)
+            {
+                throw new Exception(erro.Message);
+            }
+
+        }
+
         public void ListarEntredatas(DataGridView dgv, string codigo, DateTimePicker dtpInicial, DateTimePicker dtpFinal)
         {
             try

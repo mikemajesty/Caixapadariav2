@@ -8,10 +8,13 @@ namespace View.UI.ViewCaixa
     public partial class frmMovimentacaoCaixa : Form
     {
         private MovimentacaoCaixaRepositorio _movimentacaoCaixaRepositorio;
+        //private CaixaRepositorio _caixaRepositorio;
+
         public frmMovimentacaoCaixa()
         {
             InitializeComponent();
         }
+     
         private void InstanciarCaixaRepositorio()
         {
             _movimentacaoCaixaRepositorio = new MovimentacaoCaixaRepositorio();
@@ -21,8 +24,9 @@ namespace View.UI.ViewCaixa
 
             try
             {
-                this.FocoNoBotao(btnTodos);
                 InstanciarCaixaRepositorio();
+                DefinirValoresNoDateTimePicker();
+                this.FocoNoBotao(btnTodos);                
                 _movimentacaoCaixaRepositorio.Listar(dgvMovimentacao);
                 ExibirLucroTotalVendido();
             }
@@ -36,7 +40,29 @@ namespace View.UI.ViewCaixa
             }
 
         }
+        private void DefinirValoresNoDateTimePicker()
+        {
+            try
+            {
+                DateTime minDate = _movimentacaoCaixaRepositorio.GetMinimunDate();
+                DateTime maxDate = _movimentacaoCaixaRepositorio.GetMaximunDate();
+                dtpValorInicial.MinDate = minDate;
+                dtpValorInicial.MaxDate = maxDate;
+                dtpValorFinal.MaxDate = maxDate;
+                dtpValorFinal.MinDate = minDate;
+                dtpPesquisarPorDia.MinDate = minDate;
+                dtpPesquisarPorDia.MaxDate = maxDate;
+            }
+            catch (CustomException erro)
+            {
+                DialogMessage.MessageFullComButtonOkIconeDeInformacao(erro.Message, "Aviso");
+            }
+            catch (Exception erro)
+            {
+                DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
+            }
 
+        }
         private void btnPesquisarEntreDatas_Click(object sender, EventArgs e)
         {
 

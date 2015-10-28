@@ -1,4 +1,6 @@
-﻿namespace View.UI.ViewLogin
+﻿using System.Windows.Forms;
+
+namespace View.UI.ViewLogin
 {
     partial class frmCadastrarLogin
     {
@@ -121,6 +123,7 @@
             this.txtConfirmarSenha.Size = new System.Drawing.Size(224, 31);
             this.txtConfirmarSenha.TabIndex = 4;
             this.txtConfirmarSenha.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtConfirmarSenha.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtConfirmarSenha_KeyPress);
             // 
             // lblSenha
             // 
@@ -144,6 +147,7 @@
             this.txtSenha.Size = new System.Drawing.Size(224, 31);
             this.txtSenha.TabIndex = 3;
             this.txtSenha.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtSenha.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSenha_KeyPress);
             // 
             // txtLogin
             // 
@@ -156,6 +160,7 @@
             this.txtLogin.Size = new System.Drawing.Size(224, 31);
             this.txtLogin.TabIndex = 2;
             this.txtLogin.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtLogin.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtLogin_KeyPress);
             // 
             // gpbPermicao
             // 
@@ -170,6 +175,7 @@
             // 
             // cbbPermissao
             // 
+            this.cbbPermissao.KeyPress += new KeyPressEventHandler(this.cbbPermissao_KeyPress);
             this.cbbPermissao.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbbPermissao.FormattingEnabled = true;
             this.cbbPermissao.Location = new System.Drawing.Point(24, 21);

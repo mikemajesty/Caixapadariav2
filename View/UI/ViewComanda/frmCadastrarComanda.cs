@@ -206,8 +206,15 @@ namespace View.UI.ViewComanda
         {
             ValidatorField.IntegerAndLetter(e: e);
             ValidatorField.NoSpace(e);
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                FocarNoBtn();
+            }
         }
 
-
+        private void FocarNoBtn()
+        {
+            this.ActiveControl = btnCadastrar;
+        }
     }
 }

@@ -75,6 +75,7 @@
             // 
             // txtCodigo
             // 
+            this.txtCodigo.CharacterCasing = System.Windows.Forms.CharacterCasing.Lower;
             this.txtCodigo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCodigo.Location = new System.Drawing.Point(92, 30);
             this.txtCodigo.MaxLength = 20;
@@ -117,6 +118,7 @@
             this.cbbCategoria.TabIndex = 3;
             this.cbbCategoria.TabStop = false;
             this.cbbCategoria.SelectedIndexChanged += new System.EventHandler(this.cbbCategoria_SelectedIndexChanged);
+            this.cbbCategoria.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cbbCategoria_KeyPress);
             // 
             // gpbProduto
             // 
@@ -275,6 +277,7 @@
             // 
             // txtDescricao
             // 
+            this.txtDescricao.CharacterCasing = System.Windows.Forms.CharacterCasing.Lower;
             this.txtDescricao.Location = new System.Drawing.Point(92, 185);
             this.txtDescricao.MaxLength = 70;
             this.txtDescricao.Multiline = true;
@@ -315,6 +318,7 @@
             // 
             // txtNome
             // 
+            this.txtNome.CharacterCasing = System.Windows.Forms.CharacterCasing.Lower;
             this.txtNome.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNome.Location = new System.Drawing.Point(92, 70);
             this.txtNome.MaxLength = 30;

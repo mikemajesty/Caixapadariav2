@@ -6,5 +6,8 @@ namespace View.Enum
     {
         Unidade,
         Peso
+        
+                
+                   
     }
 }

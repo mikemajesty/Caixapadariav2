@@ -23,9 +23,35 @@ namespace View.UI.ViewCaixa
 
             try
             {
+                InstanciarVendaRepositorio();
+                DefinirValoresNoDateTimePicker();
                 FocoNoBotao();
                 CarregarGrid();
                 CarregarTipoMovimentacao();
+            }
+            catch (CustomException erro)
+            {
+                DialogMessage.MessageFullComButtonOkIconeDeInformacao(erro.Message, "Aviso");
+            }
+            catch (Exception erro)
+            {
+                DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
+            }
+
+        }
+
+        private void DefinirValoresNoDateTimePicker()
+        {
+            try
+            {
+                DateTime minDate = _vendaRepositorio.GetMininumDate();
+                DateTime maxDate = _vendaRepositorio.GetMaximunDate();
+                dtpValorInicial.MinDate = minDate;
+                dtpValorInicial.MaxDate = maxDate;
+                dtpValorFinal.MaxDate = maxDate;
+                dtpValorFinal.MinDate = minDate;
+                dtpPesquisarPorDia.MinDate = minDate;
+                dtpPesquisarPorDia.MaxDate = maxDate;
             }
             catch (CustomException erro)
             {
@@ -66,7 +92,7 @@ namespace View.UI.ViewCaixa
             try
             {
 
-                InstanciarVendaRepositorio();
+                
                 _vendaRepositorio.ListarTodos(dgvMovimentacao);
                 dgvMovimentacao.AjustartamanhoDoDataGridView(new List<TamanhoGrid>() 
                 {

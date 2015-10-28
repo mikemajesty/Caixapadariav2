@@ -33,7 +33,7 @@ namespace View.UI.ViewCetegoria
             try
             {
 
-                this.FocoNoTxt(txt: txtCategoria);
+               
                 switch (_tipoOperacao)
                 {
 
@@ -42,12 +42,14 @@ namespace View.UI.ViewCetegoria
                         MudarTextoDoBotao(texto: "Alterar");
                         MudarCorDoBotao(color: Color.LightGreen);
                         PupularTxt();
+                        FocarNotxt();
                         break;
                     case EnumTipoOperacao.Deletar:
                         MudarTextoDoForm("Deletar Categoria");
                         MudarTextoDoBotao(texto: "Deletar");
                         MudarCorDoBotao(color: Color.LightCoral);
                         PupularTxt();
+                        FocarNoBtn();
                         DesabilitarDruopBox();
                         break;
 
@@ -192,6 +194,15 @@ namespace View.UI.ViewCetegoria
         private void txtCategoria_KeyPress(object sender, KeyPressEventArgs e)
         {
             ValidatorField.IntegerAndLetter(e: e);
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                FocarNoBtn();               
+            }
+        }
+
+        private void FocarNoBtn()
+        {
+            this.ActiveControl = btnCadastrar;
         }
     }
 }

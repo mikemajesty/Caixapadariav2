@@ -23,6 +23,8 @@ namespace View.UI.ViewProduto
             _produto = produto;
             InitializeComponent();
         }
+       
+
         private void InstanciarTipoCadastroRepositorio()
         {
             _tipoCadastroRepositorio = new TipoCadastroRepositorio();
@@ -37,9 +39,9 @@ namespace View.UI.ViewProduto
 
             try
             {
-
+              
                 InstanciarMovimentacaoProdutoRepositorio();
-
+                DefinirValoresNoDateTimePicker();
                 _movimentacaoProdutoRepositorio.ListarTodos(dgv: dgvProdutos, codigo: _produto.Codigo);
                 dgvProdutos.AjustartamanhoDoDataGridView(new List<TamanhoGrid>()
                     {
@@ -52,7 +54,7 @@ namespace View.UI.ViewProduto
                 ExibirQuantidadeTotalVendido();
                 InstanciarTipoCadastroRepositorio();
                 CarregarPesoVendido(_produto.TipoCadastro);
-               
+
             }
             catch (CustomException erro)
             {
@@ -64,7 +66,30 @@ namespace View.UI.ViewProduto
             }
 
         }
+        private void DefinirValoresNoDateTimePicker()
+        {
+            try
+            {
+                DateTime minDate = _movimentacaoProdutoRepositorio.GetMinimunDate();
+                DateTime maxDate = _movimentacaoProdutoRepositorio.GetMaximunDate();
+                dtpValorInicial.MinDate = minDate;
+                dtpValorInicial.MaxDate = maxDate;
+                dtpValorFinal.MaxDate = maxDate;
+                dtpValorFinal.MinDate = minDate;
+                dtpPesquisarPorDia.MinDate = minDate;
+                dtpPesquisarPorDia.MaxDate = maxDate;
+            }
+            catch (CustomException erro)
+            {
+                DialogMessage.MessageFullComButtonOkIconeDeInformacao(erro.Message, "Aviso");
+            }
+            catch (Exception erro)
+            {
+                DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
+            }
 
+        }
+      
         private void CarregarPesoVendido(int tipoCadastro)
         {
 
@@ -75,7 +100,7 @@ namespace View.UI.ViewProduto
                 {
                     if (dgvProdutos.Rows.Count > 0)
                     {
-                        MudarTextoDaLabel(lbl:lblQuantidade,texto:"KG");
+                        MudarTextoDaLabel(lbl: lblQuantidade, texto: "KG");
                         dgvProdutos.EsconderColuna("Quantidade");
                         decimal pesoKilo = _produto.PrecoVenda;
                         decimal valorVendido = Convert.ToDecimal(dgvProdutos.Rows[0].Cells[3].Value);
@@ -116,7 +141,7 @@ namespace View.UI.ViewProduto
 
         }
 
-        
+
 
         private void MudarTextoDaLabel(Label lbl, string texto)
         {

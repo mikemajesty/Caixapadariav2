@@ -37,7 +37,42 @@ namespace Controller.Repositorio
             }
 
         }
+        public DateTime GetMinimunDate()
+        {
+            try
+            {
+                InstanciarBanco();
+                var date  = _banco.MovimentacaoCaixa.Min(c => c.Data);
+                return date;
+            }
+            catch (CustomException erro)
+            {
+                throw new CustomException(erro.Message);
+            }
+            catch (Exception erro)
+            {
+                throw new Exception(erro.Message);
+            }
 
+        }
+        public DateTime GetMaximunDate()
+        {
+            try
+            {
+                InstanciarBanco();
+                var date = _banco.MovimentacaoCaixa.Max(c => c.Data);
+                return date;
+            }
+            catch (CustomException erro)
+            {
+                throw new CustomException(erro.Message);
+            }
+            catch (Exception erro)
+            {
+                throw new Exception(erro.Message);
+            }
+
+        }
         public void ListarPorDia(DataGridView dgv, DateTimePicker dtp)
         {
             try

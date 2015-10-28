@@ -36,10 +36,9 @@ namespace View.UI.ViewLogin
 
             try
             {
-
-                ColocarFocnoNotxt(txtNome);
+                
+               
                 CarregarPermissao();
-
                 switch (_tipoOperacao)
                 {
                     case EnumTipoOperacao.Salvar:
@@ -47,12 +46,14 @@ namespace View.UI.ViewLogin
                         MudarCorDoBotao(_tipoOperacao);
                         EsconderUltimoAcesso();
                         VerificarSeExistemAlgumUsuarioCadastrado();
+                        FocarNoTxt(txtNome);
                         break;
                     case EnumTipoOperacao.Alterar:
                         PopularTxt(_usuarios);
                         MudarTextosDoForm(textoForm: "Alterar Usuário", textoButton: "Alterar");
                         MudarCorDoBotao(_tipoOperacao);
                         EsconderUltimoAcesso();
+                        FocarNoTxt(txtNome);
                         break;
                     case EnumTipoOperacao.Deletar:
                         PopularTxt(_usuarios);
@@ -65,6 +66,7 @@ namespace View.UI.ViewLogin
                         MudarTextosDoForm(textoForm: "Deletar Usuário", textoButton: "Deletar");
                         MudarCorDoBotao(_tipoOperacao);
                         EsconderUltimoAcesso();
+                        FocarNoBtn(btnCadastrar);
                         break;
                     case EnumTipoOperacao.Detalhes:
                         PopularTxt(_usuarios);
@@ -77,6 +79,7 @@ namespace View.UI.ViewLogin
                         MudarTamanhoDoFormParaMais();
                         MudarTextosDoForm(textoForm: "Detalhes do Usuário", textoButton: "Sair");
                         MudarCorDoBotao(_tipoOperacao);
+                        FocarNoBtn(btnCadastrar);
                         break;
                 }
 
@@ -117,14 +120,14 @@ namespace View.UI.ViewLogin
         }
 
         private void DesabilitarComboBox(ComboBox cbb) => cbb.Enabled = false;
-       
-        private void MudarLocalizacaoDoBotaoParaBaixo() => btnCadastrar.Location = new Point(12, 350);      
+
+        private void MudarLocalizacaoDoBotaoParaBaixo() => btnCadastrar.Location = new Point(12, 350);
 
         private void MudarTamanhoDoFormParaMais() => this.Size = new Size(359, 550);
-      
+
         private void MudarLocalizacaoDoGroupBoxUlmimoAcesso() => gpbUltimoAcesso.Location = new Point(12, 278);
-      
-        private void EsconderUltimoAcesso() => gpbUltimoAcesso.Visible = false;       
+
+        private void EsconderUltimoAcesso() => gpbUltimoAcesso.Visible = false;
 
         private void MudarCorDoBotao(EnumTipoOperacao _tipoOperacao)
         {
@@ -147,14 +150,14 @@ namespace View.UI.ViewLogin
         }
 
         private void MudarCorDoBotao(Color cor) => btnCadastrar.BackColor = cor;
-      
-        private void MudarTamanhoDoFormParaMenos() => this.Size = new Size(359, 475);
-       
-        private void MudarLocalizacaoDoBotaoParaCima() => btnCadastrar.Location = new Point(12, 277);
-       
-        private void MudarLocalizacaoDoGroupBoxPermissao() => gpbPermicao.Location = new Point(12, 203);       
 
-        private void RedimencionarGroupBoxDadosDoLogin() => gpbDadosDoUsuario.Height = 109;    
+        private void MudarTamanhoDoFormParaMenos() => this.Size = new Size(359, 475);
+
+        private void MudarLocalizacaoDoBotaoParaCima() => btnCadastrar.Location = new Point(12, 277);
+
+        private void MudarLocalizacaoDoGroupBoxPermissao() => gpbPermicao.Location = new Point(12, 203);
+
+        private void RedimencionarGroupBoxDadosDoLogin() => gpbDadosDoUsuario.Height = 109;
 
         private void EsconderConfirmarSenha()
         {
@@ -163,7 +166,7 @@ namespace View.UI.ViewLogin
         }
 
         private void DesabilitarCampos()
-        {            
+        {
             foreach (Control gpb in this.Controls)
             {
                 if (gpb is GroupBox)
@@ -212,10 +215,8 @@ namespace View.UI.ViewLogin
 
 
         }
-
-        private void ColocarFocnoNotxt(TextBox txt) => this.FocoNoTxt(txt);
-
-
+        private void FocarNoTxt(TextBox txt) => this.FocoNoTxt(txt);
+       
         private void CarregarPermissao()
         {
             new PermissaoRepositorio().ListarPermissao(cbbPermissao);
@@ -280,15 +281,15 @@ namespace View.UI.ViewLogin
                         {
                             if (_usuarioRepositorio.Alterar(PreencherUsuario()) == Sucesso)
                             {
-                                var nomeCompleto  = PreencherUsuario().NomeCompleto;
+                                var nomeCompleto = PreencherUsuario().NomeCompleto;
                                 if (Usuarios.NomeCompletoStatic != nomeCompleto)
                                 {
-                                    frmMenu form = (frmMenu)Application.OpenForms[name:nameof(frmMenu)];
+                                    frmMenu form = (frmMenu)Application.OpenForms[name: nameof(frmMenu)];
                                     if (form != null)
                                     {
-                                        form.LblUsuarioTexto = nomeCompleto;                                      
+                                        form.LblUsuarioTexto = nomeCompleto;
                                     }
-                                   
+
                                 }
                                 MensagemDeSucesso("Usuário alterado com sucesso");
                                 this.DialogResult = DialogResult.Yes;
@@ -336,7 +337,7 @@ namespace View.UI.ViewLogin
             {
                 DialogMessage.MessageFullComButtonOkIconeDeInformacao(erro.Message, "Aviso");
                 LimparTxt(new List<TextBox> { txtLogin });
-                ColocarFocnoNotxt(txtLogin);
+                FocarNoTxt(txtLogin);
             }
             catch (DbUpdateException erro)
             {
@@ -356,7 +357,7 @@ namespace View.UI.ViewLogin
             {
                 TextBox[] txtList = { txtNome, txtLogin, txtSenha, txtConfirmarSenha };
                 int retorno = 0;
-                txtList.ToList().ForEach(c=> retorno = c.Text == "" ? 1 : 0);                
+                txtList.ToList().ForEach(c => retorno = c.Text == "" ? 1 : 0);
                 return retorno;
             }
             catch (CustomException erro)
@@ -371,9 +372,16 @@ namespace View.UI.ViewLogin
         }
 
         private void FecharForm() => this.Close();
-        
-        private void txtNome_KeyPress(object sender, KeyPressEventArgs e) => ValidatorField.Letter(e: e);
-       
+
+        private void txtNome_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            ValidatorField.Letter(e: e);
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                FocarNoTxt(txt: txtLogin);
+            }
+        }
+
         private void cbbPermissao_SelectedIndexChanged(object sender, EventArgs e)
         {
             ltbDadosDoAcesso.Items.Clear();
@@ -394,7 +402,51 @@ namespace View.UI.ViewLogin
             }
         }
 
+        private void txtLogin_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                FocarNoTxt(txt: txtSenha);
+            }
+        }
 
+        private void txtSenha_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                FocarNoTxt(txt: txtConfirmarSenha);
+            }
+        }
 
+        private void txtConfirmarSenha_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                if (cbbPermissao.Enabled == true)
+                {
+                    this.ActiveControl = cbbPermissao;
+                }
+                else
+                {
+                    FocarNoBtn(btn: btnCadastrar);
+                }
+
+            }
+        }
+
+        private void FocarNoBtn(Button btn)
+        {
+            this.FocoNoBotao(btn);
+        }
+
+        private void cbbPermissao_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+
+                FocarNoBtn(btn: btnCadastrar);
+            }
+        }
     }
 }
