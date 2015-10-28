@@ -162,8 +162,7 @@ namespace View.UI.ViewProduto
 
             try
             {
-                PesquisarNoBancoPorNome();
-
+                PesquisarNoBanco();
             }
             catch (CustomException erro)
             {
@@ -175,7 +174,7 @@ namespace View.UI.ViewProduto
             }
         }
 
-        private void PesquisarNoBancoPorNome()
+        private void PesquisarNoBanco()
         {
 
             try
@@ -188,16 +187,16 @@ namespace View.UI.ViewProduto
                     switch (SelecionarTextoDoRadioButtonSelecionado())
                     {
                         case "Nome":
-                            _produtoRepositorio.SelectProdutoPeloNome(dgv: dgvProdutos, nome: txtPesquisar.Text);
+                            _produtoRepositorio.SelectProdutoPeloNome(dgv: dgvProdutos, nome: txtPesquisar.Text.Trim());
                             break;
                         case "Código":
                             if (tamanho == 0)
                             {
-                                _produtoRepositorio.SelectProdutoPeloCodigo(dgv: dgvProdutos, codigo: txtPesquisar.Text);
+                                _produtoRepositorio.SelectProdutoPeloCodigo(dgv: dgvProdutos, codigo: txtPesquisar.Text.Trim());
                             }
                             break;
                         case "Categoria":
-                            _produtoRepositorio.SelectProdutoPeloCategoria(dgv: dgvProdutos, categoria: txtPesquisar.Text);
+                            _produtoRepositorio.SelectProdutoPeloCategoria(dgv: dgvProdutos, categoria: txtPesquisar.Text.Trim());
                             break;
                     }
                 }
@@ -247,17 +246,16 @@ namespace View.UI.ViewProduto
 
             try
             {
+                ValidatorField.AllowOneSpaceTogether(e, sender);
+                
                 if ((Keys)e.KeyChar == Keys.Enter)
                 {
-
                     switch (SelecionarTextoDoRadioButtonSelecionado())
                     {
-
                         case "Código":
                             _produtoRepositorio.SelectProdutoPeloCodigo(dgv: dgvProdutos, codigo: txtPesquisar.Text);
                             break;
                     }
-
                 }
 
 
@@ -301,7 +299,7 @@ namespace View.UI.ViewProduto
             try
             {
 
-                if (dgvProdutos.Rows.Count >0)
+                if (dgvProdutos.Rows.Count > 0)
                 {
                     CarregarInformacaoComTeclaEnter();
                 }

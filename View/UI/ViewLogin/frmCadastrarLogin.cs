@@ -36,8 +36,8 @@ namespace View.UI.ViewLogin
 
             try
             {
-                
-               
+
+
                 CarregarPermissao();
                 switch (_tipoOperacao)
                 {
@@ -216,7 +216,7 @@ namespace View.UI.ViewLogin
 
         }
         private void FocarNoTxt(TextBox txt) => this.FocoNoTxt(txt);
-       
+
         private void CarregarPermissao()
         {
             new PermissaoRepositorio().ListarPermissao(cbbPermissao);
@@ -244,11 +244,11 @@ namespace View.UI.ViewLogin
         new Usuarios()
         {
             ID = _usuarios.ID,
-            Login = txtLogin.Text,
-            Senha = txtSenha.Text,
-            Confirmar = txtConfirmarSenha.Text,
-            Permicao = cbbPermissao.Text,
-            NomeCompleto = txtNome.Text.UpperCaseOnlyFirst()
+            Login = txtLogin.Text.Trim(),
+            Senha = txtSenha.Text.Trim(),
+            Confirmar = txtConfirmarSenha.Text.Trim(),
+            Permicao = cbbPermissao.Text.Trim(),
+            NomeCompleto = txtNome.Text.Trim().UpperCaseOnlyFirst()
         };
 
         private void btnCadastrar_Click(object sender, EventArgs e)
@@ -257,13 +257,13 @@ namespace View.UI.ViewLogin
             {
 
                 InstanciarUsuarioRepositorio();
-
+                int numeroDeTxtVazio = SeTxtEstaVazio();
                 switch (_tipoOperacao)
                 {
-
+                  
                     case EnumTipoOperacao.Salvar:
 
-                        if (SeTxtEstaVazio() == 0)
+                        if (numeroDeTxtVazio == 0)
                         {
                             if (_usuarioRepositorio.Salvar(PreencherUsuario()) == Sucesso)
                             {
@@ -271,13 +271,13 @@ namespace View.UI.ViewLogin
                                 PosSalvamento();
                             }
                         }
-                        else
+                        else                         
                         {
-                            MyErro.MyCustomException("Todos os campos em amarelo são obrigatórios.");
+                            FocarNoTxt(GetTxtRequired().ValidarCampos());
                         }
                         break;
                     case EnumTipoOperacao.Alterar:
-                        if (SeTxtEstaVazio() == 0)
+                        if (numeroDeTxtVazio == 0)
                         {
                             if (_usuarioRepositorio.Alterar(PreencherUsuario()) == Sucesso)
                             {
@@ -295,9 +295,9 @@ namespace View.UI.ViewLogin
                                 this.DialogResult = DialogResult.Yes;
                             }
                         }
-                        else
+                        else if (numeroDeTxtVazio > 0)
                         {
-                            MyErro.MyCustomException("Todos os campos em amarelo são obrigatórios.");
+                            FocarNoTxt(GetTxtRequired().ValidarCampos());
                         }
 
                         break;
@@ -312,20 +312,14 @@ namespace View.UI.ViewLogin
                         {
                             DialogMessage.MessageFullComButtonOkIconeDeInformacao("Você não pode excluir o unico administrador do sistema.", "Aviso");
                         }
-                        else if (SeTxtEstaVazio() == 0)
+                        else if (_usuarios.ID > 0)
                         {
-
                             if (_usuarioRepositorio.Deletar(PreencherUsuario()) == Sucesso)
                             {
                                 MensagemDeSucesso("Usuário deletado com sucesso");
                                 this.DialogResult = DialogResult.Yes;
                             }
-                        }
-                        else
-                        {
-                            MyErro.MyCustomException("Todos os campos em amarelo são obrigatórios.");
-                        }
-
+                        }                        
                         break;
                     case EnumTipoOperacao.Detalhes:
                         FecharForm();
@@ -335,9 +329,7 @@ namespace View.UI.ViewLogin
 
             catch (CustomException erro)
             {
-                DialogMessage.MessageFullComButtonOkIconeDeInformacao(erro.Message, "Aviso");
-                LimparTxt(new List<TextBox> { txtLogin });
-                FocarNoTxt(txtLogin);
+                DialogMessage.MessageFullComButtonOkIconeDeInformacao(erro.Message, "Aviso");                
             }
             catch (DbUpdateException erro)
             {
@@ -355,9 +347,9 @@ namespace View.UI.ViewLogin
         {
             try
             {
-                TextBox[] txtList = { txtNome, txtLogin, txtSenha, txtConfirmarSenha };
+                TextBox[] txtList = GetTxtRequired();
                 int retorno = 0;
-                txtList.ToList().ForEach(c => retorno = c.Text == "" ? 1 : 0);
+                txtList.ToList().ForEach(c => retorno += c.Text.Trim() == "" ? 1 : 0);             
                 return retorno;
             }
             catch (CustomException erro)
@@ -371,11 +363,15 @@ namespace View.UI.ViewLogin
 
         }
 
+        private TextBox[] GetTxtRequired() => 
+            new TextBox[] { txtNome, txtLogin, txtSenha, txtConfirmarSenha };
+       
         private void FecharForm() => this.Close();
 
         private void txtNome_KeyPress(object sender, KeyPressEventArgs e)
         {
             ValidatorField.Letter(e: e);
+            ValidatorField.AllowOneSpaceTogether(e, sender);
             if (e.KeyChar == (char)Keys.Enter)
             {
                 FocarNoTxt(txt: txtLogin);
@@ -404,6 +400,7 @@ namespace View.UI.ViewLogin
 
         private void txtLogin_KeyPress(object sender, KeyPressEventArgs e)
         {
+            ValidatorField.AllowOneSpaceTogether(e, sender);
             if (e.KeyChar == (char)Keys.Enter)
             {
                 FocarNoTxt(txt: txtSenha);
@@ -412,6 +409,7 @@ namespace View.UI.ViewLogin
 
         private void txtSenha_KeyPress(object sender, KeyPressEventArgs e)
         {
+            ValidatorField.AllowOneSpaceTogether(e, sender);
             if (e.KeyChar == (char)Keys.Enter)
             {
                 FocarNoTxt(txt: txtConfirmarSenha);
@@ -420,6 +418,7 @@ namespace View.UI.ViewLogin
 
         private void txtConfirmarSenha_KeyPress(object sender, KeyPressEventArgs e)
         {
+            ValidatorField.AllowOneSpaceTogether(e, sender);
             if (e.KeyChar == (char)Keys.Enter)
             {
                 if (cbbPermissao.Enabled == true)
@@ -441,7 +440,7 @@ namespace View.UI.ViewLogin
 
         private void cbbPermissao_KeyPress(object sender, KeyPressEventArgs e)
         {
-            
+
             if (e.KeyChar == (char)Keys.Enter)
             {
 

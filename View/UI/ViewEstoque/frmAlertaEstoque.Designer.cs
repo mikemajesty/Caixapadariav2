@@ -126,7 +126,7 @@
             this.tab.Location = new System.Drawing.Point(4, 31);
             this.tab.Name = "tab";
             this.tab.Padding = new System.Windows.Forms.Padding(3);
-            this.tab.Size = new System.Drawing.Size(335, 145);
+            this.tab.Size = new System.Drawing.Size(335, 161);
             this.tab.TabIndex = 1;
             this.tab.Text = "Sistema";
             this.tab.UseVisualStyleBackColor = true;
@@ -135,7 +135,7 @@
             // 
             this.lblExpirar.AutoSize = true;
             this.lblExpirar.ForeColor = System.Drawing.Color.Red;
-            this.lblExpirar.Location = new System.Drawing.Point(81, 36);
+            this.lblExpirar.Location = new System.Drawing.Point(94, 19);
             this.lblExpirar.Name = "lblExpirar";
             this.lblExpirar.Size = new System.Drawing.Size(173, 88);
             this.lblExpirar.TabIndex = 0;

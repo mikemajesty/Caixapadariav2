@@ -536,15 +536,11 @@ namespace View.UI.ViewProduto
         {
             if (cbbTipoCadastro.Text == EnumTipoCadastro.Peso.ToString())
             {
-                var lista = ListaTxtPeso().Cast<TextBox>().ToList().Where(c => c.BackColor == Color.Yellow && c.Text.Trim() == "");
-                DialogMessage.MessageFullComButtonOkIconeDeInformacao("Todos os campos em amarelo são obrigatórios.", "Aviso");
-                FocarNoTxt(lista.FirstOrDefault());
+                FocarNoTxt(ListaTxtPeso().ValidarCampos());                
             }
             else
             {
-                var lista = ListaTxtUnidade().Cast<TextBox>().ToList().Where(c => c.BackColor == Color.Yellow && c.Text.Trim() == "");
-                DialogMessage.MessageFullComButtonOkIconeDeInformacao("Todos os campos em amarelo são obrigatórios.", "Aviso");
-                FocarNoTxt(lista.FirstOrDefault());
+                FocarNoTxt(ListaTxtUnidade().ValidarCampos());                
             }
         }
 
@@ -1101,6 +1097,7 @@ namespace View.UI.ViewProduto
         private void txtNome_KeyPress(object sender, KeyPressEventArgs e)
         {
             ValidatorField.IntegerAndLetter(e: e);
+            ValidatorField.AllowOneSpaceTogether(e, sender);
             if ((Keys)e.KeyChar == Keys.Enter)
             {
                 if (cbbCategoria.Items.Count > 0)
@@ -1123,6 +1120,7 @@ namespace View.UI.ViewProduto
         private void txtDescricao_KeyPress(object sender, KeyPressEventArgs e)
         {
             ValidatorField.IntegerAndLetter(e: e);
+            ValidatorField.AllowOneSpaceTogether(e, sender);
             if ((Keys)e.KeyChar == Keys.Enter)
             {
                 FocarNoTxt(txtPrecoCompra);

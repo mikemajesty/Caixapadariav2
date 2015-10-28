@@ -1148,7 +1148,19 @@ namespace View.UI.ViewCaixa
 
             ValidatorField.NoVirgula(e: e, sender: sender);
             ValidatorField.Money(e: e);
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                if (txtTroco.Text.Length > 0)
+                {
+                    FocarNoBtn(btn: btnConcluirVenda);
+                }
+            }
 
+        }
+
+        private void FocarNoBtn(Button btn)
+        {
+            this.ActiveControl = btn;
         }
 
         private void txtValorDoProdutoPorpeso_KeyPress(object sender, KeyPressEventArgs e)

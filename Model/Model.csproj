@@ -58,6 +58,7 @@
     <Compile Include="BO\ProdutoBO.cs" />
     <Compile Include="BO\UsuariosBO.cs" />
     <Compile Include="Data\_DbContext.cs" />
+    <Compile Include="Entidades\Anomalias.cs" />
     <Compile Include="Entidades\Caixa.cs" />
     <Compile Include="Entidades\Categoria.cs" />
     <Compile Include="Entidades\Cliente.cs" />

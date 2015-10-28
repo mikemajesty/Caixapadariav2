@@ -175,7 +175,7 @@ namespace View.UI.ViewComanda
         private int SeTxtEstaVazio()
         {
             int retorno = 0;
-            if (txtComanda.Text.Length == 0)
+            if (txtComanda.Text.Trim().Length == 0)
             {
                 retorno = 1;
             }
@@ -193,7 +193,7 @@ namespace View.UI.ViewComanda
 
         private Comanda PopularComanda()
         {
-            return new Comanda() { ID = _comanda.ID, Codigo = txtComanda.Text };
+            return new Comanda() { ID = _comanda.ID, Codigo = txtComanda.Text.Trim() };
 
         }
 

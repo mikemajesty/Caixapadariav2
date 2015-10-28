@@ -155,6 +155,7 @@
             this.txtPesquisar.TabIndex = 4;
             this.txtPesquisar.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtPesquisar.TextChanged += new System.EventHandler(this.txtPesquisar_TextChanged);
+            this.txtPesquisar.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPesquisar_KeyPress);
             // 
             // frmGerenciarLogin
             // 

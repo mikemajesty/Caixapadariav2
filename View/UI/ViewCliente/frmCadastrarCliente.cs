@@ -5,7 +5,7 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 using View.Enum;
-
+using System.Linq;
 namespace View.UI.ViewComanda
 {
     public partial class frmCadastrarCliente : Form
@@ -17,12 +17,12 @@ namespace View.UI.ViewComanda
         private const int Sucesso = 1;
         public frmCadastrarCliente(Cliente cliente, EnumTipoOperacao tipoOpercacao)
         {
-           
+
             InitializeComponent();
             CarregaClienteTipoOperacao(cliente, tipoOpercacao);
         }
         private void InstanciarFiadoRepositorio() => _fiadoRepositorio = new FiadoRepositorio();
-        
+
         private void CarregaClienteTipoOperacao(Model.Entidades.Cliente cliente, EnumTipoOperacao tipoOpercacao)
         {
             _cliente = cliente;
@@ -72,7 +72,7 @@ namespace View.UI.ViewComanda
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
-          
+
         }
 
         private void DesabilitarGroupBox(GroupBox gpb)
@@ -108,10 +108,11 @@ namespace View.UI.ViewComanda
             try
             {
 
+                int txtEmBranco = GetTxtEmBranco();
                 switch (_tipoOperacao)
                 {
                     case EnumTipoOperacao.Salvar:
-                        if (SeTxtEstaVazio() == 0)
+                        if (txtEmBranco == 0)
                         {
                             InstanciarClienteRepositorio();
                             if (_clienteRepositorio.Salvar(PreencheCliente()) == Sucesso)
@@ -122,12 +123,13 @@ namespace View.UI.ViewComanda
                         }
                         else
                         {
-                            MyErro.MyCustomException("Todos os campos em amarelo são obrigatórios.");
+                            ValidarTxt();
+
                         }
 
                         break;
                     case EnumTipoOperacao.Alterar:
-                        if (SeTxtEstaVazio() == 0)
+                        if (txtEmBranco == 0)
                         {
                             InstanciarClienteRepositorio();
                             if (_clienteRepositorio.Alterar(PreencheCliente()) == Sucesso)
@@ -138,12 +140,13 @@ namespace View.UI.ViewComanda
                         }
                         else
                         {
-                            MyErro.MyCustomException("Todos os campos em amarelo são obrigatórios.");
+                            ValidarTxt();
+
                         }
 
                         break;
                     case EnumTipoOperacao.Deletar:
-                        if (SeTxtEstaVazio() == 0)
+                        if (_cliente.ID > 0)
                         {
                             InstanciarClienteRepositorio();
                             InstanciarFiadoRepositorio();
@@ -176,7 +179,7 @@ namespace View.UI.ViewComanda
             }
             catch (CustomException erro)
             {
-                FocarNoTxt(txt:txtNome);
+                FocarNoTxt(txt: txtNome);
                 DialogMessage.MessageFullComButtonOkIconeDeInformacao(erro.Message, "Aviso");
             }
             catch (Exception erro)
@@ -186,29 +189,43 @@ namespace View.UI.ViewComanda
 
         }
 
+        private void ValidarTxt()
+        {
+            var listaMbt = GetMtbList().ToList().Where(c => c.BackColor == Color.Yellow && c.Text.Trim() == "");
+            if (listaMbt.Count() > 0)
+            {
+                FocarNoMtb(listaMbt.FirstOrDefault());
+            }
+            else
+            {
+                FocarNoTxt(txtNome);
+            }
+            DialogMessage.MessageFullComButtonOkIconeDeInformacao("Todos os campos em amarelo são obrigatórios.", "Aviso");
+        }
+
         private void FocarNoTxt(TextBox txt)
         {
             this.FocoNoTxt(txt);
         }
 
-        private int SeTxtEstaVazio()
+        private int GetTxtEmBranco()
         {
 
             try
             {
                 int retorno = 0;
-                MaskedTextBox[] mtbList = {mtbCpf,mtbTelefone };
+                MaskedTextBox[] mtbList = GetMtbList();
                 if (txtNome.Text == string.Empty)
                 {
                     retorno = 1;
-                    
+
                 }
                 foreach (MaskedTextBox mtb in mtbList)
                 {
                     if (mtb.Text == string.Empty)
                     {
-                         retorno = 1;
-                         break;
+                        retorno = 1;
+                        break;
                     }
                 }
 
@@ -225,6 +242,8 @@ namespace View.UI.ViewComanda
 
         }
 
+        private MaskedTextBox[] GetMtbList() => new MaskedTextBox[] { mtbCpf, mtbTelefone };
+       
         private void FecharForm()
         {
             this.Close();

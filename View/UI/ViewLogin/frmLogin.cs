@@ -124,7 +124,7 @@ namespace View.UI.ViewLogin
 
         private Usuarios PreencherLogin()
         {
-            return new Usuarios() { Login = txtLogin.Text, Senha = txtSenha.Text };
+            return new Usuarios() { Login = txtLogin.Text.Trim(), Senha = txtSenha.Text.Trim() };
         }
 
         private void btnSair_Click(object sender, EventArgs e)
@@ -139,6 +139,7 @@ namespace View.UI.ViewLogin
 
         private void txtLogin_KeyPress(object sender, KeyPressEventArgs e)
         {
+            ValidatorField.AllowOneSpaceTogether(e, sender);
             if (e.KeyChar == (char)Keys.Enter)
             {
                 FocarNotxt(txt:txtSenha);
@@ -147,6 +148,7 @@ namespace View.UI.ViewLogin
 
         private void txtSenha_KeyPress(object sender, KeyPressEventArgs e)
         {
+            ValidatorField.AllowOneSpaceTogether(e, sender);
             if (e.KeyChar == (char)Keys.Enter)
             {
                 FocarNoBtn(btn: btnEntrar);

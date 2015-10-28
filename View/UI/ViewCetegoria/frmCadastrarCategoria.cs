@@ -155,7 +155,7 @@ namespace View.UI.ViewCetegoria
         private bool VerificarSeTxtEstaVazio()
         {
             bool retorno = false;
-            if (txtCategoria.Text.Length == Vazio)
+            if (txtCategoria.Text.Trim().Length == Vazio)
             {
                 retorno = true;
             }
@@ -183,7 +183,7 @@ namespace View.UI.ViewCetegoria
 
         private Categoria PupularCategoria()
         {
-            return new Categoria() { ID = _categoria.ID, Nome = txtCategoria.Text.UpperCaseOnlyFirst() };
+            return new Categoria() { ID = _categoria.ID, Nome = txtCategoria.Text.Trim().UpperCaseOnlyFirst() };
         }
 
         private void InstanciarCategoriaRepositorio()
@@ -194,6 +194,7 @@ namespace View.UI.ViewCetegoria
         private void txtCategoria_KeyPress(object sender, KeyPressEventArgs e)
         {
             ValidatorField.IntegerAndLetter(e: e);
+            ValidatorField.AllowOneSpaceTogether(e, sender);
             if (e.KeyChar == (char)Keys.Enter)
             {
                 FocarNoBtn();               

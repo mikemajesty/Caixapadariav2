@@ -329,5 +329,11 @@ namespace View.UI.ViewProduto
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
         }
+
+        private void txtPesquisar_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+            ValidatorField.AllowOneSpaceTogether(e, sender);
+        }
     }
 }

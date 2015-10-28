@@ -73,6 +73,7 @@
             // 
             // txtSenha
             // 
+            this.txtSenha.BackColor = System.Drawing.Color.Yellow;
             this.txtSenha.CharacterCasing = System.Windows.Forms.CharacterCasing.Lower;
             this.txtSenha.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSenha.Location = new System.Drawing.Point(57, 49);
@@ -86,6 +87,7 @@
             // 
             // txtLogin
             // 
+            this.txtLogin.BackColor = System.Drawing.Color.Yellow;
             this.txtLogin.CharacterCasing = System.Windows.Forms.CharacterCasing.Lower;
             this.txtLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtLogin.Location = new System.Drawing.Point(57, 12);

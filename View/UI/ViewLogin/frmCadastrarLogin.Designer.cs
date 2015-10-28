@@ -66,6 +66,7 @@ namespace View.UI.ViewLogin
             // txtNome
             // 
             this.txtNome.BackColor = System.Drawing.Color.Yellow;
+            this.txtNome.CharacterCasing = System.Windows.Forms.CharacterCasing.Lower;
             this.txtNome.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNome.Location = new System.Drawing.Point(5, 19);
             this.txtNome.MaxLength = 50;
@@ -175,7 +176,6 @@ namespace View.UI.ViewLogin
             // 
             // cbbPermissao
             // 
-            this.cbbPermissao.KeyPress += new KeyPressEventHandler(this.cbbPermissao_KeyPress);
             this.cbbPermissao.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbbPermissao.FormattingEnabled = true;
             this.cbbPermissao.Location = new System.Drawing.Point(24, 21);
@@ -183,6 +183,7 @@ namespace View.UI.ViewLogin
             this.cbbPermissao.Size = new System.Drawing.Size(270, 33);
             this.cbbPermissao.TabIndex = 5;
             this.cbbPermissao.SelectedIndexChanged += new System.EventHandler(this.cbbPermissao_SelectedIndexChanged);
+            this.cbbPermissao.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cbbPermissao_KeyPress);
             // 
             // btnCadastrar
             // 
