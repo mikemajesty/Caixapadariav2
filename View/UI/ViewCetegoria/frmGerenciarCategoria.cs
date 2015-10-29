@@ -216,6 +216,7 @@ namespace View.UI.ViewCetegoria
 
         private void txtPesquisar_KeyPress(object sender, KeyPressEventArgs e)
         {
+            ValidatorField.AllowOneSpaceTogether(e,sender);
             ValidatorField.IntegerAndLetter(e:e);
         }
 

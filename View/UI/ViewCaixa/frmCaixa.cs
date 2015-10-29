@@ -219,7 +219,7 @@ namespace View.UI.ViewCaixa
 
             try
             {
-                ValidatorField.IntegerAndLetter(e);
+                ValidatorField.IntegerAndLetter(e: e);
                 ValidatorField.NoSpace(e);
 
                 if ((Keys)e.KeyChar == Keys.Enter)
@@ -1081,7 +1081,7 @@ namespace View.UI.ViewCaixa
 
         private void ChecarChebox(CheckBox ckb, bool checado)
         {
-            ckb.Checked = false;
+            ckb.Checked = checado;
         }
 
         private void DesmarcarCheckBox()
@@ -1316,6 +1316,10 @@ namespace View.UI.ViewCaixa
                         ExcluirComandaAtiva();
                     }
                 }
+                else
+                {
+                    MyErro.MyCustomException("Não é possível parcelar uma venda inexistente.");
+                }
 
 
 
@@ -1427,6 +1431,11 @@ namespace View.UI.ViewCaixa
 
         }
 
+        private void btnAtalhos_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void btnFecharCaixa_Click(object sender, EventArgs e)
         {
             try
@@ -1451,6 +1460,38 @@ namespace View.UI.ViewCaixa
 
         }
 
+        private void cbbTipoDePagamento_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                if (btnConcluirVenda.Visible == true)
+                {
+                    FocarNoBtn(btnConcluirVenda);
+                }
+                else if (cbbTipoDePagamento.Text == EnumTipoPagamento.Cartão.ToString()
+                    && ltvProdutos.Items.Count == 0)
+                {
+                    FocarNoTxt(txtCodigoDoProduto);
+                }
+                else if(cbbTipoDePagamento.Text == EnumTipoPagamento.Creditar.ToString()
+                    && ltvProdutos.Items.Count == 0)
+                {
+                    FocarNoTxt(txtCodigoDoProduto);
+                }
+                else
+                {
+                    FocarNoCbb(cbbTipoDePagamento);
+                }
+            }
+           
+        }
+
+        private void btnSairDoMenu_Click(object sender, EventArgs e)
+        {
+            btnOperacoes.HideDropDown();
+            FocarNoTxt(txtCodigoDoProduto);
+        }
+
         private void timer_Tick(object sender, EventArgs e)
         {
 
@@ -1470,6 +1511,77 @@ namespace View.UI.ViewCaixa
 
         }
 
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            switch (keyData)
+            {
 
+                case Keys.F1:
+                    FocarNoTxt(txtCodigoDaComanda);
+                    break;
+                case Keys.F2:
+                    if (ckbPorPeso.Checked == false)
+                    {
+                        ChecarChebox(ckbPorPeso, true);
+                    }
+                    else
+                    {
+                        ChecarChebox(ckbPorPeso, false);
+                    }
+                    break;
+                case Keys.F3:
+                    if (txtQuantidade.Visible == true)
+                    {
+                        FocarNoTxt(txtQuantidade);
+                    }
+                    else
+                    {
+                        ChecarChebox(ckbPorPeso, false);
+                    }
+                    break;
+                case Keys.F4:
+                    FocarNoTxt(txtCodigoDoProduto);
+                    break;
+                case Keys.F5:
+                    FocarNoCbb(cbb:cbbTipoDePagamento);
+                    cbbTipoDePagamento.DroppedDown = true;
+                    break;
+                case Keys.F6:
+                    if (cbbTipoDePagamento.Text == EnumTipoPagamento.Dinheiro.ToString())
+                    {
+                        FocarNoTxt(txtValorPago);
+                    }
+                    break;
+                case Keys.F7:
+                    btnCalculadora.PerformClick();
+                    break;
+                case Keys.F8:
+                    btnOperacoes.ShowDropDown();
+                    btnReceberCredito.Select();
+                    break;
+                case Keys.F9:
+                    break;
+                case Keys.F10:
+                    break;
+                case Keys.F11:
+                    break;
+                case Keys.F12:
+                    if (btnConcluirVenda.Visible == true)
+                    {
+                        btnConcluirVenda.PerformClick();
+                    }                   
+                    break;
+                default:
+                    break;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+     
+
+        private void FocarNoCbb(ComboBox cbb)
+        {
+            this.ActiveControl = cbb;
+        }
     }
 }

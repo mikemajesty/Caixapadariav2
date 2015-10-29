@@ -49,6 +49,7 @@
             // txtComanda
             // 
             this.txtComanda.BackColor = System.Drawing.Color.Yellow;
+            this.txtComanda.CharacterCasing = System.Windows.Forms.CharacterCasing.Lower;
             this.txtComanda.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtComanda.Location = new System.Drawing.Point(6, 30);
             this.txtComanda.Name = "txtComanda";

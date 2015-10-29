@@ -1,8 +1,10 @@
 ﻿using Mike.Utilities.Desktop;
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Model.Entidades
 {
+    [Table(nameof(Anomalias))]
     public class Anomalias
     {
         private int _id;

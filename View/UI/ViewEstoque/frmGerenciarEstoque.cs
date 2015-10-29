@@ -233,6 +233,14 @@ namespace View.UI.ViewEstoque
             {
                 ValidatorField.IntegerAndLetter(e: e);
                 LimparFocoDoDataGridView();
+                if (ckbPorCodigo.Checked)
+                {
+                    ValidatorField.NoSpace(e);
+                }
+                else
+                {
+                    ValidatorField.AllowOneSpaceTogether(e, sender);
+                } 
                 if ((Keys)e.KeyChar == Keys.Enter)
                 {
                     if (_estoqueRepositorio.GetQuantidade() > 0)

@@ -272,5 +272,11 @@ namespace View.UI.ViewComanda
             }
 
         }
+
+        private void txtPesquisar_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            ValidatorField.Letter(e);
+            ValidatorField.AllowOneSpaceTogether(e, sender);
+        }
     }
 }

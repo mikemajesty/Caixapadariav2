@@ -30,6 +30,7 @@ namespace View
         {
             _usuario = usuario;
             InitializeComponent();
+            
         }
 
         private void InstanciaCaixaRepositorio()
@@ -42,6 +43,7 @@ namespace View
 
             try
             {
+                this.KeyPreview = true;
                 ContainerContext.Context = this;
                 OpenMdiForm.LoadNewKeepAnother(this, new frmAlertaEstoque());
                 VerificaQuantidadesDeDatas();
@@ -298,6 +300,8 @@ namespace View
             OpenMdiForm.LoadNewKeepAnother(this, new frmRelatorio());
         }
 
+      
 
+     
     }
 }

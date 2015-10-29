@@ -271,7 +271,8 @@ namespace View.UI.ViewComanda
 
         private void txtPesquisar_KeyPress(object sender, KeyPressEventArgs e)
         {
-            ValidatorField.IntegerAndLetter(e);
+            ValidatorField.Letter(e);
+            ValidatorField.AllowOneSpaceTogether(e, sender);
         }
 
         private void dgvCliente_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)

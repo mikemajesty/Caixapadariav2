@@ -294,7 +294,8 @@ namespace View.UI.ViewComanda
 
         private void txtNome_KeyPress(object sender, KeyPressEventArgs e)
         {
-            ValidatorField.Letter(e: e);
+            ValidatorField.Letter(e);
+            ValidatorField.AllowOneSpaceTogether(e, sender);
             if (e.KeyChar == (char)Keys.Enter)
             {
                 FocarNoMtb(mtb: mtbTelefone);

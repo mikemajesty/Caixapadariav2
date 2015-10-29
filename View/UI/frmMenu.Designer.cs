@@ -107,7 +107,7 @@
             // btnGerenciarLogin
             // 
             this.btnGerenciarLogin.Name = "btnGerenciarLogin";
-            this.btnGerenciarLogin.Size = new System.Drawing.Size(152, 22);
+            this.btnGerenciarLogin.Size = new System.Drawing.Size(148, 22);
             this.btnGerenciarLogin.Text = "Gerenciar";
             this.btnGerenciarLogin.Click += new System.EventHandler(this.btnGerenciar_Click);
             // 
@@ -125,7 +125,7 @@
             // btnGerenciarComanda
             // 
             this.btnGerenciarComanda.Name = "btnGerenciarComanda";
-            this.btnGerenciarComanda.Size = new System.Drawing.Size(152, 22);
+            this.btnGerenciarComanda.Size = new System.Drawing.Size(148, 22);
             this.btnGerenciarComanda.Text = "Gerenciar";
             this.btnGerenciarComanda.Click += new System.EventHandler(this.btnGerenciarComanda_Click);
             // 
@@ -143,7 +143,7 @@
             // btnGerenciarCategoria
             // 
             this.btnGerenciarCategoria.Name = "btnGerenciarCategoria";
-            this.btnGerenciarCategoria.Size = new System.Drawing.Size(152, 22);
+            this.btnGerenciarCategoria.Size = new System.Drawing.Size(148, 22);
             this.btnGerenciarCategoria.Text = "Gerenciar";
             this.btnGerenciarCategoria.Click += new System.EventHandler(this.btnGerenciarCategoria_Click);
             // 
@@ -162,14 +162,14 @@
             // btnGerenciarProduto
             // 
             this.btnGerenciarProduto.Name = "btnGerenciarProduto";
-            this.btnGerenciarProduto.Size = new System.Drawing.Size(152, 22);
+            this.btnGerenciarProduto.Size = new System.Drawing.Size(148, 22);
             this.btnGerenciarProduto.Text = "Gerenciar";
             this.btnGerenciarProduto.Click += new System.EventHandler(this.btnGerenciarProduto_Click);
             // 
             // btnPesuisarProduto
             // 
             this.btnPesuisarProduto.Name = "btnPesuisarProduto";
-            this.btnPesuisarProduto.Size = new System.Drawing.Size(152, 22);
+            this.btnPesuisarProduto.Size = new System.Drawing.Size(148, 22);
             this.btnPesuisarProduto.Text = "Pesquisar";
             this.btnPesuisarProduto.Click += new System.EventHandler(this.btnPesuisarProduto_Click);
             // 
@@ -187,7 +187,7 @@
             // btnGerenciarCliente
             // 
             this.btnGerenciarCliente.Name = "btnGerenciarCliente";
-            this.btnGerenciarCliente.Size = new System.Drawing.Size(152, 22);
+            this.btnGerenciarCliente.Size = new System.Drawing.Size(148, 22);
             this.btnGerenciarCliente.Text = "Gerenciar";
             this.btnGerenciarCliente.Click += new System.EventHandler(this.btnGerenciarCliente_Click);
             // 
@@ -205,7 +205,7 @@
             // btnGerenciarEstoque
             // 
             this.btnGerenciarEstoque.Name = "btnGerenciarEstoque";
-            this.btnGerenciarEstoque.Size = new System.Drawing.Size(152, 22);
+            this.btnGerenciarEstoque.Size = new System.Drawing.Size(148, 22);
             this.btnGerenciarEstoque.Text = "Gerenciar";
             this.btnGerenciarEstoque.Click += new System.EventHandler(this.btnGerenciarEstoque_Click);
             // 
@@ -223,7 +223,7 @@
             // btnCaixa
             // 
             this.btnCaixa.Name = "btnCaixa";
-            this.btnCaixa.Size = new System.Drawing.Size(152, 22);
+            this.btnCaixa.Size = new System.Drawing.Size(117, 22);
             this.btnCaixa.Text = "Caixa";
             this.btnCaixa.Click += new System.EventHandler(this.btnCaixa_Click);
             // 
@@ -243,21 +243,21 @@
             // btnMovimentacaoVenda
             // 
             this.btnMovimentacaoVenda.Name = "btnMovimentacaoVenda";
-            this.btnMovimentacaoVenda.Size = new System.Drawing.Size(152, 22);
+            this.btnMovimentacaoVenda.Size = new System.Drawing.Size(133, 22);
             this.btnMovimentacaoVenda.Text = "Venda";
             this.btnMovimentacaoVenda.Click += new System.EventHandler(this.btnMovimentacaoCaixa_Click);
             // 
             // btnMovimentacaoCaixa
             // 
             this.btnMovimentacaoCaixa.Name = "btnMovimentacaoCaixa";
-            this.btnMovimentacaoCaixa.Size = new System.Drawing.Size(152, 22);
+            this.btnMovimentacaoCaixa.Size = new System.Drawing.Size(133, 22);
             this.btnMovimentacaoCaixa.Text = "Caixa";
             this.btnMovimentacaoCaixa.Click += new System.EventHandler(this.btnMovimentacaoCaixa_Click_1);
             // 
             // btnMovimentacaoProduto
             // 
             this.btnMovimentacaoProduto.Name = "btnMovimentacaoProduto";
-            this.btnMovimentacaoProduto.Size = new System.Drawing.Size(152, 22);
+            this.btnMovimentacaoProduto.Size = new System.Drawing.Size(133, 22);
             this.btnMovimentacaoProduto.Text = "Produto";
             this.btnMovimentacaoProduto.Click += new System.EventHandler(this.btnMovimentacaoProduto_Click);
             // 
@@ -275,7 +275,7 @@
             // btnRelatorioCompra
             // 
             this.btnRelatorioCompra.Name = "btnRelatorioCompra";
-            this.btnRelatorioCompra.Size = new System.Drawing.Size(152, 22);
+            this.btnRelatorioCompra.Size = new System.Drawing.Size(138, 22);
             this.btnRelatorioCompra.Text = "Comprar";
             this.btnRelatorioCompra.Click += new System.EventHandler(this.btnRelatorioCompra_Click);
             // 

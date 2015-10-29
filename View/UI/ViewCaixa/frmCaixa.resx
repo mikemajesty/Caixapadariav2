@@ -373,6 +373,9 @@
         AElFTkSuQmCC
 </value>
   </data>
+  <metadata name="tlp.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>219, 17</value>
+  </metadata>
   <data name="ptbQuantidade.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
@@ -408,7 +411,7 @@
   <data name="ptbKilograma.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADr0AAA69AUf7kK0AAAIrSURBVFhH7ZdBZx1RGIYPIZSsQlah5AeE/oBQQggl29BV
+        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAIrSURBVFhH7ZdBZx1RGIYPIZSsQlah5AeE/oBQQggl29BV
         V6FkFboKWZVsQ35AKaWrkm1W+QGh/yCUEEpXXYWSvs9kXvc4zlx3zhkzd5GXx5nvO3O/+cydOeed8KIl
         0Io4EbfiXzsSk59cNHEjnjKQn7zJU0Ez9+JArLYjMXnmJ9WdoJG9JprprSDP/KR6FDSy1kQzcSfJMz+p
         fAd3m2imHbEUd9DPII3sk2hHNz75M7j0bzGiCda9uLmlWQdjxQ2Ork0RN1DLazGoDkXuQqVQb1BdityF
@@ -421,6 +424,9 @@
         YII=
 </value>
   </data>
+  <metadata name="tlp.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>219, 17</value>
+  </metadata>
   <data name="ckbPorPeso.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
