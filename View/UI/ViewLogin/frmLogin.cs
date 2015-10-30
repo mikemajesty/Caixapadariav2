@@ -40,6 +40,7 @@ namespace View.UI.ViewLogin
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -68,6 +69,7 @@ namespace View.UI.ViewLogin
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(message: erro.Message, title: "Erro");
             }
 
@@ -112,6 +114,7 @@ namespace View.UI.ViewLogin
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(message: erro.Message, title: "Erro");
             }
 

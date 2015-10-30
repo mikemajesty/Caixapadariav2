@@ -143,6 +143,7 @@
             this.dgvUsuarios.Size = new System.Drawing.Size(528, 150);
             this.dgvUsuarios.TabIndex = 5;
             this.dgvUsuarios.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUsuarios_CellDoubleClick);
+            this.dgvUsuarios.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvUsuarios_KeyDown);
             // 
             // txtPesquisar
             // 

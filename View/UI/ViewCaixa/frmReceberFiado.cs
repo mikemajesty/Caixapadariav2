@@ -49,6 +49,7 @@ namespace View.UI.ViewCaixa
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -150,6 +151,7 @@ namespace View.UI.ViewCaixa
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
             finally { EsconderBotao(); LimparTxt(new List<TextBox> { txtValorPago, txtTroco }); };
@@ -264,28 +266,7 @@ namespace View.UI.ViewCaixa
                         LimparTxt(new List<TextBox> { txtTroco });
                     }
                 }
-                
-                //if ((sender as TextBox).Text.Length > 0)
-                //{
-                //    decimal valorPago = Decimal.Parse((sender as TextBox).Text);
-                //    decimal ValorTotal = _fiado.Valor;
-
-                //    if (valorPago > ValorTotal)
-                //    {
-                //        throw new CustomException("Digite um valor menor ou igual ao valor da dívida.");
-
-                //    }
-                //    else
-                //    {
-                //        MostrarBotao();
-                //    }
-                //}
-                //else
-                //{
-                //    EsconderBotao();
-
-                //}
-
+              
             }
             catch (CustomException erro)
             {
@@ -296,6 +277,7 @@ namespace View.UI.ViewCaixa
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -347,6 +329,7 @@ namespace View.UI.ViewCaixa
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 

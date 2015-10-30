@@ -103,6 +103,7 @@
             this.dgvProdutos.TabStop = false;
             this.dgvProdutos.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProdutos_CellDoubleClick);
             this.dgvProdutos.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvProdutos_CellFormatting);
+            this.dgvProdutos.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvProdutos_KeyDown);
             this.dgvProdutos.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dgvProdutos_KeyPress);
             // 
             // txtPesquisar
@@ -112,7 +113,7 @@
             this.txtPesquisar.MaxLength = 20;
             this.txtPesquisar.Name = "txtPesquisar";
             this.txtPesquisar.Size = new System.Drawing.Size(675, 31);
-            this.txtPesquisar.TabIndex = 4;
+            this.txtPesquisar.TabIndex = 1;
             this.txtPesquisar.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtPesquisar.TextChanged += new System.EventHandler(this.txtPesquisar_TextChanged);
             this.txtPesquisar.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPesquisar_KeyPress);
@@ -139,9 +140,9 @@
             this.rdbCategoria.Location = new System.Drawing.Point(461, 19);
             this.rdbCategoria.Name = "rdbCategoria";
             this.rdbCategoria.Size = new System.Drawing.Size(220, 53);
-            this.rdbCategoria.TabIndex = 0;
+            this.rdbCategoria.TabIndex = 4;
             this.rdbCategoria.TabStop = true;
-            this.rdbCategoria.Text = "Categoria";
+            this.rdbCategoria.Text = "Categoria [F3]";
             this.rdbCategoria.UseVisualStyleBackColor = true;
             this.rdbCategoria.CheckedChanged += new System.EventHandler(this.rdbCategoria_CheckedChanged);
             // 
@@ -154,9 +155,9 @@
             this.rdbCodigo.Location = new System.Drawing.Point(234, 19);
             this.rdbCodigo.Name = "rdbCodigo";
             this.rdbCodigo.Size = new System.Drawing.Size(220, 53);
-            this.rdbCodigo.TabIndex = 0;
+            this.rdbCodigo.TabIndex = 3;
             this.rdbCodigo.TabStop = true;
-            this.rdbCodigo.Text = "Código";
+            this.rdbCodigo.Text = "Código [F2]";
             this.rdbCodigo.UseVisualStyleBackColor = true;
             this.rdbCodigo.CheckedChanged += new System.EventHandler(this.rdbCodigo_CheckedChanged);
             // 
@@ -169,9 +170,9 @@
             this.rdbNome.Location = new System.Drawing.Point(6, 19);
             this.rdbNome.Name = "rdbNome";
             this.rdbNome.Size = new System.Drawing.Size(220, 53);
-            this.rdbNome.TabIndex = 0;
+            this.rdbNome.TabIndex = 2;
             this.rdbNome.TabStop = true;
-            this.rdbNome.Text = "Nome";
+            this.rdbNome.Text = "Nome [F1]";
             this.rdbNome.UseVisualStyleBackColor = true;
             this.rdbNome.CheckedChanged += new System.EventHandler(this.rdbNome_CheckedChanged);
             // 

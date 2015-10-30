@@ -100,6 +100,7 @@
             this.dgvComanda.Size = new System.Drawing.Size(423, 150);
             this.dgvComanda.TabIndex = 5;
             this.dgvComanda.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvComanda_CellDoubleClick);
+            this.dgvComanda.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvComanda_KeyDown);
             this.dgvComanda.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dgvComanda_KeyPress);
             // 
             // txtPesquisar

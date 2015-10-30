@@ -44,6 +44,7 @@ namespace View.UI.ViewLogin
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -66,6 +67,7 @@ namespace View.UI.ViewLogin
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -92,6 +94,7 @@ namespace View.UI.ViewLogin
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -120,6 +123,7 @@ namespace View.UI.ViewLogin
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -154,6 +158,7 @@ namespace View.UI.ViewLogin
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -211,6 +216,7 @@ namespace View.UI.ViewLogin
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -238,6 +244,7 @@ namespace View.UI.ViewLogin
                 }
                 catch (Exception erro)
                 {
+                    SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                     DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
                 } 
             }
@@ -267,6 +274,11 @@ namespace View.UI.ViewLogin
         private void txtPesquisar_KeyPress(object sender, KeyPressEventArgs e)
         {
             ValidatorField.AllowOneSpaceTogether(e, sender);
+        }
+
+        private void dgvUsuarios_KeyDown(object sender, KeyEventArgs e)
+        {
+            ValidatorField.DisableTabInGrid(sender, e);
         }
     }
 }

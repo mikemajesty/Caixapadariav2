@@ -12,6 +12,7 @@ using View.UI.ViewLogin;
 using View.UI.ViewProduto;
 using View.UI.ViewRelatorio;
 using View.Enum;
+using View.UI;
 
 namespace View
 {
@@ -30,14 +31,14 @@ namespace View
         {
             _usuario = usuario;
             InitializeComponent();
-            
+
         }
 
         private void InstanciaCaixaRepositorio()
         {
             _caixaRepositorio = new CaixaRepositorio();
         }
-     
+
         private void frmMenu_Load(object sender, EventArgs e)
         {
 
@@ -88,9 +89,9 @@ namespace View
 
         public string LblUsuarioTexto
         {
-            
+
             get { return this.lblUsuarioLogado.Text; }
-           
+
             set { this.lblUsuarioLogado.Text = value; }
         }
 
@@ -300,8 +301,6 @@ namespace View
             OpenMdiForm.LoadNewKeepAnother(this, new frmRelatorio());
         }
 
-      
-
-     
+       
     }
 }

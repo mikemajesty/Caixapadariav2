@@ -8,7 +8,6 @@ namespace View.UI.ViewCaixa
     public partial class frmMovimentacaoCaixa : Form
     {
         private MovimentacaoCaixaRepositorio _movimentacaoCaixaRepositorio;
-        //private CaixaRepositorio _caixaRepositorio;
 
         public frmMovimentacaoCaixa()
         {
@@ -36,6 +35,7 @@ namespace View.UI.ViewCaixa
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -59,6 +59,7 @@ namespace View.UI.ViewCaixa
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -79,6 +80,7 @@ namespace View.UI.ViewCaixa
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -101,6 +103,7 @@ namespace View.UI.ViewCaixa
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -122,6 +125,7 @@ namespace View.UI.ViewCaixa
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -151,6 +155,7 @@ namespace View.UI.ViewCaixa
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -160,6 +165,11 @@ namespace View.UI.ViewCaixa
         private void LimparTxt()
         {
             txtTotalLucro.Text = string.Empty;
+        }
+
+        private void dgvMovimentacao_KeyDown(object sender, KeyEventArgs e)
+        {
+            ValidatorField.DisableTabInGrid(sender, e);
         }
     }
 }

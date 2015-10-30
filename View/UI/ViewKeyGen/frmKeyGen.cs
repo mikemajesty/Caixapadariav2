@@ -48,6 +48,7 @@ namespace View.UI.ViewKeyGen
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -83,6 +84,7 @@ namespace View.UI.ViewKeyGen
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 

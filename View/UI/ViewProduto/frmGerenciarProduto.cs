@@ -3,7 +3,9 @@ using Mike.Utilities.Desktop;
 using Model.Entidades;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using View.Enum;
 using View.UI.ViewProduto;
@@ -14,10 +16,11 @@ namespace View.UI.ViewProduto
     {
         private ProdutoRepositorio _produtoRepositorio;
         private TipoCadastroRepositorio _tipoCadastroRepositorio;
+    
         public frmGerenciarProduto()
-        {
+        {           
             InitializeComponent();
-        }
+        }  
         private void InstanciarTipoCadastroRepositorio()
         {
             _tipoCadastroRepositorio = new TipoCadastroRepositorio();
@@ -29,18 +32,12 @@ namespace View.UI.ViewProduto
                 case "Caixa":
                     btnDeletar.Visible = false;
                     break;
-
-
-
-
             }
         }
         private void frmGerenciarProduto_Load(object sender, EventArgs e)
         {
-
             try
             {
-
                 InstanciarProdutoRepositorio();
                 CarregaGrid();
                 CarregarTextoDePermissao();
@@ -52,12 +49,13 @@ namespace View.UI.ViewProduto
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
 
         }
-
+        
         private void InstanciarProdutoRepositorio()
         {
             _produtoRepositorio = new ProdutoRepositorio();
@@ -86,6 +84,7 @@ namespace View.UI.ViewProduto
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -108,6 +107,7 @@ namespace View.UI.ViewProduto
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -128,7 +128,7 @@ namespace View.UI.ViewProduto
                     }
                 }
                 else
-                {
+                {                    
                     MyErro.MyCustomException("Selecione um produto");
                 }
 
@@ -141,6 +141,7 @@ namespace View.UI.ViewProduto
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -174,6 +175,7 @@ namespace View.UI.ViewProduto
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -208,6 +210,7 @@ namespace View.UI.ViewProduto
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -230,6 +233,7 @@ namespace View.UI.ViewProduto
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -254,6 +258,7 @@ namespace View.UI.ViewProduto
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -304,6 +309,7 @@ namespace View.UI.ViewProduto
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -326,6 +332,7 @@ namespace View.UI.ViewProduto
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
         }
@@ -334,6 +341,12 @@ namespace View.UI.ViewProduto
         {
 
             ValidatorField.AllowOneSpaceTogether(e, sender);
+            
+        }
+
+        private void dgvProdutos_KeyDown(object sender, KeyEventArgs e)
+        {
+            ValidatorField.DisableTabInGrid(sender, e);           
         }
     }
 }

@@ -255,7 +255,7 @@
             this.dgvProdutos.Size = new System.Drawing.Size(531, 222);
             this.dgvProdutos.TabIndex = 29;
             this.dgvProdutos.TabStop = false;
-            this.dgvProdutos.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvProdutos_CellFormatting);
+            this.dgvProdutos.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvProdutos_KeyDown);
             // 
             // frmMovimentacaoProdutos
             // 

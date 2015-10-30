@@ -54,6 +54,7 @@
             this.btnRelatorioCompra = new System.Windows.Forms.ToolStripMenuItem();
             this.btnSair = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.fffToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rodape = new System.Windows.Forms.StatusStrip();
             this.lblProfissao = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblUsuarioLogado = new System.Windows.Forms.ToolStripStatusLabel();
@@ -77,7 +78,8 @@
             this.menuMovimentacao,
             this.menuRelatorios,
             this.btnSair,
-            this.toolStripMenuItem1});
+            this.toolStripMenuItem1,
+            this.fffToolStripMenuItem});
             this.menu.Location = new System.Drawing.Point(0, 0);
             this.menu.Name = "menu";
             this.menu.Size = new System.Drawing.Size(1176, 54);
@@ -243,21 +245,21 @@
             // btnMovimentacaoVenda
             // 
             this.btnMovimentacaoVenda.Name = "btnMovimentacaoVenda";
-            this.btnMovimentacaoVenda.Size = new System.Drawing.Size(133, 22);
+            this.btnMovimentacaoVenda.Size = new System.Drawing.Size(152, 22);
             this.btnMovimentacaoVenda.Text = "Venda";
             this.btnMovimentacaoVenda.Click += new System.EventHandler(this.btnMovimentacaoCaixa_Click);
             // 
             // btnMovimentacaoCaixa
             // 
             this.btnMovimentacaoCaixa.Name = "btnMovimentacaoCaixa";
-            this.btnMovimentacaoCaixa.Size = new System.Drawing.Size(133, 22);
+            this.btnMovimentacaoCaixa.Size = new System.Drawing.Size(152, 22);
             this.btnMovimentacaoCaixa.Text = "Caixa";
             this.btnMovimentacaoCaixa.Click += new System.EventHandler(this.btnMovimentacaoCaixa_Click_1);
             // 
             // btnMovimentacaoProduto
             // 
             this.btnMovimentacaoProduto.Name = "btnMovimentacaoProduto";
-            this.btnMovimentacaoProduto.Size = new System.Drawing.Size(133, 22);
+            this.btnMovimentacaoProduto.Size = new System.Drawing.Size(152, 22);
             this.btnMovimentacaoProduto.Text = "Produto";
             this.btnMovimentacaoProduto.Click += new System.EventHandler(this.btnMovimentacaoProduto_Click);
             // 
@@ -295,6 +297,7 @@
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Padding = new System.Windows.Forms.Padding(0);
             this.toolStripMenuItem1.Size = new System.Drawing.Size(4, 50);
+           
             // 
             // rodape
             // 
@@ -380,5 +383,6 @@
         private System.Windows.Forms.ToolStripMenuItem menuRelatorios;
         private System.Windows.Forms.ToolStripMenuItem btnRelatorioCompra;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem fffToolStripMenuItem;
     }
 }

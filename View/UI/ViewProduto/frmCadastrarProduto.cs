@@ -8,7 +8,7 @@ using System.Windows.Forms;
 using View.Enum;
 using View.UI.ViewCetegoria;
 using View.UI.ViewEstoque;
-using System.Linq;
+
 namespace View.UI.ViewProduto
 {
     public partial class frmCadastrarProduto : Form
@@ -43,7 +43,6 @@ namespace View.UI.ViewProduto
                         txtQtdMaxima.ReadOnly = true;
                         ckbEstoque.Enabled = false;
                         gpbPorcentagemLucro.Visible = false;
-                        //gpbDadosUnidade.Visible = false;
                         btnAdicionarCategoria.Visible = false;
                         MudarTamanhoDoComboBoxCategoria(new Size(558, 31));
                         MudarTamanhoDotxtDescricao(new Size(558, 106));
@@ -58,6 +57,7 @@ namespace View.UI.ViewProduto
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -165,6 +165,7 @@ namespace View.UI.ViewProduto
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -239,6 +240,7 @@ namespace View.UI.ViewProduto
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -323,6 +325,7 @@ namespace View.UI.ViewProduto
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -348,6 +351,7 @@ namespace View.UI.ViewProduto
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -387,6 +391,7 @@ namespace View.UI.ViewProduto
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -408,6 +413,7 @@ namespace View.UI.ViewProduto
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -518,6 +524,7 @@ namespace View.UI.ViewProduto
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
             finally
@@ -768,6 +775,7 @@ namespace View.UI.ViewProduto
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -844,6 +852,7 @@ namespace View.UI.ViewProduto
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -935,6 +944,7 @@ namespace View.UI.ViewProduto
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -1019,6 +1029,7 @@ namespace View.UI.ViewProduto
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -1037,6 +1048,7 @@ namespace View.UI.ViewProduto
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
         }
@@ -1056,6 +1068,7 @@ namespace View.UI.ViewProduto
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -1079,6 +1092,7 @@ namespace View.UI.ViewProduto
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -1103,6 +1117,7 @@ namespace View.UI.ViewProduto
                 if (cbbCategoria.Items.Count > 0)
                 {
                     FocarNoCbb(cbbCategoria);
+                    MostrarItensDoCbb(cbb:cbbCategoria);
                 }
                 else
                 {
@@ -1110,6 +1125,11 @@ namespace View.UI.ViewProduto
                 }
 
             }
+        }
+
+        private void MostrarItensDoCbb(ComboBox cbb)
+        {
+            cbb.DroppedDown = true;
         }
 
         private void FocarNoCbb(ComboBox cbb)
@@ -1211,6 +1231,7 @@ namespace View.UI.ViewProduto
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -1252,6 +1273,7 @@ namespace View.UI.ViewProduto
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 

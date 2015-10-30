@@ -133,6 +133,7 @@ namespace View.UI.ViewCaixa
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -163,6 +164,7 @@ namespace View.UI.ViewCaixa
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -200,6 +202,7 @@ namespace View.UI.ViewCaixa
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -256,6 +259,7 @@ namespace View.UI.ViewCaixa
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -297,6 +301,10 @@ namespace View.UI.ViewCaixa
                     {
                         EsconderOuMostrarButtonVenda(Mostrar);
                     }
+                    else
+                    {
+                        FocarNoTxt(txt:txtCodigoDoProduto);
+                    }
                 }
             }
             catch (CustomException erro)
@@ -305,6 +313,7 @@ namespace View.UI.ViewCaixa
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
         }
@@ -339,6 +348,7 @@ namespace View.UI.ViewCaixa
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
         }
@@ -428,6 +438,7 @@ namespace View.UI.ViewCaixa
                         MostrarGpb();
                         if (VerificarSeExisteItensNoListView() > 0)
                         {
+                            FocarNoTxt(txtValorPago);
                             decimal valorPago = ValorPago.ValorPagoPeloCliente(txtValorPago);
                             decimal valorDaComanda = GetValorNaComanda();
                             if (valorPago >= valorDaComanda)
@@ -441,7 +452,10 @@ namespace View.UI.ViewCaixa
                             }
 
                         }
-                        FocarNoTxt(txtValorPago);
+                        else
+                        {
+                            FocarNoTxt(txt:txtCodigoDoProduto);
+                        }
                         break;
                     case "Cartão":
                         EsconderGpb();
@@ -464,6 +478,7 @@ namespace View.UI.ViewCaixa
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -498,6 +513,7 @@ namespace View.UI.ViewCaixa
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -530,6 +546,7 @@ namespace View.UI.ViewCaixa
                 }
                 catch (Exception erro)
                 {
+                    SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                     DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
                 }
 
@@ -554,6 +571,7 @@ namespace View.UI.ViewCaixa
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, "frmCaixa");
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
         }
@@ -572,7 +590,11 @@ namespace View.UI.ViewCaixa
                     }
                     else
                     {
+                       
                         DarBaixaNoEstoque();
+                        PosSalvamentoPadrao();
+                        AtualizarQuandroDeAvisos();
+                        FocarNoTxt(txt:txtCodigoDoProduto);
                     }
                 }
             }
@@ -582,6 +604,7 @@ namespace View.UI.ViewCaixa
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -606,6 +629,7 @@ namespace View.UI.ViewCaixa
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
         }
@@ -623,6 +647,7 @@ namespace View.UI.ViewCaixa
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -640,8 +665,7 @@ namespace View.UI.ViewCaixa
                     if (OpenMdiForm.OpenForWithShowDialog(new frmClienteCreditar(EnumTipoCreditar.Vender)) == DialogResult.Yes)
                     {
                         InstanciarFiadoRepositorio();
-                        _fiadoRepositorio.Cadastrar(new Fiado() { IDCliente = Cliente.ClienteIDStatic, IDFuncionario = Usuarios.IDStatic, Valor = VendaTotal });
-                        PosSalvamentoPadrao();
+                        _fiadoRepositorio.Cadastrar(new Fiado() { IDCliente = Cliente.ClienteIDStatic, IDFuncionario = Usuarios.IDStatic, Valor = VendaTotal });                        
                         MensagemDeAviso();
                         retorno = true;
                     }
@@ -696,6 +720,7 @@ namespace View.UI.ViewCaixa
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -740,6 +765,7 @@ namespace View.UI.ViewCaixa
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -770,6 +796,7 @@ namespace View.UI.ViewCaixa
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -799,6 +826,7 @@ namespace View.UI.ViewCaixa
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -945,7 +973,6 @@ namespace View.UI.ViewCaixa
                             ChecarChebox(ckb: ckbPorPeso, checado: false);
                             LimparTxt(new List<TextBox> { txtPesoDoProduto });
                             VenderPorUnidade(codigo);
-                            //FocarNoTxt(txtCodigoDoProduto);
                         }
                         else
                         {
@@ -974,6 +1001,7 @@ namespace View.UI.ViewCaixa
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
         }
@@ -1019,6 +1047,7 @@ namespace View.UI.ViewCaixa
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -1073,6 +1102,7 @@ namespace View.UI.ViewCaixa
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -1128,6 +1158,7 @@ namespace View.UI.ViewCaixa
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
         }
@@ -1225,6 +1256,7 @@ namespace View.UI.ViewCaixa
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -1248,6 +1280,7 @@ namespace View.UI.ViewCaixa
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -1272,6 +1305,7 @@ namespace View.UI.ViewCaixa
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
         }
@@ -1289,6 +1323,7 @@ namespace View.UI.ViewCaixa
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -1330,6 +1365,7 @@ namespace View.UI.ViewCaixa
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -1368,6 +1404,7 @@ namespace View.UI.ViewCaixa
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
         }
@@ -1385,6 +1422,7 @@ namespace View.UI.ViewCaixa
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -1403,6 +1441,7 @@ namespace View.UI.ViewCaixa
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
         }
@@ -1426,13 +1465,9 @@ namespace View.UI.ViewCaixa
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
-
-        }
-
-        private void btnAtalhos_Click(object sender, EventArgs e)
-        {
 
         }
 
@@ -1455,6 +1490,7 @@ namespace View.UI.ViewCaixa
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -1506,6 +1542,7 @@ namespace View.UI.ViewCaixa
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 

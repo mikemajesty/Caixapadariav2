@@ -154,6 +154,7 @@
             this.dgvMovimentacao.Size = new System.Drawing.Size(509, 210);
             this.dgvMovimentacao.TabIndex = 18;
             this.dgvMovimentacao.TabStop = false;
+            this.dgvMovimentacao.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvMovimentacao_KeyDown);
             // 
             // gpbDatas
             // 

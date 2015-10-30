@@ -35,10 +35,52 @@ namespace View.UI.ViewProduto
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
 
+        }
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            switch (keyData)
+            {
+               
+                case Keys.F1:
+                    ChecarRdb(rdb: rdbNome);
+                    break;
+                case Keys.F2:
+                    ChecarRdb(rdb: rdbCodigo);
+                    break;
+                case Keys.F3:
+                    ChecarRdb(rdb: rdbCategoria);
+                    break;
+                case Keys.F4:
+                    break;
+                case Keys.F5:
+                    break;
+                case Keys.F6:
+                    break;
+                case Keys.F7:
+                    break;
+                case Keys.F8:
+                    break;
+                case Keys.F9:
+                    break;
+                case Keys.F10:
+                    break;
+                case Keys.F11:
+                    break;
+                case Keys.F12:
+                    break;
+
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private void ChecarRdb(RadioButton rdb)
+        {
+            rdb.Checked = true;
         }
 
         private void ChecarRadioButtonNome()
@@ -61,14 +103,15 @@ namespace View.UI.ViewProduto
                 new TamanhoGrid() { Tamanho = 120, ColunaNome="Categoria" },
                 new TamanhoGrid() { Tamanho = 100, ColunaNome="Preço" }  ,
                 new TamanhoGrid() { Tamanho = 90, ColunaNome="Estoque" }});
-
+                dgvProdutos.PadronizarGrid();
             }
             catch (CustomException erro)
-            {
+            {                
                 DialogMessage.MessageFullComButtonOkIconeDeInformacao(erro.Message, "Aviso");
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -96,6 +139,7 @@ namespace View.UI.ViewProduto
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -122,6 +166,7 @@ namespace View.UI.ViewProduto
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
         }
@@ -148,6 +193,7 @@ namespace View.UI.ViewProduto
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
         }
@@ -170,6 +216,7 @@ namespace View.UI.ViewProduto
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
         }
@@ -183,7 +230,6 @@ namespace View.UI.ViewProduto
                 if (_produtoRepositorio.GetQuantidade() > 0)
                 {
                     int tamanho = txtPesquisar.Text.Length;
-                    InstanciarProdutoRepositorio();
                     switch (SelecionarTextoDoRadioButtonSelecionado())
                     {
                         case "Nome":
@@ -207,6 +253,7 @@ namespace View.UI.ViewProduto
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
         }
@@ -223,7 +270,7 @@ namespace View.UI.ViewProduto
                 {
                     if (rdb.Checked)
                     {
-                        rdbSelecionado = rdb.Text;
+                        rdbSelecionado = rdb.Text.Contains("Nome") ? "Nome" : rdb.Text.Contains("Categoria") ? "Categoria" : rdb.Text.Contains("Código") ? "Código" : "Nome";
                     }
                 }
                 return rdbSelecionado;
@@ -266,6 +313,7 @@ namespace View.UI.ViewProduto
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -287,6 +335,7 @@ namespace View.UI.ViewProduto
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -310,6 +359,7 @@ namespace View.UI.ViewProduto
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -348,6 +398,7 @@ namespace View.UI.ViewProduto
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -419,7 +470,11 @@ namespace View.UI.ViewProduto
             }
         }
 
-
+        private void dgvProdutos_KeyDown(object sender, KeyEventArgs e)
+        {
+            ValidatorField.DisableTabInGrid(sender, e);
+        }
+        
     }
 }
 

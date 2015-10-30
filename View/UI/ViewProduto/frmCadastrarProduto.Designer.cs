@@ -117,7 +117,6 @@
             this.cbbCategoria.Size = new System.Drawing.Size(208, 31);
             this.cbbCategoria.TabIndex = 3;
             this.cbbCategoria.TabStop = false;
-            this.cbbCategoria.SelectedIndexChanged += new System.EventHandler(this.cbbCategoria_SelectedIndexChanged);
             this.cbbCategoria.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cbbCategoria_KeyPress);
             // 
             // gpbProduto
@@ -426,7 +425,7 @@
             this.cbbTipoCadastro.ItemHeight = 23;
             this.cbbTipoCadastro.Location = new System.Drawing.Point(6, 29);
             this.cbbTipoCadastro.Name = "cbbTipoCadastro";
-            this.cbbTipoCadastro.Size = new System.Drawing.Size(315, 31);
+            this.cbbTipoCadastro.Size = new System.Drawing.Size(284, 31);
             this.cbbTipoCadastro.TabIndex = 0;
             this.tlp2.SetToolTip(this.cbbTipoCadastro, "Selecione o tipo de cadastro, exemplo Unidade");
             this.cbbTipoCadastro.SelectedIndexChanged += new System.EventHandler(this.cbbTipoCadastro_SelectedIndexChanged);

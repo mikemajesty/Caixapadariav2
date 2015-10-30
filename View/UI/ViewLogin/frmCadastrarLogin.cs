@@ -90,6 +90,7 @@ namespace View.UI.ViewLogin
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -114,6 +115,7 @@ namespace View.UI.ViewLogin
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -210,6 +212,7 @@ namespace View.UI.ViewLogin
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -333,10 +336,12 @@ namespace View.UI.ViewLogin
             }
             catch (DbUpdateException erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageFullComButtonOkIconeDeInformacao(erro.Message, "Aviso");
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
         }
@@ -424,6 +429,7 @@ namespace View.UI.ViewLogin
                 if (cbbPermissao.Enabled == true)
                 {
                     this.ActiveControl = cbbPermissao;
+                    MostrarItensDoCbb(cbb:cbbPermissao);
                 }
                 else
                 {
@@ -431,6 +437,11 @@ namespace View.UI.ViewLogin
                 }
 
             }
+        }
+
+        private void MostrarItensDoCbb(ComboBox cbb)
+        {
+            cbb.DroppedDown = true;
         }
 
         private void FocarNoBtn(Button btn)

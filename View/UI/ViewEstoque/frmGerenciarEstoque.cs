@@ -43,6 +43,7 @@ namespace View.UI.ViewEstoque
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -78,6 +79,7 @@ namespace View.UI.ViewEstoque
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -132,6 +134,7 @@ namespace View.UI.ViewEstoque
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -206,9 +209,10 @@ namespace View.UI.ViewEstoque
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
-            finally { /*DefinirTamanhoDoGrid();*/ TirarFocoDoDgv(); }
+            finally {TirarFocoDoDgv(); }
         }
 
         private void MudarOMaximoDeCaracteresDigitadosNoTxt(int caracter)
@@ -263,6 +267,7 @@ namespace View.UI.ViewEstoque
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -326,6 +331,14 @@ namespace View.UI.ViewEstoque
             }
         }
 
+        private void dgvEstoque_KeyDown(object sender, KeyEventArgs e)
+        {
+            ValidatorField.DisableTabInGrid(sender, e);
+        }
 
+        private void dgvEstoque_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            (sender as DataGridView).ClearSelection();
+        }
     }
 }

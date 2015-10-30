@@ -141,6 +141,8 @@
             this.dgvEstoque.TabStop = false;
             this.dgvEstoque.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvEstoque_CellDoubleClick);
             this.dgvEstoque.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvEstoque_CellFormatting);
+            this.dgvEstoque.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvEstoque_DataBindingComplete);
+            this.dgvEstoque.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvEstoque_KeyDown);
             // 
             // textBox1
             // 

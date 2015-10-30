@@ -50,6 +50,7 @@ namespace View.UI.ViewCetegoria
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -74,6 +75,7 @@ namespace View.UI.ViewCetegoria
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -125,6 +127,7 @@ namespace View.UI.ViewCetegoria
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -157,6 +160,7 @@ namespace View.UI.ViewCetegoria
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
         }
@@ -205,6 +209,7 @@ namespace View.UI.ViewCetegoria
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -220,10 +225,9 @@ namespace View.UI.ViewCetegoria
             ValidatorField.IntegerAndLetter(e:e);
         }
 
-      
-
-      
-
-      
+        private void dgvCategoria_KeyDown(object sender, KeyEventArgs e)
+        {
+            ValidatorField.DisableTabInGrid(sender, e);
+        }
     }
 }

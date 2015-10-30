@@ -62,6 +62,7 @@ namespace View.UI.ViewProduto
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -85,6 +86,7 @@ namespace View.UI.ViewProduto
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -136,6 +138,7 @@ namespace View.UI.ViewProduto
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -208,6 +211,7 @@ namespace View.UI.ViewProduto
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -241,6 +245,7 @@ namespace View.UI.ViewProduto
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -262,27 +267,16 @@ namespace View.UI.ViewProduto
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
         }
 
-        private void dgvProdutos_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+     
+        private void dgvProdutos_KeyDown(object sender, KeyEventArgs e)
         {
-
-            try
-            {
-
-            }
-            catch (CustomException erro)
-            {
-                DialogMessage.MessageFullComButtonOkIconeDeInformacao(erro.Message, "Aviso");
-            }
-            catch (Exception erro)
-            {
-                DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
-            }
-
+            ValidatorField.DisableTabInGrid(sender, e);
         }
     }
 }

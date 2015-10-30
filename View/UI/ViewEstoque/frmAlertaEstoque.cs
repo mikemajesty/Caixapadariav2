@@ -45,9 +45,9 @@ namespace View.UI.ViewEstoque
                   "para expirar\no programa";
                 AtualizarGrid();               
             }
-            catch (Exception)
+            catch (Exception erro)
             {
-
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 throw;
             }
            
@@ -81,9 +81,9 @@ namespace View.UI.ViewEstoque
                 }
              
             }
-            catch (Exception)
+            catch (Exception erro)
             {
-
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 throw;
             }
 
@@ -111,9 +111,9 @@ namespace View.UI.ViewEstoque
                     OpenMdiForm.LoadNewKeepAnother(ContainerContext.Context,formAlertEstoque);
                 }
             }
-            catch (Exception)
+            catch (Exception erro)
             {
-
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 throw;
             }
         }
