@@ -48,7 +48,7 @@ namespace Model.Entidades
                 {
                     MyErro.MyCustomException("Nome não pode ser vazio.");
                 }
-                else if (value.Length > 30)
+                else if (value.Length > 40)
                 {
                     MyErro.MyCustomException("Nome não pode conter mais de 30 letras ou numeros.");
                 }

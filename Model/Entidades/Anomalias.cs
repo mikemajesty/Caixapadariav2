@@ -30,7 +30,7 @@ namespace Model.Entidades
                 {
                     _idComanda = value;
                 }
-                
+
             }
         }
         private int _idUsuario;
@@ -69,7 +69,33 @@ namespace Model.Entidades
 
             }
         }
-        public DateTime Date { get; set; } = DateTime.Now;
+        public DateTime Data { get; set; } = DateTime.Now;
+        private string _texto;
+
+        public string Texto
+        {
+            get { return _texto; }
+            set
+            {
+                if (value.Length <= 0)
+                {
+                    MyErro.MyCustomException("Texto dever ser preenchido.");
+                }
+                else if (value.Length <= 15)
+                {
+                    MyErro.MyCustomException("Texto deve explicar o ocorrido, para que não gere problemas ao operador.");
+                }
+                else if (value.Length > 150)
+                {
+                    MyErro.MyCustomException("Tente explicar o ocorrido em um texto mais curto.");
+                }
+                else
+                {
+                    _texto = value;
+                }
+
+            }
+        }
 
 
     }

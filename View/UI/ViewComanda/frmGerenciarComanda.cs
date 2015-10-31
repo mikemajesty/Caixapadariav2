@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using View.Enum;
+using View.UI.ViewAnomalias;
 
 namespace View.UI.ViewComanda
 {
@@ -114,7 +115,7 @@ namespace View.UI.ViewComanda
                 SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
-            
+
         }
 
         private void MudarTextoDoForm(string txt)
@@ -180,7 +181,7 @@ namespace View.UI.ViewComanda
                 if (dgvComanda.Rows.Count > 0 && _comandaRepositorio.GetQuantidade() > 0)
                 {
 
-                    Comanda comanda = _comandaRepositorio.GetComandaPorID(PegaLinhaSelecionadaDoGrid());
+                    Comanda comanda = _comandaRepositorio.GetComandaPorID(PegaIDSelecionadaDoGrid());
                     if (OpenMdiForm.OpenForWithShowDialog(new frmCadastrarComanda(EnumTipoOperacao.Alterar, comanda)) == DialogResult.Yes)
                     {
                         CarregaGridSelecao();
@@ -204,7 +205,7 @@ namespace View.UI.ViewComanda
 
         }
 
-        private int PegaLinhaSelecionadaDoGrid()
+        private int PegaIDSelecionadaDoGrid()
         {
             return Convert.ToInt32(dgvComanda.CurrentRow.Cells["ID"].Value);
         }
@@ -218,34 +219,35 @@ namespace View.UI.ViewComanda
                 {
                     InstanciarComandaRepositorio();
                     if (_enumComanda == EnumComanda.Seleção)
-                    {                      
-                        Comanda comanda = _comandaRepositorio.GetComandaPorID(PegaLinhaSelecionadaDoGrid());
+                    {
+                        Comanda comanda = _comandaRepositorio.GetComandaPorID(PegaIDSelecionadaDoGrid());
                         if (OpenMdiForm.OpenForWithShowDialog(new frmCadastrarComanda(EnumTipoOperacao.Deletar, comanda)) == DialogResult.Yes)
                         {
                             CarregaGridSelecao();
                         }
-                    }
+
+                    }                  
                     else if (_enumComanda == EnumComanda.Comanda)
                     {
-                        if (DialogMessage.MessageFullQuestion("Deseja Realmente excluir os itens dessa camanda?", "Aviso") == DialogResult.Yes)
+                        Comanda comanda = _comandaRepositorio.GetComandaPorID(PegaIDSelecionadaDoGrid());
+                        if (OpenMdiForm.OpenForWithShowDialog(new frmCriarAnomalias(new Anomalias
+                        {
+                            IDComanda = comanda.ID,
+                            IDUsuario = Usuarios.IDStatic,
+                            Valor = GetvalorDaComanda(),
+
+                        })) == DialogResult.Yes)
                         {
                             InstanciarVendaComComandaAtivaRepositorio();
                             int resultado = _vendaComComandaAtivaRepositorio.DeletaItensDaComandaPorCodigo(dgvComanda.CurrentRow.Cells["Código"].Value.ToString());
                             if (resultado > 0)
                             {
-                                DialogMessage.MessageFullComButtonOkIconeDeInformacao("Itens da Comanda deletado com Sucesso.","Titulo");
+                                DialogMessage.MessageFullComButtonOkIconeDeInformacao("Itens da Comanda deletado com Sucesso.", "Titulo");
                                 CarregarGridComanda();
+                                FocarNoBtn(btn: btnSair);
                             }
-                           
                         }
-                        else
-                        {
-                            LimparTxt();
-                            this.FocoNoTxt(txt: txtPesquisar);
-                        }
-                        
-                    }
-                   
+                    }                  
                 }
                 else
                 {
@@ -254,13 +256,40 @@ namespace View.UI.ViewComanda
 
             }
             catch (CustomException erro)
-            {
+            {                
                 DialogMessage.MessageFullComButtonOkIconeDeInformacao(erro.Message, "Aviso");
             }
             catch (Exception erro)
             {
                 SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
+            }
+        }
+
+        private void FocarNoBtn(Button btn)
+        {
+            this.ActiveControl = btn;
+        }
+
+        private decimal GetvalorDaComanda()
+        {
+            try
+            {
+                if (dgvComanda.Columns.Count > 0)
+                {
+                    return Convert.ToDecimal(dgvComanda.CurrentRow.Cells["Total"].Value);
+                }
+                return 0;
+            }
+            catch (CustomException error)
+            {
+
+                throw new CustomException(error.Message);
+            }
+            catch (Exception error)
+            {
+
+                throw new Exception(error.Message);
             }
         }
 
@@ -367,7 +396,7 @@ namespace View.UI.ViewComanda
             ValidatorField.Integer(e: e);
         }
 
-      
+
 
         private void PegarCodigoDaComanda()
         {

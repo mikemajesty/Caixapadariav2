@@ -320,7 +320,7 @@
             this.txtNome.CharacterCasing = System.Windows.Forms.CharacterCasing.Lower;
             this.txtNome.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNome.Location = new System.Drawing.Point(92, 70);
-            this.txtNome.MaxLength = 30;
+            this.txtNome.MaxLength = 40;
             this.txtNome.Name = "txtNome";
             this.txtNome.Size = new System.Drawing.Size(559, 29);
             this.txtNome.TabIndex = 2;
