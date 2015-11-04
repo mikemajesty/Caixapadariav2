@@ -50,6 +50,7 @@
             this.btnMovimentacaoVenda = new System.Windows.Forms.ToolStripMenuItem();
             this.btnMovimentacaoCaixa = new System.Windows.Forms.ToolStripMenuItem();
             this.btnMovimentacaoProduto = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnAnomalias = new System.Windows.Forms.ToolStripMenuItem();
             this.menuRelatorios = new System.Windows.Forms.ToolStripMenuItem();
             this.btnRelatorioCompra = new System.Windows.Forms.ToolStripMenuItem();
             this.btnSair = new System.Windows.Forms.ToolStripMenuItem();
@@ -234,7 +235,8 @@
             this.menuMovimentacao.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnMovimentacaoVenda,
             this.btnMovimentacaoCaixa,
-            this.btnMovimentacaoProduto});
+            this.btnMovimentacaoProduto,
+            this.btnAnomalias});
             this.menuMovimentacao.Font = new System.Drawing.Font("Arial Black", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menuMovimentacao.Image = ((System.Drawing.Image)(resources.GetObject("menuMovimentacao.Image")));
             this.menuMovimentacao.Name = "menuMovimentacao";
@@ -262,6 +264,13 @@
             this.btnMovimentacaoProduto.Size = new System.Drawing.Size(152, 22);
             this.btnMovimentacaoProduto.Text = "Produto";
             this.btnMovimentacaoProduto.Click += new System.EventHandler(this.btnMovimentacaoProduto_Click);
+            // 
+            // btnAnomalias
+            // 
+            this.btnAnomalias.Name = "btnAnomalias";
+            this.btnAnomalias.Size = new System.Drawing.Size(152, 22);
+            this.btnAnomalias.Text = "Anomalias";
+            this.btnAnomalias.Click += new System.EventHandler(this.btnAnomalias_Click);
             // 
             // menuRelatorios
             // 
@@ -297,7 +306,11 @@
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Padding = new System.Windows.Forms.Padding(0);
             this.toolStripMenuItem1.Size = new System.Drawing.Size(4, 50);
-           
+            // 
+            // fffToolStripMenuItem
+            // 
+            this.fffToolStripMenuItem.Name = "fffToolStripMenuItem";
+            this.fffToolStripMenuItem.Size = new System.Drawing.Size(12, 50);
             // 
             // rodape
             // 
@@ -384,5 +397,6 @@
         private System.Windows.Forms.ToolStripMenuItem btnRelatorioCompra;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem fffToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem btnAnomalias;
     }
 }

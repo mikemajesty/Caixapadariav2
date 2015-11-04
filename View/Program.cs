@@ -13,9 +13,13 @@ namespace View.Enum
     {
 
 
+        private static frmMensagemDeEspera mensagem;
+        private static Espere espere = new Espere();
         [STAThread]
         static void Main()
         {
+            
+            espere.Start(ExibirMensagem);
             KeyGenRepositorio _keyGenRepositorio;
             UsuarioRepositorio _usuariosRepositorio;
             CaixaRepositorio _caixaRepositorio;
@@ -23,9 +27,7 @@ namespace View.Enum
             {
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
-
-                _keyGenRepositorio = new KeyGenRepositorio();
-                ;
+                _keyGenRepositorio = new KeyGenRepositorio();            
                 if (InserirDatas(_keyGenRepositorio) > 0)
                 {
                     _caixaRepositorio = new CaixaRepositorio();
@@ -33,11 +35,9 @@ namespace View.Enum
                     {
                         Properties.Settings.Default.CaixaAberto = true;
                     }
-
                 }
                 else
                 {
-                    
                     Properties.Settings.Default.CaixaAberto = false;
                 }
                 _usuariosRepositorio = new UsuarioRepositorio();
@@ -48,29 +48,28 @@ namespace View.Enum
                     if (_keyGenRepositorio.GetQuantidade() >= 30)
                     {
                         Backup.GerarBeckup(new _DbContext());
+                        CancelarMensagem();
                         Application.Run(new frmKeyGen());
                     }
                     else
                     {
+                        CancelarMensagem();
                         Application.Run(new frmLogin());
                     }
-
-
                 }
                 else
                 {
                     if (_keyGenRepositorio.GetQuantidade() >= 30)
                     {
-
+                        CancelarMensagem();
                         Application.Run(new frmKeyGen());
                     }
                     else
                     {
+                        CancelarMensagem();
                         Application.Run(new frmCadastrarLogin(null, EnumTipoOperacao.Salvar));
                     }
-
                 }
-
             }
             catch (CustomException erro)
             {
@@ -81,10 +80,24 @@ namespace View.Enum
                 SaveErroInTxt.RecordInTxt(erro, "Inicialização");
                 DialogMessage.MessageComButtonOkIconeErro("Problema ao estabelecer conexão com o banco de dados, reinice o computador, se o erro persistir contate o Administrador: " + erro.Message, "Erro");
             }
+            finally { CancelarMensagem(); }
+        }
+        private static void CancelarMensagem()
+        {
+            espere.CancelarTask();
+            if (espere.Cancel.IsCancellationRequested)
+            {
+                if (mensagem != null)
+                {
+                    mensagem.Close();
+                }
 
-
-
-
+            }
+        }
+        private static void ExibirMensagem()
+        {
+            mensagem = new frmMensagemDeEspera();
+            mensagem.ShowDialog();
         }
 
         private static int InserirDatas(KeyGenRepositorio _keyGenRepositorio)

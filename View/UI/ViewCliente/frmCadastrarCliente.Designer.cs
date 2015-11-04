@@ -59,6 +59,7 @@
             // txtNome
             // 
             this.txtNome.BackColor = System.Drawing.Color.Yellow;
+            this.txtNome.CharacterCasing = System.Windows.Forms.CharacterCasing.Lower;
             this.txtNome.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNome.Location = new System.Drawing.Point(64, 32);
             this.txtNome.MaxLength = 50;

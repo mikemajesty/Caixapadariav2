@@ -534,7 +534,6 @@ namespace View.UI.ViewCaixa
                     if (_vendaRepositorio.Cadastrar(PopularVenda()) == Sucesso)
                     {
                         InstanciarMovimentacaoProdutoRepositorio();
-                        AtualizarQuandroDeAvisos();
                         ConcluirVendaComDinheiro();
                         ConcluirVendaComCreditar();
                         ConcluirVendaComCartao();
@@ -549,7 +548,10 @@ namespace View.UI.ViewCaixa
                     SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                     DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
                 }
-
+                finally
+                {
+                    AtualizarQuandroDeAvisos();
+                }
             }
         }
 
@@ -590,10 +592,8 @@ namespace View.UI.ViewCaixa
                     }
                     else
                     {
-                       
-                        DarBaixaNoEstoque();
                         PosSalvamentoPadrao();
-                        AtualizarQuandroDeAvisos();
+                        DarBaixaNoEstoque();
                         FocarNoTxt(txt:txtCodigoDoProduto);
                     }
                 }
@@ -703,7 +703,7 @@ namespace View.UI.ViewCaixa
                         InstanciarMovimentacaoCaixa();
                         int resultado = _movimentacaoCaixaRepositorio.Salvar(new MovimentacaoCaixa() { Valor = VendaTotal, Data = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day) });
                         if (resultado > 0)
-                        {
+                        {                            
                             DarBaixaNoEstoque();
                             JogarNovoValorParaCaixa();
                             PosSalvamentoPadrao();
@@ -738,6 +738,7 @@ namespace View.UI.ViewCaixa
 
             try
             {
+
                 foreach (ListViewItem lstItem in ltvProdutos.Items)
                 {
                     Produto produto = _produtoRepositorio.GetProdutoPorCodigoUnidade(lstItem.SubItems[1].Text);

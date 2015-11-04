@@ -271,7 +271,7 @@ namespace View.UI.ViewComanda
                 return new Model.Entidades.Cliente()
                 {
                     ID = _cliente.ID,
-                    Nome = txtNome.Text.UpperCaseOnlyFirst(),
+                    Nome = txtNome.Text.Trim().UpperCaseOnlyFirst(),
                     Celular = mtbTelefone.Text,
                     CPF = mtbCpf.Text
                 };

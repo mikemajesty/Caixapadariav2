@@ -10,9 +10,9 @@ using View.UI.ViewComanda;
 using View.UI.ViewEstoque;
 using View.UI.ViewLogin;
 using View.UI.ViewProduto;
-using View.UI.ViewRelatorio;
 using View.Enum;
 using View.UI;
+using View.UI.ViewAnomalias;
 
 namespace View
 {
@@ -298,9 +298,12 @@ namespace View
 
         private void btnRelatorioCompra_Click(object sender, EventArgs e)
         {
-            OpenMdiForm.LoadNewKeepAnother(this, new frmRelatorio());
+            //OpenMdiForm.LoadNewKeepAnother(this, new frmRelatorio());
         }
 
-       
+        private void btnAnomalias_Click(object sender, EventArgs e)
+        {
+            OpenMdiForm.LoadNewKeepAnother(this, new frmAnomalias());
+        }
     }
 }

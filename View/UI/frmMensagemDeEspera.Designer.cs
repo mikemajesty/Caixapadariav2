@@ -43,7 +43,8 @@
             this.ptbImgLoad.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.ptbImgLoad.TabIndex = 0;
             this.ptbImgLoad.TabStop = false;
-            // frmMensagemEstoque
+            // 
+            // frmMensagemDeEspera
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -51,7 +52,7 @@
             this.Controls.Add(this.ptbImgLoad);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "frmMensagemEstoque";
+            this.Name = "frmMensagemDeEspera";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             ((System.ComponentModel.ISupportInitialize)(this.ptbImgLoad)).EndInit();
             this.ResumeLayout(false);
