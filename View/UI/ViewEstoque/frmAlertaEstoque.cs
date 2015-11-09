@@ -79,7 +79,7 @@ namespace View.UI.ViewEstoque
                     dgvAvisosEstoque.Visible = false;
                     lblSemRecado.Visible = true;
                 }
-             
+                
             }
             catch (Exception erro)
             {
@@ -104,7 +104,6 @@ namespace View.UI.ViewEstoque
                 var codigo = dgvAvisosEstoque.CurrentRow.Cells["Código"].Value.ToString();
                 if (codigo != null)
                 {
-
                     var formAlertEstoque = new frmGerenciarEstoque();
                     GerenciarGerenciamentoDeEstoque.FecharForm(formAlertEstoque);
                     Estoque.CodigoEstoque = codigo;
@@ -117,5 +116,7 @@ namespace View.UI.ViewEstoque
                 throw;
             }
         }
+
+       
     }
 }

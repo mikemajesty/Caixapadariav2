@@ -66,7 +66,7 @@ namespace View.UI.ViewCetegoria
                 this.InstanciarCategoriaRepositorio();
                 _categoriaRepositorio.Listar(dgv: dgvCategoria);
                 AjustarTamanhoDoGrid();
-                
+                dgvCategoria.PadronizarGrid();
                
             }
             catch (CustomException erro)

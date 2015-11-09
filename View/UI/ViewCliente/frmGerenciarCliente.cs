@@ -64,6 +64,7 @@ namespace View.UI.ViewComanda
                 InstanciarClienteRepositorio();
                 _clienteRepositorio.ListarParaVender(dgv: dgvCliente);
                 AjustarTamanhoDoGrid();
+                dgvCliente.PadronizarGrid();
             }
             catch (CustomException erro)
             {

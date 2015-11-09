@@ -71,7 +71,7 @@ namespace View.UI.ViewEstoque
                
                 _estoqueRepositorio.ListarPorNome(dgv: dgvEstoque,nome: "");
                 DefinirTamanhoDoGrid();
-
+                dgvEstoque.PadronizarGrid();
             }
             catch (CustomException erro)
             {

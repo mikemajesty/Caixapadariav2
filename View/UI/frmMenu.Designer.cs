@@ -83,7 +83,7 @@
             this.fffToolStripMenuItem});
             this.menu.Location = new System.Drawing.Point(0, 0);
             this.menu.Name = "menu";
-            this.menu.Size = new System.Drawing.Size(1176, 54);
+            this.menu.Size = new System.Drawing.Size(1238, 54);
             this.menu.TabIndex = 0;
             // 
             // btnLogin
@@ -247,28 +247,28 @@
             // btnMovimentacaoVenda
             // 
             this.btnMovimentacaoVenda.Name = "btnMovimentacaoVenda";
-            this.btnMovimentacaoVenda.Size = new System.Drawing.Size(152, 22);
+            this.btnMovimentacaoVenda.Size = new System.Drawing.Size(151, 22);
             this.btnMovimentacaoVenda.Text = "Venda";
             this.btnMovimentacaoVenda.Click += new System.EventHandler(this.btnMovimentacaoCaixa_Click);
             // 
             // btnMovimentacaoCaixa
             // 
             this.btnMovimentacaoCaixa.Name = "btnMovimentacaoCaixa";
-            this.btnMovimentacaoCaixa.Size = new System.Drawing.Size(152, 22);
+            this.btnMovimentacaoCaixa.Size = new System.Drawing.Size(151, 22);
             this.btnMovimentacaoCaixa.Text = "Caixa";
             this.btnMovimentacaoCaixa.Click += new System.EventHandler(this.btnMovimentacaoCaixa_Click_1);
             // 
             // btnMovimentacaoProduto
             // 
             this.btnMovimentacaoProduto.Name = "btnMovimentacaoProduto";
-            this.btnMovimentacaoProduto.Size = new System.Drawing.Size(152, 22);
+            this.btnMovimentacaoProduto.Size = new System.Drawing.Size(151, 22);
             this.btnMovimentacaoProduto.Text = "Produto";
             this.btnMovimentacaoProduto.Click += new System.EventHandler(this.btnMovimentacaoProduto_Click);
             // 
             // btnAnomalias
             // 
             this.btnAnomalias.Name = "btnAnomalias";
-            this.btnAnomalias.Size = new System.Drawing.Size(152, 22);
+            this.btnAnomalias.Size = new System.Drawing.Size(151, 22);
             this.btnAnomalias.Text = "Anomalias";
             this.btnAnomalias.Click += new System.EventHandler(this.btnAnomalias_Click);
             // 
@@ -286,7 +286,7 @@
             // btnRelatorioCompra
             // 
             this.btnRelatorioCompra.Name = "btnRelatorioCompra";
-            this.btnRelatorioCompra.Size = new System.Drawing.Size(138, 22);
+            this.btnRelatorioCompra.Size = new System.Drawing.Size(152, 22);
             this.btnRelatorioCompra.Text = "Comprar";
             this.btnRelatorioCompra.Click += new System.EventHandler(this.btnRelatorioCompra_Click);
             // 
@@ -320,7 +320,7 @@
             this.rodape.Location = new System.Drawing.Point(0, 399);
             this.rodape.Name = "rodape";
             this.rodape.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.rodape.Size = new System.Drawing.Size(1176, 25);
+            this.rodape.Size = new System.Drawing.Size(1238, 25);
             this.rodape.TabIndex = 2;
             this.rodape.Text = "statusStrip1";
             // 
@@ -345,7 +345,7 @@
             this.BackColor = System.Drawing.Color.White;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1176, 424);
+            this.ClientSize = new System.Drawing.Size(1238, 424);
             this.Controls.Add(this.rodape);
             this.Controls.Add(this.menu);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;

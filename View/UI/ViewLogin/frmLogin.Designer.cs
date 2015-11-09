@@ -151,7 +151,7 @@
             this.MinimizeBox = false;
             this.Name = "frmLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Logar no sistema";
+            this.Text = "Entre no sistema";
             this.Load += new System.EventHandler(this.frmLogin_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ptbLogin)).EndInit();
             this.ResumeLayout(false);

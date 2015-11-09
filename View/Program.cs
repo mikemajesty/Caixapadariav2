@@ -31,9 +31,13 @@ namespace View.Enum
                 if (InserirDatas(_keyGenRepositorio) > 0)
                 {
                     _caixaRepositorio = new CaixaRepositorio();
-                    if (_caixaRepositorio.GetValor().Valor > 0)
+                    if (_caixaRepositorio.GetValor() != null)
                     {
-                        Properties.Settings.Default.CaixaAberto = true;
+                        if (_caixaRepositorio.GetValor().Valor > 0)
+                        {
+                            Properties.Settings.Default.CaixaAberto = true;
+                        }
+                       
                     }
                 }
                 else

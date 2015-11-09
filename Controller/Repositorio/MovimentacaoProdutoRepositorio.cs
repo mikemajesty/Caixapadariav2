@@ -104,13 +104,34 @@ namespace Controller.Repositorio
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
         }
+        public int GetQuantitidade()
+        {
 
+            try
+            {
+                InstanciarBanco();
+                return _banco.MovimentacaoProduto.Count();
+            }
+            catch (CustomException error)
+            {
+                throw new CustomException(error.Message);
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error.Message);
+            }
+
+        }
         public DateTime GetMinimunDate()
         {
             try
             {
                 InstanciarBanco();
-                var date = _banco.MovimentacaoProduto.Min(c => c.Data);
+                var date = DateTime.Now;
+                if (this.GetQuantitidade() > 0)
+                {
+                    date = _banco.MovimentacaoProduto.Min(c => c.Data);
+                }
                 return date;
             }
             catch (CustomException erro)
@@ -128,7 +149,11 @@ namespace Controller.Repositorio
             try
             {
                 InstanciarBanco();
-                var date = _banco.MovimentacaoProduto.Max(c => c.Data);
+                var date = DateTime.Now;
+                if (this.GetQuantitidade() > 0)
+                {
+                    date = _banco.MovimentacaoProduto.Max(c => c.Data);
+                }                
                 return date;
             }
             catch (CustomException erro)

@@ -48,7 +48,7 @@ namespace View.UI.ViewComanda
                     AumentarTamanhoDoTxt();
                     AjustarTamanhoDoDataGridView();
                 }
-
+                dgvCliente.PadronizarGrid();
 
             }
             catch (CustomException erro)

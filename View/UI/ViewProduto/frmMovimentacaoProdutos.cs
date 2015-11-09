@@ -50,6 +50,7 @@ namespace View.UI.ViewProduto
                         new TamanhoGrid(){ ColunaNome="Quantidade", Tamanho = 100},
                         new TamanhoGrid(){ ColunaNome="Total", Tamanho = 100},
                     });
+                dgvProdutos.PadronizarGrid();
                 FocarNoBotao(btn: btnTodos);
                 ExibirQuantidadeTotalVendido();
                 InstanciarTipoCadastroRepositorio();

@@ -27,6 +27,7 @@ namespace View.UI.ViewCaixa
                 DefinirValoresNoDateTimePicker();
                 this.FocoNoBotao(btnTodos);                
                 _movimentacaoCaixaRepositorio.Listar(dgvMovimentacao);
+                dgvMovimentacao.PadronizarGrid();
                 ExibirLucroTotalVendido();
             }
             catch (CustomException erro)

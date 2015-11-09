@@ -26,8 +26,12 @@ namespace Controller.Repositorio
             try
             {
                 InstanciarBanco();
-                var venda = _banco.Venda.Min(c=>c.Data);
-                return venda;
+                var data = DateTime.Now;
+                if (this.GetQuantidade() > 0)
+                {
+                    data = _banco.Venda.Min(c => c.Data);
+                }
+                return data;
             }
             catch (CustomException erro)
             {
@@ -38,13 +42,37 @@ namespace Controller.Repositorio
                 throw new Exception(erro.Message);
             }
         }
+
+        private int GetQuantidade()
+        {
+
+            try
+            {
+                InstanciarBanco();
+                return _banco.Venda.Count();
+            }
+            catch (CustomException error)
+            {
+                throw new CustomException(error.Message);
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error.Message);
+            }
+
+        }
+
         public DateTime GetMaximunDate()
         {
             try
             {
                 InstanciarBanco();
-                var venda = _banco.Venda.ToList().Max(c=>c.Data);
-                return venda;
+                var data = DateTime.Now;
+                if (this.GetQuantidade() > 0)
+                {
+                    data = _banco.Venda.ToList().Max(c => c.Data);
+                }
+                return data;
             }
             catch (CustomException erro)
             {

@@ -13,6 +13,12 @@ using View.UI.ViewProduto;
 using View.Enum;
 using View.UI;
 using View.UI.ViewAnomalias;
+using Model.Data;
+using Microsoft.Reporting.WebForms;
+using System.Text;
+using Mike.Utilities.Desktop;
+using Model.BO;
+using System.Linq;
 
 namespace View
 {
@@ -34,11 +40,8 @@ namespace View
 
         }
 
-        private void InstanciaCaixaRepositorio()
-        {
-            _caixaRepositorio = new CaixaRepositorio();
-        }
-
+        private void InstanciaCaixaRepositorio() => _caixaRepositorio = new CaixaRepositorio();
+        
         private void frmMenu_Load(object sender, EventArgs e)
         {
 
@@ -122,7 +125,6 @@ namespace View
 
         private int InserirDatasUnicas()
         {
-
             try
             {
 
@@ -142,17 +144,9 @@ namespace View
                 throw new Exception(erro.Message);
 
             }
-
-
         }
-
-        private void InstanciarKeyGenRepositorio()
-        {
-            _keyGenRepositorio = new KeyGenRepositorio();
-        }
-
-
-
+        private void InstanciarKeyGenRepositorio() => _keyGenRepositorio = new KeyGenRepositorio();
+        
         private void CarregarTextoDePermissao()
         {
             this.Text += ": " + Usuarios.PermissaoStatic + " | Data: " + DateTime.Now;
@@ -169,13 +163,8 @@ namespace View
                     menuUsuario.Visible = false;
                     menuEstoque.Visible = false;
                     break;
-
-
-
             }
         }
-
-
         private void AtribuirItensNoRodape(Usuarios _usuario)
         {
             try
@@ -194,32 +183,16 @@ namespace View
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
         }
+        private void InstanciarTipoPagamentoRepositorio() => _tipoPagamentoRepositorio = new TipoPagamentoRepositorio();
+       
+        private void InstanciarTipoCadastroRepositorio() => _tipoCadastroRepositorio = new TipoCadastroRepositorio();
+       
+        private void btnGerenciar_Click(object sender, EventArgs e) => OpenMdiForm.LoadNewKeepAnother(this, new frmGerenciarLogin());
 
-        private void InstanciarTipoPagamentoRepositorio()
-        {
-            _tipoPagamentoRepositorio = new TipoPagamentoRepositorio();
-        }
+        private void btnLogin_Click(object sender, EventArgs e) => OpenMdiForm.OpenAndCloseNoMdi(new frmLogin(), this);
+        
+        private void btnSair_Click(object sender, EventArgs e) => Sair();
 
-        private void InstanciarTipoCadastroRepositorio()
-        {
-            _tipoCadastroRepositorio = new TipoCadastroRepositorio();
-        }
-        private void btnGerenciar_Click(object sender, EventArgs e)
-        {
-            OpenMdiForm.LoadNewKeepAnother(this, new frmGerenciarLogin());
-        }
-
-
-
-        private void btnLogin_Click(object sender, EventArgs e)
-        {
-            OpenMdiForm.OpenAndCloseNoMdi(new frmLogin(), this);
-        }
-
-        private void btnSair_Click(object sender, EventArgs e)
-        {
-            Sair();
-        }
 
         private static void Sair()
         {
@@ -229,30 +202,18 @@ namespace View
             }
         }
 
-        private void btnGerenciarComanda_Click(object sender, EventArgs e)
-        {
-            OpenMdiForm.LoadNewKeepAnother(this, new frmGerenciarComanda(EnumComanda.Seleção));
-        }
-
-        private void btnGerenciarCategoria_Click(object sender, EventArgs e)
-        {
-            OpenMdiForm.LoadNewKeepAnother(this, new frmGerenciarCategoria());
-        }
-
-        private void btnGerenciarProduto_Click(object sender, EventArgs e)
-        {
-
-            OpenMdiForm.LoadNewKeepAnother(this, new frmGerenciarProduto());
-        }
-
+        private void btnGerenciarComanda_Click(object sender, EventArgs e) => OpenMdiForm.LoadNewKeepAnother(this, new frmGerenciarComanda(EnumComanda.Seleção));
+      
+        private void btnGerenciarCategoria_Click(object sender, EventArgs e) => OpenMdiForm.LoadNewKeepAnother(this, new frmGerenciarCategoria());
+      
+        private void btnGerenciarProduto_Click(object sender, EventArgs e) => OpenMdiForm.LoadNewKeepAnother(this, new frmGerenciarProduto());
+        
         private void btnPesuisarProduto_Click(object sender, EventArgs e)
         {
 
             try
             {
-
                 OpenMdiForm.LoadNewKeepAnother(this, new frmPesquisarProduto(EnumMovimentacao.Pesquisa));
-
             }
             catch (CustomException erro)
             {
@@ -265,45 +226,58 @@ namespace View
 
         }
 
-        private void btnGerenciarCliente_Click(object sender, EventArgs e)
-        {
-            OpenMdiForm.LoadNewKeepAnother(this, new frmGerenciarCliente());
-        }
-
-        private void btnGerenciarEstoque_Click(object sender, EventArgs e)
-        {
-            OpenMdiForm.LoadNewKeepAnother(this, new frmGerenciarEstoque());
-        }
-
-        private void btnCaixa_Click(object sender, EventArgs e)
-        {
-            OpenMdiForm.LoadNewKeepAnother(this, new frmCaixa());
-        }
-
-        private void btnMovimentacaoCaixa_Click(object sender, EventArgs e)
-        {
-            OpenMdiForm.LoadNewKeepAnother(this, new frmMovimentacaoVenda());
-        }
-
-        private void btnMovimentacaoCaixa_Click_1(object sender, EventArgs e)
-        {
-            OpenMdiForm.LoadNewKeepAnother(this, new frmMovimentacaoCaixa());
-        }
-
-        private void btnMovimentacaoProduto_Click(object sender, EventArgs e)
-        {
-            OpenMdiForm.LoadNewKeepAnother(this, new frmPesquisarProduto(EnumMovimentacao.Movimentacao));
-
-        }
-
+        private void btnGerenciarCliente_Click(object sender, EventArgs e) => OpenMdiForm.LoadNewKeepAnother(this, new frmGerenciarCliente());
+       
+        private void btnGerenciarEstoque_Click(object sender, EventArgs e) => OpenMdiForm.LoadNewKeepAnother(this, new frmGerenciarEstoque());
+      
+        private void btnCaixa_Click(object sender, EventArgs e) => OpenMdiForm.LoadNewKeepAnother(this, new frmCaixa());
+      
+        private void btnMovimentacaoCaixa_Click(object sender, EventArgs e) => OpenMdiForm.LoadNewKeepAnother(this, new frmMovimentacaoVenda());
+       
+        private void btnMovimentacaoCaixa_Click_1(object sender, EventArgs e) => OpenMdiForm.LoadNewKeepAnother(this, new frmMovimentacaoCaixa());
+       
+        private void btnMovimentacaoProduto_Click(object sender, EventArgs e) => OpenMdiForm.LoadNewKeepAnother(this, new frmPesquisarProduto(EnumMovimentacao.Movimentacao));
+        
         private void btnRelatorioCompra_Click(object sender, EventArgs e)
         {
-            //OpenMdiForm.LoadNewKeepAnother(this, new frmRelatorio());
+            try
+            {
+                ReportViewer reportViewer = new ReportViewer();
+                _DbContext banco = new _DbContext();
+                string fileName = "rpvCompras.rdlc";
+                /*Com query
+                MyReport report = new MyReport(db.Usuarios.ToList(), fileName.GetFullPath(), nameof(db.Usuarios),ProcessingMode.Local);
+                report.GerarRelatoriosComParametrosDefinidosNaQueryPDF();
+                string fileName = "teste2.rdlc";
+                MyReport report = new MyReport(fileName.GetFullPath());
+                report.GerarRelatoriosApenasComParametrosExcel(new System.Collections.Generic.List<ReportParameter>
+                {
+                     new ReportParameter("Nome",txtNome.Text)
+                });
+                StringBuilder str = new StringBuilder();
+                str.AppendLine("SELECT prod.CODIGO as Código, prod.NOME as Nome, cat.NOME as Categoria, prod.Quantidade as");
+                str.AppendLine(" Quantidade,  prod.QuantidadeMaxima - prod.Quantidade as Comprar");
+                str.AppendLine(" FROM PRODUTO as prod inner join CATEGORIA cat on cat.ID = prod.CATEGORIA");
+                str.AppendLine(" WHERE(prod.Quantidade < ((prod.QuantidadeMaxima + prod.QuantidadeMinima) / 2))");
+                var table = (banco.Database.SqlQuery<RelatorioComprasViewModel>(str.ToString())).ToList();
+                */
+                RelatorioCompraRepositorio relatorio = new RelatorioCompraRepositorio();
+                var table = relatorio.GerarRelatorioDeVendas();
+                MyReport report = new MyReport(table, fileName.GetFullPath(), "Compras", ProcessingMode.Local);
+                report.GerarRelatoriosComParametrosDefinidosNaQueryPDF();
+            }
+            catch (CustomException error)
+            {
+                DialogMessage.MessageFullComButtonOkIconeDeInformacao(message: error.Message, title: "Aviso");
+            }
+            catch (Exception error)
+            {
+                DialogMessage.MessageFullComButtonOkIconeDeInformacao(message: error.Message, title: "Aviso");
+            }
+
         }
 
-        private void btnAnomalias_Click(object sender, EventArgs e)
-        {
-            OpenMdiForm.LoadNewKeepAnother(this, new frmAnomalias());
-        }
+        private void btnAnomalias_Click(object sender, EventArgs e) => OpenMdiForm.LoadNewKeepAnother(this, new frmAnomalias());
+       
     }
 }

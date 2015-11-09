@@ -33,22 +33,6 @@ namespace Controller.Repositorio
 
             try
             {
-                //idAnomalia = 1;
-                //return (from ano in _Banco.Anomalias
-                //        join usu in _Banco.Usuarios
-                //        on ano.IDUsuario equals usu.ID
-                //        join com in _Banco.Comanda
-                //        on ano.IDComanda equals com.ID
-                //        where ano.Data == data
-                //        select new AnomaliasViewModel
-                //        {
-                //            ID = ano.ID,
-                //            Data = ano.Data,
-                //            Código = ano.IDComanda,
-                //            Usuário = usu.NomeCompleto,
-                //            Texto = ano.Texto,
-                //            Valor = ano.Valor
-                //        }).ToList();
                 return (from ano in _Banco.Anomalias
                         join usu in _Banco.Usuarios
                         on ano.IDUsuario equals usu.ID
@@ -63,7 +47,7 @@ namespace Controller.Repositorio
                             Usuário = usu.NomeCompleto,
                             Texto = ano.Texto,
                             Valor = ano.Valor
-                        }).Where(c=> data == null ? c.Data > DateTime.MinValue : c.Data == data ).ToList();
+                        }).Where(c => data == null ? c.Data > DateTime.MinValue : c.Data == data).ToList();
 
             }
             catch (CustomException error)
@@ -76,7 +60,7 @@ namespace Controller.Repositorio
             }
 
         }
-       
+
         public int Salvar(Anomalias anomalias)
         {
             try
@@ -87,14 +71,20 @@ namespace Controller.Repositorio
             catch (CustomException erro) { throw new CustomException(erro.Message); }
             catch (Exception erro) { throw new Exception(erro.Message); }
         }
-        private int SalvarMudancas() => _Banco.SaveChanges();      
+        private int SalvarMudancas() => _Banco.SaveChanges();
 
         public DateTime GetMaximunDate()
         {
 
             try
             {
-               return _Banco.Anomalias.Max(c=>c.Data);
+                var data = DateTime.Now;
+                if (this.GetQuantidade() > 0)
+                {
+                    data =  _Banco.Anomalias.Max(c => c.Data);
+
+                }
+                return data;
             }
             catch (CustomException error)
             {
@@ -112,7 +102,12 @@ namespace Controller.Repositorio
 
             try
             {
-              return  _Banco.Anomalias.Min(c => c.Data);
+                var data = DateTime.Now;
+                if (this.GetQuantidade() > 0)
+                {
+                    data = _Banco.Anomalias.Min(c => c.Data);
+                }
+                return data;
             }
             catch (CustomException error)
             {
@@ -127,6 +122,24 @@ namespace Controller.Repositorio
         public void Dispose()
         {
             _Banco.Dispose();
+        }
+
+        public Anomalias GetByID(int id)
+        {
+
+            try
+            {
+                return _Banco.Anomalias.Find(id);
+            }
+            catch (CustomException error)
+            {
+                throw new CustomException(error.Message);
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error.Message);
+            }
+
         }
     }
 }

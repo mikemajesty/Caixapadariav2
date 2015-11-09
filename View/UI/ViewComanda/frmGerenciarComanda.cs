@@ -85,7 +85,9 @@ namespace View.UI.ViewComanda
                     MudarLocationDoGrid(btn: dgvComanda, location: new Point(9, 19));
                     CarregarGridComanda();
                     EsconderTxt(txt: txtPesquisar);
+
                 }
+                dgvComanda.PadronizarGrid();
             }
             catch (CustomException erro)
             {
@@ -236,7 +238,7 @@ namespace View.UI.ViewComanda
                             IDUsuario = Usuarios.IDStatic,
                             Valor = GetvalorDaComanda(),
 
-                        })) == DialogResult.Yes)
+                        },EnumAnomalia.Criar)) == DialogResult.Yes)
                         {
                             InstanciarVendaComComandaAtivaRepositorio();
                             int resultado = _vendaComComandaAtivaRepositorio.DeletaItensDaComandaPorCodigo(dgvComanda.CurrentRow.Cells["Código"].Value.ToString());
@@ -341,7 +343,7 @@ namespace View.UI.ViewComanda
 
                 _comandaRepositorio.Listar(dgv: dgvComanda);
                 AjustarTamanhoDoGrid(_enumComanda);
-
+                
             }
             catch (CustomException erro)
             {

@@ -42,7 +42,11 @@ namespace Controller.Repositorio
             try
             {
                 InstanciarBanco();
-                var date  = _banco.MovimentacaoCaixa.Min(c => c.Data);
+                var date = DateTime.Now;
+                if (this.GetQuantidade() > 0)
+                {
+                    date = _banco.MovimentacaoCaixa.Min(c => c.Data);
+                }               
                 return date;
             }
             catch (CustomException erro)
@@ -60,7 +64,11 @@ namespace Controller.Repositorio
             try
             {
                 InstanciarBanco();
-                var date = _banco.MovimentacaoCaixa.Max(c => c.Data);
+                var date = DateTime.Now;
+                if (this.GetQuantidade() > 0)
+                {
+                   date = _banco.MovimentacaoCaixa.Max(c => c.Data);
+                }
                 return date;
             }
             catch (CustomException erro)

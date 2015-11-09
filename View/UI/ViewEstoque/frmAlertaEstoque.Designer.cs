@@ -112,7 +112,7 @@
             this.dgvAvisosEstoque.Name = "dgvAvisosEstoque";
             this.dgvAvisosEstoque.ReadOnly = true;
             this.dgvAvisosEstoque.RowHeadersVisible = false;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dgvAvisosEstoque.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvAvisosEstoque.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvAvisosEstoque.Size = new System.Drawing.Size(323, 149);

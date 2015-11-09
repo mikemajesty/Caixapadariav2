@@ -68,6 +68,7 @@ namespace View.UI.ViewProduto
             {
 
                 _produtoRepositorio.Listar(dgv: dgvProdutos);
+                dgvProdutos.PadronizarGrid();
                 dgvProdutos.AjustartamanhoDoDataGridView(new List<TamanhoGrid> {
                 new TamanhoGrid() { Tamanho = -1, ColunaNome="ID"} ,
                 new TamanhoGrid() { Tamanho = 135, ColunaNome = "Código" },

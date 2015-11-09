@@ -65,6 +65,7 @@
     <Compile Include="Repositorio\MovimentacaoProdutoRepositorio.cs" />
     <Compile Include="Repositorio\PermissaoRepositorio.cs" />
     <Compile Include="Repositorio\ProdutoRepositorio.cs" />
+    <Compile Include="Repositorio\RelatorioCompraRepositorio.cs" />
     <Compile Include="Repositorio\TipoCadastroRepositorio.cs" />
     <Compile Include="Repositorio\TipoPagamentoRepositorio.cs" />
     <Compile Include="Repositorio\UsuarioRepositorio.cs" />

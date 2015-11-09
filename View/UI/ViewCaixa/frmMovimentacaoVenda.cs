@@ -106,6 +106,7 @@ namespace View.UI.ViewCaixa
                                    new TamanhoGrid(){ ColunaNome = "Tipo_Pagamento", Tamanho = 170}
                 });
                 ExibirLucroTotalVendido();
+                dgvMovimentacao.PadronizarGrid();
             }
             catch (CustomException erro)
             {

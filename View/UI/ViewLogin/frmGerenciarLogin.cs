@@ -36,6 +36,7 @@ namespace View.UI.ViewLogin
                 this.FocoNoTxt(txt:txtPesquisar);
                 InstanciaUsuarioRepositorio();
                 _usuarioRepositorio.Listar(dgvUsuarios);
+                dgvUsuarios.PadronizarGrid();
                 CarregarTextoDePermissao();
             }
             catch (CustomException erro)
