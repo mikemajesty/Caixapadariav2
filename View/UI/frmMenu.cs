@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
 using Mike.Utilities.Desktop;
-using Controller.Repositorio;
 using Model.Entidades;
 using View.UI.ViewKeyGen;
 using View.UI.ViewCaixa;
@@ -19,6 +18,8 @@ using System.Text;
 using Mike.Utilities.Desktop;
 using Model.BO;
 using System.Linq;
+using System.Drawing;
+using Controller.Repositorio;
 
 namespace View
 {
@@ -29,6 +30,8 @@ namespace View
         private Usuarios _usuario;
         private KeyGenRepositorio _keyGenRepositorio;
         private CaixaRepositorio _caixaRepositorio;
+        private Espere espere;
+        private frmMensagemDeEspera frmEspera;
         public frmMenu()
         {
 
@@ -85,6 +88,7 @@ namespace View
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -118,6 +122,7 @@ namespace View
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
@@ -180,17 +185,49 @@ namespace View
             }
             catch (Exception erro)
             {
+                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
         }
         private void InstanciarTipoPagamentoRepositorio() => _tipoPagamentoRepositorio = new TipoPagamentoRepositorio();
        
-        private void InstanciarTipoCadastroRepositorio() => _tipoCadastroRepositorio = new TipoCadastroRepositorio();
-       
-        private void btnGerenciar_Click(object sender, EventArgs e) => OpenMdiForm.LoadNewKeepAnother(this, new frmGerenciarLogin());
+        private void InstanciarTipoCadastroRepositorio() { _tipoCadastroRepositorio = new TipoCadastroRepositorio();
+            }
+        private void btnGerenciar_Click(object sender, EventArgs e)
+        {
+            
 
-        private void btnLogin_Click(object sender, EventArgs e) => OpenMdiForm.OpenAndCloseNoMdi(new frmLogin(), this);
-        
+            try
+            {
+                OpenMdiForm.LoadNewKeepAnother(this, new frmGerenciarLogin());
+            }
+            catch (CustomException error)
+            {
+                DialogMessage.MessageFullComButtonOkIconeDeInformacao(error.Message, "Aviso");
+            }
+            catch (Exception error)
+            {
+                SaveErroInTxt.RecordInTxt(error, this.GetType().Name);
+                DialogMessage.MessageComButtonOkIconeErro(error.Message, "Erro");
+            }
+        }
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+           
+            try
+            {
+                OpenMdiForm.OpenAndCloseNoMdi(new frmLogin(), this);
+            }
+            catch (CustomException error)
+            {
+                DialogMessage.MessageFullComButtonOkIconeDeInformacao(error.Message, "Aviso");
+            }
+            catch (Exception error)
+            {
+                SaveErroInTxt.RecordInTxt(error, this.GetType().Name);
+                DialogMessage.MessageComButtonOkIconeErro(error.Message, "Erro");
+            }
+        }
         private void btnSair_Click(object sender, EventArgs e) => Sair();
 
 
@@ -202,12 +239,56 @@ namespace View
             }
         }
 
-        private void btnGerenciarComanda_Click(object sender, EventArgs e) => OpenMdiForm.LoadNewKeepAnother(this, new frmGerenciarComanda(EnumComanda.Seleção));
-      
-        private void btnGerenciarCategoria_Click(object sender, EventArgs e) => OpenMdiForm.LoadNewKeepAnother(this, new frmGerenciarCategoria());
-      
-        private void btnGerenciarProduto_Click(object sender, EventArgs e) => OpenMdiForm.LoadNewKeepAnother(this, new frmGerenciarProduto());
-        
+        private void btnGerenciarComanda_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                OpenMdiForm.LoadNewKeepAnother(this, new frmGerenciarComanda(EnumComanda.Seleção));
+            }
+            catch (CustomException error)
+            {
+                DialogMessage.MessageFullComButtonOkIconeDeInformacao(error.Message, "Aviso");
+            }
+            catch (Exception error)
+            {
+                SaveErroInTxt.RecordInTxt(error, this.GetType().Name);
+                DialogMessage.MessageComButtonOkIconeErro(error.Message, "Erro");
+            }
+           
+        }
+        private void btnGerenciarCategoria_Click(object sender, EventArgs e)
+        {          
+            try
+            {
+                OpenMdiForm.LoadNewKeepAnother(this, new frmGerenciarCategoria());
+            }
+            catch (CustomException error)
+            {
+                DialogMessage.MessageFullComButtonOkIconeDeInformacao(error.Message, "Aviso");
+            }
+            catch (Exception error)
+            {
+                SaveErroInTxt.RecordInTxt(error, this.GetType().Name);
+                DialogMessage.MessageComButtonOkIconeErro(error.Message, "Erro");
+            }
+        }
+        private void btnGerenciarProduto_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                OpenMdiForm.LoadNewKeepAnother(this, new frmGerenciarProduto());
+            }
+            catch (CustomException error)
+            {
+                DialogMessage.MessageFullComButtonOkIconeDeInformacao(error.Message, "Aviso");
+            }
+            catch (Exception error)
+            {
+                SaveErroInTxt.RecordInTxt(error, this.GetType().Name);
+                DialogMessage.MessageComButtonOkIconeErro(error.Message, "Erro");
+            }
+           
+        }
         private void btnPesuisarProduto_Click(object sender, EventArgs e)
         {
 
@@ -215,56 +296,23 @@ namespace View
             {
                 OpenMdiForm.LoadNewKeepAnother(this, new frmPesquisarProduto(EnumMovimentacao.Pesquisa));
             }
-            catch (CustomException erro)
+            catch (CustomException error)
             {
-                DialogMessage.MessageFullComButtonOkIconeDeInformacao(erro.Message, "Aviso");
+                DialogMessage.MessageFullComButtonOkIconeDeInformacao(error.Message, "Aviso");
             }
-            catch (Exception erro)
+            catch (Exception error)
             {
-                DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
+                SaveErroInTxt.RecordInTxt(error, this.GetType().Name);
+                DialogMessage.MessageComButtonOkIconeErro(error.Message, "Erro");
             }
 
         }
 
-        private void btnGerenciarCliente_Click(object sender, EventArgs e) => OpenMdiForm.LoadNewKeepAnother(this, new frmGerenciarCliente());
-       
-        private void btnGerenciarEstoque_Click(object sender, EventArgs e) => OpenMdiForm.LoadNewKeepAnother(this, new frmGerenciarEstoque());
-      
-        private void btnCaixa_Click(object sender, EventArgs e) => OpenMdiForm.LoadNewKeepAnother(this, new frmCaixa());
-      
-        private void btnMovimentacaoCaixa_Click(object sender, EventArgs e) => OpenMdiForm.LoadNewKeepAnother(this, new frmMovimentacaoVenda());
-       
-        private void btnMovimentacaoCaixa_Click_1(object sender, EventArgs e) => OpenMdiForm.LoadNewKeepAnother(this, new frmMovimentacaoCaixa());
-       
-        private void btnMovimentacaoProduto_Click(object sender, EventArgs e) => OpenMdiForm.LoadNewKeepAnother(this, new frmPesquisarProduto(EnumMovimentacao.Movimentacao));
-        
-        private void btnRelatorioCompra_Click(object sender, EventArgs e)
+        private void btnGerenciarCliente_Click(object sender, EventArgs e)
         {
             try
             {
-                ReportViewer reportViewer = new ReportViewer();
-                _DbContext banco = new _DbContext();
-                string fileName = "rpvCompras.rdlc";
-                /*Com query
-                MyReport report = new MyReport(db.Usuarios.ToList(), fileName.GetFullPath(), nameof(db.Usuarios),ProcessingMode.Local);
-                report.GerarRelatoriosComParametrosDefinidosNaQueryPDF();
-                string fileName = "teste2.rdlc";
-                MyReport report = new MyReport(fileName.GetFullPath());
-                report.GerarRelatoriosApenasComParametrosExcel(new System.Collections.Generic.List<ReportParameter>
-                {
-                     new ReportParameter("Nome",txtNome.Text)
-                });
-                StringBuilder str = new StringBuilder();
-                str.AppendLine("SELECT prod.CODIGO as Código, prod.NOME as Nome, cat.NOME as Categoria, prod.Quantidade as");
-                str.AppendLine(" Quantidade,  prod.QuantidadeMaxima - prod.Quantidade as Comprar");
-                str.AppendLine(" FROM PRODUTO as prod inner join CATEGORIA cat on cat.ID = prod.CATEGORIA");
-                str.AppendLine(" WHERE(prod.Quantidade < ((prod.QuantidadeMaxima + prod.QuantidadeMinima) / 2))");
-                var table = (banco.Database.SqlQuery<RelatorioComprasViewModel>(str.ToString())).ToList();
-                */
-                RelatorioCompraRepositorio relatorio = new RelatorioCompraRepositorio();
-                var table = relatorio.GerarRelatorioDeVendas();
-                MyReport report = new MyReport(table, fileName.GetFullPath(), "Compras", ProcessingMode.Local);
-                report.GerarRelatoriosComParametrosDefinidosNaQueryPDF();
+                OpenMdiForm.LoadNewKeepAnother(this, new frmGerenciarCliente());
             }
             catch (CustomException error)
             {
@@ -272,12 +320,172 @@ namespace View
             }
             catch (Exception error)
             {
+                SaveErroInTxt.RecordInTxt(error, this.GetType().Name);
+                DialogMessage.MessageFullComButtonOkIconeDeInformacao(message: error.Message, title: "Aviso");
+            }
+           
+        }
+        private void btnGerenciarEstoque_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                OpenMdiForm.LoadNewKeepAnother(this, new frmGerenciarEstoque());
+            }
+            catch (CustomException error)
+            {
+                DialogMessage.MessageFullComButtonOkIconeDeInformacao(message: error.Message, title: "Aviso");
+            }
+            catch (Exception error)
+            {
+                SaveErroInTxt.RecordInTxt(error, this.GetType().Name);
                 DialogMessage.MessageFullComButtonOkIconeDeInformacao(message: error.Message, title: "Aviso");
             }
 
+            
         }
 
-        private void btnAnomalias_Click(object sender, EventArgs e) => OpenMdiForm.LoadNewKeepAnother(this, new frmAnomalias());
-       
+        private void btnCaixa_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                OpenMdiForm.LoadNewKeepAnother(this, new frmCaixa());
+            }
+            catch (CustomException error)
+            {
+                DialogMessage.MessageFullComButtonOkIconeDeInformacao(message: error.Message, title: "Aviso");
+            }
+            catch (Exception error)
+            {
+                SaveErroInTxt.RecordInTxt(error, this.GetType().Name);
+                DialogMessage.MessageFullComButtonOkIconeDeInformacao(message: error.Message, title: "Aviso");
+            }
+           
+        }
+        private void btnMovimentacaoCaixa_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                OpenMdiForm.LoadNewKeepAnother(this, new frmMovimentacaoVenda());
+            }
+            catch (CustomException error)
+            {
+                DialogMessage.MessageFullComButtonOkIconeDeInformacao(message: error.Message, title: "Aviso");
+            }
+            catch (Exception error)
+            {
+                SaveErroInTxt.RecordInTxt(error, this.GetType().Name);
+                DialogMessage.MessageFullComButtonOkIconeDeInformacao(message: error.Message, title: "Aviso");
+            }
+            
+        }
+        private void btnMovimentacaoCaixa_Click_1(object sender, EventArgs e)
+        {
+
+            try
+            {
+                OpenMdiForm.LoadNewKeepAnother(this, new frmMovimentacaoCaixa());
+            }
+              catch (CustomException error)
+            {
+                DialogMessage.MessageFullComButtonOkIconeDeInformacao(message: error.Message, title: "Aviso");
+            }
+            catch (Exception error)
+            {
+                SaveErroInTxt.RecordInTxt(error, this.GetType().Name);
+                DialogMessage.MessageFullComButtonOkIconeDeInformacao(message: error.Message, title: "Aviso");
+            }
+
+           
+        }
+        private void btnMovimentacaoProduto_Click(object sender, EventArgs e)
+        {
+
+            try
+            {
+                OpenMdiForm.LoadNewKeepAnother(this, new frmPesquisarProduto(EnumMovimentacao.Movimentacao));
+            }
+            catch (CustomException error)
+            {
+                DialogMessage.MessageFullComButtonOkIconeDeInformacao(message: error.Message, title: "Aviso");
+            }
+            catch (Exception error)
+            {
+                SaveErroInTxt.RecordInTxt(error, this.GetType().Name);
+                DialogMessage.MessageFullComButtonOkIconeDeInformacao(message: error.Message, title: "Aviso");
+            }
+
+
+         
+        }
+        private void btnRelatorioCompra_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                espere = new Espere();
+                espere.Start(MostrarMensagemEspera);
+                ReportViewer reportViewer = new ReportViewer();
+                _DbContext banco = new _DbContext();
+                string fileName = "rpvCompras.rdlc";
+                RelatorioCompraRepositorio relatorio = new RelatorioCompraRepositorio();
+                var table = relatorio.GerarRelatorioDeVendas();
+                MyReport report = new MyReport(table, fileName.GetFullPath(), "Compras", ProcessingMode.Local);
+                report.GerarRelatoriosComParametrosDefinidosNaQueryPDF();
+                espere.CancelarTask();
+                if (espere.Cancel.IsCancellationRequested)
+                {
+                    if (frmEspera != null)
+                    {
+                        frmEspera.Close();
+                    }
+                   
+                }
+            }
+            catch (CustomException error)
+            {
+                DialogMessage.MessageFullComButtonOkIconeDeInformacao(message: error.Message, title: "Aviso");
+            }
+            catch (Exception error)
+            {
+                SaveErroInTxt.RecordInTxt(error, this.GetType().Name);
+                DialogMessage.MessageFullComButtonOkIconeDeInformacao(message: error.Message, title: "Aviso");
+            }
+            finally
+            {
+                espere.CancelarTask();
+                if (espere.Cancel.IsCancellationRequested)
+                {
+                    if (frmEspera != null)
+                    {
+                        frmEspera.Close();
+                    }
+
+                }
+            }
+        }
+
+        private void MostrarMensagemEspera()
+        {
+            frmEspera = new frmMensagemDeEspera();
+            frmEspera.ShowDialog();
+           
+        }
+
+        private void btnAnomalias_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                OpenMdiForm.LoadNewKeepAnother(this, new frmAnomalias());
+            }
+            catch (CustomException error)
+            {
+                DialogMessage.MessageFullComButtonOkIconeDeInformacao(message: error.Message, title: "Aviso");
+            }
+            catch (Exception error)
+            {
+                SaveErroInTxt.RecordInTxt(error, this.GetType().Name);
+                DialogMessage.MessageFullComButtonOkIconeDeInformacao(message: error.Message, title: "Aviso");
+            }
+           
+        }
     }
 }

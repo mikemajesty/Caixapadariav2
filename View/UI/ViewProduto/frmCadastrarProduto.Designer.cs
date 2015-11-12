@@ -346,10 +346,10 @@
             // txtQtdMaxima
             // 
             this.txtQtdMaxima.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtQtdMaxima.Location = new System.Drawing.Point(582, 39);
+            this.txtQtdMaxima.Location = new System.Drawing.Point(582, 41);
             this.txtQtdMaxima.MaxLength = 20;
             this.txtQtdMaxima.Name = "txtQtdMaxima";
-            this.txtQtdMaxima.Size = new System.Drawing.Size(69, 29);
+            this.txtQtdMaxima.Size = new System.Drawing.Size(58, 29);
             this.txtQtdMaxima.TabIndex = 9;
             this.txtQtdMaxima.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtQtdMaxima.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtQtdMaxima_KeyPress);
@@ -357,10 +357,10 @@
             // txtQtdMinima
             // 
             this.txtQtdMinima.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtQtdMinima.Location = new System.Drawing.Point(338, 39);
+            this.txtQtdMinima.Location = new System.Drawing.Point(359, 41);
             this.txtQtdMinima.MaxLength = 20;
             this.txtQtdMinima.Name = "txtQtdMinima";
-            this.txtQtdMinima.Size = new System.Drawing.Size(69, 29);
+            this.txtQtdMinima.Size = new System.Drawing.Size(58, 29);
             this.txtQtdMinima.TabIndex = 8;
             this.txtQtdMinima.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtQtdMinima.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtQtdMinima_KeyPress);
@@ -368,10 +368,10 @@
             // txtEstoque
             // 
             this.txtEstoque.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEstoque.Location = new System.Drawing.Point(91, 39);
+            this.txtEstoque.Location = new System.Drawing.Point(146, 41);
             this.txtEstoque.MaxLength = 20;
             this.txtEstoque.Name = "txtEstoque";
-            this.txtEstoque.Size = new System.Drawing.Size(69, 29);
+            this.txtEstoque.Size = new System.Drawing.Size(58, 29);
             this.txtEstoque.TabIndex = 7;
             this.txtEstoque.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtEstoque.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtEstoque_KeyPress);
@@ -380,17 +380,17 @@
             // 
             this.lblQuantidadeMaxima.AutoSize = true;
             this.lblQuantidadeMaxima.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblQuantidadeMaxima.Location = new System.Drawing.Point(435, 42);
+            this.lblQuantidadeMaxima.Location = new System.Drawing.Point(424, 42);
             this.lblQuantidadeMaxima.Name = "lblQuantidadeMaxima";
-            this.lblQuantidadeMaxima.Size = new System.Drawing.Size(150, 23);
+            this.lblQuantidadeMaxima.Size = new System.Drawing.Size(156, 23);
             this.lblQuantidadeMaxima.TabIndex = 2;
-            this.lblQuantidadeMaxima.Text = "Quantidade Máxima";
+            this.lblQuantidadeMaxima.Text = "Quantidade Aceitável";
             // 
             // lblQuantidadeMinima
             // 
             this.lblQuantidadeMinima.AutoSize = true;
             this.lblQuantidadeMinima.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblQuantidadeMinima.Location = new System.Drawing.Point(189, 42);
+            this.lblQuantidadeMinima.Location = new System.Drawing.Point(211, 42);
             this.lblQuantidadeMinima.Name = "lblQuantidadeMinima";
             this.lblQuantidadeMinima.Size = new System.Drawing.Size(145, 23);
             this.lblQuantidadeMinima.TabIndex = 2;
@@ -400,11 +400,11 @@
             // 
             this.lblEstoque.AutoSize = true;
             this.lblEstoque.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEstoque.Location = new System.Drawing.Point(10, 42);
+            this.lblEstoque.Location = new System.Drawing.Point(14, 42);
             this.lblEstoque.Name = "lblEstoque";
-            this.lblEstoque.Size = new System.Drawing.Size(67, 23);
+            this.lblEstoque.Size = new System.Drawing.Size(129, 23);
             this.lblEstoque.TabIndex = 2;
-            this.lblEstoque.Text = "Estoque";
+            this.lblEstoque.Text = "Quantidade Atual";
             // 
             // gpbTipoCadastro
             // 

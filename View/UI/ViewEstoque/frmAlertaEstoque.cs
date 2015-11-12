@@ -1,5 +1,4 @@
-﻿using Controller.Repositorio;
-using Model.Entidades;
+﻿using Model.Entidades;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -7,6 +6,7 @@ using System.Linq;
 using System.Windows.Forms;
 using Mike.Utilities.Desktop;
 using Model.BO;
+using Controller.Repositorio;
 
 namespace View.UI.ViewEstoque
 {

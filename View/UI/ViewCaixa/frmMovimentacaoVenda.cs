@@ -1,8 +1,8 @@
-﻿using Controller.Repositorio;
-using Mike.Utilities.Desktop;
+﻿using Mike.Utilities.Desktop;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using Controller.Repositorio;
 
 namespace View.UI.ViewCaixa
 {

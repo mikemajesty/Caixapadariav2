@@ -1083,6 +1083,7 @@ namespace View.UI.ViewProduto
                 if (OpenMdiForm.OpenForWithShowDialog(new frmCadastrarCategoria(new Categoria(), EnumTipoOperacao.Salvar)) == DialogResult.Yes)
                 {
                     CarregarCategoriaComSelecao();
+                    FocarNoTxt(txtDescricao);
                 }
 
             }

@@ -1,8 +1,7 @@
 ﻿using Mike.Utilities.Desktop;
-
 namespace Model.Entidades
 {
-     public class Cliente
+    public class Cliente
     {
         private int _id;
 
@@ -27,7 +26,7 @@ namespace Model.Entidades
         public string Nome
         {
             get { return _nome; }
-            set 
+            set
             {
                 if (value.Length == 0)
                 {
@@ -39,19 +38,22 @@ namespace Model.Entidades
                 }
                 else
                 {
-                    _nome = value; 
+                    _nome = value;
                 }
-              
+
             }
         }
         private string _cpf;
-
         public string CPF
         {
             get { return _cpf; }
-            set 
+            set
             {
-                if (value.Length == 0)
+                if (!value.ValidarCPF())
+                {
+                    MyErro.MyCustomException("CPF inválido.");
+                }
+                else if (value.Length == 0)
                 {
                     MyErro.MyCustomException("CPF não pode ser vazio.");
                 }
@@ -65,9 +67,9 @@ namespace Model.Entidades
                 }
                 else
                 {
-                    _cpf = value; 
+                    _cpf = value;
                 }
-               
+
             }
         }
         private string _celular;
@@ -75,7 +77,7 @@ namespace Model.Entidades
         public string Celular
         {
             get { return _celular; }
-            set 
+            set
             {
                 if (value.Length == 0)
                 {
@@ -93,12 +95,11 @@ namespace Model.Entidades
                 {
                     _celular = value;
                 }
-              
+
             }
         }
-
-
         public static int ClienteIDStatic { get; set; }
-      
+
     }
+
 }

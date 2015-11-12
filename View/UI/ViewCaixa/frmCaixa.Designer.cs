@@ -72,6 +72,7 @@
             this.btnCalculadora = new System.Windows.Forms.ToolStripMenuItem();
             this.tlp = new System.Windows.Forms.ToolTip(this.components);
             this.timer = new System.Windows.Forms.Timer(this.components);
+            this.btnLimparVenda = new System.Windows.Forms.ToolStripMenuItem();
             this.gpbCodigoDaComanda.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ptbCodigo)).BeginInit();
             this.gpbCodigoDoProduto.SuspendLayout();
@@ -177,6 +178,7 @@
             this.txtCodigoDoProduto.TabIndex = 3;
             this.txtCodigoDoProduto.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tlp.SetToolTip(this.txtCodigoDoProduto, "Digite o código de barra do produto");
+            this.txtCodigoDoProduto.TextChanged += new System.EventHandler(this.txtCodigoDoProduto_TextChanged);
             this.txtCodigoDoProduto.DoubleClick += new System.EventHandler(this.txtCodigoDoProduto_DoubleClick);
             this.txtCodigoDoProduto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCodigoDoProduto_KeyPress);
             // 
@@ -488,7 +490,7 @@
             this.btnCalculadora});
             this.MenuCaixa.Location = new System.Drawing.Point(0, 0);
             this.MenuCaixa.Name = "MenuCaixa";
-            this.MenuCaixa.Size = new System.Drawing.Size(881, 35);
+            this.MenuCaixa.Size = new System.Drawing.Size(882, 35);
             this.MenuCaixa.TabIndex = 14;
             this.MenuCaixa.TabStop = true;
             this.MenuCaixa.Text = "Menu";
@@ -503,6 +505,7 @@
             this.btnDividirComanda,
             this.btnAbrirCaixa,
             this.btnFecharCaixa,
+            this.btnLimparVenda,
             this.btnSairDoMenu});
             this.btnOperacoes.Font = new System.Drawing.Font("Arial Black", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnOperacoes.Margin = new System.Windows.Forms.Padding(0, 0, 10, 0);
@@ -569,12 +572,19 @@
             this.timer.Interval = 1000;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
+            // btnLimparVenda
+            // 
+            this.btnLimparVenda.Name = "btnLimparVenda";
+            this.btnLimparVenda.Size = new System.Drawing.Size(229, 22);
+            this.btnLimparVenda.Text = "Limpar Venda";
+            this.btnLimparVenda.Click += new System.EventHandler(this.btnLimparVenda_Click);
+            // 
             // frmCaixa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(881, 527);
+            this.ClientSize = new System.Drawing.Size(882, 507);
             this.Controls.Add(this.ckbPorPeso);
             this.Controls.Add(this.MenuCaixa);
             this.Controls.Add(this.ltvProdutos);
@@ -670,5 +680,6 @@
         private System.Windows.Forms.Label lblF3;
         private System.Windows.Forms.Label lblF5;
         private System.Windows.Forms.Label lblF6;
+        private System.Windows.Forms.ToolStripMenuItem btnLimparVenda;
     }
 }

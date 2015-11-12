@@ -69,6 +69,7 @@ namespace Controller.Repositorio
         {
             try
             {
+               
                 InstanciarKeyGenBO();
                 int retorno = 0;
                 if (_keyGenBo.VerificaSeExisteDatas(datas) == null)
