@@ -287,7 +287,7 @@
             // 
             this.btnRelatorioCompra.Name = "btnRelatorioCompra";
             this.btnRelatorioCompra.Size = new System.Drawing.Size(152, 22);
-            this.btnRelatorioCompra.Text = "Comprar";
+            this.btnRelatorioCompra.Text = "Compras";
             this.btnRelatorioCompra.Click += new System.EventHandler(this.btnRelatorioCompra_Click);
             // 
             // btnSair

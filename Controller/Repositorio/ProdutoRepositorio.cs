@@ -84,14 +84,14 @@ namespace Controller.Repositorio
                 dgv.DataSource = (from prod in _banco.Produto
                                   join cat in _banco.Categoria on prod.Categoria equals cat.ID
                                   select new
-                                      {
-                                          ID = prod.ID,
-                                          Código = prod.Codigo,
-                                          Nome = prod.Nome,
-                                          Categoria = cat.Nome,
-                                          Preço = prod.PrecoVenda,
-                                          Estoque = prod.GerenciarEstoque
-                                      }).OrderBy(c => c.Nome).ToList();
+                                  {
+                                      ID = prod.ID,
+                                      Código = prod.Codigo,
+                                      Nome = prod.Nome,
+                                      Categoria = cat.Nome,
+                                      Preço = prod.PrecoVenda,
+                                      Estoque = prod.GerenciarEstoque
+                                  }).OrderBy(c => c.Nome).ToList();
                 dgv.EsconderColuna("ID");
 
             }
@@ -163,7 +163,7 @@ namespace Controller.Repositorio
                         _banco.Entry(produto).State = EntityState.Deleted;
                         retorno = _banco.SaveChanges() == Sucesso ? Sucesso : Insucesso;
                     }
-                  
+
                 }
                 return retorno;
 
@@ -394,15 +394,7 @@ namespace Controller.Repositorio
                 {
                     listView = new ListViewItem(item.Nome);
                     listView.SubItems.Add(item.Codigo);
-                    object itemQtd = item.Quantidade;
-                    if (itemQtd.ToString().Contains("Peso"))
-                    {
-                        listView.SubItems.Add("Peso");
-                    }
-                    else
-                    {
-                        listView.SubItems.Add("" + item.Quantidade);
-                    }
+                    listView.SubItems.Add("" + item.Quantidade);
                     listView.SubItems.Add(item.Total.ToString("N2"));
                     listView.SubItems.Add(item.LucroTotal.ToString("N2"));
                     ltv.Items.Add(listView);
@@ -494,7 +486,7 @@ namespace Controller.Repositorio
                 InstanciarTipoCadastroRepositorio();
                 int IDTipoPeso = _tipoCadastroRepositorio.GetIDPeloNome("Peso");
                 Produto produto = this.GetProdutoPorCodigoPorPeso(codigo);
-
+                string pesoTemp = peso <= 99 ? "0,0" + peso + " Kg" : peso <= 999 ? "0," + peso + " Kg" : peso <= 9999 ? peso.ToString().Insert(1, ",") + " Kg" : peso >= 10000 ? peso.ToString().Insert(2, ",") + " Kg" : "" + peso + " Kg";
                 if (produto != null)
                 {
                     IQueryable<dynamic> _venda = null;
@@ -508,7 +500,7 @@ namespace Controller.Repositorio
                                       ,
                                       Codigo = prod.Codigo
                                       ,
-                                      Quantidade = "Peso"
+                                      Quantidade = pesoTemp
                                       ,
                                       Total = (prod.PrecoVenda / 1000) * peso
                                       ,

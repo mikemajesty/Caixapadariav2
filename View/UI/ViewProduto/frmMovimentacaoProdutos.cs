@@ -47,8 +47,8 @@ namespace View.UI.ViewProduto
                     {
                         new TamanhoGrid(){ ColunaNome="Código", Tamanho = 131},
                         new TamanhoGrid(){ ColunaNome="Nome", Tamanho = 200},
-                        new TamanhoGrid(){ ColunaNome="Quantidade", Tamanho = 100},
-                        new TamanhoGrid(){ ColunaNome="Total", Tamanho = 100},
+                        new TamanhoGrid(){ ColunaNome="Quantidade", Tamanho = 120},
+                        new TamanhoGrid(){ ColunaNome="Total", Tamanho = 80},
                     });
                 dgvProdutos.PadronizarGrid();
                 FocarNoBotao(btn: btnTodos);
