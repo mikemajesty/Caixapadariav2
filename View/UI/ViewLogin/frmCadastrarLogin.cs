@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 using Mike.Utilities.Desktop;
+using Controller.Repositorio;
 using Model.Entidades;
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
@@ -9,7 +10,6 @@ using View.Enum;
 using Model.BO;
 using System.Linq;
 using View.UI.ViewCaixa;
-using Controller.Repositorio;
 
 namespace View.UI.ViewLogin
 {

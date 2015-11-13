@@ -1,10 +1,10 @@
-﻿using Mike.Utilities.Desktop;
+﻿using Controller.Repositorio;
+using Mike.Utilities.Desktop;
 using Model.Entidades;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
 using View.Enum;
-using Controller.Repositorio;
 
 namespace View.UI.ViewCetegoria
 {

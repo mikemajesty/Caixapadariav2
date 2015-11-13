@@ -1,4 +1,6 @@
-﻿using Mike.Utilities.Desktop;
+﻿using Controller.Enum;
+using Controller.Repositorio;
+using Mike.Utilities.Desktop;
 using Model.Entidades;
 using System;
 using System.Collections.Generic;
@@ -7,8 +9,6 @@ using View.Enum;
 using View.UI.ViewComanda;
 using View.UI.ViewEstoque;
 using View.UI.ViewProduto;
-using Controller.Repositorio;
-using Controller.Enum;
 
 namespace View.UI.ViewCaixa
 {
@@ -303,7 +303,7 @@ namespace View.UI.ViewCaixa
                     }
                     else
                     {
-                        FocarNoTxt(txt: txtCodigoDoProduto);
+                        FocarNoTxt(txt:txtCodigoDoProduto);
                     }
                 }
             }
@@ -454,7 +454,7 @@ namespace View.UI.ViewCaixa
                         }
                         else
                         {
-                            FocarNoTxt(txt: txtCodigoDoProduto);
+                            FocarNoTxt(txt:txtCodigoDoProduto);
                         }
                         break;
                     case "Cartão":
@@ -592,9 +592,9 @@ namespace View.UI.ViewCaixa
                     }
                     else
                     {
-                        DarBaixaNoEstoque();
                         PosSalvamentoPadrao();
-                        FocarNoTxt(txt: txtCodigoDoProduto);
+                        DarBaixaNoEstoque();
+                        FocarNoTxt(txt:txtCodigoDoProduto);
                     }
                 }
             }
@@ -665,7 +665,7 @@ namespace View.UI.ViewCaixa
                     if (OpenMdiForm.OpenForWithShowDialog(new frmClienteCreditar(EnumTipoCreditar.Vender)) == DialogResult.Yes)
                     {
                         InstanciarFiadoRepositorio();
-                        _fiadoRepositorio.Cadastrar(new Fiado() { IDCliente = Cliente.ClienteIDStatic, IDFuncionario = Usuarios.IDStatic, Valor = VendaTotal });
+                        _fiadoRepositorio.Cadastrar(new Fiado() { IDCliente = Cliente.ClienteIDStatic, IDFuncionario = Usuarios.IDStatic, Valor = VendaTotal });                        
                         MensagemDeAviso();
                         retorno = true;
                     }
@@ -703,7 +703,7 @@ namespace View.UI.ViewCaixa
                         InstanciarMovimentacaoCaixa();
                         int resultado = _movimentacaoCaixaRepositorio.Salvar(new MovimentacaoCaixa() { Valor = VendaTotal, Data = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day) });
                         if (resultado > 0)
-                        {
+                        {                            
                             DarBaixaNoEstoque();
                             JogarNovoValorParaCaixa();
                             PosSalvamentoPadrao();
@@ -751,7 +751,7 @@ namespace View.UI.ViewCaixa
                     {
                         Codigo = lstItem.SubItems[1].Text,
                         Data = DateTime.Now.DataNoFormatoDate(),
-                        Quantidade = lstItem.SubItems[2].Text.Contains("Kg") ? 0 : Convert.ToInt32(lstItem.SubItems[2].Text),
+                        Quantidade = lstItem.SubItems[2].Text == "Peso" ? 0 : Convert.ToInt32(lstItem.SubItems[2].Text),
                         Valor = Convert.ToDecimal(lstItem.SubItems[3].Text)
                     });
 
@@ -802,38 +802,7 @@ namespace View.UI.ViewCaixa
             }
 
         }
-        private void LimparVenda()
-        {
 
-            try
-            {
-                if (mensagem != null)
-                {
-                    mensagem = null;
-                }
-                LimparTxt(new List<TextBox>() { txtCodigoDaComanda, txtCodigoDoProduto, txtTroco, txtValorPago });
-                CarregarTxtQuantidadeComUm();
-                ZerarTotalVenda();
-                ZerarListView();
-                EsconderOuMostrarButtonVenda(Esconder);
-                ZerarLabelTotalVenda();
-                EsconderGroupBoxOuMostrar(new List<GroupBox>() { gpbValorPorPeso }, Esconder);
-                DesmarcarCheckBox();
-                FocarNoTxt(txtCodigoDaComanda);
-                cbbTipoDePagamento.SelectedIndex = 0;
-                LimparComanda();
-            }
-            catch (CustomException erro)
-            {
-                DialogMessage.MessageFullComButtonOkIconeDeInformacao(erro.Message, "Aviso");
-            }
-            catch (Exception erro)
-            {
-                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
-                DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
-            }
-
-        }
         private void ExcluirComandaAtiva()
         {
 
@@ -847,7 +816,7 @@ namespace View.UI.ViewCaixa
                     comandaLista.ForEach(c => contador = _vendaComComandaAtivaRepositorio.DeletaItensDaComandaPorCodigo(c.Codigo));
                     if (contador > 0)
                     {
-                        LimparComanda();
+                        comandaLista.Clear();
                     }
                 }
 
@@ -862,11 +831,6 @@ namespace View.UI.ViewCaixa
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
 
-        }
-
-        private void LimparComanda()
-        {
-            comandaLista.Clear();
         }
 
         private void ZerarLabelTotalVenda()
@@ -996,18 +960,12 @@ namespace View.UI.ViewCaixa
             {
                 ValidatorField.IntegerAndLetter(e);
                 ValidatorField.NoSpace(e);
-                string codigo = txtCodigoDoProduto.Text;              
+                string codigo = txtCodigoDoProduto.Text;
                 if ((Keys)e.KeyChar == Keys.Enter && codigo.Length > 0)
                 {
-                    if (txtPesoDoProduto.Text.Trim().Length > 0)
-                    {
-                        if (txtPesoDoProduto.Text.EndsWith(","))
-                        {
-                            txtPesoDoProduto.Text = txtPesoDoProduto.Text.Remove(txtPesoDoProduto.Text.Length - 1, 1);
-                        }
-                    }
                     if (ckbPorPeso.Checked)
                     {
+
                         InstanciarProdutoRepositorio();
                         InstanciarTipoCadastroRepositorio();
                         Produto prod = _produtoRepositorio.GetProdutoPorCodigo(codigo);
@@ -1053,11 +1011,20 @@ namespace View.UI.ViewCaixa
         {
             try
             {
-              
-                decimal peso = txtPesoDoProduto.Text == "" ? 0 : Convert.ToDecimal(txtPesoDoProduto.Text.Replace(",", ""));
+                decimal peso = 0;
+                if (txtPesoDoProduto.Text.Contains("0,"))
+                {
+                    string temp = txtPesoDoProduto.Text.Substring(2, txtPesoDoProduto.Text.Length - 2);
+                    peso = txtPesoDoProduto.Text == "" ? 0 : Convert.ToDecimal(temp);
+                }
+                else
+                {
+                    peso = txtPesoDoProduto.Text == "" ? 0 : Convert.ToDecimal(txtPesoDoProduto.Text.Replace(",", ""));
+                }
 
                 if (peso > 0)
                 {
+
                     _produtoRepositorio.AdicionarProdutoParaVendaPorPeso(ltvProdutos, codigo, peso);
                     GetValorNaComanda();
                     LimparTxt(new List<TextBox>() { txtCodigoDoProduto });
@@ -1230,12 +1197,15 @@ namespace View.UI.ViewCaixa
 
         private void txtValorDoProdutoPorpeso_KeyPress(object sender, KeyPressEventArgs e)
         {
-            ValidatorField.Peso(e: e, sender: sender);
+
             if (e.KeyChar == (char)Keys.Enter)
             {
                 FocarNoTxt(txtCodigoDoProduto);
             }
-
+            else
+            {
+                ValidatorField.Peso(e: e, sender: sender);
+            }
 
         }
 
@@ -1540,7 +1510,7 @@ namespace View.UI.ViewCaixa
                 {
                     FocarNoTxt(txtCodigoDoProduto);
                 }
-                else if (cbbTipoDePagamento.Text == EnumTipoPagamento.Creditar.ToString()
+                else if(cbbTipoDePagamento.Text == EnumTipoPagamento.Creditar.ToString()
                     && ltvProdutos.Items.Count == 0)
                 {
                     FocarNoTxt(txtCodigoDoProduto);
@@ -1550,30 +1520,13 @@ namespace View.UI.ViewCaixa
                     FocarNoCbb(cbbTipoDePagamento);
                 }
             }
-
+           
         }
 
         private void btnSairDoMenu_Click(object sender, EventArgs e)
         {
             btnOperacoes.HideDropDown();
             FocarNoTxt(txtCodigoDoProduto);
-        }
-
-        private void txtCodigoDoProduto_TextChanged(object sender, EventArgs e)
-        {
-            if (txtPesoDoProduto.Text.Trim().Length > 0)
-            {
-                if (txtPesoDoProduto.Text.EndsWith(","))
-                {
-                    txtPesoDoProduto.Text = txtPesoDoProduto.Text.Remove(txtPesoDoProduto.Text.Length - 1, 1);
-                }
-
-            }
-        }
-
-        private void btnLimparVenda_Click(object sender, EventArgs e)
-        {
-            LimparVenda();
         }
 
         private void timer_Tick(object sender, EventArgs e)
@@ -1628,7 +1581,7 @@ namespace View.UI.ViewCaixa
                     FocarNoTxt(txtCodigoDoProduto);
                     break;
                 case Keys.F5:
-                    FocarNoCbb(cbb: cbbTipoDePagamento);
+                    FocarNoCbb(cbb:cbbTipoDePagamento);
                     cbbTipoDePagamento.DroppedDown = true;
                     break;
                 case Keys.F6:
@@ -1654,7 +1607,7 @@ namespace View.UI.ViewCaixa
                     if (btnConcluirVenda.Visible == true)
                     {
                         btnConcluirVenda.PerformClick();
-                    }
+                    }                   
                     break;
                 default:
                     break;
@@ -1662,7 +1615,7 @@ namespace View.UI.ViewCaixa
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
-
+     
 
         private void FocarNoCbb(ComboBox cbb)
         {

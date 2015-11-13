@@ -69,7 +69,7 @@ namespace Model.Entidades
                 }
                 else if (value > _quantidadeMaxima)
                 {
-                    MyErro.MyCustomException("Quantidade Mínima não pode ser maior que Quantidade Aceitável.");
+                    MyErro.MyCustomException("Quantidade Mínima não pode ser maior que Quantidade Máxima.");
                 }
                 else
                 {
@@ -85,7 +85,7 @@ namespace Model.Entidades
             get { return _quantidadeMaxima; }
             set
             {
-                if (value <= 1)
+                if (value < 1)
                 {
                     MyErro.MyCustomException("Quantidade Mánima não pode ser menor ou igual a zero.");
                 }
@@ -95,7 +95,7 @@ namespace Model.Entidades
                 }
                 else if (value < _quantidadeMinima)
                 {
-                    MyErro.MyCustomException("Quantidade Aceitável não pode ser maior que Quantidade Míxima.");
+                    MyErro.MyCustomException("Quantidade Máxima não pode ser maior que Quantidade Míxima.");
                 }
                 else
                 {

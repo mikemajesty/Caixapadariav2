@@ -1,4 +1,5 @@
-﻿using Mike.Utilities.Desktop;
+﻿using Controller.Repositorio;
+using Mike.Utilities.Desktop;
 using Model.Entidades;
 using System;
 using System.Collections.Generic;
@@ -6,7 +7,6 @@ using System.Drawing;
 using System.Windows.Forms;
 using View.Enum;
 using View.UI.ViewAnomalias;
-using Controller.Repositorio;
 
 namespace View.UI.ViewComanda
 {

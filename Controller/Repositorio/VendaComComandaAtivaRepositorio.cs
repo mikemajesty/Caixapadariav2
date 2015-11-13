@@ -30,21 +30,20 @@ namespace Controller.Repositorio
         }
         public List<VendaComComandaAtivaViewModel> GetComandasEmUso()
         {
-
+            
             try
             {
-                InstanciaBanco();
-                return (from venda in _banco.VendaComComandaAtiva
-                        join coman in _banco.Comanda on venda.IDComanda equals coman.ID
-                        group venda by new { venda.IDComanda, coman.Codigo } into g
-                        select new VendaComComandaAtivaViewModel
-                        {
-                            ID = g.Key.IDComanda,
-                            Código = g.Key.Codigo,
-                            Total = g.Sum(c => c.PrecoTotal)
-                        }).Distinct().ToList();
+                InstanciaBanco();   
+                return (from venda in _banco.VendaComComandaAtiva join coman in _banco.Comanda on venda.IDComanda equals coman.ID
+                        group venda by new {venda.IDComanda,coman.Codigo} into g
+                       select new VendaComComandaAtivaViewModel
+                       {                           
+                           ID = g.Key.IDComanda,
+                           Código = g.Key.Codigo,
+                           Total = g.Sum(c=>c.PrecoTotal)
+                       }).Distinct().ToList();
 
-
+               
             }
             catch (CustomException erro)
             {
@@ -74,7 +73,7 @@ namespace Controller.Repositorio
                                                   Quantidade = venda.Quantidade,
                                                   Total = venda.PrecoTotal,
                                                   LucroTotal =
-                                                  venda.Quantidade < 0 ?
+                                                  venda.Quantidade == 0 ?
                                                   ((venda.PrecoTotal * 100) / prod.Porcentagem) :
                                                   ((prod.PrecoVenda - prod.PrecoCompra) * venda.Quantidade)
                                               });
@@ -153,14 +152,9 @@ namespace Controller.Repositorio
                 {
                     listView = new ListViewItem(item.Nome);
                     listView.SubItems.Add(item.Codigo);
-                    if (item.Quantidade < 0)
+                    if (item.Quantidade == 0)
                     {
-                        string pesoTemp = item.Quantidade.ToString().Replace("-", "");
-                        int peso = Convert.ToInt32(pesoTemp.Replace(",", ""));
-                        string pesoFinal = peso <= 999 ?
-                            "0," + pesoTemp + " Kg" : peso <= 9999 ?
-                                   pesoTemp.Insert(1, ",") + " Kg" : peso >= 10000 ? pesoTemp.Insert(2, ",") + " Kg" : pesoTemp;
-                        listView.SubItems.Add(pesoFinal);
+                        listView.SubItems.Add("Peso");
                     }
                     else
                     {

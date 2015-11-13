@@ -1,40 +1,33 @@
 ﻿using System;
 using System.Windows.Forms;
+using Controller.Repositorio;
 using Mike.Utilities.Desktop;
 using Model.Entidades;
 using View.UI.ViewKeyGen;
 using Model.Data;
 using View.UI.ViewLogin;
-using System.ServiceProcess;
-using System.Security.Principal;
-using System.Diagnostics;
-using System.Security.Claims;
-using System.IO;
-using System.ComponentModel;
-using Controller.Repositorio;
 
 namespace View.Enum
 {
     static class Program
     {
 
+
         private static frmMensagemDeEspera mensagem;
         private static Espere espere = new Espere();
         [STAThread]
         static void Main()
         {
-
+            
             espere.Start(ExibirMensagem);
             KeyGenRepositorio _keyGenRepositorio;
             UsuarioRepositorio _usuariosRepositorio;
             CaixaRepositorio _caixaRepositorio;
-
             try
             {
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
-                _keyGenRepositorio = new KeyGenRepositorio();
-                Servico.StartServico(instanceName:"SQLSERVER");
+                _keyGenRepositorio = new KeyGenRepositorio();            
                 if (InserirDatas(_keyGenRepositorio) > 0)
                 {
                     _caixaRepositorio = new CaixaRepositorio();
@@ -44,7 +37,7 @@ namespace View.Enum
                         {
                             Properties.Settings.Default.CaixaAberto = true;
                         }
-
+                       
                     }
                 }
                 else
@@ -117,9 +110,9 @@ namespace View.Enum
             try
             {
                 return _keyGenRepositorio.InsertDatas(new Datas()
-                {
-                    Data = DateTime.Now.ToDataCertaSemHora()
-                });
+                  {
+                      Data = DateTime.Now.ToDataCertaSemHora()
+                  });
 
             }
             catch (CustomException erro)
@@ -128,13 +121,11 @@ namespace View.Enum
             }
             catch (Exception erro)
             {
-               
+                SaveErroInTxt.RecordInTxt(erro, "Inicialização");
                 throw new Exception(erro.Message);
             }
 
 
         }
-
-
     }
 }

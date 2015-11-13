@@ -2,8 +2,8 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Model.Entidades;
 using Mike.Utilities.Desktop;
-using Model.BO;
 using Controller.Repositorio;
+using Model.BO;
 
 namespace UnitTestProject
 {
@@ -14,7 +14,8 @@ namespace UnitTestProject
         public void TesteLog()
         {
             try
-            {               
+            {
+               
                 UsuarioRepositorio banco = new UsuarioRepositorio();
                 UsuariosBO usuarioBo = new UsuariosBO();
                 Usuarios usuarios = new Usuarios() { Login = "mike", Senha = "mike"};

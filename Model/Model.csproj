@@ -36,9 +36,8 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="Mike.Utilities.Desktop, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Projects\Mike.Utilities.Desktop\Mike.Utilities.Desktop\bin\Debug\Mike.Utilities.Desktop.dll</HintPath>
+    <Reference Include="Mike.Utilities.Desktop">
+      <HintPath>..\..\Mike.Utilities.Desktop\Mike.Utilities.Desktop\bin\Debug\Mike.Utilities.Desktop.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />

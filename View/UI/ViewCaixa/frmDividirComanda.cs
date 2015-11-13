@@ -1,4 +1,5 @@
 ﻿using Controller.Enum;
+using Controller.Repositorio;
 using Mike.Utilities.Desktop;
 using Model.Entidades;
 using System;
@@ -6,7 +7,6 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using View.Enum;
 using View.UI.ViewComanda;
-using Controller.Repositorio;
 
 namespace View.UI.ViewCaixa
 {
