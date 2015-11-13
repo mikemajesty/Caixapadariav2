@@ -428,7 +428,7 @@ namespace Controller.Repositorio
                 }
                 else
                 {
-                    throw new CustomException("Produto com esse código não esta cadastrado.");
+                    throw new CustomException($"Produto com o código {codigo.ToUpper()} não esta cadastrado.");
                 }
 
 
@@ -486,7 +486,7 @@ namespace Controller.Repositorio
                 InstanciarTipoCadastroRepositorio();
                 int IDTipoPeso = _tipoCadastroRepositorio.GetIDPeloNome("Peso");
                 Produto produto = this.GetProdutoPorCodigoPorPeso(codigo);
-                string pesoTemp = peso <= 99 ? "0,0" + peso + " Kg" : peso <= 999 ? "0," + peso + " Kg" : peso <= 9999 ? peso.ToString().Insert(1, ",") + " Kg" : peso >= 10000 ? peso.ToString().Insert(2, ",") + " Kg" : "" + peso + " Kg";
+                string pesoTemp = peso <= 9 ? "0,00" + peso + " Kg" : peso <= 99 ? "0,0" + peso + " Kg" : peso <= 999 ? "0," + peso + " Kg" : peso <= 9999 ? peso.ToString().Insert(1, ",") + " Kg" : peso >= 10000 ? peso.ToString().Insert(2, ",") + " Kg" : "" + peso + " Kg";
                 if (produto != null)
                 {
                     IQueryable<dynamic> _venda = null;

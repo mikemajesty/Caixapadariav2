@@ -32,6 +32,7 @@ namespace View.UI.ViewCaixa
         private MovimentacaoProdutoRepositorio _movimentacaoProdutoRepositorio;
         private frmGerenciarComanda formComanda;
         private TipoCadastroRepositorio _tipoCadastroRepositorio;
+        private Espere espere;
         private const bool Esconder = false, Mostrar = true, NaoExiste = false;
         private decimal VendaTotal;
         private const int Sucesso = 1, Insucesso = 0;
@@ -212,7 +213,7 @@ namespace View.UI.ViewCaixa
         {
             _tipoPagamentoRepositorio = new TipoPagamentoRepositorio();
         }
-        public void run()
+        public void MostrarMensagem()
         {
             mensagem = new frmMensagemDeEspera();
             mensagem.ShowDialog();
@@ -229,20 +230,13 @@ namespace View.UI.ViewCaixa
                 {
                     if (txtCodigoDaComanda.Text.Trim().Length > 0)
                     {
-                        Espere espere = new Espere();
-                        CarregarComandaAtiva(task: espere, metodo: run);
+                        espere = new Espere();
+                        CarregarComandaAtiva(task: espere, metodo: MostrarMensagem);
                         MostrarBotaoVendaSeExisteItensNaComanda();
                         LimparTxt(new List<TextBox>() { txtCodigoDaComanda });
                         FocarNoTxt(txtQuantidade);
-                        espere.CancelarTask();
-                        if (espere.Cancel.IsCancellationRequested)
-                        {
-                            if (mensagem != null)
-                            {
-                                mensagem.Close();
-                            }
-
-                        }
+                      
+                      
                     }
                     else
                     {
@@ -262,7 +256,18 @@ namespace View.UI.ViewCaixa
                 SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
+            finally
+            {
+                espere.CancelarTask();
+                if (espere.Cancel.IsCancellationRequested)
+                {
+                    if (mensagem != null)
+                    {
+                        mensagem.Close();
+                    }
 
+                }
+            }
         }
 
         private void CarregarComandaEmUso()
@@ -994,6 +999,7 @@ namespace View.UI.ViewCaixa
         {
             try
             {
+               
                 ValidatorField.IntegerAndLetter(e);
                 ValidatorField.NoSpace(e);
                 string codigo = txtCodigoDoProduto.Text;              
@@ -1008,23 +1014,35 @@ namespace View.UI.ViewCaixa
                     }
                     if (ckbPorPeso.Checked)
                     {
+                        espere = new Espere();
+                        espere.Start(MostrarMensagem);
                         InstanciarProdutoRepositorio();
                         InstanciarTipoCadastroRepositorio();
-                        Produto prod = _produtoRepositorio.GetProdutoPorCodigo(codigo);
-                        if (prod.TipoCadastro == _tipoCadastroRepositorio.GetIDPeloNome(EnumTipoCadastro.Unidade.ToString()))
+                        Produto prod = new ProdutoRepositorio().GetProdutoPorCodigo(codigo);
+                        if (prod != null)
                         {
-                            ChecarChebox(ckb: ckbPorPeso, checado: false);
-                            LimparTxt(new List<TextBox> { txtPesoDoProduto });
-                            VenderPorUnidade(codigo);
+                            if (prod.TipoCadastro == new TipoCadastroRepositorio().GetIDPeloNome(EnumTipoCadastro.Unidade.ToString()))
+                            {
+                                ChecarChebox(ckb: ckbPorPeso, checado: false);
+                                LimparTxt(new List<TextBox> { txtPesoDoProduto });
+                                VenderPorUnidade(codigo);
+                            }
+                            else
+                            {
+                                VenderPorPeso(codigo);
+                            }
                         }
                         else
                         {
-                            VenderPorPeso(codigo);
+                            MyErro.MyCustomException($"Produto com o código: { txtCodigoDoProduto.Text.ToUpper()} não esta cadastrado.");
                         }
+                       
 
                     }
                     else
                     {
+                        espere = new Espere();
+                        espere.Start(MostrarMensagem);
                         VenderPorUnidade(codigo);
                     }
 
@@ -1032,7 +1050,6 @@ namespace View.UI.ViewCaixa
                 }
                 else if ((Keys)e.KeyChar == Keys.Enter && txtCodigoDoProduto.Text.Length == 0)
                 {
-
                     txtCodigoDoProduto_DoubleClick(txtCodigoDoProduto, e);
                 }
             }
@@ -1046,6 +1063,18 @@ namespace View.UI.ViewCaixa
             {
                 SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
+            }
+            finally
+            {
+                if (espere != null)
+                {
+                    espere.CancelarTask();
+                    if (espere.Cancel.IsCancellationRequested)
+                    {
+                        mensagem.Close();
+                    }
+                }
+               
             }
         }
 
@@ -1231,6 +1260,7 @@ namespace View.UI.ViewCaixa
         private void txtValorDoProdutoPorpeso_KeyPress(object sender, KeyPressEventArgs e)
         {
             ValidatorField.Peso(e: e, sender: sender);
+            ValidatorField.Money(e);
             if (e.KeyChar == (char)Keys.Enter)
             {
                 FocarNoTxt(txtCodigoDoProduto);
@@ -1367,16 +1397,17 @@ namespace View.UI.ViewCaixa
             {
                 if (MyListView.VerificarSeExisteItensNoListView(ltvProdutos) > 0)
                 {
-                    InstanciarMovimentacaoProdutoRepositorio();
+                   
                     List<BaixarEstoque> lista = new List<BaixarEstoque>();
                     foreach (var item in MyListView.RetornarValoresParaDarBaixaNoEstoque(ltvProdutos))
                     {
-                        lista.Add(item);
-                        _movimentacaoProdutoRepositorio.Cadastrar(PopulaMovimentacaoProduto(item));
+                        lista.Add(item);                       
                     }
 
                     if (OpenMdiForm.OpenForWithShowDialog(new frmDividirComanda(lista)) == DialogResult.Yes)
                     {
+                        InstanciarMovimentacaoProdutoRepositorio();
+                        lista.ForEach(c=> _movimentacaoProdutoRepositorio.Cadastrar(PopulaMovimentacaoProduto(c)));                        
                         CarregarValorDoCaixaAtualiza();
                         PosSalvamentoPadrao();
                         ExcluirComandaAtiva();

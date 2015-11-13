@@ -157,7 +157,9 @@ namespace Controller.Repositorio
                     {
                         string pesoTemp = item.Quantidade.ToString().Replace("-", "");
                         int peso = Convert.ToInt32(pesoTemp.Replace(",", ""));
-                        string pesoFinal = peso <= 999 ?
+                        string pesoFinal = peso <= 9 ?
+                            "0,00" + pesoTemp + " Kg" : peso <= 99 ?
+                            "0,0" + pesoTemp + " Kg" : peso <= 999 ?
                             "0," + pesoTemp + " Kg" : peso <= 9999 ?
                                    pesoTemp.Insert(1, ",") + " Kg" : peso >= 10000 ? pesoTemp.Insert(2, ",") + " Kg" : pesoTemp;
                         listView.SubItems.Add(pesoFinal);

@@ -2,7 +2,7 @@
 
 namespace View.Enum
 {
-    enum EnumTipoCadastro
+    public enum EnumTipoCadastro
     {
         Unidade,
         Peso
