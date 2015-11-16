@@ -352,6 +352,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\ViewRelatorio\estoqueConferencia.rdlc" />
     <EmbeddedResource Include="UI\ViewRelatorio\rpvCompras.rdlc" />
+    <EmbeddedResource Include="UI\ViewRelatorio\rpvFiado.rdlc" />
     <None Include="app.manifest">
       <SubType>Designer</SubType>
     </None>
@@ -361,6 +362,7 @@
     <None Include="Properties\DataSources\Model.Data._DbContext.datasource" />
     <None Include="Properties\DataSources\Model.Entidades.RelatorioComprasViewModel.datasource" />
     <None Include="Properties\DataSources\Model.Entidades.RelatorioEstoqueConferenciaViewModel.datasource" />
+    <None Include="Properties\DataSources\Model.Entidades.RelatorioFiadoViewModel.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

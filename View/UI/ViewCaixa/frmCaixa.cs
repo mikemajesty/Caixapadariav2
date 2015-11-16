@@ -9,6 +9,8 @@ using View.UI.ViewEstoque;
 using View.UI.ViewProduto;
 using Controller.Repositorio;
 using Controller.Enum;
+using Model.BO;
+using Microsoft.Reporting.WebForms;
 
 namespace View.UI.ViewCaixa
 {
@@ -236,8 +238,8 @@ namespace View.UI.ViewCaixa
                         MostrarBotaoVendaSeExisteItensNaComanda();
                         LimparTxt(new List<TextBox>() { txtCodigoDaComanda });
                         FocarNoTxt(txtQuantidade);
-                      
-                      
+
+
                     }
                     else
                     {
@@ -270,7 +272,7 @@ namespace View.UI.ViewCaixa
 
                     }
                 }
-               
+
             }
         }
 
@@ -601,6 +603,30 @@ namespace View.UI.ViewCaixa
                     }
                     else
                     {
+                        if (DialogMessage.MessageFullQuestion("Deseja imprimir o comprovante de compra?", "Aviso") == DialogResult.Yes)
+                        {
+                            espere = new Espere();
+                            espere.Start(MostrarMensagem);
+                            string fileName = "rpvFiado.rdlc";
+                            RelatorioFiadoViewModel relatorioFiado = null;
+                            List<RelatorioFiadoViewModel> relatorioFiadoList = new List<RelatorioFiadoViewModel>();
+                            foreach (ListViewItem item in ltvProdutos.Items)
+                            {
+                                relatorioFiado = new RelatorioFiadoViewModel();
+                                relatorioFiado.Produto = item.SubItems[0].Text;
+                                relatorioFiado.Quantidade = item.SubItems[2].Text;
+                                relatorioFiado.Valor = Convert.ToDecimal(item.SubItems[3].Text);
+                                relatorioFiadoList.Add(relatorioFiado);
+                            }
+                            var table = new RelatorioFiadoRepositorio().GerarRelatorioDeFiado(relatorioFiadoList);
+                            MyReport report = new MyReport(table, fileName.GetFullPath(), "Fiado", Microsoft.Reporting.WebForms.ProcessingMode.Local);
+                            report.GerarRelatoriosComParametrosEQueryDefinidosNaQueryPDF(new List<ReportParameter>
+                            {
+                                 new ReportParameter("NomeCliente",new ClienteRepositorio().GetClientePorID(Cliente.ClienteIDStatic).Nome),
+                                 new ReportParameter("NomeVendedor",Usuarios.NomeCompletoStatic)
+
+                            });
+                        }
                         DarBaixaNoEstoque();
                         PosSalvamentoPadrao();
                         FocarNoTxt(txt: txtCodigoDoProduto);
@@ -616,7 +642,21 @@ namespace View.UI.ViewCaixa
                 SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
-
+            finally
+            {
+                if (espere != null)
+                {
+                    espere.CancelarTask();
+                    if (espere.Cancel.IsCancellationRequested)
+                    {
+                        if (mensagem != null)
+                        {
+                            mensagem.Close();
+                        }
+                    }
+                }
+               
+            }
         }
 
         private void ConcluirVendaComCartao()
@@ -1003,10 +1043,10 @@ namespace View.UI.ViewCaixa
         {
             try
             {
-               
+
                 ValidatorField.IntegerAndLetter(e);
                 ValidatorField.NoSpace(e);
-                string codigo = txtCodigoDoProduto.Text;              
+                string codigo = txtCodigoDoProduto.Text;
                 if ((Keys)e.KeyChar == Keys.Enter && codigo.Length > 0)
                 {
                     if (txtPesoDoProduto.Text.Trim().Length > 0)
@@ -1018,7 +1058,7 @@ namespace View.UI.ViewCaixa
                     }
                     if (ckbPorPeso.Checked)
                     {
-                       
+
                         InstanciarProdutoRepositorio();
                         InstanciarTipoCadastroRepositorio();
                         Produto prod = new ProdutoRepositorio().GetProdutoPorCodigo(codigo);
@@ -1039,7 +1079,7 @@ namespace View.UI.ViewCaixa
                         {
                             MyErro.MyCustomException($"Produto com o código: { txtCodigoDoProduto.Text.ToUpper()} não esta cadastrado.");
                         }
-                       
+
 
                     }
                     else
@@ -1065,14 +1105,14 @@ namespace View.UI.ViewCaixa
                 SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
-           
+
         }
 
         private void VenderPorPeso(string codigo)
         {
             try
             {
-              
+
                 decimal peso = txtPesoDoProduto.Text == "" ? 0 : Convert.ToDecimal(txtPesoDoProduto.Text.Replace(",", ""));
 
                 if (peso > 0)
@@ -1387,17 +1427,17 @@ namespace View.UI.ViewCaixa
             {
                 if (MyListView.VerificarSeExisteItensNoListView(ltvProdutos) > 0)
                 {
-                   
+
                     List<BaixarEstoque> lista = new List<BaixarEstoque>();
                     foreach (var item in MyListView.RetornarValoresParaDarBaixaNoEstoque(ltvProdutos))
                     {
-                        lista.Add(item);                       
+                        lista.Add(item);
                     }
 
                     if (OpenMdiForm.OpenForWithShowDialog(new frmDividirComanda(lista)) == DialogResult.Yes)
                     {
                         InstanciarMovimentacaoProdutoRepositorio();
-                        lista.ForEach(c=> _movimentacaoProdutoRepositorio.Cadastrar(PopulaMovimentacaoProduto(c)));                        
+                        lista.ForEach(c => _movimentacaoProdutoRepositorio.Cadastrar(PopulaMovimentacaoProduto(c)));
                         CarregarValorDoCaixaAtualiza();
                         PosSalvamentoPadrao();
                         ExcluirComandaAtiva();

@@ -25,7 +25,7 @@ namespace Controller.Repositorio
                             {
                                 Código = prod.Codigo,
                                 Nome = prod.Nome,
-                                Descrição = prod.Nome,
+                                Descrição = prod.Descricao,
                                 Comprar = prod.QuantidadeMaxima - prod.Quantidade,
                                 Quantidade = prod.Quantidade
                             }).ToList();
