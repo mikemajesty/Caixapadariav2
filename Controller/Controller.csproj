@@ -58,6 +58,7 @@
     <Compile Include="Repositorio\CategoriaRepositorio.cs" />
     <Compile Include="Repositorio\ClienteRepositorio.cs" />
     <Compile Include="Repositorio\ComandaRepositorio.cs" />
+    <Compile Include="Repositorio\RelatorioEstoqueConferenciaRepositorio.cs" />
     <Compile Include="Repositorio\EstoqueRepositorio.cs" />
     <Compile Include="Repositorio\FiadoRepositorio.cs" />
     <Compile Include="Repositorio\KeyGenRepositorio.cs" />

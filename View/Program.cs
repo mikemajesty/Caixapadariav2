@@ -12,6 +12,7 @@ using System.Security.Claims;
 using System.IO;
 using System.ComponentModel;
 using Controller.Repositorio;
+using System.Net;
 
 namespace View.Enum
 {
@@ -34,7 +35,7 @@ namespace View.Enum
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
                 _keyGenRepositorio = new KeyGenRepositorio();
-                Servico.StartServico(instanceName:"SQLSERVER");
+                Servico.StartServico(instanceName: "SQLSERVER");
                 if (InserirDatas(_keyGenRepositorio) > 0)
                 {
                     _caixaRepositorio = new CaixaRepositorio();
@@ -88,22 +89,38 @@ namespace View.Enum
             }
             catch (Exception erro)
             {
-                SaveErroInTxt.RecordInTxt(erro, "Inicialização");
-                DialogMessage.MessageComButtonOkIconeErro("Problema ao estabelecer conexão com o banco de dados, reinice o computador, se o erro persistir contate o Administrador: " + erro.Message, "Erro");
+                SaveErroInTxt.RecordInTxt(erro, new StackFrame().GetMethod().DeclaringType.Name);
+                DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
+
             }
             finally { CancelarMensagem(); }
         }
+
         private static void CancelarMensagem()
         {
-            espere.CancelarTask();
-            if (espere.Cancel.IsCancellationRequested)
-            {
-                if (mensagem != null)
-                {
-                    mensagem.Close();
-                }
 
+            try
+            {
+
+                espere.CancelarTask();
+                if (espere.Cancel.IsCancellationRequested)
+                {
+                    if (mensagem != null)
+                    {
+                        mensagem.Close();
+                    }
+
+                }
             }
+            catch (CustomException error)
+            {
+                throw new CustomException(error.Message);
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error.Message);
+            }
+
         }
         private static void ExibirMensagem()
         {
@@ -128,7 +145,7 @@ namespace View.Enum
             }
             catch (Exception erro)
             {
-               
+
                 throw new Exception(erro.Message);
             }
 

@@ -350,6 +350,7 @@
     <EmbeddedResource Include="UI\ViewProduto\frmPesquisarProduto.resx">
       <DependentUpon>frmPesquisarProduto.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\ViewRelatorio\estoqueConferencia.rdlc" />
     <EmbeddedResource Include="UI\ViewRelatorio\rpvCompras.rdlc" />
     <None Include="app.manifest">
       <SubType>Designer</SubType>
@@ -358,6 +359,8 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Properties\DataSources\Model.Data._DbContext.datasource" />
+    <None Include="Properties\DataSources\Model.Entidades.RelatorioComprasViewModel.datasource" />
+    <None Include="Properties\DataSources\Model.Entidades.RelatorioEstoqueConferenciaViewModel.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

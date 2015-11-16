@@ -105,5 +105,11 @@ namespace View.UI.ViewAnomalias
         {
             txt.Text = string.Empty;
         }
+
+        private void txtTexto_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            ValidatorField.AllowOneSpaceTogether(e, sender);
+            ValidatorField.Letter(e);
+        }
     }
 }

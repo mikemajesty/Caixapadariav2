@@ -423,7 +423,6 @@ namespace View
             {
                 espere = new Espere();
                 espere.Start(MostrarMensagemEspera);
-                ReportViewer reportViewer = new ReportViewer();
                 _DbContext banco = new _DbContext();
                 string fileName = "rpvCompras.rdlc";
                 RelatorioCompraRepositorio relatorio = new RelatorioCompraRepositorio();
@@ -486,6 +485,55 @@ namespace View
                 DialogMessage.MessageFullComButtonOkIconeDeInformacao(message: error.Message, title: "Aviso");
             }
            
+        }
+
+        private void btnConferenciaEstoque_Click(object sender, EventArgs e)
+        {
+
+            try
+            {
+                espere = new Espere();
+                espere.Start(MostrarMensagemEspera);
+                string fileName = "estoqueConferencia.rdlc";
+                RelatorioEstoqueConferenciaRepositorio estoqueConferenciaRepositorio = new RelatorioEstoqueConferenciaRepositorio();
+                var table = estoqueConferenciaRepositorio.GetRelatorioConferencia();
+                MyReport report = new MyReport(table, fileName.GetFullPath(), "EstoqueConferencia", ProcessingMode.Local);
+                report.GerarRelatoriosComParametrosEQueryDefinidosNaQueryPDF(new System.Collections.Generic.List<ReportParameter>
+                {
+                    new ReportParameter("NomeConf",Usuarios.NomeCompletoStatic)
+
+                });
+                espere.CancelarTask();
+                if (espere.Cancel.IsCancellationRequested)
+                {
+                    if (frmEspera != null)
+                    {
+                        frmEspera.Close();
+                    }
+
+                }
+            }
+            catch (CustomException error)
+            {
+                DialogMessage.MessageFullComButtonOkIconeDeInformacao(message: error.Message, title: "Aviso");
+            }
+            catch (Exception error)
+            {
+                SaveErroInTxt.RecordInTxt(error, this.GetType().Name);
+                DialogMessage.MessageFullComButtonOkIconeDeInformacao(message: error.Message, title: "Aviso");
+            }
+            finally
+            {
+                espere.CancelarTask();
+                if (espere.Cancel.IsCancellationRequested)
+                {
+                    if (frmEspera != null)
+                    {
+                        frmEspera.Close();
+                    }
+
+                }
+            }
         }
     }
 }

@@ -465,7 +465,7 @@ namespace Controller.Repositorio
                 }
                 else
                 {
-                    throw new CustomException("Produto com esse código não esta cadastrado.");
+                    throw new CustomException($"Produto com o código:{codigo.ToUpper()} não esta cadastrado.");
                 }
 
 

@@ -228,6 +228,7 @@ namespace View.UI.ViewCaixa
 
                 if ((Keys)e.KeyChar == Keys.Enter)
                 {
+
                     if (txtCodigoDaComanda.Text.Trim().Length > 0)
                     {
                         espere = new Espere();
@@ -241,7 +242,6 @@ namespace View.UI.ViewCaixa
                     else
                     {
                         CarregarComandaEmUso();
-
                     }
 
                 }
@@ -258,15 +258,19 @@ namespace View.UI.ViewCaixa
             }
             finally
             {
-                espere.CancelarTask();
-                if (espere.Cancel.IsCancellationRequested)
+                if (espere != null)
                 {
-                    if (mensagem != null)
+                    espere.CancelarTask();
+                    if (espere.Cancel.IsCancellationRequested)
                     {
-                        mensagem.Close();
-                    }
+                        if (mensagem != null)
+                        {
+                            mensagem.Close();
+                        }
 
+                    }
                 }
+               
             }
         }
 
@@ -1014,8 +1018,7 @@ namespace View.UI.ViewCaixa
                     }
                     if (ckbPorPeso.Checked)
                     {
-                        espere = new Espere();
-                        espere.Start(MostrarMensagem);
+                       
                         InstanciarProdutoRepositorio();
                         InstanciarTipoCadastroRepositorio();
                         Produto prod = new ProdutoRepositorio().GetProdutoPorCodigo(codigo);
@@ -1041,8 +1044,6 @@ namespace View.UI.ViewCaixa
                     }
                     else
                     {
-                        espere = new Espere();
-                        espere.Start(MostrarMensagem);
                         VenderPorUnidade(codigo);
                     }
 
@@ -1064,18 +1065,7 @@ namespace View.UI.ViewCaixa
                 SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
-            finally
-            {
-                if (espere != null)
-                {
-                    espere.CancelarTask();
-                    if (espere.Cancel.IsCancellationRequested)
-                    {
-                        mensagem.Close();
-                    }
-                }
-               
-            }
+           
         }
 
         private void VenderPorPeso(string codigo)
@@ -1121,7 +1111,7 @@ namespace View.UI.ViewCaixa
             try
             {
                 DialogResult dialogResult = DialogResult.OK;
-                if (Convert.ToInt32(txtQuantidade.Text) > 20)
+                if (Convert.ToInt32(txtQuantidade.Text) >= 10)
                 {
                     dialogResult = DialogMessage.MessageFullQuestion("Deseja vender " + txtQuantidade.Text + " produtos?", "Aviso");
                 }

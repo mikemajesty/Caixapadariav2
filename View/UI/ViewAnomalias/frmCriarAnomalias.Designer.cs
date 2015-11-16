@@ -41,6 +41,7 @@
             // 
             // txtTexto
             // 
+            this.txtTexto.CharacterCasing = System.Windows.Forms.CharacterCasing.Lower;
             this.txtTexto.Location = new System.Drawing.Point(6, 31);
             this.txtTexto.MaxLength = 150;
             this.txtTexto.Multiline = true;
@@ -48,6 +49,7 @@
             this.txtTexto.Size = new System.Drawing.Size(444, 168);
             this.txtTexto.TabIndex = 1;
             this.txtTexto.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtTexto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTexto_KeyPress);
             // 
             // gpbExluir
             // 

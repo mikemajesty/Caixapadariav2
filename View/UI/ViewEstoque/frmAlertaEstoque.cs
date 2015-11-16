@@ -101,14 +101,18 @@ namespace View.UI.ViewEstoque
         {
             try
             {
-                var codigo = dgvAvisosEstoque.CurrentRow.Cells["Código"].Value.ToString();
-                if (codigo != null)
+                if (e.RowIndex >= 0)
                 {
-                    var formAlertEstoque = new frmGerenciarEstoque();
-                    GerenciarGerenciamentoDeEstoque.FecharForm(formAlertEstoque);
-                    Estoque.CodigoEstoque = codigo;
-                    OpenMdiForm.LoadNewKeepAnother(ContainerContext.Context,formAlertEstoque);
+                    var codigo = dgvAvisosEstoque.CurrentRow.Cells["Código"].Value.ToString();
+                    if (codigo != null)
+                    {
+                        var formAlertEstoque = new frmGerenciarEstoque();
+                        GerenciarGerenciamentoDeEstoque.FecharForm(formAlertEstoque);
+                        Estoque.CodigoEstoque = codigo;
+                        OpenMdiForm.LoadNewKeepAnother(ContainerContext.Context, formAlertEstoque);
+                    }
                 }
+               
             }
             catch (Exception erro)
             {

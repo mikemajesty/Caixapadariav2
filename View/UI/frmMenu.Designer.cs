@@ -59,6 +59,7 @@
             this.rodape = new System.Windows.Forms.StatusStrip();
             this.lblProfissao = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblUsuarioLogado = new System.Windows.Forms.ToolStripStatusLabel();
+            this.btnConferenciaEstoque = new System.Windows.Forms.ToolStripMenuItem();
             this.menu.SuspendLayout();
             this.rodape.SuspendLayout();
             this.SuspendLayout();
@@ -275,7 +276,8 @@
             // menuRelatorios
             // 
             this.menuRelatorios.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnRelatorioCompra});
+            this.btnRelatorioCompra,
+            this.btnConferenciaEstoque});
             this.menuRelatorios.Font = new System.Drawing.Font("Arial Black", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menuRelatorios.Image = ((System.Drawing.Image)(resources.GetObject("menuRelatorios.Image")));
             this.menuRelatorios.Name = "menuRelatorios";
@@ -286,7 +288,7 @@
             // btnRelatorioCompra
             // 
             this.btnRelatorioCompra.Name = "btnRelatorioCompra";
-            this.btnRelatorioCompra.Size = new System.Drawing.Size(152, 22);
+            this.btnRelatorioCompra.Size = new System.Drawing.Size(235, 22);
             this.btnRelatorioCompra.Text = "Compras";
             this.btnRelatorioCompra.Click += new System.EventHandler(this.btnRelatorioCompra_Click);
             // 
@@ -337,6 +339,13 @@
             this.lblUsuarioLogado.Name = "lblUsuarioLogado";
             this.lblUsuarioLogado.Size = new System.Drawing.Size(56, 20);
             this.lblUsuarioLogado.Text = "Nome";
+            // 
+            // btnConferenciaEstoque
+            // 
+            this.btnConferenciaEstoque.Name = "btnConferenciaEstoque";
+            this.btnConferenciaEstoque.Size = new System.Drawing.Size(235, 22);
+            this.btnConferenciaEstoque.Text = "Estoque - Conferência";
+            this.btnConferenciaEstoque.Click += new System.EventHandler(this.btnConferenciaEstoque_Click);
             // 
             // frmMenu
             // 
@@ -398,5 +407,6 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem fffToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem btnAnomalias;
+        private System.Windows.Forms.ToolStripMenuItem btnConferenciaEstoque;
     }
 }

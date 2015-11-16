@@ -100,7 +100,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Categoria</Value>
+                              <Value>Descrição</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -296,14 +296,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Código1">
+                    <Textbox Name="Descrição">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!Código.Value</Value>
+                              <Value>=Fields!Descrição.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -312,7 +312,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Código1</rd:DefaultName>
+                      <rd:DefaultName>Descrição</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -390,6 +390,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -502,11 +503,18 @@
       </ConnectionProperties>
       <rd:DataSourceID>7f8fc9b6-de11-49bd-b48f-3165810202c1</rd:DataSourceID>
     </DataSource>
+    <DataSource Name="ModelEntidades">
+      <ConnectionProperties>
+        <DataProvider>System.Data.DataSet</DataProvider>
+        <ConnectString>/* Local Connection */</ConnectString>
+      </ConnectionProperties>
+      <rd:DataSourceID>aa1cb56d-60ed-4718-a6a4-372fad057b0c</rd:DataSourceID>
+    </DataSource>
   </DataSources>
   <DataSets>
     <DataSet Name="Compras">
       <Query>
-        <DataSourceName>Compras</DataSourceName>
+        <DataSourceName>ModelEntidades</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <Fields>
@@ -514,30 +522,27 @@
           <DataField>Código</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="Comprar">
+          <DataField>Comprar</DataField>
+          <rd:TypeName>System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+        </Field>
+        <Field Name="Descrição">
+          <DataField>Descrição</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="Nome">
           <DataField>Nome</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="Categoria">
-          <DataField>Categoria</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
         <Field Name="Quantidade">
           <DataField>Quantidade</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="Comprar">
-          <DataField>Comprar</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
+          <rd:TypeName>System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
         </Field>
       </Fields>
       <rd:DataSetInfo>
-        <rd:DataSetName>Compras</rd:DataSetName>
-        <rd:SchemaPath>D:\Padaria Terminado Versão 2\Padaria.Novo.Desktop.Caixa\View\Compras.xsd</rd:SchemaPath>
-        <rd:TableName>GetRelatorioCompra</rd:TableName>
-        <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
-        <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
-        <rd:TableAdapterName>GetRelatorioCompraTableAdapter</rd:TableAdapterName>
+        <rd:DataSetName>Model.Entidades</rd:DataSetName>
+        <rd:TableName>RelatorioComprasViewModel</rd:TableName>
+        <rd:ObjectDataSourceType>Model.Entidades.RelatorioComprasViewModel, Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
       </rd:DataSetInfo>
     </DataSet>
   </DataSets>
