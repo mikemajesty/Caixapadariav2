@@ -46,7 +46,7 @@ namespace Model.Entidades
             }
         }
         [NotMapped]
-        public static int CodigoComanda { get; set; }
+        public static string CodigoComanda { get; set; }
 
     }
 }

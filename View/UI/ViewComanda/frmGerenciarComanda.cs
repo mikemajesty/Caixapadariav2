@@ -54,6 +54,63 @@ namespace View.UI.ViewComanda
         {
             _vendaComComandaAtivaRepositorio = new VendaComComandaAtivaRepositorio();
         }
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            switch (keyData)
+            {
+                case Keys.Up:
+                    break;
+                    dgvComanda.MoveToUp();
+                case Keys.Down:
+                    dgvComanda.MoveToDown();
+                    break;
+                case Keys.Enter:
+                    if (_enumComanda == EnumComanda.Comanda)
+                    {
+                        if (dgvComanda.Rows.Count > 0)
+                        {
+                            string codigo = dgvComanda.SelectedRows[0].Cells["Código"].Value.ToString();
+                            if (!string.IsNullOrEmpty(codigo))
+                            {
+                                Comanda.CodigoComanda = codigo;
+                                this.DialogResult = DialogResult.Yes;
+                            }
+                            else
+                            {
+                                MyErro.MyCustomException("Você deve escolher uma comanda.");
+                            }
+                        }
+                       
+                    }
+                    break;                    
+                case Keys.F1:
+                    break;
+                case Keys.F2:
+                    break;
+                case Keys.F3:
+                    break;
+                case Keys.F4:
+                    break;
+                case Keys.F5:
+                    break;
+                case Keys.F6:
+                    break;
+                case Keys.F7:
+                    break;
+                case Keys.F8:
+                    break;
+                case Keys.F9:
+                    break;
+                case Keys.F10:
+                    break;
+                case Keys.F11:
+                    break;
+                case Keys.F12:
+                    break;
+
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
 
         private void frmGerenciarComanda_Load(object sender, EventArgs e)
         {
@@ -85,7 +142,11 @@ namespace View.UI.ViewComanda
                     MudarLocationDoGrid(btn: dgvComanda, location: new Point(9, 19));
                     CarregarGridComanda();
                     EsconderTxt(txt: txtPesquisar);
-
+                    if (dgvComanda.Rows.Count == 0)
+                    {
+                        FocarNoBtn(btnSair);
+                    }
+                    
                 }
                 dgvComanda.PadronizarGrid();
             }
@@ -402,16 +463,20 @@ namespace View.UI.ViewComanda
 
         private void PegarCodigoDaComanda()
         {
-            int codigo = Convert.ToInt32(dgvComanda.CurrentRow.Cells["Código"].Value);
-            if (codigo > 0)
+            if (dgvComanda.Rows.Count > 0)
             {
-                Comanda.CodigoComanda = codigo;
-                this.DialogResult = DialogResult.Yes;
+                string codigo = dgvComanda.CurrentRow.Cells["Código"].Value.ToString();
+                if (!String.IsNullOrEmpty(codigo))
+                {
+                    Comanda.CodigoComanda = codigo;
+                    this.DialogResult = DialogResult.Yes;
+                }
+                else
+                {
+                    MyErro.MyCustomException("Você deve escolher uma comanda.");
+                }
             }
-            else
-            {
-                MyErro.MyCustomException("Você deve escolher uma comanda.");
-            }
+         
         }
 
         private void dgvComanda_KeyPress(object sender, KeyPressEventArgs e)

@@ -1484,6 +1484,7 @@ namespace View.UI.ViewCaixa
                 {
                     (sender as TextBox).Text = Produto.CodigoDoProduto;
                     SendKeys.SendWait("{ENTER}");
+
                     CarregarTxtQuantidadeComUm();
 
                 }
@@ -1524,6 +1525,7 @@ namespace View.UI.ViewCaixa
         {
             try
             {
+
                 CarregarComandaEmUso();
 
             }

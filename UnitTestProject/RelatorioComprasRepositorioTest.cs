@@ -4,23 +4,19 @@ using Model.Entidades;
 using Mike.Utilities.Desktop;
 using Model.BO;
 using Controller.Repositorio;
-
+using System.Linq;
 namespace UnitTestProject
 {
     [TestClass]
-    public class UnitTest1
+    public class RelatorioComprasRepositorioTest
     {
         [TestMethod]
-        public void TesteLog()
+        public void GetQuantidadeRegistros_Correto_2()
         {
             try
-            {               
-                UsuarioRepositorio banco = new UsuarioRepositorio();
-                UsuariosBO usuarioBo = new UsuariosBO();
-                Usuarios usuarios = new Usuarios() { Login = "mike", Senha = "mike"};
-                Assert.AreEqual(true, banco.Logar(usuario: usuarios));
-
-
+            {
+                var repositorio = new RelatorioCompraRepositorio().GerarRelatorioDeVendas();
+              
             }
             catch (CustomException erro)
             {

@@ -4,13 +4,13 @@ using Model.Entidades;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
 namespace Controller.Repositorio
 {
+   
     public class RelatorioCompraRepositorio
     {
         public _DbContext Banco { get; private set; }
-
+        
         public List<RelatorioComprasViewModel> GerarRelatorioDeVendas()
         {
 
@@ -26,7 +26,7 @@ namespace Controller.Repositorio
                                 Código = prod.Codigo,
                                 Nome = prod.Nome,
                                 Descrição = prod.Descricao,
-                                Comprar = prod.QuantidadeMaxima - prod.Quantidade,
+                                Comprar = prod.Quantidade < 0 ? prod.QuantidadeMaxima: prod.QuantidadeMaxima - prod.Quantidade,
                                 Quantidade = prod.Quantidade
                             }).ToList();
                 }

@@ -3,6 +3,7 @@ using Mike.Utilities.Desktop;
 using Model.Entidades;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Windows.Forms;
 using View.Enum;
 using View.UI.ViewProduto;
@@ -13,7 +14,7 @@ namespace View.UI.ViewProduto
     {
         private ProdutoRepositorio _produtoRepositorio;
         private EnumMovimentacao _enumMovimentacao;
-
+        private BindingSource _source = new BindingSource();
         public frmPesquisarProduto(EnumMovimentacao enumMovimentacao)
         {
             _enumMovimentacao = enumMovimentacao;
@@ -27,6 +28,7 @@ namespace View.UI.ViewProduto
             {
                 CarregarGrid();
                 ChecarRadioButtonNome();
+                ColocarSelecaoNaPrimeiraLinha();
                 FocarNoTxt();
             }
             catch (CustomException erro)
@@ -41,11 +43,32 @@ namespace View.UI.ViewProduto
 
 
         }
+
+        private void ColocarSelecaoNaPrimeiraLinha()
+        {
+            if (dgvProdutos.Rows.Count > 0)
+            {
+                dgvProdutos.Rows[0].Selected = true;
+            }            
+        }
+
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             switch (keyData)
             {
-               
+
+                case Keys.Left:
+                    break;
+                case Keys.Up:
+                    dgvProdutos.MoveToUp();                  
+                    break;
+                case Keys.Right:
+                    break;
+                case Keys.Down:
+                    dgvProdutos.MoveToDown();                 
+                    break;
+                case Keys.Select:
+                    break;
                 case Keys.F1:
                     ChecarRdb(rdb: rdbNome);
                     break;
@@ -72,6 +95,27 @@ namespace View.UI.ViewProduto
                 case Keys.F11:
                     break;
                 case Keys.F12:
+                    break;
+                case Keys.Enter:
+                    if (_enumMovimentacao == EnumMovimentacao.Pesquisa)
+                    {
+                        if (dgvProdutos.Rows.Count > 0)
+                        {
+                            int idProduto = Convert.ToInt32(dgvProdutos.SelectedRows[0].Cells["ID"].Value);
+                            InstanciarProdutoRepositorio();
+                            Produto prod =  _produtoRepositorio.GetProdutoPorID(idProduto);
+                            if (prod != null)
+                            {
+                                Produto.CodigoDoProduto = prod.Codigo;
+                                this.DialogResult = DialogResult.Yes;
+                            }
+                            else
+                            {
+                                DialogMessage.MessageFullComButtonOkIconeDeInformacao("Selecione um Produto", "Aviso");
+                            }
+                        }
+                    }
+
                     break;
 
             }
@@ -104,9 +148,10 @@ namespace View.UI.ViewProduto
                 new TamanhoGrid() { Tamanho = 100, ColunaNome="Preço" }  ,
                 new TamanhoGrid() { Tamanho = 90, ColunaNome="Estoque" }});
                 dgvProdutos.PadronizarGrid();
+
             }
             catch (CustomException erro)
-            {                
+            {
                 DialogMessage.MessageFullComButtonOkIconeDeInformacao(erro.Message, "Aviso");
             }
             catch (Exception erro)
@@ -131,7 +176,8 @@ namespace View.UI.ViewProduto
                 MudarTextoDoGroupBox(texto: "Pesquisar pelo Nome do produto");
                 this.FocoNoTxt(txt: txtPesquisar);
                 LimparTxt(txt: txtPesquisar);
-                TirarFocoDoGrid();
+                ColocarSelecaoNaPrimeiraLinha();
+                //TirarFocoDoGrid();
             }
             catch (CustomException erro)
             {
@@ -158,7 +204,8 @@ namespace View.UI.ViewProduto
                 MudarTextoDoGroupBox(texto: "Pesquisar pelo Código do produto");
                 this.FocoNoTxt(txt: txtPesquisar);
                 LimparTxt(txt: txtPesquisar);
-                TirarFocoDoGrid();
+                //TirarFocoDoGrid();
+                ColocarSelecaoNaPrimeiraLinha();
             }
             catch (CustomException erro)
             {
@@ -185,7 +232,8 @@ namespace View.UI.ViewProduto
                 MudarTextoDoGroupBox(texto: "Pesquisar pela Categoria do produto");
                 this.FocoNoTxt(txt: txtPesquisar);
                 LimparTxt(txt: txtPesquisar);
-                TirarFocoDoGrid();
+                //TirarFocoDoGrid();
+                ColocarSelecaoNaPrimeiraLinha();
             }
             catch (CustomException erro)
             {
@@ -294,7 +342,7 @@ namespace View.UI.ViewProduto
             try
             {
                 ValidatorField.AllowOneSpaceTogether(e, sender);
-                
+
                 if ((Keys)e.KeyChar == Keys.Enter)
                 {
                     switch (SelecionarTextoDoRadioButtonSelecionado())
@@ -474,7 +522,7 @@ namespace View.UI.ViewProduto
         {
             ValidatorField.DisableTabInGrid(sender, e);
         }
-        
+
     }
 }
 

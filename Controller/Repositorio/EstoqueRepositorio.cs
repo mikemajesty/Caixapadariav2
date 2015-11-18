@@ -241,6 +241,11 @@ namespace Controller.Repositorio
                     InstanciarDbContext();
                     produto.Quantidade -= estoque.Quantidade;
                     _banco.Entry(produto).State = System.Data.Entity.EntityState.Modified;
+                    if (produto.Quantidade < 0)
+                    {
+                        produto.Quantidade = 0;
+                        _banco.Entry(produto).State = System.Data.Entity.EntityState.Modified;
+                    }
                     _banco.SaveChanges();
                 }
 

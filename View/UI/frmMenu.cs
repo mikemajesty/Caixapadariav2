@@ -294,7 +294,7 @@ namespace View
 
             try
             {
-                OpenMdiForm.LoadNewKeepAnother(this, new frmPesquisarProduto(EnumMovimentacao.Pesquisa));
+                OpenMdiForm.LoadNewKeepAnother(this, new frmPesquisarProduto(EnumMovimentacao.Neutro));
             }
             catch (CustomException error)
             {
