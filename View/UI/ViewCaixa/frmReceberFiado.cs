@@ -92,7 +92,19 @@ namespace View.UI.ViewCaixa
                 throw new Exception(erro.Message);
             }
         }
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            switch (keyData)
+            {
+                case Keys.Escape:
+                    FecharForm();
+                    break;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);    
+        }
 
+        private void FecharForm()
+                     => this.Close();
         private void btnConcluirVenda_Click(object sender, EventArgs e)
         {
 
@@ -210,6 +222,10 @@ namespace View.UI.ViewCaixa
         {
             ValidatorField.NoVirgula(e, sender);
             ValidatorField.Money(e);
+            if (Keys.Enter == (Keys)e.KeyChar)
+            {
+                FocarNoBotao();
+            }
         }
 
 

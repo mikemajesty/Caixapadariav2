@@ -68,11 +68,11 @@
             this.btnDividirComanda = new System.Windows.Forms.ToolStripMenuItem();
             this.btnAbrirCaixa = new System.Windows.Forms.ToolStripMenuItem();
             this.btnFecharCaixa = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnLimparVenda = new System.Windows.Forms.ToolStripMenuItem();
             this.btnSairDoMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.btnCalculadora = new System.Windows.Forms.ToolStripMenuItem();
             this.tlp = new System.Windows.Forms.ToolTip(this.components);
             this.timer = new System.Windows.Forms.Timer(this.components);
-            this.btnLimparVenda = new System.Windows.Forms.ToolStripMenuItem();
             this.gpbCodigoDaComanda.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ptbCodigo)).BeginInit();
             this.gpbCodigoDoProduto.SuspendLayout();
@@ -278,7 +278,7 @@
             // 
             // lblTotalVenda
             // 
-            this.lblTotalVenda.Font = new System.Drawing.Font("Showcard Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalVenda.Font = new System.Drawing.Font("Arial", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotalVenda.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.lblTotalVenda.Location = new System.Drawing.Point(5, 16);
             this.lblTotalVenda.Name = "lblTotalVenda";
@@ -301,7 +301,7 @@
             // 
             // lblTotalNoCaixa
             // 
-            this.lblTotalNoCaixa.Font = new System.Drawing.Font("Showcard Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalNoCaixa.Font = new System.Drawing.Font("Arial Narrow", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotalNoCaixa.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblTotalNoCaixa.Location = new System.Drawing.Point(2, 16);
             this.lblTotalNoCaixa.Name = "lblTotalNoCaixa";
@@ -542,6 +542,13 @@
             this.btnFecharCaixa.Text = "Fechar Caixa";
             this.btnFecharCaixa.Click += new System.EventHandler(this.btnFecharCaixa_Click);
             // 
+            // btnLimparVenda
+            // 
+            this.btnLimparVenda.Name = "btnLimparVenda";
+            this.btnLimparVenda.Size = new System.Drawing.Size(229, 22);
+            this.btnLimparVenda.Text = "Limpar Venda";
+            this.btnLimparVenda.Click += new System.EventHandler(this.btnLimparVenda_Click);
+            // 
             // btnSairDoMenu
             // 
             this.btnSairDoMenu.Name = "btnSairDoMenu";
@@ -571,13 +578,6 @@
             // 
             this.timer.Interval = 1000;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
-            // 
-            // btnLimparVenda
-            // 
-            this.btnLimparVenda.Name = "btnLimparVenda";
-            this.btnLimparVenda.Size = new System.Drawing.Size(229, 22);
-            this.btnLimparVenda.Text = "Limpar Venda";
-            this.btnLimparVenda.Click += new System.EventHandler(this.btnLimparVenda_Click);
             // 
             // frmCaixa
             // 

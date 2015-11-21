@@ -106,6 +106,7 @@
             this.dgvCliente.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCliente.Size = new System.Drawing.Size(528, 150);
             this.dgvCliente.TabIndex = 5;
+            this.dgvCliente.TabStop = false;
             this.dgvCliente.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCliente_CellDoubleClick);
             this.dgvCliente.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvCliente_CellFormatting);
             this.dgvCliente.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvCliente_KeyDown);

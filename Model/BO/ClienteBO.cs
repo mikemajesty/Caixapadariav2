@@ -11,9 +11,7 @@ namespace Model.BO
         private _DbContext _banco;
         private const bool Existe = true, NaoExiste = false;
         public void InstanciarBanco()
-        {
-            _banco = new _DbContext();
-        }
+                    => _banco = new _DbContext();
         public bool VerificarSeJaExisteNoSalvamento(Cliente cliente)
         {
             try

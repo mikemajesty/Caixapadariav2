@@ -107,7 +107,9 @@ namespace View.UI.ViewComanda
                     break;
                 case Keys.F12:
                     break;
-
+                case Keys.Escape:
+                    FecharForm();
+                    break;
             }
             return base.ProcessCmdKey(ref msg, keyData);
         }

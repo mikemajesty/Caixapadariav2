@@ -29,9 +29,92 @@ namespace View.UI.ViewComanda
         {
             _clienteRepositorio = new ClienteRepositorio();
         }
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            switch (keyData)
+            {
+                case Keys.Escape:
+                    FecharForm();
+                    break;
+                case Keys.Up:
+                    dgvCliente.MoveToUp();
+                    break;
+                case Keys.Down:
+                    dgvCliente.MoveToDown();
+                    break;
+                case Keys.F1:
+                    break;
+                case Keys.F2:
+                    break;
+                case Keys.F3:
+                    break;
+                case Keys.F4:
+                    break;
+                case Keys.F5:
+                    break;
+                case Keys.F6:
+                    break;
+                case Keys.F7:
+                    break;
+                case Keys.F8:
+                    break;
+                case Keys.F9:
+                    break;
+                case Keys.F10:
+                    break;
+                case Keys.F11:
+                    break;
+                case Keys.F12:
+                    break;
+                case Keys.F13:
+                    break;
+                case Keys.F14:
+                    break;
+                case Keys.F15:
+                    break;
+                case Keys.F16:
+                    break;
+                case Keys.F17:
+                    break;
+                case Keys.F18:
+                    break;
+                case Keys.F19:
+                    break;
+                case Keys.F20:
+                    break;
+                case Keys.F21:
+                    break;
+                case Keys.F22:
+                    break;
+                case Keys.F23:
+                    break;
+                case Keys.F24:
+                    break;
+                case Keys.Enter:
+                    if (_enumCreditar == EnumTipoCreditar.Vender)
+                    {
+                        Cliente.ClienteIDStatic = Convert.ToInt32(dgvCliente.GetSelectRow(0, "ID"));
+                        this.DialogResult = System.Windows.Forms.DialogResult.Yes;
+                    }
+                    else
+                    {
+
+                        Fiado fiado = _fiadoRepositorio.PesquisarFiadoPeloID(Convert.ToInt32(dgvCliente.GetSelectRow(0, "ID")));
+                        if (OpenMdiForm.OpenForWithShowDialog(new frmReceberFiado(fiado)) == DialogResult.Yes)
+                        {
+                            _fiadoRepositorio.ListarCreditos(dgv: dgvCliente);
+                        }
+                    }
+                    break;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private void FecharForm()
+                     => this.Close();
         private void ClienteCreditar_Load(object sender, EventArgs e)
         {
-
+            
             try
             {
                 if (_enumCreditar == EnumTipoCreditar.Vender)

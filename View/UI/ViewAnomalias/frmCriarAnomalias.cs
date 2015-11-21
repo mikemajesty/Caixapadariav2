@@ -76,7 +76,7 @@ namespace View.UI.ViewAnomalias
             try
             {
                 InstanciarAnomaliasRepositorio();
-                _anomalias.Texto = txtTexto.Text;
+                _anomalias.Texto = txtTexto.Text.Trim().UpperCaseOnlyFirst();
                 if (_anomaliasRepositorio.Salvar(_anomalias) > 0)
                 {
                     this.DialogResult = DialogResult.Yes;

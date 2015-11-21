@@ -44,7 +44,7 @@ namespace View
         }
 
         private void InstanciaCaixaRepositorio() => _caixaRepositorio = new CaixaRepositorio();
-        
+
         private void frmMenu_Load(object sender, EventArgs e)
         {
 
@@ -63,16 +63,9 @@ namespace View
                 CarregarTextoDePermissao();
                 if (InserirDatasUnicas() > 0)
                 {
-                    _caixaRepositorio = new CaixaRepositorio();
-                    if (_caixaRepositorio.GetValor().Valor > 0)
-                    {
-                        Properties.Settings.Default.CaixaAberto = true;
-                    }
-                    else
-                    {
-                        Properties.Settings.Default.CaixaAberto = false;
-                    }
-
+                    Properties.Settings.Default.CaixaAberto =
+                        new CaixaRepositorio().GetValor().Valor > 0 ?
+                        true : false;
                 }
 
                 if (_keyGenRepositorio.GetDiasTrail() == 0)
@@ -151,7 +144,7 @@ namespace View
             }
         }
         private void InstanciarKeyGenRepositorio() => _keyGenRepositorio = new KeyGenRepositorio();
-        
+
         private void CarregarTextoDePermissao()
         {
             this.Text += ": " + Usuarios.PermissaoStatic + " | Data: " + DateTime.Now;
@@ -190,12 +183,14 @@ namespace View
             }
         }
         private void InstanciarTipoPagamentoRepositorio() => _tipoPagamentoRepositorio = new TipoPagamentoRepositorio();
-       
-        private void InstanciarTipoCadastroRepositorio() { _tipoCadastroRepositorio = new TipoCadastroRepositorio();
-            }
+
+        private void InstanciarTipoCadastroRepositorio()
+        {
+            _tipoCadastroRepositorio = new TipoCadastroRepositorio();
+        }
         private void btnGerenciar_Click(object sender, EventArgs e)
         {
-            
+
 
             try
             {
@@ -213,7 +208,7 @@ namespace View
         }
         private void btnLogin_Click(object sender, EventArgs e)
         {
-           
+
             try
             {
                 OpenMdiForm.OpenAndCloseNoMdi(new frmLogin(), this);
@@ -254,10 +249,10 @@ namespace View
                 SaveErroInTxt.RecordInTxt(error, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(error.Message, "Erro");
             }
-           
+
         }
         private void btnGerenciarCategoria_Click(object sender, EventArgs e)
-        {          
+        {
             try
             {
                 OpenMdiForm.LoadNewKeepAnother(this, new frmGerenciarCategoria());
@@ -287,7 +282,7 @@ namespace View
                 SaveErroInTxt.RecordInTxt(error, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(error.Message, "Erro");
             }
-           
+
         }
         private void btnPesuisarProduto_Click(object sender, EventArgs e)
         {
@@ -323,7 +318,7 @@ namespace View
                 SaveErroInTxt.RecordInTxt(error, this.GetType().Name);
                 DialogMessage.MessageFullComButtonOkIconeDeInformacao(message: error.Message, title: "Aviso");
             }
-           
+
         }
         private void btnGerenciarEstoque_Click(object sender, EventArgs e)
         {
@@ -341,7 +336,7 @@ namespace View
                 DialogMessage.MessageFullComButtonOkIconeDeInformacao(message: error.Message, title: "Aviso");
             }
 
-            
+
         }
 
         private void btnCaixa_Click(object sender, EventArgs e)
@@ -359,7 +354,7 @@ namespace View
                 SaveErroInTxt.RecordInTxt(error, this.GetType().Name);
                 DialogMessage.MessageFullComButtonOkIconeDeInformacao(message: error.Message, title: "Aviso");
             }
-           
+
         }
         private void btnMovimentacaoCaixa_Click(object sender, EventArgs e)
         {
@@ -376,7 +371,7 @@ namespace View
                 SaveErroInTxt.RecordInTxt(error, this.GetType().Name);
                 DialogMessage.MessageFullComButtonOkIconeDeInformacao(message: error.Message, title: "Aviso");
             }
-            
+
         }
         private void btnMovimentacaoCaixa_Click_1(object sender, EventArgs e)
         {
@@ -385,7 +380,7 @@ namespace View
             {
                 OpenMdiForm.LoadNewKeepAnother(this, new frmMovimentacaoCaixa());
             }
-              catch (CustomException error)
+            catch (CustomException error)
             {
                 DialogMessage.MessageFullComButtonOkIconeDeInformacao(message: error.Message, title: "Aviso");
             }
@@ -395,7 +390,7 @@ namespace View
                 DialogMessage.MessageFullComButtonOkIconeDeInformacao(message: error.Message, title: "Aviso");
             }
 
-           
+
         }
         private void btnMovimentacaoProduto_Click(object sender, EventArgs e)
         {
@@ -415,7 +410,7 @@ namespace View
             }
 
 
-         
+
         }
         private void btnRelatorioCompra_Click(object sender, EventArgs e)
         {
@@ -436,7 +431,7 @@ namespace View
                     {
                         frmEspera.Close();
                     }
-                   
+
                 }
             }
             catch (CustomException error)
@@ -466,7 +461,7 @@ namespace View
         {
             frmEspera = new frmMensagemDeEspera();
             frmEspera.ShowDialog();
-           
+
         }
 
         private void btnAnomalias_Click(object sender, EventArgs e)
@@ -484,7 +479,7 @@ namespace View
                 SaveErroInTxt.RecordInTxt(error, this.GetType().Name);
                 DialogMessage.MessageFullComButtonOkIconeDeInformacao(message: error.Message, title: "Aviso");
             }
-           
+
         }
 
         private void btnConferenciaEstoque_Click(object sender, EventArgs e)

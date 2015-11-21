@@ -1719,7 +1719,8 @@ namespace View.UI.ViewCaixa
                         btnConcluirVenda.PerformClick();
                     }
                     break;
-                default:
+                case Keys.Escape:
+                    this.Close();
                     break;
             }
             return base.ProcessCmdKey(ref msg, keyData);

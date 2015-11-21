@@ -49,7 +49,7 @@ namespace View.UI.ViewProduto
             if (dgvProdutos.Rows.Count > 0)
             {
                 dgvProdutos.Rows[0].Selected = true;
-            }            
+            }
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -60,12 +60,12 @@ namespace View.UI.ViewProduto
                 case Keys.Left:
                     break;
                 case Keys.Up:
-                    dgvProdutos.MoveToUp();                  
+                    dgvProdutos.MoveToUp();
                     break;
                 case Keys.Right:
                     break;
                 case Keys.Down:
-                    dgvProdutos.MoveToDown();                 
+                    dgvProdutos.MoveToDown();
                     break;
                 case Keys.Select:
                     break;
@@ -103,7 +103,7 @@ namespace View.UI.ViewProduto
                         {
                             int idProduto = Convert.ToInt32(dgvProdutos.SelectedRows[0].Cells["ID"].Value);
                             InstanciarProdutoRepositorio();
-                            Produto prod =  _produtoRepositorio.GetProdutoPorID(idProduto);
+                            Produto prod = _produtoRepositorio.GetProdutoPorID(idProduto);
                             if (prod != null)
                             {
                                 Produto.CodigoDoProduto = prod.Codigo;
@@ -117,7 +117,9 @@ namespace View.UI.ViewProduto
                     }
 
                     break;
-
+                case Keys.Escape:
+                    this.Close();
+                    break;
             }
             return base.ProcessCmdKey(ref msg, keyData);
         }
@@ -277,17 +279,13 @@ namespace View.UI.ViewProduto
                 InstanciarProdutoRepositorio();
                 if (_produtoRepositorio.GetQuantidade() > 0)
                 {
-                    int tamanho = txtPesquisar.Text.Length;
                     switch (SelecionarTextoDoRadioButtonSelecionado())
                     {
                         case "Nome":
                             _produtoRepositorio.SelectProdutoPeloNome(dgv: dgvProdutos, nome: txtPesquisar.Text.Trim());
                             break;
                         case "Código":
-                            if (tamanho == 0)
-                            {
-                                _produtoRepositorio.SelectProdutoPeloCodigo(dgv: dgvProdutos, codigo: txtPesquisar.Text.Trim());
-                            }
+                            _produtoRepositorio.SelectProdutoPeloCodigo(dgv: dgvProdutos, codigo: txtPesquisar.Text.Trim());
                             break;
                         case "Categoria":
                             _produtoRepositorio.SelectProdutoPeloCategoria(dgv: dgvProdutos, categoria: txtPesquisar.Text.Trim());

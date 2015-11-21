@@ -543,11 +543,11 @@ namespace View.UI.ViewProduto
         {
             if (cbbTipoCadastro.Text == EnumTipoCadastro.Peso.ToString())
             {
-                FocarNoTxt(ListaTxtPeso().ValidarCampos());                
+                FocarNoTxt(ListaTxtPeso().ValidarCampos());
             }
             else
             {
-                FocarNoTxt(ListaTxtUnidade().ValidarCampos());                
+                FocarNoTxt(ListaTxtUnidade().ValidarCampos());
             }
         }
 
@@ -683,26 +683,47 @@ namespace View.UI.ViewProduto
             }
 
         }
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            switch (keyData)
+            {
 
+                case Keys.F1:
+                    break;
+                case Keys.F2:
+                    break;
+                case Keys.F3:
+                    break;
+                case Keys.F4:
+                    break;
+                case Keys.F5:
+                    break;
+                case Keys.F6:
+                    break;
+                case Keys.F7:
+                    break;
+                case Keys.F8:
+                    break;
+                case Keys.F9:
+                    break;
+                case Keys.F10:
+                    break;
+                case Keys.F11:
+                    break;
+                case Keys.F12:
+                    break;
+                case Keys.Escape:
+                    FecharForm();
+                    break;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
         private TextBox[] ListaTxtUnidadeSemEstoque()
-        {
-
-            TextBox[] txtListUnidade = { txtCodigo, txtNome, txtPrecoCompra, txtPrecoVenda };
-            return txtListUnidade;
-
-        }
-
+                          => new TextBox[] { txtCodigo, txtNome, txtPrecoCompra, txtPrecoVenda };
         private TextBox[] ListaTxtPeso()
-        {
-            TextBox[] txtListPeso = { txtCodigo, txtNome, txtDescricao, txtPrecoCompra, txtPrecoVenda };
-            return txtListPeso;
-        }
-
+                          => new TextBox[] { txtCodigo, txtNome, txtDescricao, txtPrecoCompra, txtPrecoVenda };
         private TextBox[] ListaTxtUnidade()
-        {
-            TextBox[] txtListUnidade = { txtCodigo, txtNome, txtPrecoCompra, txtPrecoVenda, txtQtdMaxima, txtQtdMinima, txtEstoque };
-            return txtListUnidade;
-        }
+                          => new TextBox[] { txtCodigo, txtNome, txtPrecoCompra, txtPrecoVenda, txtQtdMaxima, txtQtdMinima, txtEstoque };
         private void PreenchimentoDoProdutoPorUnidade(Produto produto)
         {
 
@@ -1118,7 +1139,7 @@ namespace View.UI.ViewProduto
                 if (cbbCategoria.Items.Count > 0)
                 {
                     FocarNoCbb(cbbCategoria);
-                    MostrarItensDoCbb(cbb:cbbCategoria);
+                    MostrarItensDoCbb(cbb: cbbCategoria);
                 }
                 else
                 {

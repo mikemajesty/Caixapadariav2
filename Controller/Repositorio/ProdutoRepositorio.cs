@@ -222,7 +222,7 @@ namespace Controller.Repositorio
                                        Categoria = cat.Nome,
                                        Preço = prod.PrecoVenda,
                                        Estoque = prod.GerenciarEstoque
-                                   }).Where(c => c.Codigo == codigo).OrderBy(c => c.Nome).ToList());
+                                   }).Where(c => c.Codigo.Contains(codigo)).OrderBy(c => c.Nome).ToList());
 
                 if (dgv.Rows.Count == 0)
                 {
