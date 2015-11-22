@@ -14,13 +14,9 @@ namespace Controller.Repositorio
         private TipoPagamentoRepositorio _tipoPagamentoRePositorio;
         private const int Sucesso = 1, Insucesso = 0;
         private void InstanciarBanco()
-        {
-            _banco = new _DbContext();
-        }
+                     => _banco = new _DbContext();
         private void InstanciarTipoDePagamentoRepositorio()
-        {
-            _tipoPagamentoRePositorio = new TipoPagamentoRepositorio();
-        }
+                     => _tipoPagamentoRePositorio = new TipoPagamentoRepositorio();
         public DateTime GetMininumDate()
         {
             try
@@ -107,7 +103,6 @@ namespace Controller.Repositorio
             try
             {
                 InstanciarBanco();
-
                 dgv.DataSource = _banco.Venda.ToList();
             }
             catch (CustomException erro)

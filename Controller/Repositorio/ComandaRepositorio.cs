@@ -24,11 +24,7 @@ namespace Controller.Repositorio
             _comandaBO = new ComandaBO();
         }
         private void InstanciaVendaComComandaAtivaRepositorio()
-        {
-            _vendaComComandaAtivaRepositorio = new VendaComComandaAtivaRepositorio();
-
-        }
-       
+                     => _vendaComComandaAtivaRepositorio = new VendaComComandaAtivaRepositorio();
         public bool Inserir(List<Comanda> comandList, Comanda comanda)
         {
             try
@@ -95,7 +91,13 @@ namespace Controller.Repositorio
             try
             {
 
-                dgv.DataSource = (from a in _banco.Comanda select new { ID = a.ID, Codigo = a.Codigo }).ToList();
+                dgv.DataSource =
+                    (from a in _banco.Comanda
+                     select new
+                     {
+                         ID = a.ID,
+                         Codigo = a.Codigo
+                     }).ToList();
 
             }
             catch (CustomException erro)
@@ -142,7 +144,7 @@ namespace Controller.Repositorio
                 {
                     throw new CustomException("Não é possível deletar uma comanda que possui itens vendidos");
                 }
-             
+
             }
             catch (CustomException erro)
             {

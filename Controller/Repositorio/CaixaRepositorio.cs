@@ -13,10 +13,7 @@ namespace Controller.Repositorio
         private _DbContext _banco;
         private const int Sucesso = 1, Insucesso = 0;
         private void InstanciarBanco()
-        {
-            _banco = new _DbContext();
-        }
-
+                     => _banco = new _DbContext();
         public int Cadastrar(Caixa caixa)
         {
             try

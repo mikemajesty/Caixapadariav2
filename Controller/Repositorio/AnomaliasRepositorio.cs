@@ -120,10 +120,7 @@ namespace Controller.Repositorio
         }
 
         public void Dispose()
-        {
-            _Banco.Dispose();
-        }
-
+                    => _Banco.Dispose();
         public Anomalias GetByID(int id)
         {
 

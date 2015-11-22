@@ -13,13 +13,9 @@ namespace Controller.Repositorio
         private _DbContext _banco;
         private KeyGenBO _keyGenBo;
         private void InstanciarBanco()
-        {
-            _banco = new _DbContext();
-        }
+                     => _banco = new _DbContext();
         private void InstanciarKeyGenBO()
-        {
-            _keyGenBo = new KeyGenBO();
-        }
+                     => _keyGenBo = new KeyGenBO();
         public int DeletarDatas()
         {
             try
@@ -27,7 +23,7 @@ namespace Controller.Repositorio
 
                 InstanciarBanco();
                 var datas = _banco.Datas;
-                int retorno = 0;
+                int retorno = 0;             
                 foreach (var item in datas)
                 {
                     _banco.Datas.Remove(item);
@@ -69,7 +65,7 @@ namespace Controller.Repositorio
         {
             try
             {
-               
+
                 InstanciarKeyGenBO();
                 int retorno = 0;
                 if (_keyGenBo.VerificaSeExisteDatas(datas) == null)
@@ -98,7 +94,7 @@ namespace Controller.Repositorio
             try
             {
                 InstanciarBanco();
-                int dias = 30 -_banco.Datas.Count();
+                int dias = 30 - _banco.Datas.Count();
                 return dias;
 
             }

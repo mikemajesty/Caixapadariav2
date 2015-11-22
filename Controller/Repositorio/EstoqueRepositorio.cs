@@ -18,14 +18,9 @@ namespace Controller.Repositorio
         private const int Unidade = 3;
         private const bool NaoGerenciarEstoque = false, GerenciarEstoque = true;
         private void InstanciarTipoCadastroRepositorio()
-        {
-            _tipoCadastroRepositorio = new TipoCadastroRepositorio();
-        }
+                     => _tipoCadastroRepositorio = new TipoCadastroRepositorio();
         private void InstanciarMovimentacaoProdutoRepositorio()
-        {
-            _movimentacaoProdutoRepositorio = new MovimentacaoProdutoRepositorio();
-        }
-
+                     => _movimentacaoProdutoRepositorio = new MovimentacaoProdutoRepositorio();
         public int GetIDTipoCategoria(string nome)
         {
             try
@@ -151,17 +146,9 @@ namespace Controller.Repositorio
 
         }
         private void InstanciarDbContext()
-        {
-            _banco = new _DbContext();
-        }
-
-
-
+                     => _banco = new _DbContext();
         public Produto GetLinhaPeloID(int ProdutoID)
         {
-
-
-
             try
             {
 

@@ -17,9 +17,7 @@ namespace Controller.Repositorio
         private ClienteBO _clienteBO;
         private bool NaoExiste = false;
         private void InstanciarClienteBO()
-        {
-            _clienteBO = new ClienteBO();
-        }
+                     => _clienteBO = new ClienteBO();
         public ClienteRepositorio()
         {
             _banco = new _DbContext();

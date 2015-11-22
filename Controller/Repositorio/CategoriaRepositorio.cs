@@ -17,13 +17,18 @@ namespace Controller.Repositorio
         {
             _banco = new _DbContext();
         }
-
         public void Listar(DataGridView dgv)
         {
             try
             {
 
-                dgv.DataSource = (from a in _banco.Categoria select new { ID = a.ID, Nome = a.Nome }).ToList();
+                dgv.DataSource =
+                (from a in _banco.Categoria
+                 select new
+                 {
+                     ID = a.ID,
+                     Nome = a.Nome
+                 }).ToList();
 
             }
             catch (CustomException erro)
@@ -105,7 +110,7 @@ namespace Controller.Repositorio
 
             try
             {
-                if (_banco.Produto.FirstOrDefault(c=>c.Categoria == categoria.ID) == null)
+                if (_banco.Produto.FirstOrDefault(c => c.Categoria == categoria.ID) == null)
                 {
                     _banco.Entry(categoria).State = EntityState.Deleted;
                     return _banco.SaveChanges() == Sucesso ? Sucesso : Insucesso;
@@ -114,7 +119,7 @@ namespace Controller.Repositorio
                 {
                     throw new CustomException("Não é possível deletar uma Categoria associada a um produto.");
                 }
-              
+
             }
             catch (CustomException erro)
             {
@@ -132,7 +137,13 @@ namespace Controller.Repositorio
             try
             {
 
-                dgv.DataSource = (from a in _banco.Categoria select new { ID = a.ID, Nome = a.Nome }).Where(c => c.Nome.Contains(nome)).ToList();
+                dgv.DataSource =
+                    (from a in _banco.Categoria
+                     select new
+                     {
+                         ID = a.ID,
+                         Nome = a.Nome
+                     }).Where(c => c.Nome.Contains(nome)).ToList();
 
             }
             catch (CustomException erro)
@@ -246,8 +257,8 @@ namespace Controller.Repositorio
         {
             try
             {
-               Categoria categoria =  _banco.Categoria.OrderByDescending(c => c.ID).FirstOrDefault();
-               return categoria.Nome;
+                Categoria categoria = _banco.Categoria.OrderByDescending(c => c.ID).FirstOrDefault();
+                return categoria.Nome;
             }
             catch (CustomException erro)
             {

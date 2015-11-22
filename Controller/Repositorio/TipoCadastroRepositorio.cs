@@ -10,12 +10,9 @@ namespace Controller.Repositorio
 {
     public class TipoCadastroRepositorio
     {
-        private  _DbContext _banco;
-        
+        private  _DbContext _banco;        
         private void InstanciarBanco()
-        {
-            _banco = new _DbContext();
-        }
+                     => _banco = new _DbContext();
         public void Listar(ComboBox cbb)
         {
             try
@@ -121,7 +118,7 @@ namespace Controller.Repositorio
 
             try
             {
-                return new System.Collections.Generic.List<TipoCadastro>()
+                return new List<TipoCadastro>()
                 {
                      new TipoCadastro(){ Nome="Unidade"},
                      new TipoCadastro(){ Nome="Peso"} 

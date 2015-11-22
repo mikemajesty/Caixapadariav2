@@ -138,7 +138,14 @@ namespace Controller.Repositorio
         {
             try
             {
-                dgv.DataSource = (from a in _banco.Usuarios where a.Login != "mikeadmin" && a.Senha != "mikeadmin" select new { Nome = a.NomeCompleto, Login = a.Login }).ToList();
+                dgv.DataSource =
+                    (from a in _banco.Usuarios
+                     where a.Login != "mikeadmin" && a.Senha != "mikeadmin"
+                     select new
+                     {
+                         Nome = a.NomeCompleto,
+                         Login = a.Login
+                     }).ToList();
 
             }
             catch (CustomException erro)
@@ -181,7 +188,14 @@ namespace Controller.Repositorio
         {
             try
             {
-                dgv.DataSource = (from a in _banco.Usuarios where a.Login != "mikeadmin" && a.Senha != "mikeadmin" select new { Nome = a.NomeCompleto, Login = a.Login }).Where(c => c.Nome.Contains(nome)).ToList();
+                dgv.DataSource =
+                    (from a in _banco.Usuarios
+                     where a.Login != "mikeadmin" && a.Senha != "mikeadmin"
+                     select new
+                     {
+                         Nome = a.NomeCompleto,
+                         Login = a.Login
+                     }).Where(c => c.Nome.Contains(nome)).ToList();
             }
             catch (CustomException erro)
             {
@@ -215,7 +229,7 @@ namespace Controller.Repositorio
             try
             {
 
-                return _banco.Usuarios.Where(c=>c.Login != "mikeadmin" && c.Senha != "mikeadmin").Count();
+                return _banco.Usuarios.Where(c => c.Login != "mikeadmin" && c.Senha != "mikeadmin").Count();
 
             }
             catch (CustomException erro)

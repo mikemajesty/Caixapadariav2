@@ -13,17 +13,11 @@ namespace Controller.Repositorio
         private FiadoRepositorio _fiadoRepositorio;
         private Fiado _fiado;
         private void InstanciarBanco()
-        {
-            _banco = new _DbContext();
-        }
+                     => _banco = new _DbContext();
         private void InstanciarFiadoRepositorio()
-        {
-            _fiadoRepositorio = new FiadoRepositorio();
-        }
+                     => _fiadoRepositorio = new FiadoRepositorio();
         private void InstanciarFiado()
-        {
-            _fiado = new Fiado();
-        }
+                     => _fiado = new Fiado();
         public int Cadastrar(Fiado fiado)
         {
             try

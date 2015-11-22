@@ -107,11 +107,7 @@ namespace Controller.Repositorio
         {
             try
             {
-
-                foreach (var item in _banco.TipoPagamento)
-                {
-                    cbb.Items.Add(item.Tipo);
-                }
+                _banco.TipoPagamento.ToList().ForEach(c=> cbb.Items.Add(c.Tipo));
                 cbb.SelectedIndex = 0;
                 
             }

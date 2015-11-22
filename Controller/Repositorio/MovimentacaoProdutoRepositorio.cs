@@ -12,10 +12,7 @@ namespace Controller.Repositorio
     {
         private _DbContext _banco;
         private void InstanciarBanco()
-        {
-            _banco = new _DbContext();
-        }
-
+                     => _banco = new _DbContext();
         public int Cadastrar(MovimentacaoProduto movimentacaProduto)
         {
             try
@@ -61,13 +58,13 @@ namespace Controller.Repositorio
                                    }).Distinct()).ToList();
 
             }
-            catch (CustomException erro)
+            catch (CustomException error)
             {
-                DialogMessage.MessageFullComButtonOkIconeDeInformacao(erro.Message, "Aviso");
+                throw new CustomException(error.Message);
             }
-            catch (Exception erro)
+            catch (Exception error)
             {
-                DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
+                throw new Exception(error.Message);
             }
 
 
@@ -95,13 +92,13 @@ namespace Controller.Repositorio
                                    }).Distinct()).ToList();
 
             }
-            catch (CustomException erro)
+            catch (CustomException error)
             {
-                DialogMessage.MessageFullComButtonOkIconeDeInformacao(erro.Message, "Aviso");
+                throw new CustomException(error.Message);
             }
-            catch (Exception erro)
+            catch (Exception error)
             {
-                DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
+                throw new Exception(error.Message);
             }
         }
         public int GetQuantitidade()
@@ -189,13 +186,13 @@ namespace Controller.Repositorio
                                    }).Distinct()).ToList();
 
             }
-            catch (CustomException erro)
+            catch (CustomException error)
             {
-                DialogMessage.MessageFullComButtonOkIconeDeInformacao(erro.Message, "Aviso");
+                throw new CustomException(error.Message);
             }
-            catch (Exception erro)
+            catch (Exception error)
             {
-                DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
+                throw new Exception(error.Message);
             }
         }
     }

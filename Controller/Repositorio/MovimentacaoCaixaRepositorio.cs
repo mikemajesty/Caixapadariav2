@@ -2,11 +2,8 @@
 using Model.Data;
 using Model.Entidades;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Controller.Repositorio
@@ -15,10 +12,7 @@ namespace Controller.Repositorio
     {
         private _DbContext _banco;
         private void InstanciarBanco()
-        {
-            _banco = new _DbContext();
-        }
-
+                     => _banco = new _DbContext();
         public int Salvar(MovimentacaoCaixa movimentacaoCaixa)
         {
             try

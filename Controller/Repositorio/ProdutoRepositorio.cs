@@ -17,17 +17,11 @@ namespace Controller.Repositorio
         private const int Sucesso = 1, Insucesso = 0;
         private const bool NaoExiste = false;
         private void InstanciarDbContext()
-        {
-            _banco = new _DbContext();
-        }
+                     => _banco = new _DbContext();
         private void InstanciarProdutoBO()
-        {
-            _produtoBO = new ProdutoBO();
-        }
+                     => _produtoBO = new ProdutoBO();
         private void InstanciarTipoCadastroRepositorio()
-        {
-            _tipoCadastroRepositorio = new TipoCadastroRepositorio();
-        }
+                     => _tipoCadastroRepositorio = new TipoCadastroRepositorio();
         public int Salvar(Produto produto)
         {
             try

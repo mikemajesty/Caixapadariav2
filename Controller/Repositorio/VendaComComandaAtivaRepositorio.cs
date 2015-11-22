@@ -17,17 +17,11 @@ namespace Controller.Repositorio
         private VendaComComandaAtiva _vendaComComandaAtiva;
         private const bool Existe = true, NaoExiste = false;
         private void InstanciaBanco()
-        {
-            _banco = new _DbContext();
-        }
+                     => _banco = new _DbContext();
         private void InstanciarComandaRepositorio()
-        {
-            _comandaRepositorio = new ComandaRepositorio();
-        }
+                     => _comandaRepositorio = new ComandaRepositorio();
         private void InstanciarVendaComComandaAtiva()
-        {
-            _vendaComComandaAtiva = new VendaComComandaAtiva();
-        }
+                     => _vendaComComandaAtiva = new VendaComComandaAtiva();
         public List<VendaComComandaAtivaViewModel> GetComandasEmUso()
         {
 
@@ -212,13 +206,6 @@ namespace Controller.Repositorio
             }
 
         }
-
-
-
-
-
-
-
         public bool GetQuantidadeNaComandaAtiva(Comanda comanda)
         {
 
