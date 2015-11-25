@@ -19,7 +19,9 @@ namespace Model.BO
         {
             try
             {
-                return _banco.Categoria.FirstOrDefault(c => c.Nome == categoria.Nome) != null ? Existe.RetornaErro("Categoria já existe.") : NaoExiste;
+                return _banco.Categoria
+                    .FirstOrDefault(c => c.Nome == categoria.Nome) 
+                    != null ? Existe.RetornaErro("Categoria já existe.") : NaoExiste;
             }
             catch (CustomException erro)
             {

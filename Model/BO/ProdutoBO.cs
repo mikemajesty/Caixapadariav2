@@ -19,7 +19,9 @@ namespace Model.BO
         {
             try
             {
-                return _banco.Produto.FirstOrDefault(c => c.Codigo == produto.Codigo) != null ? Existe.RetornaErro("Produto com esse código já esta cadastrado.") : NaoExiste;
+                return _banco.Produto
+                       .FirstOrDefault(c => c.Codigo == produto.Codigo)
+                       != null ? Existe.RetornaErro("Produto com esse código já esta cadastrado.") : NaoExiste;
 
             }
             catch (CustomException erro)

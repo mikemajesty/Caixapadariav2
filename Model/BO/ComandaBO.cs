@@ -19,7 +19,9 @@ namespace Model.BO
         {
             try
             {
-                return _banco.Comanda.FirstOrDefault(c => c.Codigo == comanda.Codigo) != null ? Existe.RetornaErro("Comanda já Existe.") : NaoExiste;
+                return _banco.Comanda
+                       .FirstOrDefault(c => c.Codigo == comanda.Codigo) 
+                       != null ? Existe.RetornaErro("Comanda já Existe.") : NaoExiste;
                 
             }
             catch (CustomException erro)

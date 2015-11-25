@@ -131,7 +131,8 @@ namespace Controller.Repositorio
 
                     dgv.DataSource = (from venda in _banco.Venda
                                       join usu in _banco.Usuarios on venda.IdUsuario equals usu.ID
-                                      join tipoPag in _banco.TipoPagamento on venda.IDTIPOPAGAMENTO equals tipoPag.ID
+                                      join tipoPag in _banco.TipoPagamento on venda.IDTIPOPAGAMENTO 
+                                      equals tipoPag.ID
                                       where
                                          venda.Data >= dtpInicial.Value.Date
                                       && venda.Data <= dtpFinal.Value.Date

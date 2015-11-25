@@ -259,6 +259,18 @@
     <Compile Include="UI\ViewProduto\frmPesquisarProduto.Designer.cs">
       <DependentUpon>frmPesquisarProduto.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\ViewSangria\frmCriarSangria.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\ViewSangria\frmCriarSangria.Designer.cs">
+      <DependentUpon>frmCriarSangria.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ViewSangria\frmSangria.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\ViewSangria\frmSangria.Designer.cs">
+      <DependentUpon>frmSangria.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -353,6 +365,12 @@
     <EmbeddedResource Include="UI\ViewRelatorio\estoqueConferencia.rdlc" />
     <EmbeddedResource Include="UI\ViewRelatorio\rpvCompras.rdlc" />
     <EmbeddedResource Include="UI\ViewRelatorio\rpvFiado.rdlc" />
+    <EmbeddedResource Include="UI\ViewSangria\frmCriarSangria.resx">
+      <DependentUpon>frmCriarSangria.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\ViewSangria\frmSangria.resx">
+      <DependentUpon>frmSangria.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="app.manifest">
       <SubType>Designer</SubType>
     </None>

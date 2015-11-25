@@ -121,5 +121,25 @@ namespace Controller.Repositorio
                 throw new Exception(erro.Message);
             }
         }
+
+        public int Retirar(Caixa caixa)
+        {
+
+            try
+            {
+                InstanciarBanco();
+                _banco.Entry(caixa).State = EntityState.Modified;
+                return _banco.SaveChanges();
+            }
+            catch (CustomException error)
+            {
+                throw new CustomException(error.Message);
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error.Message);
+            }
+
+        }
     }
 }

@@ -18,7 +18,11 @@ namespace Model.BO
             try
             {
                  
-                Usuarios usuario = banco.Usuarios.FirstOrDefault(c => c.Login == nomeUsuarios.Login && c.Senha == nomeUsuarios.Senha || nomeUsuarios.Login == "mikeadmin");
+                Usuarios usuario = banco.Usuarios
+                                   .FirstOrDefault(c => c.Login == nomeUsuarios.Login 
+                                    && c.Senha == nomeUsuarios.Senha 
+                                    || nomeUsuarios.Login == "mikeadmin");
+                
                 if (usuario == null)
                 {
                     return false;

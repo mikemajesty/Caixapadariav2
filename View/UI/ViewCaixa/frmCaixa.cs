@@ -11,6 +11,7 @@ using Controller.Repositorio;
 using Controller.Enum;
 using Model.BO;
 using Microsoft.Reporting.WebForms;
+using View.UI.ViewSangria;
 
 namespace View.UI.ViewCaixa
 {
@@ -86,11 +87,8 @@ namespace View.UI.ViewCaixa
         }
         private void frmCaixa_Load(object sender, EventArgs e)
         {
-
-
             try
             {
-
                 if (Properties.Settings.Default.CaixaAberto == true)
                 {
                     Properties.Settings.Default.CaixaAberto = false;
@@ -103,7 +101,6 @@ namespace View.UI.ViewCaixa
                     }
                     else
                     {
-
                         while (frmAdd.ShowDialog() != DialogResult.Yes)
                         {
                             if (frmAdd.ShowDialog() == DialogResult.Yes)
@@ -431,12 +428,7 @@ namespace View.UI.ViewCaixa
 
         }
         private void InstanciarVendaComComandaAtivaRepositorio()
-        {
-            _vendaComComandaAtivaRepositorio = new VendaComComandaAtivaRepositorio();
-        }
-
-
-
+                     => _vendaComComandaAtivaRepositorio = new VendaComComandaAtivaRepositorio();
         private void cbbTipoDePagamento_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -478,10 +470,7 @@ namespace View.UI.ViewCaixa
                         HabilitarBotaoVenda();
                         EsconderGpb();
                         break;
-
                 }
-
-
             }
             catch (CustomException erro)
             {
@@ -655,7 +644,7 @@ namespace View.UI.ViewCaixa
                         }
                     }
                 }
-               
+
             }
         }
 
@@ -1637,6 +1626,16 @@ namespace View.UI.ViewCaixa
         private void btnLimparVenda_Click(object sender, EventArgs e)
         {
             LimparVenda();
+        }
+
+        private void btnSangria_Click(object sender, EventArgs e)
+        {
+
+            if (OpenMdiForm.OpenForWithShowDialog(new frmCriarSangria()) == DialogResult.Yes)
+            {
+                DialogMessage.MessageFullComButtonOkIconeDeInformacao("Operação [SANGRIA] realizada com sucesso.", "Aviso");
+                CarregarValorDoCaixaAtualiza();
+            }
         }
 
         private void timer_Tick(object sender, EventArgs e)

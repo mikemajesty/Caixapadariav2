@@ -51,11 +51,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BO\CaixaBO.cs" />
     <Compile Include="BO\CategoriaBO.cs" />
     <Compile Include="BO\ClienteBO.cs" />
     <Compile Include="BO\ComandaBO.cs" />
     <Compile Include="BO\GerenciarGerenciamentoDeEstoque.cs" />
-    <Compile Include="BO\Inject.cs" />
     <Compile Include="BO\KeyGenBO.cs" />
     <Compile Include="BO\ProdutoBO.cs" />
     <Compile Include="BO\UsuariosBO.cs" />
@@ -77,6 +77,7 @@
     <Compile Include="Entidades\RelatorioComprasViewModel.cs" />
     <Compile Include="Entidades\RelatorioEstoqueConferenciaViewModel.cs" />
     <Compile Include="Entidades\RelatorioFiadoViewModel.cs" />
+    <Compile Include="Entidades\Sangria.cs" />
     <Compile Include="Entidades\TipoCadastro.cs" />
     <Compile Include="Entidades\TipoPagamento.cs" />
     <Compile Include="Entidades\Usuarios.cs" />

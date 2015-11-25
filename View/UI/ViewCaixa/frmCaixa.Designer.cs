@@ -73,6 +73,7 @@
             this.btnCalculadora = new System.Windows.Forms.ToolStripMenuItem();
             this.tlp = new System.Windows.Forms.ToolTip(this.components);
             this.timer = new System.Windows.Forms.Timer(this.components);
+            this.btnSangria = new System.Windows.Forms.ToolStripMenuItem();
             this.gpbCodigoDaComanda.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ptbCodigo)).BeginInit();
             this.gpbCodigoDoProduto.SuspendLayout();
@@ -504,6 +505,7 @@
             this.btnReceberCredito,
             this.btnDividirComanda,
             this.btnAbrirCaixa,
+            this.btnSangria,
             this.btnFecharCaixa,
             this.btnLimparVenda,
             this.btnSairDoMenu});
@@ -578,6 +580,13 @@
             // 
             this.timer.Interval = 1000;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            // 
+            // btnSangria
+            // 
+            this.btnSangria.Name = "btnSangria";
+            this.btnSangria.Size = new System.Drawing.Size(229, 22);
+            this.btnSangria.Text = "Sangria";
+            this.btnSangria.Click += new System.EventHandler(this.btnSangria_Click);
             // 
             // frmCaixa
             // 
@@ -681,5 +690,6 @@
         private System.Windows.Forms.Label lblF5;
         private System.Windows.Forms.Label lblF6;
         private System.Windows.Forms.ToolStripMenuItem btnLimparVenda;
+        private System.Windows.Forms.ToolStripMenuItem btnSangria;
     }
 }
