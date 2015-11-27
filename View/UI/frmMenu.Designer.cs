@@ -53,13 +53,14 @@
             this.btnAnomalias = new System.Windows.Forms.ToolStripMenuItem();
             this.menuRelatorios = new System.Windows.Forms.ToolStripMenuItem();
             this.btnRelatorioCompra = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnConferenciaEstoque = new System.Windows.Forms.ToolStripMenuItem();
             this.btnSair = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.fffToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rodape = new System.Windows.Forms.StatusStrip();
             this.lblProfissao = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblUsuarioLogado = new System.Windows.Forms.ToolStripStatusLabel();
-            this.btnConferenciaEstoque = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnSangria = new System.Windows.Forms.ToolStripMenuItem();
             this.menu.SuspendLayout();
             this.rodape.SuspendLayout();
             this.SuspendLayout();
@@ -237,7 +238,8 @@
             this.btnMovimentacaoVenda,
             this.btnMovimentacaoCaixa,
             this.btnMovimentacaoProduto,
-            this.btnAnomalias});
+            this.btnAnomalias,
+            this.btnSangria});
             this.menuMovimentacao.Font = new System.Drawing.Font("Arial Black", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menuMovimentacao.Image = ((System.Drawing.Image)(resources.GetObject("menuMovimentacao.Image")));
             this.menuMovimentacao.Name = "menuMovimentacao";
@@ -248,29 +250,29 @@
             // btnMovimentacaoVenda
             // 
             this.btnMovimentacaoVenda.Name = "btnMovimentacaoVenda";
-            this.btnMovimentacaoVenda.Size = new System.Drawing.Size(151, 22);
+            this.btnMovimentacaoVenda.Size = new System.Drawing.Size(152, 22);
             this.btnMovimentacaoVenda.Text = "Venda";
             this.btnMovimentacaoVenda.Click += new System.EventHandler(this.btnMovimentacaoCaixa_Click);
             // 
             // btnMovimentacaoCaixa
             // 
             this.btnMovimentacaoCaixa.Name = "btnMovimentacaoCaixa";
-            this.btnMovimentacaoCaixa.Size = new System.Drawing.Size(151, 22);
+            this.btnMovimentacaoCaixa.Size = new System.Drawing.Size(152, 22);
             this.btnMovimentacaoCaixa.Text = "Caixa";
             this.btnMovimentacaoCaixa.Click += new System.EventHandler(this.btnMovimentacaoCaixa_Click_1);
             // 
             // btnMovimentacaoProduto
             // 
             this.btnMovimentacaoProduto.Name = "btnMovimentacaoProduto";
-            this.btnMovimentacaoProduto.Size = new System.Drawing.Size(151, 22);
+            this.btnMovimentacaoProduto.Size = new System.Drawing.Size(152, 22);
             this.btnMovimentacaoProduto.Text = "Produto";
             this.btnMovimentacaoProduto.Click += new System.EventHandler(this.btnMovimentacaoProduto_Click);
             // 
             // btnAnomalias
             // 
             this.btnAnomalias.Name = "btnAnomalias";
-            this.btnAnomalias.Size = new System.Drawing.Size(151, 22);
-            this.btnAnomalias.Text = "Anomalias";
+            this.btnAnomalias.Size = new System.Drawing.Size(152, 22);
+            this.btnAnomalias.Text = "Anomalia";
             this.btnAnomalias.Click += new System.EventHandler(this.btnAnomalias_Click);
             // 
             // menuRelatorios
@@ -291,6 +293,13 @@
             this.btnRelatorioCompra.Size = new System.Drawing.Size(235, 22);
             this.btnRelatorioCompra.Text = "Compras";
             this.btnRelatorioCompra.Click += new System.EventHandler(this.btnRelatorioCompra_Click);
+            // 
+            // btnConferenciaEstoque
+            // 
+            this.btnConferenciaEstoque.Name = "btnConferenciaEstoque";
+            this.btnConferenciaEstoque.Size = new System.Drawing.Size(235, 22);
+            this.btnConferenciaEstoque.Text = "Estoque - Conferência";
+            this.btnConferenciaEstoque.Click += new System.EventHandler(this.btnConferenciaEstoque_Click);
             // 
             // btnSair
             // 
@@ -340,12 +349,12 @@
             this.lblUsuarioLogado.Size = new System.Drawing.Size(56, 20);
             this.lblUsuarioLogado.Text = "Nome";
             // 
-            // btnConferenciaEstoque
+            // btnSangria
             // 
-            this.btnConferenciaEstoque.Name = "btnConferenciaEstoque";
-            this.btnConferenciaEstoque.Size = new System.Drawing.Size(235, 22);
-            this.btnConferenciaEstoque.Text = "Estoque - Conferência";
-            this.btnConferenciaEstoque.Click += new System.EventHandler(this.btnConferenciaEstoque_Click);
+            this.btnSangria.Name = "btnSangria";
+            this.btnSangria.Size = new System.Drawing.Size(152, 22);
+            this.btnSangria.Text = "Sangria";
+            this.btnSangria.Click += new System.EventHandler(this.btnSangria_Click);
             // 
             // frmMenu
             // 
@@ -408,5 +417,6 @@
         private System.Windows.Forms.ToolStripMenuItem fffToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem btnAnomalias;
         private System.Windows.Forms.ToolStripMenuItem btnConferenciaEstoque;
+        private System.Windows.Forms.ToolStripMenuItem btnSangria;
     }
 }

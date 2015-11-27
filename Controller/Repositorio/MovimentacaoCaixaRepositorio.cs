@@ -40,7 +40,7 @@ namespace Controller.Repositorio
                 if (this.GetQuantidade() > 0)
                 {
                     date = _banco.MovimentacaoCaixa.Min(c => c.Data);
-                }               
+                }
                 return date;
             }
             catch (CustomException erro)
@@ -61,7 +61,7 @@ namespace Controller.Repositorio
                 var date = DateTime.Now;
                 if (this.GetQuantidade() > 0)
                 {
-                   date = _banco.MovimentacaoCaixa.Max(c => c.Data);
+                    date = _banco.MovimentacaoCaixa.Max(c => c.Data);
                 }
                 return date;
             }
@@ -130,6 +130,51 @@ namespace Controller.Repositorio
             catch (Exception erro)
             {
                 throw new Exception(erro.Message);
+            }
+
+        }
+
+        public int RetirarValor(decimal valor, DateTime data)
+        {
+
+            try
+            {
+                InstanciarBanco();
+                var movimentacaoCaixa = _banco.MovimentacaoCaixa.FirstOrDefault(c => c.Data == data.Date/*c=>c.Valor >= valor*/);
+                int retorno = 0;
+                if (movimentacaoCaixa != null)
+                {
+                    movimentacaoCaixa.Valor -= valor;
+                    retorno = this.Alterar(movimentacaoCaixa) == true ? 1 : 0;
+                }
+                return retorno;
+            }
+            catch (CustomException error)
+            {
+                throw new CustomException(error.Message);
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error.Message);
+            }
+
+        }
+        private bool Alterar(MovimentacaoCaixa mov)
+        {
+
+            try
+            {
+                InstanciarBanco();
+                _banco.Entry<MovimentacaoCaixa>(mov).State = EntityState.Modified;
+                return _banco.SaveChanges() > 0;
+            }
+            catch (CustomException error)
+            {
+                throw new CustomException(error.Message);
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error.Message);
             }
 
         }

@@ -78,6 +78,7 @@
     <Compile Include="Entidades\RelatorioEstoqueConferenciaViewModel.cs" />
     <Compile Include="Entidades\RelatorioFiadoViewModel.cs" />
     <Compile Include="Entidades\Sangria.cs" />
+    <Compile Include="Entidades\SangriaViewModel.cs" />
     <Compile Include="Entidades\TipoCadastro.cs" />
     <Compile Include="Entidades\TipoPagamento.cs" />
     <Compile Include="Entidades\Usuarios.cs" />

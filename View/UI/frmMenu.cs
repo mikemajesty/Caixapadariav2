@@ -20,6 +20,7 @@ using Model.BO;
 using System.Linq;
 using System.Drawing;
 using Controller.Repositorio;
+using View.UI.ViewSangria;
 
 namespace View
 {
@@ -529,6 +530,25 @@ namespace View
 
                 }
             }
+        }
+
+        private void btnSangria_Click(object sender, EventArgs e)
+        {
+
+            try
+            {
+                OpenMdiForm.LoadNewKeepAnother(this, new frmSangria());
+            }
+            catch (CustomException error)
+            {
+                DialogMessage.MessageFullComButtonOkIconeDeInformacao(message: error.Message, title: "Aviso");
+            }
+            catch (Exception error)
+            {
+                SaveErroInTxt.RecordInTxt(error, this.GetType().Name);
+                DialogMessage.MessageFullComButtonOkIconeDeInformacao(message: error.Message, title: "Aviso");
+            }
+
         }
     }
 }

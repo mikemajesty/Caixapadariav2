@@ -49,7 +49,7 @@ namespace Model.Entidades
                 {
                     MyErro.MyCustomException("Descrição deve conter mais palavras.");
                 }
-                if (value.Length > 50)
+                if (value.Length > 100)
                 {
                     MyErro.MyCustomException("Descrição deve conter menos palavras.");
                 }

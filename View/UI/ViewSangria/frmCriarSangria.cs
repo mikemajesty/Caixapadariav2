@@ -95,6 +95,7 @@ namespace View.UI.ViewSangria
                     var caixa = _caixaRepositorio.GetValor();
                     var sangria = Convert.ToDecimal(txtValorSangria.Text);
                     var resultCaixaRetirar = _caixaRepositorio.Retirar(new Caixa { ID = caixa.ID, IDUsuario = caixa.IDUsuario, Valor = (caixa.Valor - sangria) });
+                    new MovimentacaoCaixaRepositorio().RetirarValor(valor: sangria, data: DateTime.Now);
                     if (resultCaixaRetirar > 0)
                     {
                         this.DialogResult = DialogResult.Yes;                      

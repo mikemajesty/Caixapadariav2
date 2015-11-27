@@ -70,7 +70,7 @@
             this.txtDescricao.CharacterCasing = System.Windows.Forms.CharacterCasing.Lower;
             this.txtDescricao.Font = new System.Drawing.Font("Arial Narrow", 12F);
             this.txtDescricao.Location = new System.Drawing.Point(17, 24);
-            this.txtDescricao.MaxLength = 50;
+            this.txtDescricao.MaxLength = 100;
             this.txtDescricao.Multiline = true;
             this.txtDescricao.Name = "txtDescricao";
             this.txtDescricao.Size = new System.Drawing.Size(334, 126);
@@ -121,7 +121,7 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Valor no Caixa";
             // 
-            // frmSangria
+            // frmCriarSangria
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -135,7 +135,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "frmSangria";
+            this.Name = "frmCriarSangria";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Sangria";
             this.Load += new System.EventHandler(this.frmSangria_Load);
