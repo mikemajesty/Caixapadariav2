@@ -61,6 +61,7 @@
             this.dgvSangria.Name = "dgvSangria";
             this.dgvSangria.Size = new System.Drawing.Size(565, 171);
             this.dgvSangria.TabIndex = 0;
+            this.dgvSangria.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSangria_CellDoubleClick);
             // 
             // gpbValor
             // 
@@ -143,6 +144,8 @@
             this.Controls.Add(this.gpbSangria);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmSangria";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Sangria";

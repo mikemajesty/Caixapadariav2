@@ -1631,7 +1631,7 @@ namespace View.UI.ViewCaixa
         private void btnSangria_Click(object sender, EventArgs e)
         {
 
-            if (OpenMdiForm.OpenForWithShowDialog(new frmCriarSangria()) == DialogResult.Yes)
+            if (OpenMdiForm.OpenForWithShowDialog(new frmCriarSangria(EnumSangria.Criar,null)) == DialogResult.Yes)
             {
                 DialogMessage.MessageFullComButtonOkIconeDeInformacao("Operação [SANGRIA] realizada com sucesso.", "Aviso");
                 CarregarValorDoCaixaAtualiza();

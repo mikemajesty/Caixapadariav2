@@ -10,7 +10,24 @@ namespace Controller.Repositorio
     public class SangriaRepositorio
     {
         public _DbContext Banco { get; private set; }
+        private int _GetQuantidade()
+        {
 
+            try
+            {
+                return Banco.Sangria.Count();
+            }
+            catch (CustomException error)
+            {
+                throw new CustomException(error.Message);
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error.Message);
+            }
+
+
+        }
         public bool Salvar(Sangria sangria)
         {
 
@@ -40,12 +57,13 @@ namespace Controller.Repositorio
                 {
                     dgv.DataSource = (from san in Banco.Sangria
                                       join usu in
-            Banco.Usuarios on san.UsuarioID equals usu.ID where san.Data == data.Date 
+            Banco.Usuarios on san.UsuarioID equals usu.ID
+                                      where san.Data == data.Date
                                       select new SangriaViewModel
                                       {
                                           ID = san.ID,
-                                          Data = san.Data
-                                          Usuario = usu.NomeCompleto,
+                                          Data = san.Data,
+                                          Usuário = usu.NomeCompleto,
                                           Valor = san.valor
                                       }).ToList();
                 }
@@ -89,7 +107,7 @@ namespace Controller.Repositorio
                                       {
                                           ID = san.ID,
                                           Data = san.Data,
-                                          Usuario = usu.NomeCompleto,
+                                          Usuário = usu.NomeCompleto,
                                           Valor = san.valor
                                       }).ToList();
                 }
@@ -104,6 +122,78 @@ namespace Controller.Repositorio
             }
 
         }
+        public DateTime GetMinDate()
+        {
+
+            try
+            {
+                using (Banco = new _DbContext())
+                {
+                    return this._GetQuantidade() > 0 ? Banco.Sangria.Min(c => c.Data) : DateTime.MinValue;
+                }
+            }
+            catch (CustomException error)
+            {
+                throw new CustomException(error.Message);
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error.Message);
+            }
+
+        }
+        public DateTime GetMaxDate()
+        {
+
+            try
+            {
+                using (Banco = new _DbContext())
+                {
+                    return this._GetQuantidade() > 0 ? Banco.Sangria.Max(c => c.Data) : DateTime.MaxValue;
+                }
+            }
+            catch (CustomException error)
+            {
+                throw new CustomException(error.Message);
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error.Message);
+            }
+
+        }
+
+        public SangriaViewModel GetViewModelPorID(int id)
+        {
+
+            try
+            {
+                using (Banco = new _DbContext())
+                {
+                    return (from san in Banco.Sangria
+                            join usu in
+  Banco.Usuarios on san.UsuarioID equals usu.ID
+                            select new SangriaViewModel
+                            {
+                                ID = san.ID,
+                                Data = san.Data,
+                                Descricao = san.Descricao,
+                                Usuário = usu.NomeCompleto,
+                                Valor = san.valor
+                            }).Where(c => c.ID == id).FirstOrDefault();
+                }
+            }
+            catch (CustomException error)
+            {
+                throw new CustomException(error.Message);
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error.Message);
+            }
+
+        }
+
         private int SaveChanges()
                     => Banco.SaveChanges();
     }

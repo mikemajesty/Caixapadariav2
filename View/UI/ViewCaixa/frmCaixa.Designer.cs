@@ -67,13 +67,13 @@
             this.btnReceberCredito = new System.Windows.Forms.ToolStripMenuItem();
             this.btnDividirComanda = new System.Windows.Forms.ToolStripMenuItem();
             this.btnAbrirCaixa = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnSangria = new System.Windows.Forms.ToolStripMenuItem();
             this.btnFecharCaixa = new System.Windows.Forms.ToolStripMenuItem();
             this.btnLimparVenda = new System.Windows.Forms.ToolStripMenuItem();
             this.btnSairDoMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.btnCalculadora = new System.Windows.Forms.ToolStripMenuItem();
             this.tlp = new System.Windows.Forms.ToolTip(this.components);
             this.timer = new System.Windows.Forms.Timer(this.components);
-            this.btnSangria = new System.Windows.Forms.ToolStripMenuItem();
             this.gpbCodigoDaComanda.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ptbCodigo)).BeginInit();
             this.gpbCodigoDoProduto.SuspendLayout();
@@ -191,14 +191,14 @@
             this.gpbValorPago.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gpbValorPago.Location = new System.Drawing.Point(8, 355);
             this.gpbValorPago.Name = "gpbValorPago";
-            this.gpbValorPago.Size = new System.Drawing.Size(230, 72);
+            this.gpbValorPago.Size = new System.Drawing.Size(249, 72);
             this.gpbValorPago.TabIndex = 4;
             this.gpbValorPago.TabStop = false;
             this.gpbValorPago.Text = "Valor pago pelo cliente";
             // 
             // lblF6
             // 
-            this.lblF6.Location = new System.Drawing.Point(189, 27);
+            this.lblF6.Location = new System.Drawing.Point(204, 27);
             this.lblF6.Name = "lblF6";
             this.lblF6.Size = new System.Drawing.Size(37, 38);
             this.lblF6.TabIndex = 14;
@@ -221,7 +221,7 @@
             this.txtValorPago.Location = new System.Drawing.Point(41, 27);
             this.txtValorPago.MaxLength = 7;
             this.txtValorPago.Name = "txtValorPago";
-            this.txtValorPago.Size = new System.Drawing.Size(146, 38);
+            this.txtValorPago.Size = new System.Drawing.Size(158, 38);
             this.txtValorPago.TabIndex = 4;
             this.txtValorPago.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tlp.SetToolTip(this.txtValorPago, "Digite o Valor pago pelo cliente");
@@ -233,9 +233,9 @@
             this.gpbGerarTroco.Controls.Add(this.ptbTroco);
             this.gpbGerarTroco.Controls.Add(this.txtTroco);
             this.gpbGerarTroco.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gpbGerarTroco.Location = new System.Drawing.Point(244, 355);
+            this.gpbGerarTroco.Location = new System.Drawing.Point(263, 355);
             this.gpbGerarTroco.Name = "gpbGerarTroco";
-            this.gpbGerarTroco.Size = new System.Drawing.Size(204, 72);
+            this.gpbGerarTroco.Size = new System.Drawing.Size(185, 72);
             this.gpbGerarTroco.TabIndex = 5;
             this.gpbGerarTroco.TabStop = false;
             this.gpbGerarTroco.Text = "Troco";
@@ -259,7 +259,7 @@
             this.txtTroco.MaxLength = 20;
             this.txtTroco.Name = "txtTroco";
             this.txtTroco.ReadOnly = true;
-            this.txtTroco.Size = new System.Drawing.Size(155, 39);
+            this.txtTroco.Size = new System.Drawing.Size(134, 39);
             this.txtTroco.TabIndex = 0;
             this.txtTroco.TabStop = false;
             this.txtTroco.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -295,7 +295,7 @@
             this.gpbTotalNocaixa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gpbTotalNocaixa.Location = new System.Drawing.Point(8, 427);
             this.gpbTotalNocaixa.Name = "gpbTotalNocaixa";
-            this.gpbTotalNocaixa.Size = new System.Drawing.Size(230, 71);
+            this.gpbTotalNocaixa.Size = new System.Drawing.Size(249, 71);
             this.gpbTotalNocaixa.TabIndex = 4;
             this.gpbTotalNocaixa.TabStop = false;
             this.gpbTotalNocaixa.Text = "Total  no caixa";
@@ -304,9 +304,9 @@
             // 
             this.lblTotalNoCaixa.Font = new System.Drawing.Font("Arial Narrow", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotalNoCaixa.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblTotalNoCaixa.Location = new System.Drawing.Point(2, 16);
+            this.lblTotalNoCaixa.Location = new System.Drawing.Point(0, 16);
             this.lblTotalNoCaixa.Name = "lblTotalNoCaixa";
-            this.lblTotalNoCaixa.Size = new System.Drawing.Size(219, 52);
+            this.lblTotalNoCaixa.Size = new System.Drawing.Size(249, 52);
             this.lblTotalNoCaixa.TabIndex = 0;
             this.lblTotalNoCaixa.Text = "00 R$";
             this.lblTotalNoCaixa.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -321,9 +321,9 @@
             this.btnConcluirVenda.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnConcluirVenda.Image = ((System.Drawing.Image)(resources.GetObject("btnConcluirVenda.Image")));
             this.btnConcluirVenda.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnConcluirVenda.Location = new System.Drawing.Point(243, 435);
+            this.btnConcluirVenda.Location = new System.Drawing.Point(263, 435);
             this.btnConcluirVenda.Name = "btnConcluirVenda";
-            this.btnConcluirVenda.Size = new System.Drawing.Size(204, 63);
+            this.btnConcluirVenda.Size = new System.Drawing.Size(184, 63);
             this.btnConcluirVenda.TabIndex = 6;
             this.btnConcluirVenda.Text = "\r\nConcluir Venda\r\n  [F12]";
             this.tlp.SetToolTip(this.btnConcluirVenda, "\r\n\r\n");
@@ -537,6 +537,13 @@
             this.btnAbrirCaixa.Text = "Abrir\\Adicionar Caixa";
             this.btnAbrirCaixa.Click += new System.EventHandler(this.btnAbrirCaixa_Click);
             // 
+            // btnSangria
+            // 
+            this.btnSangria.Name = "btnSangria";
+            this.btnSangria.Size = new System.Drawing.Size(229, 22);
+            this.btnSangria.Text = "Sangria";
+            this.btnSangria.Click += new System.EventHandler(this.btnSangria_Click);
+            // 
             // btnFecharCaixa
             // 
             this.btnFecharCaixa.Name = "btnFecharCaixa";
@@ -580,13 +587,6 @@
             // 
             this.timer.Interval = 1000;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
-            // 
-            // btnSangria
-            // 
-            this.btnSangria.Name = "btnSangria";
-            this.btnSangria.Size = new System.Drawing.Size(229, 22);
-            this.btnSangria.Text = "Sangria";
-            this.btnSangria.Click += new System.EventHandler(this.btnSangria_Click);
             // 
             // frmCaixa
             // 
