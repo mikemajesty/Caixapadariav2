@@ -29,16 +29,12 @@ namespace View.UI.ViewCetegoria
                     btnNovo.Visible = false;
                     btnAlterar.Visible = false;
                     break;
-
-
             }
         }
         private void frmCadastrarCategoria_Load(object sender, EventArgs e)
         {
-
             try
             {
-                
                 this.FocoNoTxt(txt: txtPesquisar);
                 this.InstanciarCategoriaRepositorio();
                 CarregarGrid();
@@ -53,21 +49,17 @@ namespace View.UI.ViewCetegoria
                 SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
-
         }
-
         private void CarregarGrid()
         {
-
             try
             {
-
                 dgvCategoria.ClearSelection();
                 this.InstanciarCategoriaRepositorio();
                 _categoriaRepositorio.Listar(dgv: dgvCategoria);
                 AjustarTamanhoDoGrid();
                 dgvCategoria.PadronizarGrid();
-               
+
             }
             catch (CustomException erro)
             {
@@ -78,15 +70,9 @@ namespace View.UI.ViewCetegoria
                 SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
-
         }
-
         private void TirarFocoDoGrid()
-        {
-            dgvCategoria.ClearSelection();
-          
-        }
-
+                     => dgvCategoria.ClearSelection();
         private void AjustarTamanhoDoGrid()
         {
             dgvCategoria.AjustartamanhoDoDataGridView(
@@ -105,7 +91,6 @@ namespace View.UI.ViewCetegoria
 
         private void btnAlterar_Click(object sender, EventArgs e)
         {
-
             try
             {
                 if (dgvCategoria.Rows.Count > 0)
@@ -130,16 +115,11 @@ namespace View.UI.ViewCetegoria
                 SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
-
-          
         }
-
         private void btnDeletar_Click(object sender, EventArgs e)
         {
-
             try
             {
-
                 if (dgvCategoria.Rows.Count > 0)
                 {
                     Categoria categoria = _categoriaRepositorio.GetCategoriaPorID(PegaLinhaDoGrid());
@@ -165,10 +145,7 @@ namespace View.UI.ViewCetegoria
             }
         }
         public int PegaLinhaDoGrid()
-        {           
-            return Convert.ToInt32(dgvCategoria.CurrentRow.Cells["ID"].Value);
-        }
-
+                   => Convert.ToInt32(dgvCategoria.CurrentRow.Cells["ID"].Value);
         private void MostrarBotoes()
         {
             btnAlterar.Enabled = true;
@@ -181,27 +158,17 @@ namespace View.UI.ViewCetegoria
             btnDeletar.Enabled = false;
         }
         private void btnSair_Click(object sender, EventArgs e)
-        {
-            FecharForm();
-        }
-
+                     => FecharForm();
         private void FecharForm()
-        {
-            this.Close();
-        }
-
+                     => this.Close();
         private void txtPesquisar_TextChanged(object sender, EventArgs e)
         {
-
             try
             {
                 if (_categoriaRepositorio.GetQuantidade() > 0)
                 {
                     _categoriaRepositorio.PesquisaCategoriaPeloNome(dgvCategoria, txtPesquisar.Text);
                 }
-                
-
-
             }
             catch (CustomException erro)
             {
@@ -215,19 +182,14 @@ namespace View.UI.ViewCetegoria
 
         }
         private void InstanciarCategoriaRepositorio()
-        {
-            _categoriaRepositorio = new CategoriaRepositorio();
-        }
-
+                     => _categoriaRepositorio = new CategoriaRepositorio();
         private void txtPesquisar_KeyPress(object sender, KeyPressEventArgs e)
         {
-            ValidatorField.AllowOneSpaceTogether(e,sender);
-            ValidatorField.IntegerAndLetter(e:e);
+            ValidatorField.AllowOneSpaceTogether(e, sender);
+            ValidatorField.IntegerAndLetter(e: e);
         }
 
         private void dgvCategoria_KeyDown(object sender, KeyEventArgs e)
-        {
-            ValidatorField.DisableTabInGrid(sender, e);
-        }
+                     => ValidatorField.DisableTabInGrid(sender, e);
     }
 }

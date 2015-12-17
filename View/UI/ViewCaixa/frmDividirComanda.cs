@@ -331,7 +331,6 @@ namespace View.UI.ViewCaixa
                 {
                     if (ConcluirVendaComCreditar() == false)
                     {
-
                         _vendaRepositorio.ExcluirUltimaVenda();
                         DialogMessage.MessageFullComButtonOkIconeDeInformacao("Para concluir a venda no modo CREDITAR é necessário selecionar o cliente.", "Aviso");
                     }
@@ -607,7 +606,6 @@ namespace View.UI.ViewCaixa
             {
                 throw new Exception(erro.Message);
             }
-
         }
 
 
@@ -627,9 +625,7 @@ namespace View.UI.ViewCaixa
             {
                 throw new Exception(erro.Message);
             }
-
         }
-
         public decimal GetLucroTotal()
         {
             try
@@ -646,9 +642,7 @@ namespace View.UI.ViewCaixa
             {
                 throw new Exception(erro.Message);
             }
-
         }
-
         private void cbbTipoDePagamento_SelectedIndexChanged(object sender, EventArgs e)
         {
             switch (cbbTipoDePagamento.Text)
@@ -670,7 +664,6 @@ namespace View.UI.ViewCaixa
                     MostrarBotao();
                     FocoNoBotao();
                     break;
-
             }
         }
 
@@ -684,7 +677,6 @@ namespace View.UI.ViewCaixa
                      => list.ForEach(c => c.Visible = false);
         private void btnAbrirCaixa_Click(object sender, EventArgs e)
         {
-
             try
             {
                 if (OpenMdiForm.OpenForWithShowDialog(new frmAdicionarCaixa(EnumTipoOperacaoCaixa.Adicionar)) == DialogResult.Yes)
@@ -692,8 +684,6 @@ namespace View.UI.ViewCaixa
                     LimparTxt(new List<TextBox>() { txtTroco, txtValorPago });
                     AtualizarCaixa();
                 }
-
-
             }
             catch (CustomException erro)
             {
@@ -704,16 +694,13 @@ namespace View.UI.ViewCaixa
                 SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
-
         }
-
         private void HabilitarGroupBox(List<GroupBox> gpb)
                      => gpb.ForEach(c => c.Enabled = true);
         private void btnMudarParcelas_Click(object sender, EventArgs e)
         {
             try
             {
-
                 LimparTxt(new List<TextBox>() { txtTroco, txtValorPago });
                 ZerarValorDaParcela();
                 HabilitarGroupBox(gpb: new List<GroupBox>() { gpbGerarParcelas, gpbNumeroDeParcelas });

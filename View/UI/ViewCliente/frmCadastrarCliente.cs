@@ -18,7 +18,6 @@ namespace View.UI.ViewComanda
         private const int Sucesso = 1;
         public frmCadastrarCliente(Cliente cliente, EnumTipoOperacao tipoOpercacao)
         {
-
             InitializeComponent();
             CarregaClienteTipoOperacao(cliente, tipoOpercacao);
         }
@@ -32,11 +31,8 @@ namespace View.UI.ViewComanda
 
         private void frmCadastrarCliente_Load(object sender, EventArgs e)
         {
-
             try
             {
-
-
                 this.FocoNoTxt(txt: txtNome);
                 switch (_tipoOperacao)
                 {
@@ -73,15 +69,9 @@ namespace View.UI.ViewComanda
                 SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
-
-
         }
-
         private void DesabilitarGroupBox(GroupBox gpb)
-        {
-            gpb.Enabled = false;
-        }
-
+                     => gpb.Enabled = false;
         private void PopularTxt()
         {
             txtNome.Text = _cliente.Nome;
@@ -90,26 +80,15 @@ namespace View.UI.ViewComanda
         }
 
         private void MudarCorDoBotao(Color color)
-        {
-            btnCadastrar.BackColor = color;
-        }
-
+                     => btnCadastrar.BackColor = color;
         private void MudarTextoDoBotao(string texto)
-        {
-            btnCadastrar.Text = texto;
-        }
-
+                     => btnCadastrar.Text = texto;
         private void MudarTextoDoForm(string texto)
-        {
-            this.Text = texto;
-        }
-
+                     => this.Text = texto;
         private void btnCadastrar_Click(object sender, EventArgs e)
         {
-
             try
             {
-
                 int txtEmBranco = GetTxtEmBranco();
                 switch (_tipoOperacao)
                 {
@@ -124,11 +103,7 @@ namespace View.UI.ViewComanda
                             }
                         }
                         else
-                        {
                             ValidarTxt();
-
-                        }
-
                         break;
                     case EnumTipoOperacao.Alterar:
                         if (txtEmBranco == 0)
@@ -141,11 +116,7 @@ namespace View.UI.ViewComanda
                             }
                         }
                         else
-                        {
                             ValidarTxt();
-
-                        }
-
                         break;
                     case EnumTipoOperacao.Deletar:
                         if (_cliente.ID > 0)
@@ -162,15 +133,10 @@ namespace View.UI.ViewComanda
                                 }
                             }
                             else
-                            {
                                 MyErro.MyCustomException("Não é possível excluir um cliente que esta em débito com o estabelecimento.");
-                            }
                         }
                         else
-                        {
                             MyErro.MyCustomException("Todos os campos em amarelo são obrigatórios.");
-                        }
-
                         break;
                     case EnumTipoOperacao.Detalhes:
                         FecharForm();
@@ -196,33 +162,23 @@ namespace View.UI.ViewComanda
         {
             var listaMbt = GetMtbList().ToList().Where(c => c.BackColor == Color.Yellow && c.Text.Trim() == "");
             if (listaMbt.Count() > 0)
-            {
                 FocarNoMtb(listaMbt.FirstOrDefault());
-            }
             else
-            {
                 FocarNoTxt(txtNome);
-            }
             DialogMessage.MessageFullComButtonOkIconeDeInformacao("Todos os campos em amarelo são obrigatórios.", "Aviso");
         }
 
         private void FocarNoTxt(TextBox txt)
-        {
-            this.FocoNoTxt(txt);
-        }
-
+                     => this.FocoNoTxt(txt);
         private int GetTxtEmBranco()
         {
-
             try
             {
                 int retorno = 0;
                 MaskedTextBox[] mtbList = GetMtbList();
                 if (txtNome.Text == string.Empty)
-                {
                     retorno = 1;
 
-                }
                 foreach (MaskedTextBox mtb in mtbList)
                 {
                     if (mtb.Text == string.Empty)
@@ -246,29 +202,17 @@ namespace View.UI.ViewComanda
         }
 
         private MaskedTextBox[] GetMtbList() => new MaskedTextBox[] { mtbCpf, mtbTelefone };
-       
+
         private void FecharForm()
-        {
-            this.Close();
-        }
-
+                     => this.Close();
         private void MesagemDeAviso(string mensagem)
-        {
-            DialogMessage.MessageFullComButtonOkIconeDeInformacao(mensagem, "Aviso");
-        }
-
+                     => DialogMessage.MessageFullComButtonOkIconeDeInformacao(mensagem, "Aviso");
         private void PosSalvamento()
-        {
-            this.DialogResult = DialogResult.Yes;
-        }
-
+                     => this.DialogResult = DialogResult.Yes;
         private Model.Entidades.Cliente PreencheCliente()
         {
-
-
             try
             {
-
                 return new Model.Entidades.Cliente()
                 {
                     ID = _cliente.ID,
@@ -286,51 +230,33 @@ namespace View.UI.ViewComanda
             {
                 throw new Exception(erro.Message);
             }
-
-
         }
-
         private void InstanciarClienteRepositorio()
-        {
-            _clienteRepositorio = new ClienteRepositorio();
-        }
-
+                     => _clienteRepositorio = new ClienteRepositorio();
         private void txtNome_KeyPress(object sender, KeyPressEventArgs e)
         {
             ValidatorField.Letter(e);
             ValidatorField.AllowOneSpaceTogether(e, sender);
             if (e.KeyChar == (char)Keys.Enter)
-            {
                 FocarNoMtb(mtb: mtbTelefone);
-            }
         }
-
         private void FocarNoMtb(MaskedTextBox mtb)
-        {
-            this.ActiveControl = mtb;
-        }
-
+                     => this.ActiveControl = mtb;
         private void mtbTelefone_KeyPress(object sender, KeyPressEventArgs e)
         {
             ValidatorField.Integer(e: e);
             if (e.KeyChar == (char)Keys.Enter)
-            {
                 FocarNoMtb(mtb: mtbCpf);
-            }
         }
 
         private void mtbCpf_KeyPress(object sender, KeyPressEventArgs e)
         {
             ValidatorField.IntegerAndLetter(e: e);
             if (e.KeyChar == (char)Keys.Enter)
-            {
                 FocarNoButton(btn: btnCadastrar);
-            }
         }
 
         private void FocarNoButton(Button btn)
-        {
-            this.ActiveControl = btn;
-        }
+                     => this.ActiveControl = btn;
     }
 }

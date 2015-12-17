@@ -15,12 +15,9 @@ namespace View.UI.ViewCaixa
         }
      
         private void InstanciarCaixaRepositorio()
-        {
-            _movimentacaoCaixaRepositorio = new MovimentacaoCaixaRepositorio();
-        }
+                     => _movimentacaoCaixaRepositorio = new MovimentacaoCaixaRepositorio();
         private void frmMovimentacaoCaixa_Load(object sender, EventArgs e)
         {
-
             try
             {
                 InstanciarCaixaRepositorio();
@@ -39,7 +36,6 @@ namespace View.UI.ViewCaixa
                 SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
-
         }
         private void DefinirValoresNoDateTimePicker()
         {
@@ -67,10 +63,8 @@ namespace View.UI.ViewCaixa
         }
         private void btnPesquisarEntreDatas_Click(object sender, EventArgs e)
         {
-
             try
             {
-
                 InstanciarCaixaRepositorio();
                 _movimentacaoCaixaRepositorio.ListarEntreDatas(dgvMovimentacao, dtpValorInicial,dtpValorFinal);
                 ExibirLucroTotalVendido();
@@ -84,16 +78,11 @@ namespace View.UI.ViewCaixa
                 SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
-
         }
-
         private void btnPesquisarDia_Click(object sender, EventArgs e)
         {
-
             try
             {
-
-
                 InstanciarCaixaRepositorio();
                 _movimentacaoCaixaRepositorio.ListarPorDia(dgvMovimentacao,dtpPesquisarPorDia);
                 ExibirLucroTotalVendido();
@@ -107,15 +96,11 @@ namespace View.UI.ViewCaixa
                 SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
-
         }
-
         private void btnTodos_Click(object sender, EventArgs e)
-        {
-                
+        {                
             try
             {
-
                 InstanciarCaixaRepositorio();
                 _movimentacaoCaixaRepositorio.Listar(dgvMovimentacao);
                 ExibirLucroTotalVendido();
@@ -145,10 +130,7 @@ namespace View.UI.ViewCaixa
                         lucro += Convert.ToDecimal(dgvMovimentacao.Rows[contador].Cells[0].Value);                        
                     }
                     txtTotalLucro.Text = lucro.ToString("C2");
-                    
-
                 }
-
             }
             catch (CustomException erro)
             {
@@ -159,18 +141,10 @@ namespace View.UI.ViewCaixa
                 SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
-
-
         }
-
         private void LimparTxt()
-        {
-            txtTotalLucro.Text = string.Empty;
-        }
-
+                     => txtTotalLucro.Text = string.Empty;
         private void dgvMovimentacao_KeyDown(object sender, KeyEventArgs e)
-        {
-            ValidatorField.DisableTabInGrid(sender, e);
-        }
+                     => ValidatorField.DisableTabInGrid(sender, e);
     }
 }

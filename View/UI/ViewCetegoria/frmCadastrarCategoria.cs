@@ -29,11 +29,8 @@ namespace View.UI.ViewCetegoria
 
         private void frmCadastrarCategoria_Load(object sender, EventArgs e)
         {
-
             try
             {
-
-               
                 switch (_tipoOperacao)
                 {
 
@@ -65,44 +62,24 @@ namespace View.UI.ViewCetegoria
                 SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
-
-
         }
 
         private void DesabilitarDruopBox()
-        {
-            gpbCategoria.Enabled = false;
-        }
-
+                     => gpbCategoria.Enabled = false;
         private void PupularTxt()
-        {
-            txtCategoria.Text = _categoria.Nome;
-        }
-
+                     => txtCategoria.Text = _categoria.Nome;
         private void MudarCorDoBotao(Color color)
-        {
-            btnCadastrar.BackColor = color;
-        }
-
+                     => btnCadastrar.BackColor = color;
         private void MudarTextoDoBotao(string texto)
-        {
-            btnCadastrar.Text = texto;
-        }
-
+                     => btnCadastrar.Text = texto;
         private void MudarTextoDoForm(string texto)
-        {
-            this.Text = texto;
-        }
-
+                     => this.Text = texto;
         private void btnCadastrar_Click(object sender, EventArgs e)
         {
-
             try
             {
                 if (!VerificarSeTxtEstaVazio())
                 {
-
-
                     switch (_tipoOperacao)
                     {
                         case EnumTipoOperacao.Salvar:
@@ -129,7 +106,6 @@ namespace View.UI.ViewCetegoria
                                 PosSalvamento();
                             }
                             break;
-
                     }
                 }
                 else
@@ -143,7 +119,7 @@ namespace View.UI.ViewCetegoria
                 if (_tipoOperacao != EnumTipoOperacao.Deletar)
                 {
                     LimparTxt(txtCategoria);
-                }              
+                }
                 FocarNotxt();
             }
             catch (Exception erro)
@@ -151,8 +127,6 @@ namespace View.UI.ViewCetegoria
                 SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
-
-
         }
         private bool VerificarSeTxtEstaVazio()
         {
@@ -164,48 +138,35 @@ namespace View.UI.ViewCetegoria
             return retorno;
         }
         private void FocarNotxt()
-        {
-            this.FocoNoTxt(txtCategoria);
-        }
-
+                     => this.FocoNoTxt(txtCategoria);
         private void LimparTxt(TextBox txt)
-        {
-            txt.Text = string.Empty;
-        }
-
+                     => txt.Text = string.Empty;
         private void PosSalvamento()
-        {
-            this.DialogResult = DialogResult.Yes;
-        }
-
+                     => this.DialogResult = DialogResult.Yes;
         private void MensagemDeAviso(string mensagem)
-        {
-            DialogMessage.MessageFullComButtonOkIconeDeInformacao(mensagem, "Aviso");
-        }
-
+                     => DialogMessage.MessageFullComButtonOkIconeDeInformacao(mensagem, "Aviso");
         private Categoria PupularCategoria()
         {
-            return new Categoria() { ID = _categoria.ID, Nome = txtCategoria.Text.Trim().UpperCaseOnlyFirst() };
+            return new Categoria()
+            {
+                ID = _categoria.ID,
+                Nome = txtCategoria.Text.Trim().UpperCaseOnlyFirst()
+            };
         }
 
         private void InstanciarCategoriaRepositorio()
-        {
-            _categoriaRepositorio = new CategoriaRepositorio();
-        }
-
+                     => _categoriaRepositorio = new CategoriaRepositorio();
         private void txtCategoria_KeyPress(object sender, KeyPressEventArgs e)
         {
             ValidatorField.IntegerAndLetter(e: e);
             ValidatorField.AllowOneSpaceTogether(e, sender);
             if (e.KeyChar == (char)Keys.Enter)
             {
-                FocarNoBtn();               
+                FocarNoBtn();
             }
         }
 
         private void FocarNoBtn()
-        {
-            this.ActiveControl = btnCadastrar;
-        }
+                     => this.ActiveControl = btnCadastrar;
     }
 }

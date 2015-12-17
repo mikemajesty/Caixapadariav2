@@ -15,12 +15,9 @@ namespace View.UI.ViewCaixa
             InitializeComponent();
         }
         private void InstanciarTipoPagamentoRepositorio()
-        {
-            _tipoPagamentoRepositorio = new TipoPagamentoRepositorio();
-        }
+                     => _tipoPagamentoRepositorio = new TipoPagamentoRepositorio();
         private void frmMovimentacaoCaixa_Load(object sender, EventArgs e)
         {
-
             try
             {
                 InstanciarVendaRepositorio();
@@ -38,9 +35,7 @@ namespace View.UI.ViewCaixa
                 SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
-
         }
-
         private void DefinirValoresNoDateTimePicker()
         {
             try
@@ -63,14 +58,9 @@ namespace View.UI.ViewCaixa
                 SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
-
         }
-
         private void FocoNoBotao()
-        {
-            this.FocoNoBotao(btnPesquisarEntreDatas);
-        }
-
+                     => this.FocoNoBotao(btnPesquisarEntreDatas);
         private void CarregarTipoMovimentacao()
         {
             try
@@ -88,14 +78,10 @@ namespace View.UI.ViewCaixa
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
         }
-
         private void CarregarGrid()
         {
-
             try
             {
-
-                
                 _vendaRepositorio.ListarTodos(dgvMovimentacao);
                 dgvMovimentacao.AjustartamanhoDoDataGridView(new List<TamanhoGrid>() 
                 {
@@ -117,22 +103,14 @@ namespace View.UI.ViewCaixa
                 SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
-
-
         }
-
         private void InstanciarVendaRepositorio()
-        {
-            _vendaRepositorio = new VendaRepositorio();
-        }
-
+                     => _vendaRepositorio = new VendaRepositorio();
         private void dtpValorFinal_ValueChanged(object sender, EventArgs e)
         {
-
             try
             {
                 CarregarPesquisaEntreDatas();
-
             }
             catch (CustomException erro)
             {
@@ -143,16 +121,11 @@ namespace View.UI.ViewCaixa
                 SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
-
         }
-
         private void CarregarPesquisaEntreDatas()
         {
-
             try
             {
-
-
                 InstanciarVendaRepositorio();
                 _vendaRepositorio.ListarMovimentacaoEntreDatas(dtpValorInicial, dtpValorFinal, dgvMovimentacao, cbbTipoDeMovimentacao.Text);
                 ExibirLucroTotalVendido();
@@ -166,14 +139,11 @@ namespace View.UI.ViewCaixa
                 SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
-
         }
         private void CarregarPesquisaPorDatas()
         {
-
             try
             {
-
                 InstanciarVendaRepositorio();
                 _vendaRepositorio.ListarMovimentacaoPorData(dtpPesquisarPorDia, dgvMovimentacao, cbbTipoDeMovimentacao.Text);
                 ExibirLucroTotalVendido();
@@ -190,15 +160,9 @@ namespace View.UI.ViewCaixa
 
         }
         private void dtpValorInicial_ValueChanged(object sender, EventArgs e)
-        {
-
-
-            CarregarPesquisaEntreDatas();
-        }
-
+                     => CarregarPesquisaEntreDatas();
         private void ExibirLucroTotalVendido()
         {
-
             try
             {
                 LimparTxt();
@@ -225,24 +189,18 @@ namespace View.UI.ViewCaixa
                 SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
-
-
         }
-
         private void LimparTxt()
         {
             txtTotalVendido.Text = string.Empty;
             txtTotalLucro.Text = string.Empty;
         }
-
         private void btnTodos_Click(object sender, EventArgs e)
         {
-
             try
             {
                 ExibirLucroTotalVendido();
                 CarregarGrid();
-
             }
             catch (CustomException erro)
             {
@@ -253,14 +211,9 @@ namespace View.UI.ViewCaixa
                 SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
-
         }
-
-       
-
         private void btnPesquisarEntreDatas_Click(object sender, EventArgs e)
         {
-
             try
             {
                 CarregarPesquisaEntreDatas();
@@ -274,17 +227,12 @@ namespace View.UI.ViewCaixa
                 SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
-
         }
-
         private void btnPesquisarDia_Click(object sender, EventArgs e)
         {
-
             try
             {
-
                 CarregarPesquisaPorDatas();
-
             }
             catch (CustomException erro)
             {
@@ -295,12 +243,8 @@ namespace View.UI.ViewCaixa
                 SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
-
         }
-
         private void dgvMovimentacao_KeyDown(object sender, KeyEventArgs e)
-        {
-            ValidatorField.DisableTabInGrid(sender, e);
-        }
+                     => ValidatorField.DisableTabInGrid(sender, e);
     }
 }

@@ -22,17 +22,11 @@ namespace View.UI.ViewCaixa
             InitializeComponent();
         }
         private void InstanciarCaixaRepositorio()
-        {
-            _caixaRepositorio = new CaixaRepositorio();
-        }
+                     => _caixaRepositorio = new CaixaRepositorio();
         private void InstanciarFiadoRepositorio()
-        {
-            _fiadoRepositorio = new FiadoRepositorio();
-        }
+                     => _fiadoRepositorio = new FiadoRepositorio();
         private void InstanciarTipodePagamentoRepositorio()
-        {
-            _tipoPagamentoRepositorio = new TipoPagamentoRepositorio();
-        }
+                     => _tipoPagamentoRepositorio = new TipoPagamentoRepositorio();
         private void frmReceberFiado_Load(object sender, EventArgs e)
         {
 
@@ -52,14 +46,9 @@ namespace View.UI.ViewCaixa
                 SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
-
         }
-
         private void EsconderBotao()
-        {
-            btnConcluirVenda.Visible = false;
-        }
-
+                     => btnConcluirVenda.Visible = false;
         private string JogarValorTotalParaLabel()
         {
             try
@@ -107,12 +96,10 @@ namespace View.UI.ViewCaixa
                      => this.Close();
         private void btnConcluirVenda_Click(object sender, EventArgs e)
         {
-
             try
             {
                 if (DialogMessage.MessageFullQuestion("Deseja confirmar essa forma de pagamento " + cbbTipoDePagamento.Text.ToUpper(), "Aviso") == DialogResult.Yes)
                 {
-
                     InstanciarCaixaRepositorio();
                     InstanciarFiadoRepositorio();
                     switch (cbbTipoDePagamento.Text)
@@ -133,15 +120,12 @@ namespace View.UI.ViewCaixa
                                 InstanciarMovimentacaoCaixa();
                                 _movimentacaoCaixaRepositorio.Salvar(new MovimentacaoCaixa() { Valor = valorPago, Data = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day) });
                                 _fiado.Valor = GetTxtValorPago();
-                            }
-                          
+                            }                          
                             if (_fiadoRepositorio.Alterar(_fiado) == Sucesso)
                             {
                                 DialogMessage.MessageFullComButtonOkIconeDeInformacao("Opercação concluída com sucesso.", "Aviso");
                                 PosSalvamento();
-
                             }
-
                             break;
                         case "Cartão":
                             _fiado.Valor = GetValorTotal();
@@ -149,12 +133,9 @@ namespace View.UI.ViewCaixa
                             {
                                 DialogMessage.MessageFullComButtonOkIconeDeInformacao("Opercação concluída com sucesso.", "Aviso");
                                 PosSalvamento();
-
                             }
                             break;
-
                     }
-
                 }
             }
             catch (CustomException erro)
@@ -170,23 +151,13 @@ namespace View.UI.ViewCaixa
         }
 
         private decimal GetValorTotal()
-        {
-            return Convert.ToDecimal(lblTotalVenda.Text.Substring(2,lblTotalVenda.Text.Length - 2));
-        }
-
+                        => Convert.ToDecimal(lblTotalVenda.Text.Substring(2, lblTotalVenda.Text.Length - 2));
         private void InstanciarMovimentacaoCaixa()
-        {
-            _movimentacaoCaixaRepositorio = new MovimentacaoCaixaRepositorio();
-        }
-
+                     => _movimentacaoCaixaRepositorio = new MovimentacaoCaixaRepositorio();
         private void PosSalvamento()
-        {
-            this.DialogResult = DialogResult.Yes;
-        }
-
+                     => this.DialogResult = DialogResult.Yes;
         private decimal GetTxtValorPago()
         {
-
             try
             {
                 return decimal.Parse(txtValorPago.Text);
@@ -199,25 +170,13 @@ namespace View.UI.ViewCaixa
             {
                 throw new Exception(erro.Message);
             }
-
         }
-
         private void FocoNoTextBox()
-        {
-            this.FocoNoTxt(txtValorPago);
-        }
-
+                     => this.FocoNoTxt(txtValorPago);
         private void CarregarComboBoxComDinheiro()
-        {
-            cbbTipoDePagamento.SelectedIndex = 0;
-        }
-
+                     => cbbTipoDePagamento.SelectedIndex = 0;
         private void LimparTxt(List<TextBox> txtList)
-        {
-            txtList.ForEach(c => c.Text = string.Empty);
-
-        }
-
+                     => txtList.ForEach(c => c.Text = string.Empty);
         private void txtValorPago_KeyPress(object sender, KeyPressEventArgs e)
         {
             ValidatorField.NoVirgula(e, sender);
@@ -227,8 +186,6 @@ namespace View.UI.ViewCaixa
                 FocarNoBotao();
             }
         }
-
-
         public void AtualizarValor()
         {
             try
@@ -245,17 +202,11 @@ namespace View.UI.ViewCaixa
             {
                 throw new Exception(erro.Message);
             }
-
         }
-
         private void frmReceberFiado_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            this.DialogResult = DialogResult.Yes;
-        }
-
+                     => this.DialogResult = DialogResult.Yes;
         private void txtValorPago_TextChanged(object sender, EventArgs e)
         {
-
             try
             {
                 if (cbbTipoDePagamento.Text == EnumTipoPagamento.Dinheiro.ToString())
@@ -268,8 +219,7 @@ namespace View.UI.ViewCaixa
                         if (valorPago >= ValorTotal)
                         {
                             txtTroco.Text = Troco.GerarTroco(valorPago, ValorTotal);
-                            MostrarBotao();
-                            
+                            MostrarBotao();                            
                         }
                         else
                         {
@@ -296,20 +246,13 @@ namespace View.UI.ViewCaixa
                 SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
-
         }
-
         private void MostrarBotao()
-        {
-            btnConcluirVenda.Visible = true;
-        }
-
+                     => btnConcluirVenda.Visible = true;
         private void cbbTipoDePagamento_SelectedIndexChanged(object sender, EventArgs e)
         {
-
             try
             {
-
                 switch (cbbTipoDePagamento.Text)
                 {
                     case "Cartão":
@@ -333,11 +276,7 @@ namespace View.UI.ViewCaixa
                         EsconderGroupBox(gpb: gpbTroco);
                         LimparTxt(new List<TextBox> { txtValorPago, txtTroco });
                         break;
-
                 }
-
-
-
             }
             catch (CustomException erro)
             {
@@ -352,20 +291,10 @@ namespace View.UI.ViewCaixa
         }
 
         private void FocarNoBotao()
-        {
-            this.FocoNoBotao(btnConcluirVenda);
-        }
-
+                     => this.FocoNoBotao(btnConcluirVenda);
         private void MostrarGruopBox(GroupBox gpb)
-        {
-            gpb.Visible = true;
-        }
-
+                     => gpb.Visible = true;
         private void EsconderGroupBox(GroupBox gpb)
-        {
-            gpb.Visible = false;
-        }
-
-
+                     => gpb.Visible = false;
     }
 }
