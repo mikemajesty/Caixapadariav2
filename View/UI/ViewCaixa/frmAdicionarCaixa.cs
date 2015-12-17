@@ -21,9 +21,7 @@ namespace View.UI.ViewCaixa
         }
 
         private void InstanciarCaixaRepositorio()
-        {
-            _caixaRepositorio = new CaixaRepositorio();
-        }
+                     => _caixaRepositorio = new CaixaRepositorio();
         private void frmAdicionarCaixa_Load(object sender, EventArgs e)
         {
 
@@ -65,27 +63,15 @@ namespace View.UI.ViewCaixa
         }
 
         private void MudarVisaoDoBotao(Button btn, bool visao)
-        {
-            btn.Visible = visao;
-        }
-
+                     => btn.Visible = visao;
         private void MudarTextoDoGruopBox(GroupBox gpb, string texto)
-        {
-            gpb.Text = texto;
-        }
-
+                     => gpb.Text = texto;
         private void MudaroTextoDoForm(string text)
-        {
-            this.Text = text;
-        }
-
+                     => this.Text = text;
         private void AtualizarCaixa()
         {
-
             try
             {
-
-
                 InstanciarCaixaRepositorio();
                 lblTotalNoCaixa.Text = _caixaRepositorio.GetValor().Valor.ToString("C2");
 
@@ -171,17 +157,10 @@ namespace View.UI.ViewCaixa
             }
 
         }
-
         private void InstanciarMovimentacaoCaixaRepositorio()
-        {
-            _movimentacaoCaixaRepositorio = new MovimentacaoCaixaRepositorio();
-        }
-
+                     => _movimentacaoCaixaRepositorio = new MovimentacaoCaixaRepositorio();
         private void FocarNoTxt(TextBox txt)
-        {
-            this.FocoNoTxt(txt);
-        }
-
+                     => this.FocoNoTxt(txt);
         private void txtAdicionarNoCaixa_KeyPress(object sender, KeyPressEventArgs e)
         {
             ValidatorField.NoVirgula(e, sender);

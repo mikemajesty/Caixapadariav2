@@ -42,35 +42,17 @@ namespace View.UI.ViewAnomalias
         }
 
         private void MudarPosicaoDoButton(Button btn, Point location)
-        {
-            btn.Location = location;
-        }
-
+                     => btn.Location = location;
         private void FocarNoBtn(Button btn)
-        {
-            this.FocoNoBotao(btn);
-        }
-
+                     => this.FocoNoBotao(btn);
         private void DesabilitarTextBox(TextBox txt, bool disabilitadoOuNao)
-        {
-            txt.ReadOnly = disabilitadoOuNao;
-        }
-
+                     => txt.ReadOnly = disabilitadoOuNao;
         private void EsconderButton(Button btn, bool mostrarOuNao)
-        {
-            btn.Visible = mostrarOuNao;
-        }
-
+                     => btn.Visible = mostrarOuNao;
         private void MudarTamanhoDoButton(Button btn, Size size)
-        {
-            btn.Size = size;
-        }
-
+                     => btn.Size = size;
         private void btnSair_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
+                     => this.Close();
         private void btnExcluir_Click(object sender, EventArgs e)
         {
             try
@@ -95,17 +77,10 @@ namespace View.UI.ViewAnomalias
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
         }
-
         private void FocarNotxt(TextBox txt)
-        {
-            this.ActiveControl = txt;
-        }
-
+                     => this.ActiveControl = txt;
         private void LimparTxt(TextBox txt)
-        {
-            txt.Text = string.Empty;
-        }
-
+                     => txt.Text = string.Empty;
         private void txtTexto_KeyPress(object sender, KeyPressEventArgs e)
         {
             ValidatorField.AllowOneSpaceTogether(e, sender);

@@ -44,47 +44,28 @@ namespace View.UI.ViewCaixa
         {
             InitializeComponent();
         }
+        private void InstanciaTipoPagamentoRepositorio()
+                     => _tipoPagamentoRepositorio = new TipoPagamentoRepositorio();
         private void InstanciarTipoCadastroRepositorio()
-        {
-            _tipoCadastroRepositorio = new TipoCadastroRepositorio();
-        }
+                     => _tipoCadastroRepositorio = new TipoCadastroRepositorio();
         private void InstanciarMovimentacaoProdutoRepositorio()
-        {
-            _movimentacaoProdutoRepositorio = new MovimentacaoProdutoRepositorio();
-        }
+                     => _movimentacaoProdutoRepositorio = new MovimentacaoProdutoRepositorio();
         private void InstanciarMovimentacaoCaixa()
-        {
-            _movimentacaoCaixaRepositorio = new MovimentacaoCaixaRepositorio();
-        }
+                     => _movimentacaoCaixaRepositorio = new MovimentacaoCaixaRepositorio();
         private void InstanciarClienteRepositorio()
-        {
-            _clienteRepositorio = new ClienteRepositorio();
-        }
+                     => _clienteRepositorio = new ClienteRepositorio();
         private void InstanciarFiadoRepositorio()
-        {
-            _fiadoRepositorio = new FiadoRepositorio();
-        }
+                     => _fiadoRepositorio = new FiadoRepositorio();
         private void InstanciarEstoqueRepositorio()
-        {
-
-            _estoqueRepositorio = new EstoqueRepositorio();
-        }
+                     => _estoqueRepositorio = new EstoqueRepositorio();
         private void InstanciaCaixaRepositorio()
-        {
-            _caixaRepositorio = new CaixaRepositorio();
-        }
+                     => _caixaRepositorio = new CaixaRepositorio();
         private void InstanciarComandaRepositorio()
-        {
-            _comandaRepositorio = new ComandaRepositorio();
-        }
+                     => _comandaRepositorio = new ComandaRepositorio();
         private void InstanciaUsuarioRepositorio()
-        {
-            _usuarioRepositorio = new UsuarioRepositorio();
-        }
+                     => _usuarioRepositorio = new UsuarioRepositorio();
         private void InstanciarVendaRepositorio()
-        {
-            _vendaRepositorio = new VendaRepositorio();
-        }
+                     => _vendaRepositorio = new VendaRepositorio();
         private void frmCaixa_Load(object sender, EventArgs e)
         {
             try
@@ -138,24 +119,14 @@ namespace View.UI.ViewCaixa
             }
 
         }
-
-
-
         private void CarregarValorDoCaixaAtualiza()
         {
-
             try
             {
-
                 InstanciaCaixaRepositorio();
-                if (_caixaRepositorio.GetValor() != null)
-                {
-                    lblTotalNoCaixa.Text = _caixaRepositorio.GetValor().Valor.ToString("C2");
-                }
-                else
-                {
-                    lblTotalNoCaixa.Text = (00.0).ToString("C2");
-                }
+                lblTotalNoCaixa.Text = _caixaRepositorio.GetValor() != null ?
+                _caixaRepositorio.GetValor().Valor.ToString("C2") :
+                (00.0).ToString("C2");
 
             }
             catch (CustomException erro)
@@ -167,51 +138,15 @@ namespace View.UI.ViewCaixa
                 SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
-
-
         }
-
         private void CarregarTxtQuantidadeComUm()
-        {
-            txtQuantidade.Text = "1";
-        }
-
-
+                     => txtQuantidade.Text = "1";
         private void EsconderOuMostrarButtonVenda(bool esconder)
-        {
-            if (esconder == Esconder)
-            {
-                btnConcluirVenda.Visible = false;
-            }
-            else
-            {
-                btnConcluirVenda.Visible = true;
-            }
-        }
-
+                     => btnConcluirVenda.Visible = esconder == Esconder ?
+                false : true;
         private void FocarNoTxt(TextBox txt)
-        {
+                     => this.FocoNoTxt(txt: txt);
 
-            try
-            {
-                this.FocoNoTxt(txt: txt);
-            }
-            catch (CustomException erro)
-            {
-                DialogMessage.MessageFullComButtonOkIconeDeInformacao(erro.Message, "Aviso");
-            }
-            catch (Exception erro)
-            {
-                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
-                DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
-            }
-
-
-        }
-        private void InstanciaTipoPagamentoRepositorio()
-        {
-            _tipoPagamentoRepositorio = new TipoPagamentoRepositorio();
-        }
         public void MostrarMensagem()
         {
             mensagem = new frmMensagemDeEspera();
@@ -219,7 +154,6 @@ namespace View.UI.ViewCaixa
         }
         private void txtCodigoDaComanda_KeyPress(object sender, KeyPressEventArgs e)
         {
-
             try
             {
                 ValidatorField.IntegerAndLetter(e: e);
@@ -235,16 +169,12 @@ namespace View.UI.ViewCaixa
                         MostrarBotaoVendaSeExisteItensNaComanda();
                         LimparTxt(new List<TextBox>() { txtCodigoDaComanda });
                         FocarNoTxt(txtQuantidade);
-
-
                     }
                     else
                     {
                         CarregarComandaEmUso();
                     }
-
                 }
-
             }
             catch (CustomException erro)
             {
@@ -266,13 +196,10 @@ namespace View.UI.ViewCaixa
                         {
                             mensagem.Close();
                         }
-
                     }
                 }
-
             }
         }
-
         private void CarregarComandaEmUso()
         {
             try
@@ -292,14 +219,9 @@ namespace View.UI.ViewCaixa
             {
                 throw new Exception(erro.Message);
             }
-
-
         }
-
         private void MostrarBotaoVendaSeExisteItensNaComanda()
         {
-
-
             try
             {
                 if (cbbTipoDePagamento.Text == EnumTipoPagamento.Cartão.ToString() ||
@@ -325,11 +247,8 @@ namespace View.UI.ViewCaixa
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
         }
-
-
         private void CarregarComandaAtiva(Espere task, Action metodo)
         {
-
             try
             {
                 InstanciarVendaComComandaAtivaRepositorio();
@@ -360,33 +279,13 @@ namespace View.UI.ViewCaixa
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
         }
-
-
         private int VerificarSeExisteItensNoListView()
-        {
-
-            try
-            {
-                return ltvProdutos.Items.Count;
-            }
-            catch (CustomException erro)
-            {
-                throw new CustomException(erro.Message);
-            }
-            catch (Exception erro)
-            {
-                throw new Exception(erro.Message);
-            }
-
-        }
-
+                    => ltvProdutos.Items.Count;
         private decimal GetValorNaComanda()
         {
-
             try
             {
                 decimal sum = 0;
-
                 foreach (ListViewItem lstItem in ltvProdutos.Items)
                 {
                     sum += decimal.Parse(lstItem.SubItems[3].Text);
@@ -403,11 +302,9 @@ namespace View.UI.ViewCaixa
             {
                 throw new Exception(erro.Message);
             }
-
         }
         private decimal GetValorLucroTotal()
         {
-
             try
             {
                 decimal lucro = 0;
@@ -425,13 +322,11 @@ namespace View.UI.ViewCaixa
             {
                 throw new Exception(erro.Message);
             }
-
         }
         private void InstanciarVendaComComandaAtivaRepositorio()
                      => _vendaComComandaAtivaRepositorio = new VendaComComandaAtivaRepositorio();
         private void cbbTipoDePagamento_SelectedIndexChanged(object sender, EventArgs e)
         {
-
             try
             {
                 LimparTxt(new List<TextBox>() { txtValorPago, txtTroco });
@@ -453,7 +348,6 @@ namespace View.UI.ViewCaixa
                             {
                                 EsconderOuMostrarButtonVenda(Esconder);
                             }
-
                         }
                         else
                         {
@@ -492,32 +386,23 @@ namespace View.UI.ViewCaixa
             }
         }
         private void MostrarGpb()
-        {
-            EsconderGroupBoxOuMostrar(listGpb: new List<GroupBox>() { gpbGerarTroco, gpbValorPago }, esconder: Mostrar);
-        }
+                     => EsconderGroupBoxOuMostrar(listGpb:
+                new List<GroupBox>()
+                {
+                    gpbGerarTroco,
+                    gpbValorPago
+                }, esconder: Mostrar);
+
         private void EsconderGpb()
-        {
-            EsconderGroupBoxOuMostrar(listGpb: new List<GroupBox>() { gpbGerarTroco, gpbValorPago }, esconder: Esconder);
-        }
-
+                     => EsconderGroupBoxOuMostrar(listGpb:
+                new List<GroupBox>()
+                {
+                    gpbGerarTroco,
+                    gpbValorPago
+                }, esconder: Esconder);
         private void EsconderGroupBoxOuMostrar(List<GroupBox> listGpb, bool esconder)
-        {
-
-            try
-            {
-                listGpb.ForEach(c => c.Visible = (c is GroupBox) && esconder == Esconder ? Esconder : Mostrar);
-            }
-            catch (CustomException erro)
-            {
-                DialogMessage.MessageFullComButtonOkIconeDeInformacao(erro.Message, "Aviso");
-            }
-            catch (Exception erro)
-            {
-                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
-                DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
-            }
-
-        }
+                     => listGpb.ForEach(c => c.Visible = (c is GroupBox)
+                && esconder == Esconder ? Esconder : Mostrar);
 
         private void btnConcluirVenda_Click(object sender, EventArgs e)
         {
@@ -525,7 +410,6 @@ namespace View.UI.ViewCaixa
             {
                 try
                 {
-
                     InstanciarVendaRepositorio();
                     InstanciaCaixaRepositorio();
                     InstanciarProdutoRepositorio();
@@ -554,18 +438,12 @@ namespace View.UI.ViewCaixa
                 }
             }
         }
-
         private static void AtualizarQuandroDeAvisos()
         {
-
-
             try
             {
                 frmAlertaEstoque form = (frmAlertaEstoque)Application.OpenForms[name: nameof(frmAlertaEstoque)];
-                if (form != null)
-                {
-                    form.CarregarDgv();
-                }
+                form?.CarregarDgv();
             }
             catch (CustomException erro)
             {
@@ -577,10 +455,8 @@ namespace View.UI.ViewCaixa
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
         }
-
         private void ConcluirVendaComCreditar()
         {
-
             try
             {
                 if (cbbTipoDePagamento.Text == EnumTipoPagamento.Creditar.ToString())
@@ -613,7 +489,6 @@ namespace View.UI.ViewCaixa
                             {
                                  new ReportParameter("NomeCliente",new ClienteRepositorio().GetClientePorID(Cliente.ClienteIDStatic).Nome),
                                  new ReportParameter("NomeVendedor",Usuarios.NomeCompletoStatic)
-
                             });
                         }
                         DarBaixaNoEstoque();
@@ -638,19 +513,13 @@ namespace View.UI.ViewCaixa
                     espere.CancelarTask();
                     if (espere.Cancel.IsCancellationRequested)
                     {
-                        if (mensagem != null)
-                        {
-                            mensagem.Close();
-                        }
+                        mensagem?.Close();
                     }
                 }
-
             }
         }
-
         private void ConcluirVendaComCartao()
         {
-
             try
             {
                 if (cbbTipoDePagamento.Text == EnumTipoPagamento.Cartão.ToString())
@@ -671,10 +540,8 @@ namespace View.UI.ViewCaixa
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
         }
-
         private void JogarNovoValorParaCaixa()
         {
-
             try
             {
                 CarregarValorDoCaixaAtualiza();
@@ -688,13 +555,9 @@ namespace View.UI.ViewCaixa
                 SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
-
-
         }
-
         private bool VendaComCreditar()
         {
-
             try
             {
                 bool retorno = false;
@@ -710,9 +573,7 @@ namespace View.UI.ViewCaixa
                     else
                     {
                         retorno = false;
-
                     }
-
                 }
                 return retorno;
             }
@@ -724,18 +585,13 @@ namespace View.UI.ViewCaixa
             {
                 throw new Exception(erro.Message);
             }
-
-
         }
-
         private void ConcluirVendaComDinheiro()
         {
-
             try
             {
                 if (cbbTipoDePagamento.Text == EnumTipoPagamento.Dinheiro.ToString())
                 {
-
                     if (_caixaRepositorio.Cadastrar(caixa: new Caixa() { IDUsuario = Usuarios.IDStatic, Valor = VendaTotal }) == 1)
                     {
                         InstanciarMovimentacaoCaixa();
@@ -747,8 +603,6 @@ namespace View.UI.ViewCaixa
                             PosSalvamentoPadrao();
                             MensagemDeAviso();
                         }
-
-
                     }
                 }
             }
@@ -763,20 +617,16 @@ namespace View.UI.ViewCaixa
             }
 
         }
-
         private void MensagemDeAviso()
         {
             timer.Start();
             DialogMessage.MessageFullComButtonOkIconeDeInformacao("Venda concluída com sucesso.", "Aviso");
 
         }
-
         private void DarBaixaNoEstoque()
         {
-
             try
             {
-
                 foreach (ListViewItem lstItem in ltvProdutos.Items)
                 {
                     Produto produto = _produtoRepositorio.GetProdutoPorCodigoUnidade(lstItem.SubItems[1].Text);
@@ -792,11 +642,7 @@ namespace View.UI.ViewCaixa
                         Quantidade = lstItem.SubItems[2].Text.Contains("Kg") ? 0 : Convert.ToInt32(lstItem.SubItems[2].Text),
                         Valor = Convert.ToDecimal(lstItem.SubItems[3].Text)
                     });
-
-
-
                 }
-
             }
             catch (CustomException erro)
             {
@@ -807,10 +653,7 @@ namespace View.UI.ViewCaixa
                 SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
-
-
         }
-
         private void PosSalvamentoPadrao()
         {
 
@@ -838,7 +681,6 @@ namespace View.UI.ViewCaixa
                 SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
-
         }
         private void LimparVenda()
         {
@@ -874,7 +716,6 @@ namespace View.UI.ViewCaixa
         }
         private void ExcluirComandaAtiva()
         {
-
             try
             {
 
@@ -888,7 +729,6 @@ namespace View.UI.ViewCaixa
                         LimparComanda();
                     }
                 }
-
             }
             catch (CustomException erro)
             {
@@ -899,30 +739,15 @@ namespace View.UI.ViewCaixa
                 SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
-
         }
-
         private void LimparComanda()
-        {
-            comandaLista.Clear();
-        }
-
+                     => comandaLista.Clear();
         private void ZerarLabelTotalVenda()
-        {
-            lblTotalVenda.Text = "0,00 R$";
-        }
-
+                     => lblTotalVenda.Text = "0,00 R$";
         private void ZerarListView()
-        {
-            ltvProdutos.Items.Clear();
-        }
-
+                     => ltvProdutos.Items.Clear();
         private void ZerarTotalVenda()
-        {
-            VendaTotal = 0;
-        }
-
-
+                     => VendaTotal = 0;
         private Venda PopularVenda()
         {
 
@@ -940,7 +765,6 @@ namespace View.UI.ViewCaixa
                     case "Creditar":
                         venda = PopularVendaSemDinheiro(venda);
                         break;
-
                 }
 
                 return venda;
@@ -954,22 +778,19 @@ namespace View.UI.ViewCaixa
             {
                 throw new Exception(erro.Message);
             }
-
-
         }
-
         private Venda PopularVendaSemDinheiro(Venda venda)
         {
-
             try
             {
-                venda = new Venda();
-                venda.Data = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
-                venda.LucroTotal = GetValorLucroTotal();
-                venda.IDTIPOPAGAMENTO = _tipoPagamentoRepositorio.GetIDPeloNome(cbbTipoDePagamento.Text);
-                venda.VendaTotal = GetValorNaComanda();
-                venda.IdUsuario = Usuarios.IDStatic;
-                return venda;
+                return new Venda
+                {
+                    Data = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day),
+                    IDTIPOPAGAMENTO = _tipoPagamentoRepositorio.GetIDPeloNome(cbbTipoDePagamento.Text),
+                    IdUsuario = Usuarios.IDStatic,
+                    LucroTotal = GetValorLucroTotal(),
+                    VendaTotal = GetValorNaComanda()
+                };
 
             }
             catch (CustomException erro)
@@ -980,9 +801,7 @@ namespace View.UI.ViewCaixa
             {
                 throw new Exception(erro.Message);
             }
-
         }
-
         private Venda PopularVendaComDinheiro(Venda venda)
         {
             try
@@ -993,13 +812,15 @@ namespace View.UI.ViewCaixa
                 {
                     MyErro.MyCustomException($"Você não possui {GetValorTroco()} no caixa. Atualize o valor ou adicione valor ao mesmo.");
                 }
-                venda = new Venda();
-                venda.Data = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
-                venda.LucroTotal = GetValorLucroTotal();
-                venda.IDTIPOPAGAMENTO = _tipoPagamentoRepositorio.GetIDPeloNome(cbbTipoDePagamento.Text);
-                venda.VendaTotal = VendaTotal;
-                venda.IdUsuario = Usuarios.IDStatic;
-                return venda;
+                return venda = new Venda
+                {
+                    Data = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day),
+                    VendaTotal = VendaTotal,
+                    LucroTotal = GetValorLucroTotal(),
+                    IDTIPOPAGAMENTO = _tipoPagamentoRepositorio.GetIDPeloNome(cbbTipoDePagamento.Text),
+                    IdUsuario = Usuarios.IDStatic
+                };
+
             }
             catch (CustomException erro)
             {
@@ -1010,7 +831,6 @@ namespace View.UI.ViewCaixa
                 throw new Exception(erro.Message);
             }
         }
-
         private decimal GetValorTroco()
         {
             try
@@ -1025,14 +845,11 @@ namespace View.UI.ViewCaixa
             {
                 throw new Exception(erro.Message);
             }
-
         }
-
         private void txtCodigoDoProduto_KeyPress(object sender, KeyPressEventArgs e)
         {
             try
             {
-
                 ValidatorField.IntegerAndLetter(e);
                 ValidatorField.NoSpace(e);
                 string codigo = txtCodigoDoProduto.Text;
@@ -1047,7 +864,6 @@ namespace View.UI.ViewCaixa
                     }
                     if (ckbPorPeso.Checked)
                     {
-
                         InstanciarProdutoRepositorio();
                         InstanciarTipoCadastroRepositorio();
                         Produto prod = new ProdutoRepositorio().GetProdutoPorCodigo(codigo);
@@ -1068,15 +884,11 @@ namespace View.UI.ViewCaixa
                         {
                             MyErro.MyCustomException($"Produto com o código: { txtCodigoDoProduto.Text.ToUpper()} não esta cadastrado.");
                         }
-
-
                     }
                     else
                     {
                         VenderPorUnidade(codigo);
                     }
-
-
                 }
                 else if ((Keys)e.KeyChar == Keys.Enter && txtCodigoDoProduto.Text.Length == 0)
                 {
@@ -1094,15 +906,13 @@ namespace View.UI.ViewCaixa
                 SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
-
         }
-
         private void VenderPorPeso(string codigo)
         {
             try
             {
-
-                decimal peso = txtPesoDoProduto.Text == "" ? 0 : Convert.ToDecimal(txtPesoDoProduto.Text.Replace(",", ""));
+                decimal peso = txtPesoDoProduto.Text == "" ? 0 :
+                    Convert.ToDecimal(txtPesoDoProduto.Text.Replace(",", ""));
 
                 if (peso > 0)
                 {
@@ -1132,9 +942,7 @@ namespace View.UI.ViewCaixa
                 SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
-
         }
-
         private void VenderPorUnidade(string codigo)
         {
             try
@@ -1187,29 +995,15 @@ namespace View.UI.ViewCaixa
                 SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
-
-
         }
-
         private void ChecarChebox(CheckBox ckb, bool checado)
-        {
-            ckb.Checked = checado;
-        }
-
+                     => ckb.Checked = checado;
         private void DesmarcarCheckBox()
-        {
-            ckbPorPeso.Checked = false;
-        }
-
+                     => ckbPorPeso.Checked = false;
         private void InstanciarProdutoRepositorio()
-        {
-            _produtoRepositorio = new ProdutoRepositorio();
-        }
+                     => _produtoRepositorio = new ProdutoRepositorio();
         private void LimparTxt(List<TextBox> txtList)
-        {
-            txtList.ForEach(c => c.Text = string.Empty);
-        }
-
+                     => txtList.ForEach(c => c.Text = string.Empty);
         private void txtValorPago_TextChanged(object sender, EventArgs e)
         {
             try
@@ -1228,11 +1022,7 @@ namespace View.UI.ViewCaixa
                         LimparTxt(new List<TextBox>() { txtTroco });
                         EsconderOuMostrarButtonVenda(Esconder);
                     }
-
-
                 }
-
-
             }
             catch (CustomException erro)
             {
@@ -1244,21 +1034,16 @@ namespace View.UI.ViewCaixa
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
         }
-
-
         private void txtQuantidade_KeyPress(object sender, KeyPressEventArgs e)
         {
-
             ValidatorField.Integer(e);
             if ((Keys)e.KeyChar == Keys.Enter)
             {
                 FocarNoTxt(txtCodigoDoProduto);
             }
         }
-
         private void txtValorPago_KeyPress(object sender, KeyPressEventArgs e)
         {
-
             ValidatorField.NoVirgula(e: e, sender: sender);
             ValidatorField.Money(e: e);
             if (e.KeyChar == (char)Keys.Enter)
@@ -1268,14 +1053,9 @@ namespace View.UI.ViewCaixa
                     FocarNoBtn(btn: btnConcluirVenda);
                 }
             }
-
         }
-
         private void FocarNoBtn(Button btn)
-        {
-            this.ActiveControl = btn;
-        }
-
+                     => this.ActiveControl = btn;
         private void txtValorDoProdutoPorpeso_KeyPress(object sender, KeyPressEventArgs e)
         {
             ValidatorField.Peso(e: e, sender: sender);
@@ -1284,10 +1064,7 @@ namespace View.UI.ViewCaixa
             {
                 FocarNoTxt(txtCodigoDoProduto);
             }
-
-
         }
-
         private void ckbPorPeso_CheckedChanged(object sender, EventArgs e)
         {
             if (!ckbPorPeso.Checked)
@@ -1304,13 +1081,8 @@ namespace View.UI.ViewCaixa
                 FocarNoTxt(txtPesoDoProduto);
             }
         }
-
-
-
-
         private void ltvProdutos_DoubleClick(object sender, EventArgs e)
         {
-
             try
             {
                 InstanciarProdutoRepositorio();
@@ -1327,8 +1099,6 @@ namespace View.UI.ViewCaixa
                         }
                     }
                 }
-
-
             }
             catch (CustomException erro)
             {
@@ -1339,19 +1109,11 @@ namespace View.UI.ViewCaixa
                 SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
-
-
-
         }
-
-
-
         private void ltvProdutos_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e)
         {
-
             try
             {
-
                 MyListView.ColumnWidthChanging(e, ltvProdutos);
             }
             catch (CustomException erro)
@@ -1363,21 +1125,13 @@ namespace View.UI.ViewCaixa
                 SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
-
-
-
         }
-
-
-
         private void btnReceberCredito_Click(object sender, EventArgs e)
         {
             try
             {
                 OpenMdiForm.OpenForWithShowDialog(new frmClienteCreditar(EnumTipoCreditar.Pagar));
                 CarregarValorDoCaixaAtualiza();
-
-
             }
             catch (CustomException erro)
             {
@@ -1389,10 +1143,8 @@ namespace View.UI.ViewCaixa
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
         }
-
         private void btnCalculadora_Click(object sender, EventArgs e)
         {
-
             try
             {
                 Calculadora.ChamarCalculadora();
@@ -1406,23 +1158,17 @@ namespace View.UI.ViewCaixa
                 SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
-
         }
-
         private void btnDividirComanda_Click(object sender, EventArgs e)
         {
-
             try
             {
                 if (MyListView.VerificarSeExisteItensNoListView(ltvProdutos) > 0)
                 {
 
                     List<BaixarEstoque> lista = new List<BaixarEstoque>();
-                    foreach (var item in MyListView.RetornarValoresParaDarBaixaNoEstoque(ltvProdutos))
-                    {
-                        lista.Add(item);
-                    }
-
+                    MyListView.RetornarValoresParaDarBaixaNoEstoque(ltvProdutos).ForEach
+                        (c => lista.Add(c));
                     if (OpenMdiForm.OpenForWithShowDialog(new frmDividirComanda(lista)) == DialogResult.Yes)
                     {
                         InstanciarMovimentacaoProdutoRepositorio();
@@ -1436,9 +1182,6 @@ namespace View.UI.ViewCaixa
                 {
                     MyErro.MyCustomException("Não é possível parcelar uma venda inexistente.");
                 }
-
-
-
             }
             catch (CustomException erro)
             {
@@ -1449,21 +1192,17 @@ namespace View.UI.ViewCaixa
                 SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
-
         }
-
         private static MovimentacaoProduto PopulaMovimentacaoProduto(BaixarEstoque item)
         {
-            MovimentacaoProduto produto = new MovimentacaoProduto();
-
-            produto.Codigo = item.Codigo;
-            produto.Data = DateTime.Now.DataNoFormatoDate();
-            produto.Valor = item.ValorTotal;
-            produto.Quantidade = item.Quantidade;
-            return produto;
-
+            return new MovimentacaoProduto
+            {
+                Codigo = item.Codigo,
+                Data = DateTime.Now.DataNoFormatoDate(),
+                Quantidade = item.Quantidade,
+                Valor = item.ValorTotal
+            };
         }
-
         private void txtCodigoDoProduto_DoubleClick(object sender, EventArgs e)
         {
             try
@@ -1477,8 +1216,6 @@ namespace View.UI.ViewCaixa
                     CarregarTxtQuantidadeComUm();
 
                 }
-
-
             }
             catch (CustomException erro)
             {
@@ -1490,10 +1227,8 @@ namespace View.UI.ViewCaixa
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
         }
-
         private void ltvProdutos_Click(object sender, EventArgs e)
         {
-
             try
             {
                 ltvProdutos_DoubleClick(sender, e);
@@ -1507,16 +1242,12 @@ namespace View.UI.ViewCaixa
                 SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
-
         }
-
         private void txtCodigoDaComanda_DoubleClick(object sender, EventArgs e)
         {
             try
             {
-
                 CarregarComandaEmUso();
-
             }
             catch (CustomException erro)
             {
@@ -1528,19 +1259,15 @@ namespace View.UI.ViewCaixa
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
         }
-
         private void btnAbrirCaixa_Click(object sender, EventArgs e)
         {
-
             try
             {
-
                 if (OpenMdiForm.OpenForWithShowDialog(new frmAdicionarCaixa(EnumTipoOperacaoCaixa.Adicionar)) == DialogResult.Yes)
                 {
                     CarregarValorDoCaixaAtualiza();
                     FocarNoTxt(txtCodigoDaComanda);
                 }
-
             }
             catch (CustomException erro)
             {
@@ -1551,17 +1278,13 @@ namespace View.UI.ViewCaixa
                 SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
-
         }
-
         private void btnFecharCaixa_Click(object sender, EventArgs e)
         {
             try
             {
-
                 if (OpenMdiForm.OpenForWithShowDialog(new frmAdicionarCaixa(EnumTipoOperacaoCaixa.Fechar)) == DialogResult.Yes)
                 {
-
                     CarregarValorDoCaixaAtualiza();
                     FocarNoTxt(txtCodigoDaComanda);
                     LimparTxt(new List<TextBox>() { txtValorPago, txtTroco, txtPesoDoProduto });
@@ -1576,9 +1299,7 @@ namespace View.UI.ViewCaixa
                 SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
-
         }
-
         private void cbbTipoDePagamento_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Enter)
@@ -1602,15 +1323,12 @@ namespace View.UI.ViewCaixa
                     FocarNoCbb(cbbTipoDePagamento);
                 }
             }
-
         }
-
         private void btnSairDoMenu_Click(object sender, EventArgs e)
         {
             btnOperacoes.HideDropDown();
             FocarNoTxt(txtCodigoDoProduto);
         }
-
         private void txtCodigoDoProduto_TextChanged(object sender, EventArgs e)
         {
             if (txtPesoDoProduto.Text.Trim().Length > 0)
@@ -1619,19 +1337,13 @@ namespace View.UI.ViewCaixa
                 {
                     txtPesoDoProduto.Text = txtPesoDoProduto.Text.Remove(txtPesoDoProduto.Text.Length - 1, 1);
                 }
-
             }
         }
-
         private void btnLimparVenda_Click(object sender, EventArgs e)
-        {
-            LimparVenda();
-        }
-
+                     => LimparVenda();
         private void btnSangria_Click(object sender, EventArgs e)
         {
-
-            if (OpenMdiForm.OpenForWithShowDialog(new frmCriarSangria(EnumSangria.Criar,null)) == DialogResult.Yes)
+            if (OpenMdiForm.OpenForWithShowDialog(new frmCriarSangria(EnumSangria.Criar, null)) == DialogResult.Yes)
             {
                 DialogMessage.MessageFullComButtonOkIconeDeInformacao("Operação [SANGRIA] realizada com sucesso.", "Aviso");
                 CarregarValorDoCaixaAtualiza();
@@ -1640,7 +1352,6 @@ namespace View.UI.ViewCaixa
 
         private void timer_Tick(object sender, EventArgs e)
         {
-
             try
             {
                 SendKeys.Send("{ENTER}");
@@ -1655,9 +1366,7 @@ namespace View.UI.ViewCaixa
                 SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
-
         }
-
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             switch (keyData)
@@ -1667,14 +1376,7 @@ namespace View.UI.ViewCaixa
                     FocarNoTxt(txtCodigoDaComanda);
                     break;
                 case Keys.F2:
-                    if (ckbPorPeso.Checked == false)
-                    {
-                        ChecarChebox(ckbPorPeso, true);
-                    }
-                    else
-                    {
-                        ChecarChebox(ckbPorPeso, false);
-                    }
+                    ChecarChebox(ckbPorPeso, ckbPorPeso.Checked == false ? true : false);
                     break;
                 case Keys.F3:
                     if (txtQuantidade.Visible == true)
@@ -1724,12 +1426,7 @@ namespace View.UI.ViewCaixa
             }
             return base.ProcessCmdKey(ref msg, keyData);
         }
-
-
-
         private void FocarNoCbb(ComboBox cbb)
-        {
-            this.ActiveControl = cbb;
-        }
+                     => this.ActiveControl = cbb;
     }
 }
