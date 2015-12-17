@@ -8,7 +8,7 @@ using System.Windows.Forms;
 using View.Enum;
 using View.UI.ViewCetegoria;
 using View.UI.ViewEstoque;
-
+using System.Linq;
 namespace View.UI.ViewProduto
 {
     public partial class frmCadastrarProduto : Form
@@ -24,13 +24,10 @@ namespace View.UI.ViewProduto
             _produto = produto;
             _tipoOperacao = tipoOperacao;
             InitializeComponent();
-
         }
 
         private void MudarAnchorDoBotao(AnchorStyles anchorStyles)
-        {
-            btnCadastrar.Anchor = anchorStyles;
-        }
+                     => btnCadastrar.Anchor = anchorStyles;
         private void CarregarTextoDePermissao()
         {
 
@@ -64,17 +61,11 @@ namespace View.UI.ViewProduto
         }
 
         private void MudarTamanhoDoComboBoxCategoria(Size size)
-        {
-            cbbCategoria.Size = size;
-        }
+                     => cbbCategoria.Size = size;
         private void frmCadastrarProduto_Load(object sender, EventArgs e)
         {
-
-
             try
             {
-
-
                 CarregarCategoria();
                 CarregarTipoDeCadastro();
                 CarregarTextoDePermissao();
@@ -139,25 +130,17 @@ namespace View.UI.ViewProduto
                             MudarPosicaoDaLabel(posicao: new Point(13, 46), lbl: lblPrecoVenda);
                             MudarPosicaoDoPictureBox(ptb: ptbPrecoVenda, location: new Point(108, 44));
                             if (cbbTipoCadastro.Text == "Peso")
-                            {
                                 MudarPosicaoDoTextBox(posicao: new Point(97, 44), txt: txtPrecoVenda);
-                            }
                             else
-                            {
                                 MudarPosicaoDoTextBox(posicao: new Point(136, 44), txt: txtPrecoVenda);
-                            }
                             EsconderLabel(lbl: lblPrecoCompra);
                             MudarPosicaoDoPictureBox(ptb: ptbPrecoVenda, location: new Point(263, 44));
                             EsconderPtb(ptb: ptbPrecoCompra);
                             EsconderGruopBox(gpbPorcentagemLucro);
                             EsconderTextBox(txt: txtPrecoCompra);
                         }
-
                         break;
-
                 }
-
-
             }
             catch (CustomException erro)
             {
@@ -172,58 +155,32 @@ namespace View.UI.ViewProduto
         }
 
         private void EsconderLabel(Label lbl)
-        {
-            lbl.Visible = false;
-        }
-
+                     => lbl.Visible = false;
         private void EsconderTextBox(TextBox txt)
-        {
-            txt.Visible = false;
-        }
-
+                     => txt.Visible = false;
         private void EsconderPtb(PictureBox ptb)
-        {
-            ptb.Visible = false;
-        }
-
+                     => ptb.Visible = false;
         private void MudarPosicaoDoPictureBox(PictureBox ptb, Point location)
-        {
-            ptbPrecoVenda.Location = location;
-        }
-
+                     => ptbPrecoVenda.Location = location;
         private void MudarPosicaoDaLabel(Point posicao, Label lbl)
-        {
-            lbl.Location = posicao;
-        }
-
+                     => lbl.Location = posicao;
         private void MudarPosicaoDoTextBox(Point posicao, TextBox txt)
-        {
-            txt.Location = posicao;
-        }
-
+                     => txt.Location = posicao;
         private void ComboBoxCheckado()
         {
             if (ckbEstoque.Checked == false)
-            {
                 EsconderGruopBox(gpbEstoque);
-            }
         }
 
 
 
         private void DesabilitarCheckBox()
-        {
-            ckbEstoque.Enabled = false;
-        }
+                     => ckbEstoque.Enabled = false;
 
         private void EsconderButton(Button btn)
-        {
-            btn.Hide();
-        }
+                     => btn.Hide();
         private void DesabilitarGroupBoxDeTipoDeCadastro()
-        {
-            gpbTipoCadastro.Enabled = false;
-        }
+                     => gpbTipoCadastro.Enabled = false;
         private void CarregarTipoDeCadastro()
         {
 
@@ -245,43 +202,20 @@ namespace View.UI.ViewProduto
             }
 
         }
-
-
-
         private void InstanciarTipoCadastroRepositorio()
-        {
-            _tipoCadastroRepositorio = new TipoCadastroRepositorio();
-        }
-
-
-
-
+                     => _tipoCadastroRepositorio = new TipoCadastroRepositorio();
         private void MudarTextoDoBotao(string texto)
-        {
-            btnCadastrar.Text = texto;
-        }
-
+                     => btnCadastrar.Text = texto;
         private void DesabilitarCampos()
         {
-            foreach (Control gpb in this.Controls)
-            {
-                if (gpb is GroupBox)
-                {
-                    gpb.Enabled = false;
-                }
-            }
+            foreach (Control gpb in this.Controls.OfType<GroupBox>())
+                gpb.Enabled = false;
         }
 
         private void MudarTextoDoForm(string texto)
-        {
-            this.Text = texto;
-        }
-
+                     => this.Text = texto;
         private void MudarCorDoBotao(Color color)
-        {
-            btnCadastrar.BackColor = color;
-        }
-
+                     => btnCadastrar.BackColor = color;
         private void PopulaTxt()
         {
             try
@@ -296,10 +230,7 @@ namespace View.UI.ViewProduto
                     case "Peso":
                         PopulartxtPadrao();
                         break;
-
                 }
-
-
             }
             catch (CustomException erro)
             {
@@ -314,7 +245,6 @@ namespace View.UI.ViewProduto
 
         private void CarregarComboBoxDeAcordoComTipoDeCadastro()
         {
-
             try
             {
                 cbbTipoCadastro.Text = _tipoCadastroRepositorio.GetNomePeloID(_produto.TipoCadastro);
@@ -328,16 +258,11 @@ namespace View.UI.ViewProduto
                 SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
-
-
         }
-
         private void PopulatxtUnidade()
         {
-
             try
             {
-
                 txtEstoque.Text = _produto.Quantidade.ToString();
                 txtEstoque.Text = _produto.Quantidade.ToString();
                 txtQtdMaxima.Text = _produto.QuantidadeMaxima.ToString();
@@ -354,10 +279,7 @@ namespace View.UI.ViewProduto
                 SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
-
-
         }
-
         private void PopulartxtPadrao()
         {
 
@@ -369,18 +291,14 @@ namespace View.UI.ViewProduto
             txtPrecoCompra.Text = _produto.PrecoCompra.ToString();
             txtPrecoVenda.Text = _produto.PrecoVenda.ToString();
             if (_produto.GerenciarEstoque == false)
-            {
                 EsconderGruopBox(gpbEstoque);
-            }
             ckbEstoque.Checked = _produto.GerenciarEstoque;
         }
 
         private void CarregarCategoria()
         {
-
             try
             {
-
                 InstanciarCategoriaRepositorio();
                 _categoriaRepositorio.CarregaCategoria(cbbCategoria);
 
@@ -394,15 +312,11 @@ namespace View.UI.ViewProduto
                 SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
-
-
         }
         private void CarregarCategoriaComSelecao()
         {
-
             try
             {
-
                 InstanciarCategoriaRepositorio();
                 _categoriaRepositorio.CarregaCategoriaSelecionada(cbbCategoria);
 
@@ -416,8 +330,6 @@ namespace View.UI.ViewProduto
                 SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
-
-
         }
         private void btnCadastrar_Click(object sender, EventArgs e)
         {
@@ -428,13 +340,10 @@ namespace View.UI.ViewProduto
                     case EnumTipoOperacao.Salvar:
                         if (VerificarTxtNulos() == 0)
                         {
-
                             InstanciarProdutoRepositorio();
                             Produto prod = PupularProduto();
                             if (prod.Categoria == 0)
-                            {
                                 MyErro.MyCustomException("Categoria é obrigatório.");
-                            }
                             else
                             {
                                 if (_produtoRepositorio.Salvar(prod) == Sucesso)
@@ -446,10 +355,7 @@ namespace View.UI.ViewProduto
 
                         }
                         else
-                        {
                             AvisarUsuarioComCamposEmBranco();
-
-                        }
                         break;
                     case EnumTipoOperacao.Alterar:
 
@@ -463,9 +369,7 @@ namespace View.UI.ViewProduto
                             }
                         }
                         else
-                        {
                             AvisarUsuarioComCamposEmBranco();
-                        }
                         break;
                     case EnumTipoOperacao.Deletar:
                         if (_produto.ID != 0)
@@ -530,65 +434,33 @@ namespace View.UI.ViewProduto
             finally
             {
                 frmAlertaEstoque form = (frmAlertaEstoque)Application.OpenForms[name: nameof(frmAlertaEstoque)];
-                if (form != null)
-                {
-                    form.CarregarDgv();
-                }
+                form?.CarregarDgv();
+
             }
-
-
         }
 
         private void AvisarUsuarioComCamposEmBranco()
         {
             if (cbbTipoCadastro.Text == EnumTipoCadastro.Peso.ToString())
-            {
                 FocarNoTxt(ListaTxtPeso().ValidarCampos());
-            }
             else
-            {
                 FocarNoTxt(ListaTxtUnidade().ValidarCampos());
-            }
-        }
-
-        private void Dosamthing()
-        {
-            throw new NotImplementedException();
         }
 
         private void FecharForm()
-        {
-            this.Close();
-        }
-
+                     => this.Close();
         private void MensagemDeAviso(string texto)
-        {
-            DialogMessage.MessageFullComButtonOkIconeDeInformacao(texto, "Aviso");
-        }
-
-
-
+                     => DialogMessage.MessageFullComButtonOkIconeDeInformacao(texto, "Aviso");
         private void PosSalvamento()
-        {
-            this.DialogResult = DialogResult.Yes;
-        }
-
+                     => this.DialogResult = DialogResult.Yes;
         private void InstanciarProdutoRepositorio()
-        {
-            _produtoRepositorio = new ProdutoRepositorio();
-        }
-
+                     => _produtoRepositorio = new ProdutoRepositorio();
         private void InstanciarCategoriaRepositorio()
-        {
-            _categoriaRepositorio = new CategoriaRepositorio();
-        }
-
+                     => _categoriaRepositorio = new CategoriaRepositorio();
         private Produto PupularProduto()
         {
-
             try
             {
-
                 InstanciarTipoCadastroRepositorio();
                 Produto produto = new Produto();
                 switch (cbbTipoCadastro.Text)
@@ -615,11 +487,8 @@ namespace View.UI.ViewProduto
         }
         private int VerificarTxtNulos()
         {
-
             try
             {
-
-
                 int retorno = 0;
                 if (ckbEstoque.Checked == true)
                 {
@@ -726,10 +595,8 @@ namespace View.UI.ViewProduto
                           => new TextBox[] { txtCodigo, txtNome, txtPrecoCompra, txtPrecoVenda, txtQtdMaxima, txtQtdMinima, txtEstoque };
         private void PreenchimentoDoProdutoPorUnidade(Produto produto)
         {
-
             try
             {
-
                 if (ckbEstoque.Checked)
                 {
                     produto.Quantidade = Convert.ToInt32(txtEstoque.Text.Length == 0 ? 0 : Convert.ToInt32(txtEstoque.Text));
@@ -742,8 +609,6 @@ namespace View.UI.ViewProduto
                     produto.QuantidadeMaxima = null;
                     produto.QuantidadeMinima = null;
                 }
-
-
             }
             catch (CustomException erro)
             {
@@ -753,17 +618,12 @@ namespace View.UI.ViewProduto
             {
                 throw new Exception(erro.Message);
             }
-
-
         }
 
         private void PreenchimentoDoProdutoPadrao(Produto produto)
         {
-
             try
             {
-
-
                 if (_categoriaRepositorio.GetIdDaCategoriaPeloNome(cbbCategoria.Text) != 0)
                 {
                     produto.Categoria = _categoriaRepositorio.GetIdDaCategoriaPeloNome(cbbCategoria.Text);
@@ -784,10 +644,7 @@ namespace View.UI.ViewProduto
                             produto.Porcentagem = Convert.ToInt32(txtPorcentagem.Text.Length == 0 ? 0 : Convert.ToInt32(txtPorcentagem.Text));
                             break;
                     }
-
                 }
-
-
             }
             catch (CustomException erro)
             {
@@ -799,12 +656,7 @@ namespace View.UI.ViewProduto
                 SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
-
-
         }
-
-
-
         private void cbbTipoCadastro_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -862,8 +714,6 @@ namespace View.UI.ViewProduto
                         MudarTextoDaLabel(lbl: lblPrecoCompra, texto: "Custo kilo");
                         MudarTextoDaLabel(lbl: lblPrecoVenda, texto: "Preço kilo");
                         break;
-
-
                 }
 
             }
@@ -880,61 +730,25 @@ namespace View.UI.ViewProduto
         }
 
         private void MudarTamanhoDotxt(TextBox txt, Size size)
-        {
-            txt.Size = size;
-        }
-
+                     => txt.Size = size;
         private void MudarTextoDaLabel(Label lbl, string texto)
-        {
-            lbl.Text = texto;
-        }
-
-
-
+                     => lbl.Text = texto;
         private void MudarTextoDoComboBox(GroupBox gpb, string texto)
-        {
-            gpb.Text = texto;
-        }
-
+                     => gpb.Text = texto;
         private void FocarNoTxt(TextBox txt)
-        {
-            this.FocoNoTxt(txt);
-        }
-
-
-
+                     => this.FocoNoTxt(txt);
         private void LimparCheckBox()
-        {
-            ckbEstoque.Checked = false;
-        }
-
+                     => ckbEstoque.Checked = false;
         private void MostrarCheck()
-        {
-            ckbEstoque.Visible = true;
-        }
-
+                     => ckbEstoque.Visible = true;
         private void MudarPosicaoDoGroupBoxTipoCadastro(Point point)
-        {
-            gpbTipoCadastro.Location = point;
-        }
-
+                     => gpbTipoCadastro.Location = point;
         private void DefinirMaxLenghtDoTxtEstoque(int tamanho)
-        {
-            txtPorcentagem.MaxLength = tamanho;
-        }
-
+                     => txtPorcentagem.MaxLength = tamanho;
         private void EsconderCheckBox()
-        {
-            ckbEstoque.Visible = false;
-        }
-
+                     => ckbEstoque.Visible = false;
         private void DesabilitarGroupBox(GroupBox[] groupBox)
-        {
-            foreach (GroupBox gpb in groupBox)
-            {
-                gpb.Enabled = false;
-            }
-        }
+                     => Array.ForEach(groupBox, c => c.Enabled = false);
 
         private void DeixarTxtComoNaoObrigatorio()
         {
@@ -948,29 +762,7 @@ namespace View.UI.ViewProduto
         }
 
         private void DeixarTxtComoObrigatorio(TextBox[] txtList)
-        {
-
-            try
-            {
-
-                foreach (TextBox txt in txtList)
-                {
-                    txt.BackColor = Color.Yellow;
-                }
-
-            }
-            catch (CustomException erro)
-            {
-                DialogMessage.MessageFullComButtonOkIconeDeInformacao(erro.Message, "Aviso");
-            }
-            catch (Exception erro)
-            {
-                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
-                DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
-            }
-
-        }
-
+                     => Array.ForEach(txtList, c => c.BackColor = Color.Yellow);
         private void DesabilitarGroupBoxDadosDoPeso(GroupBox gpb)
         {
             switch (cbbTipoCadastro.Text)
@@ -981,22 +773,14 @@ namespace View.UI.ViewProduto
                 case "Peso":
                     gpb.Enabled = false;
                     break;
-
             }
-
-
         }
-
-
         private void LimparTodosOsTxt()
         {
             txtPrecoVenda.TextChanged -= txtPrecoVenda_TextChanged;
             txtPrecoCompra.TextChanged -= txtPrecoCompra_TextChanged;
             TextBox[] textBoxList = TodosOsTxt();
-            foreach (TextBox txt in textBoxList)
-            {
-                txt.Text = string.Empty;
-            }
+            Array.ForEach(textBoxList, c => c.Text = string.Empty);
             txtPrecoVenda.TextChanged += txtPrecoVenda_TextChanged;
             txtPrecoCompra.TextChanged += txtPrecoCompra_TextChanged;
 
@@ -1004,42 +788,33 @@ namespace View.UI.ViewProduto
 
         private TextBox[] TodosOsTxt()
         {
+            return new TextBox[]
+            {
+                txtCodigo,
+                txtDescricao,
+                txtEstoque,
+                txtNome,
+                txtPorcentagem,
+                txtPrecoCompra,
+                txtPrecoVenda,
+                txtQtdMaxima,
+                txtQtdMinima
+            };
 
-            TextBox[] textBoxList = { txtCodigo, txtDescricao, txtEstoque, txtNome, txtPorcentagem, txtPrecoCompra, txtPrecoVenda, txtQtdMaxima, txtQtdMinima };
-
-            return textBoxList;
         }
 
         private void MudarPosicaoDoBotao(Point point)
-        {
-            btnCadastrar.Location = point;
-        }
-
-
+                     => btnCadastrar.Location = point;
         private void AparecerGruopBox(GroupBox gpb)
-        {
-            gpb.Visible = true;
-        }
-
+                     => gpb.Visible = true;
         private void MudarTamanhoDotxtDescricao(Size size)
-        {
-            txtDescricao.Size = size;
-        }
-
+                     => txtDescricao.Size = size;
         private void EsconderGruopBox(GroupBox gpb)
-        {
-            gpb.Visible = false;
-        }
-
+                     => gpb.Visible = false;
         private void MudarTamanhoDoform(Size size)
-        {
-            this.Size = size;
-        }
-
-
+                     => this.Size = size;
         private void txtPrecoVenda_TextChanged(object sender, EventArgs e)
         {
-
             try
             {
                 CalcularPorcentagem();
@@ -1053,8 +828,6 @@ namespace View.UI.ViewProduto
                 SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
-
-
         }
 
         private void txtPrecoCompra_TextChanged(object sender, EventArgs e)
@@ -1076,12 +849,9 @@ namespace View.UI.ViewProduto
 
         private void CalcularPorcentagem()
         {
-
             try
             {
-
                 txtPorcentagem.Text = Calcular.CalcularPorcentagem(txtPrecoCompra: txtPrecoCompra, txtPrecoVenda: txtPrecoVenda);
-
             }
             catch (CustomException erro)
             {
@@ -1092,15 +862,11 @@ namespace View.UI.ViewProduto
                 SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
-
         }
-
         private void btnAdicionarCategoria_Click(object sender, EventArgs e)
         {
-
             try
             {
-
                 if (OpenMdiForm.OpenForWithShowDialog(new frmCadastrarCategoria(new Categoria(), EnumTipoOperacao.Salvar)) == DialogResult.Yes)
                 {
                     CarregarCategoriaComSelecao();
@@ -1117,17 +883,13 @@ namespace View.UI.ViewProduto
                 SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
-
         }
-
         private void txtCodigo_KeyPress(object sender, KeyPressEventArgs e)
         {
             ValidatorField.IntegerAndLetter(e: e);
             ValidatorField.NoSpace(e);
             if ((Keys)e.KeyChar == Keys.Enter)
-            {
                 FocarNoTxt(txtNome);
-            }
         }
 
         private void txtNome_KeyPress(object sender, KeyPressEventArgs e)
@@ -1142,31 +904,20 @@ namespace View.UI.ViewProduto
                     MostrarItensDoCbb(cbb: cbbCategoria);
                 }
                 else
-                {
                     FocarNoBotao(btnAdicionarCategoria);
-                }
-
             }
         }
 
         private void MostrarItensDoCbb(ComboBox cbb)
-        {
-            cbb.DroppedDown = true;
-        }
-
+                     => cbb.DroppedDown = true;
         private void FocarNoCbb(ComboBox cbb)
-        {
-            this.ActiveControl = cbb;
-        }
-
+                     => this.ActiveControl = cbb;
         private void txtDescricao_KeyPress(object sender, KeyPressEventArgs e)
         {
             ValidatorField.IntegerAndLetter(e: e);
             ValidatorField.AllowOneSpaceTogether(e, sender);
             if ((Keys)e.KeyChar == Keys.Enter)
-            {
                 FocarNoTxt(txtPrecoCompra);
-            }
         }
 
 
@@ -1177,9 +928,7 @@ namespace View.UI.ViewProduto
             ValidatorField.NoVirgula(e: e, sender: sender);
             ValidatorField.Money(e: e);
             if ((Keys)e.KeyChar == Keys.Enter)
-            {
                 FocarNoTxt(txtPrecoVenda);
-            }
         }
 
         private void txtPrecoVenda_KeyPress(object sender, KeyPressEventArgs e)
@@ -1187,98 +936,50 @@ namespace View.UI.ViewProduto
             ValidatorField.NoVirgula(e: e, sender: sender);
             ValidatorField.Money(e: e);
             if ((Keys)e.KeyChar == Keys.Enter)
-            {
                 FocarNoBotao(btnCadastrar);
-            }
         }
 
         private void FocarNoBotao(Button btn)
-        {
-            this.FocoNoBotao(btn);
-        }
-
+                     => this.FocoNoBotao(btn);
         private void txtEstoque_KeyPress(object sender, KeyPressEventArgs e)
         {
             ValidatorField.NoVirgula(e: e, sender: sender);
             ValidatorField.Integer(e: e);
             if ((Keys)e.KeyChar == Keys.Enter)
-            {
                 FocarNoTxt(txtQtdMinima);
-            }
         }
 
         private void txtQtdMinima_KeyPress(object sender, KeyPressEventArgs e)
         {
             ValidatorField.Integer(e: e);
             if ((Keys)e.KeyChar == Keys.Enter)
-            {
                 FocarNoTxt(txtQtdMaxima);
-            }
         }
 
         private void txtQtdMaxima_KeyPress(object sender, KeyPressEventArgs e)
         {
             ValidatorField.Integer(e: e);
             if ((Keys)e.KeyChar == Keys.Enter)
-            {
                 FocarNoBotao(btnCadastrar);
-            }
         }
 
         private void cbbCategoria_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            FocarNoTxt(txt: txtDescricao);
-        }
-
-
-
+                     => FocarNoTxt(txt: txtDescricao);
         private void LimparTxt(List<TextBox> txtList)
-        {
-
-            try
-            {
-
-                foreach (var txt in txtList)
-                {
-                    if (txt is TextBox)
-                    {
-                        txt.Text = string.Empty;
-                    }
-                }
-
-            }
-            catch (CustomException erro)
-            {
-                DialogMessage.MessageFullComButtonOkIconeDeInformacao(erro.Message, "Aviso");
-            }
-            catch (Exception erro)
-            {
-                SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
-                DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
-            }
-
-
-        }
+                     => txtList.ForEach(c => c.Text = string.Empty);
 
         private void ckbEstoque_CheckedChanged(object sender, EventArgs e)
         {
-
             try
             {
-
                 if (ckbEstoque.Checked)
                 {
                     AparecerGruopBox(gpbEstoque);
                     MudarTamanhoDoform(new Size(701, 572));
                     MudarPosicaoDoBotao(new Point(12, 471));
-                    if (_tipoOperacao == EnumTipoOperacao.Estoque || _tipoOperacao == EnumTipoOperacao.Alterar)
-                    {
-                        FocarNoTxt(txt: txtEstoque);
-                    }
-                    else
-                    {
-                        FocarNoTxt(txtCodigo);
-                    }
+                    FocarNoTxt(_tipoOperacao == EnumTipoOperacao.Estoque 
+                            || _tipoOperacao == EnumTipoOperacao.Alterar ?
+                                txtEstoque : txtCodigo);
 
                 }
                 else if (ckbEstoque.Checked == false)
@@ -1304,13 +1005,9 @@ namespace View.UI.ViewProduto
         private void cbbCategoria_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Enter)
-            {
                 FocarNoTxt(txtDescricao);
-            }
             else
-            {
                 FocarNoCbb(cbbCategoria);
-            }
         }
     }
 }

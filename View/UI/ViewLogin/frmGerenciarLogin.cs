@@ -23,18 +23,13 @@ namespace View.UI.ViewLogin
                 case "Caixa":
                     btnDeletar.Visible = false;
                     break;
-             
-
-
             }
         }
         private void frmGerenciarLogin_Load(object sender, EventArgs e)
         {
-
             try
             {
-                
-                this.FocoNoTxt(txt:txtPesquisar);
+                this.FocoNoTxt(txt: txtPesquisar);
                 InstanciaUsuarioRepositorio();
                 _usuarioRepositorio.Listar(dgvUsuarios);
                 dgvUsuarios.PadronizarGrid();
@@ -49,19 +44,12 @@ namespace View.UI.ViewLogin
                 SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
-
-
-
         }
         private void txtPesquisar_TextChanged(object sender, EventArgs e)
         {
-
-
             try
             {
-
                 CarregaGrid();
-
             }
             catch (CustomException erro)
             {
@@ -72,11 +60,7 @@ namespace View.UI.ViewLogin
                 SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
-
-
-
         }
-
         private void CarregaGrid()
         {
 
@@ -84,11 +68,7 @@ namespace View.UI.ViewLogin
             {
                 InstanciaUsuarioRepositorio();
                 if (_usuarioRepositorio.GetQuantidadeUsuarios() > 0)
-                {
-                    
                     _usuarioRepositorio.PesquisarPorNome(dgvUsuarios, txtPesquisar.Text);
-
-                }
             }
             catch (CustomException erro)
             {
@@ -99,25 +79,15 @@ namespace View.UI.ViewLogin
                 SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
-
         }
-
         private void InstanciaUsuarioRepositorio()
-        {
-            _usuarioRepositorio = new UsuarioRepositorio();
-        }
-
+                     => _usuarioRepositorio = new UsuarioRepositorio();
         private void btnNovo_Click(object sender, EventArgs e)
         {
-
-
             try
             {
-
                 if (OpenMdiForm.OpenForWithShowDialog(new frmCadastrarLogin(new Usuarios(), EnumTipoOperacao.Salvar)) == DialogResult.Yes)
-                {
                     CarregaGrid();
-                }
             }
             catch (CustomException erro)
             {
@@ -128,14 +98,9 @@ namespace View.UI.ViewLogin
                 SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
-
-
         }
-
         private void btnAlterar_Click(object sender, EventArgs e)
         {
-
-
             try
             {
                 if (dgvUsuarios.Rows.Count > 0)
@@ -143,16 +108,10 @@ namespace View.UI.ViewLogin
                     InstanciaUsuarioRepositorio();
                     Usuarios usuario = _usuarioRepositorio.GetUsuarioPorLogin(PegaLinhaSelecionadaDOGrid());
                     if (OpenMdiForm.OpenForWithShowDialog(new frmCadastrarLogin(usuario, EnumTipoOperacao.Alterar)) == DialogResult.Yes)
-                    {
                         CarregaGrid();
-                    }
                 }
                 else
-                {
                     MyErro.MyCustomException("Selecione um Usuário");
-                }
-             
-
             }
             catch (CustomException erro)
             {
@@ -163,10 +122,6 @@ namespace View.UI.ViewLogin
                 SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
-
-
-
-
         }
 
         private string PegaLinhaSelecionadaDOGrid()
@@ -186,14 +141,10 @@ namespace View.UI.ViewLogin
             {
                 throw new Exception(erro.Message);
             }
-
-
-
         }
 
         private void btnDeletar_Click(object sender, EventArgs e)
         {
-
             try
             {
                 if (dgvUsuarios.Rows.Count > 0)
@@ -201,16 +152,10 @@ namespace View.UI.ViewLogin
                     InstanciaUsuarioRepositorio();
                     Usuarios usuario = _usuarioRepositorio.GetUsuarioPorLogin(PegaLinhaSelecionadaDOGrid());
                     if (OpenMdiForm.OpenForWithShowDialog(new frmCadastrarLogin(usuario, EnumTipoOperacao.Deletar)) == DialogResult.Yes)
-                    {
                         CarregaGrid();
-                    }
                 }
                 else
-                {
                     MyErro.MyCustomException("Selecione um Usuário");
-                }
-             
-              
             }
             catch (CustomException erro)
             {
@@ -221,10 +166,7 @@ namespace View.UI.ViewLogin
                 SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
-
-
         }
-
         private void dgvUsuarios_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
 
@@ -234,7 +176,6 @@ namespace View.UI.ViewLogin
             {
                 try
                 {
-                   
                     Usuarios usuario = _usuarioRepositorio.GetUsuarioPorLogin(PegaLinhaSelecionadaDOGrid());
                     OpenMdiForm.OpenForWithShowDialog(new frmCadastrarLogin(usuario, EnumTipoOperacao.Detalhes));
                     LimparTxt();
@@ -248,39 +189,22 @@ namespace View.UI.ViewLogin
                 {
                     SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                     DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
-                } 
+                }
             }
 
         }
 
         private void FocarNoTxt()
-        {
-            this.FocoNoTxt(txtPesquisar);
-        }
-
+                     => this.FocoNoTxt(txtPesquisar);
         private void LimparTxt()
-        {
-            txtPesquisar.Text = string.Empty;
-        }
-
+                     => txtPesquisar.Text = string.Empty;
         private void btnSair_Click(object sender, EventArgs e)
-        {
-            FecharForm();
-        }
-
+                     => FecharForm();
         private void FecharForm()
-        {
-            this.Close();
-        }
-
+                     => this.Close();
         private void txtPesquisar_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            ValidatorField.AllowOneSpaceTogether(e, sender);
-        }
-
+                     => ValidatorField.AllowOneSpaceTogether(e, sender);
         private void dgvUsuarios_KeyDown(object sender, KeyEventArgs e)
-        {
-            ValidatorField.DisableTabInGrid(sender, e);
-        }
+                     => ValidatorField.DisableTabInGrid(sender, e);
     }
 }

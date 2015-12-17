@@ -30,13 +30,9 @@ namespace View.UI.ViewEstoque
             }
             catch (Exception)
             {
-
                 throw;
             }
-           
-
         }
-
         public void CarregarDgv()
         {
             try
@@ -86,9 +82,6 @@ namespace View.UI.ViewEstoque
                 SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 throw;
             }
-
-
-
         }
 
         private void PlaceLowerRight()

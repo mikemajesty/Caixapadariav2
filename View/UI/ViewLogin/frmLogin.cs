@@ -21,19 +21,12 @@ namespace View.UI.ViewLogin
 
             try
             {
-                FocarNotxt(txt:txtLogin);
-               
+                FocarNotxt(txt: txtLogin);
                 InstanciarKeyGenRepositorio();
-                if (_keyGenRepositorio.GetDiasTrail() == 0)
-                {
-                    lblExpirar.Text = "Atenção sua licença expirou";
-                }
-                else
-                {
-                    lblExpirar.Text = "Atenção " + _keyGenRepositorio.GetDiasTrail().ToString("00") + " para expirar o Programa";
-                   
-                }
-                
+                lblExpirar.Text = _keyGenRepositorio.GetDiasTrail() == 0
+                    ? "Atenção sua licença expirou"
+                    : "Atenção " + _keyGenRepositorio.GetDiasTrail().ToString("00") + " para expirar o Programa";
+
             }
             catch (CustomException erro)
             {
@@ -49,15 +42,9 @@ namespace View.UI.ViewLogin
         }
 
         private void FocarNotxt(TextBox txt)
-        {
-            this.FocoNoTxt(txt: txt);
-        }
-
+                     => this.FocoNoTxt(txt: txt);
         private void InstanciarKeyGenRepositorio()
-        {
-            _keyGenRepositorio = new KeyGenRepositorio();
-        }
-
+                     => _keyGenRepositorio = new KeyGenRepositorio();
         private void btnEntrar_Click(object sender, EventArgs e)
         {
             try
@@ -73,27 +60,22 @@ namespace View.UI.ViewLogin
                 SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(message: erro.Message, title: "Erro");
             }
-
-
         }
-
         private void Logar()
         {
             try
-            { 
-
-
+            {
                 UsuarioRepositorio _usuarioRepositorio = new UsuarioRepositorio();
                 if (_usuarioRepositorio.Logar(PreencherLogin()))
                 {
                     new UsuarioRepositorio().AdicionarUltimoAcesso(PreencherLogin().Login);
-                    OpenMdiForm.OpenForWithShow(formParaAbrir: new frmMenu(_usuarioRepositorio.GetUsuarioPorLogin(PreencherLogin().Login)),formParaFechar:this);
+                    OpenMdiForm.OpenForWithShow(formParaAbrir: new frmMenu(_usuarioRepositorio.GetUsuarioPorLogin(PreencherLogin().Login)), formParaFechar: this);
                 }
                 else if (_usuarioRepositorio.GetUsuarioPorLogin(PreencherLogin().Login) == null && _usuarioRepositorio.GetUsuarioPorSenha(PreencherLogin().Senha) != null)
                 {
-                    DialogMessage.MessageFullComButtonOkIconeDeInformacao("O Login: "+ PreencherLogin().Login+" não esta cadastrado.", "Aviso");
-                    LimparTxt(new List<TextBox> {txtLogin});
-                    FocarNotxt(txt:txtLogin);
+                    DialogMessage.MessageFullComButtonOkIconeDeInformacao("O Login: " + PreencherLogin().Login + " não esta cadastrado.", "Aviso");
+                    LimparTxt(new List<TextBox> { txtLogin });
+                    FocarNotxt(txt: txtLogin);
                 }
                 else if (_usuarioRepositorio.GetUsuarioPorSenha(PreencherLogin().Senha) == null && _usuarioRepositorio.GetUsuarioPorLogin(PreencherLogin().Login) != null)
                 {
@@ -104,14 +86,13 @@ namespace View.UI.ViewLogin
                 else
                 {
                     DialogMessage.MessageFullComButtonOkIconeDeInformacao("Login e senha incorretos.", "Aviso");
-                    LimparTxt(new List<TextBox> { txtLogin,txtSenha});
+                    LimparTxt(new List<TextBox> { txtLogin, txtSenha });
                     FocarNotxt(txt: txtLogin);
                 }
             }
             catch (CustomException erro)
             {
                 DialogMessage.MessageFullComButtonOkIconeDeInformacao(message: erro.Message, title: "Aviso");
-                
             }
             catch (Exception erro)
             {
@@ -122,46 +103,34 @@ namespace View.UI.ViewLogin
         }
 
         private void LimparTxt(List<TextBox> list)
-        {
-            list.ForEach(c => c.Text = string.Empty);
-        }
-
+                     => list.ForEach(c => c.Text = string.Empty);
         private Usuarios PreencherLogin()
-        {
-            return new Usuarios() { Login = txtLogin.Text.Trim(), Senha = txtSenha.Text.Trim() };
-        }
+            => new Usuarios()
+            {
+                Login = txtLogin.Text.Trim(),
+                Senha = txtSenha.Text.Trim()
+            };
+
 
         private void btnSair_Click(object sender, EventArgs e)
-        {
-            FecharForm();
-        }
-
+                     => FecharForm();
         private void FecharForm()
-        {
-            Application.Exit();
-        }
-
+                     => Application.Exit();
         private void txtLogin_KeyPress(object sender, KeyPressEventArgs e)
         {
             ValidatorField.AllowOneSpaceTogether(e, sender);
             if (e.KeyChar == (char)Keys.Enter)
-            {
-                FocarNotxt(txt:txtSenha);
-            }
+                FocarNotxt(txt: txtSenha);
         }
 
         private void txtSenha_KeyPress(object sender, KeyPressEventArgs e)
         {
             ValidatorField.AllowOneSpaceTogether(e, sender);
             if (e.KeyChar == (char)Keys.Enter)
-            {
                 FocarNoBtn(btn: btnEntrar);
-            }
         }
 
         private void FocarNoBtn(Button btn)
-        {
-            this.FocoNoBotao(btn);
-        }
+                     => this.FocoNoBotao(btn);
     }
 }

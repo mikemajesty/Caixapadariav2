@@ -33,11 +33,8 @@ namespace View.UI.ViewLogin
 
         private void frmLogin_Load(object sender, EventArgs e)
         {
-
             try
             {
-
-
                 CarregarPermissao();
                 switch (_tipoOperacao)
                 {
@@ -98,16 +95,12 @@ namespace View.UI.ViewLogin
 
         private void VerificarSeExistemAlgumUsuarioCadastrado()
         {
-
             try
             {
                 InstanciarUsuarioRepositorio();
 
                 if (_usuarioRepositorio.GetQuantidadeUsuarios() == 0)
-                {
                     DesabilitarComboBox(cbbPermissao);
-                }
-
             }
             catch (CustomException erro)
             {
@@ -169,13 +162,10 @@ namespace View.UI.ViewLogin
 
         private void DesabilitarCampos()
         {
-            foreach (Control gpb in this.Controls)
+            foreach (Control gpb in this.Controls.OfType<GroupBox>())
             {
-                if (gpb is GroupBox)
-                {
-                    gpb.BackColor = Color.Transparent;
-                    gpb.Enabled = false;
-                }
+                gpb.BackColor = Color.Transparent;
+                gpb.Enabled = false;
             }
         }
 
@@ -189,8 +179,6 @@ namespace View.UI.ViewLogin
         {
             try
             {
-
-
                 txtNome.Text = usuarios.NomeCompleto;
                 txtLogin.Text = usuarios.Login;
                 txtSenha.Text = usuarios.Senha;
@@ -215,8 +203,6 @@ namespace View.UI.ViewLogin
                 SaveErroInTxt.RecordInTxt(erro, this.GetType().Name);
                 DialogMessage.MessageComButtonOkIconeErro(erro.Message, "Erro");
             }
-
-
         }
         private void FocarNoTxt(TextBox txt) => this.FocoNoTxt(txt);
 
@@ -225,23 +211,15 @@ namespace View.UI.ViewLogin
             new PermissaoRepositorio().ListarPermissao(cbbPermissao);
             cbbPermissao.DropDownStyle = ComboBoxStyle.DropDownList;
         }
-
-
         private void MensagemDeSucesso(string mensagem) => DialogMessage.MessageFullComButtonOkIconeDeInformacao(mensagem, "Aviso");
 
         private void InstanciarUsuarioRepositorio() => _usuarioRepositorio = new UsuarioRepositorio();
-
-
         private void PosSalvamento()
         {
             if (Application.OpenForms.Count > 1)
-            {
                 this.DialogResult = DialogResult.Yes;
-            }
             else
-            {
                 OpenMdiForm.OpenForWithShow(new frmLogin(), this);
-            }
         }
         private Usuarios PreencherUsuario() =>
         new Usuarios()
@@ -258,14 +236,11 @@ namespace View.UI.ViewLogin
         {
             try
             {
-
                 InstanciarUsuarioRepositorio();
                 int numeroDeTxtVazio = SeTxtEstaVazio();
                 switch (_tipoOperacao)
                 {
-                  
                     case EnumTipoOperacao.Salvar:
-
                         if (numeroDeTxtVazio == 0)
                         {
                             if (_usuarioRepositorio.Salvar(PreencherUsuario()) == Sucesso)
@@ -274,10 +249,9 @@ namespace View.UI.ViewLogin
                                 PosSalvamento();
                             }
                         }
-                        else                         
-                        {
+                        else
                             FocarNoTxt(GetTxtRequired().ValidarCampos());
-                        }
+
                         break;
                     case EnumTipoOperacao.Alterar:
                         if (numeroDeTxtVazio == 0)
@@ -289,32 +263,21 @@ namespace View.UI.ViewLogin
                                 {
                                     frmMenu form = (frmMenu)Application.OpenForms[name: nameof(frmMenu)];
                                     if (form != null)
-                                    {
                                         form.LblUsuarioTexto = nomeCompleto;
-                                    }
-
                                 }
                                 MensagemDeSucesso("Usuário alterado com sucesso");
                                 this.DialogResult = DialogResult.Yes;
                             }
                         }
                         else if (numeroDeTxtVazio > 0)
-                        {
                             FocarNoTxt(GetTxtRequired().ValidarCampos());
-                        }
-
                         break;
                     case EnumTipoOperacao.Deletar:
 
                         if (_usuarios.ID == Usuarios.IDStatic)
-                        {
                             DialogMessage.MessageFullComButtonOkIconeDeInformacao("Não é possível excluir o seu próprio usuário enquanto estiver logado no sistema.", "Aviso");
-
-                        }
                         else if (new UsuariosBO().VerificarSeExisteAdministrador(usuario: PreencherUsuario()))
-                        {
                             DialogMessage.MessageFullComButtonOkIconeDeInformacao("Você não pode excluir o unico administrador do sistema.", "Aviso");
-                        }
                         else if (_usuarios.ID > 0)
                         {
                             if (_usuarioRepositorio.Deletar(PreencherUsuario()) == Sucesso)
@@ -322,7 +285,7 @@ namespace View.UI.ViewLogin
                                 MensagemDeSucesso("Usuário deletado com sucesso");
                                 this.DialogResult = DialogResult.Yes;
                             }
-                        }                        
+                        }
                         break;
                     case EnumTipoOperacao.Detalhes:
                         FecharForm();
@@ -332,7 +295,7 @@ namespace View.UI.ViewLogin
 
             catch (CustomException erro)
             {
-                DialogMessage.MessageFullComButtonOkIconeDeInformacao(erro.Message, "Aviso");                
+                DialogMessage.MessageFullComButtonOkIconeDeInformacao(erro.Message, "Aviso");
             }
             catch (DbUpdateException erro)
             {
@@ -354,7 +317,7 @@ namespace View.UI.ViewLogin
             {
                 TextBox[] txtList = GetTxtRequired();
                 int retorno = 0;
-                txtList.ToList().ForEach(c => retorno += c.Text.Trim() == "" ? 1 : 0);             
+                Array.ForEach(txtList, c => retorno += c.Text.Trim() == "" ? 1 : 0);
                 return retorno;
             }
             catch (CustomException erro)
@@ -368,9 +331,9 @@ namespace View.UI.ViewLogin
 
         }
 
-        private TextBox[] GetTxtRequired() => 
+        private TextBox[] GetTxtRequired() =>
             new TextBox[] { txtNome, txtLogin, txtSenha, txtConfirmarSenha };
-       
+
         private void FecharForm() => this.Close();
 
         private void txtNome_KeyPress(object sender, KeyPressEventArgs e)
@@ -378,9 +341,7 @@ namespace View.UI.ViewLogin
             ValidatorField.Letter(e: e);
             ValidatorField.AllowOneSpaceTogether(e, sender);
             if (e.KeyChar == (char)Keys.Enter)
-            {
                 FocarNoTxt(txt: txtLogin);
-            }
         }
 
         private void cbbPermissao_SelectedIndexChanged(object sender, EventArgs e)
@@ -398,8 +359,7 @@ namespace View.UI.ViewLogin
                 case "Restrito":
                     ltbDadosDoAcesso.Items.Add("Pesquisa, caixa, relatórios");
                     break;
-                default:
-                    break;
+
             }
         }
 
@@ -407,18 +367,14 @@ namespace View.UI.ViewLogin
         {
             ValidatorField.AllowOneSpaceTogether(e, sender);
             if (e.KeyChar == (char)Keys.Enter)
-            {
                 FocarNoTxt(txt: txtSenha);
-            }
         }
 
         private void txtSenha_KeyPress(object sender, KeyPressEventArgs e)
         {
             ValidatorField.AllowOneSpaceTogether(e, sender);
             if (e.KeyChar == (char)Keys.Enter)
-            {
                 FocarNoTxt(txt: txtConfirmarSenha);
-            }
         }
 
         private void txtConfirmarSenha_KeyPress(object sender, KeyPressEventArgs e)
@@ -429,34 +385,21 @@ namespace View.UI.ViewLogin
                 if (cbbPermissao.Enabled == true)
                 {
                     this.ActiveControl = cbbPermissao;
-                    MostrarItensDoCbb(cbb:cbbPermissao);
+                    MostrarItensDoCbb(cbb: cbbPermissao);
                 }
                 else
-                {
                     FocarNoBtn(btn: btnCadastrar);
-                }
-
             }
         }
 
         private void MostrarItensDoCbb(ComboBox cbb)
-        {
-            cbb.DroppedDown = true;
-        }
-
+                     => cbb.DroppedDown = true;
         private void FocarNoBtn(Button btn)
-        {
-            this.FocoNoBotao(btn);
-        }
-
+                     => this.FocoNoBotao(btn);
         private void cbbPermissao_KeyPress(object sender, KeyPressEventArgs e)
         {
-
             if (e.KeyChar == (char)Keys.Enter)
-            {
-
                 FocarNoBtn(btn: btnCadastrar);
-            }
         }
     }
 }

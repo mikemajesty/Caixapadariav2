@@ -29,7 +29,7 @@ namespace View.UI.ViewComanda
         private void frmCadastrarComanda_Load(object sender, EventArgs e)
         {
             MudarCorDoBotao();
-            this.FocoNoTxt(txt:txtComanda);
+            this.FocoNoTxt(txt: txtComanda);
             switch (this._tipoOperacao)
             {
                 case EnumTipoOperacao.Alterar:
@@ -48,51 +48,32 @@ namespace View.UI.ViewComanda
         }
 
         private void DesabilitarGruopBox()
-        {
-            gpbCodigoDaComanda.Enabled = false;
-        }
-
+                     => gpbCodigoDaComanda.Enabled = false;
         private void PopularTxt()
-        {
-            txtComanda.Text = _comanda.Codigo;
-        }
-
+                     => txtComanda.Text = _comanda.Codigo;
         private void MudarTextoDoBotao(string texto)
-        {
-            btnCadastrar.Text = texto;
-        }
-
+                     => btnCadastrar.Text = texto;
         private void MudarCorDoBotao()
         {
             switch (_tipoOperacao)
             {
-               
                 case EnumTipoOperacao.Alterar:
                     MudarCorDoBotao(Color.LightGreen);
                     break;
                 case EnumTipoOperacao.Deletar:
                     MudarCorDoBotao(Color.LightCoral);
                     break;
-               
             }
-
         }
         private void MudarCorDoBotao(Color color)
-        {
-            btnCadastrar.BackColor = color;
-        }
+                     => btnCadastrar.BackColor = color;
         private void MudarTextoDoForm(string texto)
-        {
-            this.Text = texto;
-        }
+                     => this.Text = texto;
         private void btnCadastrar_Click(object sender, EventArgs e)
         {
-
             try
             {
-
                 InstanciaComandaRepositorio();
-
                 switch (this._tipoOperacao)
                 {
                     case EnumTipoOperacao.Salvar:
@@ -105,11 +86,7 @@ namespace View.UI.ViewComanda
                             }
                         }
                         else
-                        {
                             MyErro.MyCustomException("Todos os campos em amarelo são obrigatórios.");
-                        }
-                       
-
                         break;
                     case EnumTipoOperacao.Alterar:
                         if (SeTxtEstaVazio() == 0)
@@ -121,10 +98,7 @@ namespace View.UI.ViewComanda
                             }
                         }
                         else
-                        {
                             MyErro.MyCustomException("Todos os campos em amarelo são obrigatórios.");
-                        }
-                     
                         break;
                     case EnumTipoOperacao.Deletar:
                         if (SeTxtEstaVazio() == 0)
@@ -136,12 +110,9 @@ namespace View.UI.ViewComanda
                             }
                         }
                         else
-                        {
                             MyErro.MyCustomException("Todos os campos em amarelo são obrigatórios.");
-                        }
-                      
                         break;
-                  
+
                 }
 
             }
@@ -149,10 +120,7 @@ namespace View.UI.ViewComanda
             {
                 DialogMessage.MessageFullComButtonOkIconeDeInformacao(erro.Message, "Aviso");
                 if (_tipoOperacao != EnumTipoOperacao.Deletar)
-                {
                     LimparTxt();
-                }
-            
                 FocarNoTxt();
             }
             catch (Exception erro)
@@ -165,57 +133,37 @@ namespace View.UI.ViewComanda
         }
 
         private void FocarNoTxt()
-        {
-            this.FocoNoTxt(txtComanda);
-        }
-
+                       => this.FocoNoTxt(txtComanda);
         private void LimparTxt()
-        {
-            txtComanda.Text = string.Empty;
-        }
+                     => txtComanda.Text = string.Empty;
         private int SeTxtEstaVazio()
         {
             int retorno = 0;
             if (txtComanda.Text.Trim().Length == 0)
-            {
                 retorno = 1;
-            }
             return retorno;
         }
         private void PosSalvamento()
-        {
-            this.DialogResult = DialogResult.Yes;
-        }
-
+                     => this.DialogResult = DialogResult.Yes;
         private void MenssagemDeInformacao(string mensagem, string title)
-        {
-            DialogMessage.MessageFullComButtonOkIconeDeInformacao(mensagem, title);
-        }
-
+                     => DialogMessage.MessageFullComButtonOkIconeDeInformacao(mensagem, title);
         private Comanda PopularComanda()
-        {
-            return new Comanda() { ID = _comanda.ID, Codigo = txtComanda.Text.Trim() };
-
-        }
-
+            => new Comanda()
+            {
+                ID = _comanda.ID,
+                Codigo = txtComanda.Text.Trim()
+            };
         private void InstanciaComandaRepositorio()
-        {
-            comandaRepositorio = new ComandaRepositorio();
-        }
-
+                     => comandaRepositorio = new ComandaRepositorio();
         private void txtComanda_KeyPress(object sender, KeyPressEventArgs e)
         {
             ValidatorField.IntegerAndLetter(e: e);
             ValidatorField.NoSpace(e);
             if (e.KeyChar == (char)Keys.Enter)
-            {
                 FocarNoBtn();
-            }
         }
 
         private void FocarNoBtn()
-        {
-            this.ActiveControl = btnCadastrar;
-        }
+                     => this.ActiveControl = btnCadastrar;
     }
 }
