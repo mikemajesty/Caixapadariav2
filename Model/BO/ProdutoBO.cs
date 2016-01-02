@@ -44,10 +44,7 @@ namespace Model.BO
                 if (_banco.Produto.Find(produto.ID).Codigo != produto.Codigo)
                 {
                     if (_banco.Produto.Any(c => c.Codigo == produto.Codigo))
-                    {
                         existe = true.RetornaErro("Produto com esse código já esta cadastrado.");
-                    }
-
                 }
                 return existe;
 
@@ -69,9 +66,7 @@ namespace Model.BO
                 bool existe = false;
 
                 if (_banco.VendaComComandaAtiva.FirstOrDefault(c => c.IDProduto == produto.ID) != null)
-                {
                     existe = true.RetornaErro("Não é possível deletar um produto que esta na Comanda");
-                }
                 return existe;
 
             }
@@ -92,9 +87,7 @@ namespace Model.BO
                 bool existe = false;
 
                 if (_banco.MovimentacaoProduto.FirstOrDefault(c => c.Codigo == produto.Codigo && c.Valor > 0) != null)
-                {
                     existe = true.RetornaErro("Não é possível deletar um produto que esta na Movimentação de Produto");
-                }
                 return existe;
 
             }

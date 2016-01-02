@@ -162,14 +162,8 @@ namespace Controller.Repositorio
             try
             {
                 Categoria categoria = _banco.Categoria.FirstOrDefault(c => c.Nome == nome);
-                if (categoria != null)
-                {
-                    return categoria.ID;
-                }
-                else
-                {
-                    return 0;
-                }
+                return categoria != null ? categoria.ID : 0;
+              
             }
             catch (CustomException erro)
             {

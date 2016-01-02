@@ -40,9 +40,7 @@ namespace Model.BO
                 if (_banco.Cliente.Find(cliente.ID).CPF !=  cliente.CPF)
                 {
                     if (_banco.Cliente.Any(c => c.CPF == cliente.CPF))
-                    {
                         retorno = Existe.RetornaErro("CPF já existe.");
-                    }
                 }
                 return retorno;
             }

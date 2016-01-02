@@ -126,9 +126,7 @@ namespace View.UI.ViewSangria
         {
             ValidatorField.AllowOneSpaceTogether(e, sender);
             if (e.KeyChar == (char)Keys.Enter)
-            {
                 FocarNoBtn(btn: btnRetirar);
-            }
         }
         private void FocarNoBtn(Button btn)
                      => this.FocoNoBotao(btn);
@@ -139,10 +137,7 @@ namespace View.UI.ViewSangria
             if (e.KeyChar == (char)Keys.Enter)
             {
                 if ((sender as TextBox).Text.Length == 0)
-                {
                     FocarNoTxt(txt: txtDescricao);
-                }
-
             }
         }
 
@@ -172,9 +167,7 @@ namespace View.UI.ViewSangria
                                 });
                             new MovimentacaoCaixaRepositorio().RetirarValor(valor: sangria, data: DateTime.Now);
                             if (resultCaixaRetirar > 0)
-                            {
                                 this.DialogResult = DialogResult.Yes;
-                            }
                         }
                         break;
 
@@ -192,9 +185,7 @@ namespace View.UI.ViewSangria
                 SaveErroInTxt.RecordInTxt(error, this.GetType().Name);
                 DialogMessage.MessageFullComButtonOkIconeDeInformacao(message: error.Message, title: "Aviso");
             }
-
         }
-
         private void FecharForm()
                      => this.Close();
         private Sangria PreencherSangria()

@@ -41,9 +41,7 @@ namespace Model.BO
                 if (_banco.Categoria.Find(categoria.ID).Nome != categoria.Nome)
                 {
                     if (_banco.Categoria.Any(c=>c.Nome == categoria.Nome))
-                    {
                         retorno = Existe.RetornaErro("Categoria já existe.");
-                    }
                 }
                 return retorno;
             }

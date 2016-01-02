@@ -40,14 +40,10 @@ namespace Model.BO
             {
 
                 bool existe = false;
-
                 if (_banco.Comanda.Find(comanda.ID).Codigo != comanda.Codigo)
                 {
                     if (_banco.Comanda.Any(c => c.Codigo == comanda.Codigo))
-                    {
                         existe = true.RetornaErro("Comanda já existe.");
-                    }
-
                 }
                 return existe;
 

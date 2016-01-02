@@ -23,17 +23,17 @@ namespace Model.Entidades
 
                 if (value.Length == 0)
                 {
-                      MyErro.MyCustomException("Códido não pode ser vazio.");
+                    MyErro.MyCustomException("Códido não pode ser vazio.");
                 }
                 else if (value.Length > 20)
                 {
                     MyErro.MyCustomException("Códido não pode conter mais de 20 letras ou numeros.");
-                }                
+                }
                 else
                 {
                     _codigo = value;
                 }
-               
+
             }
         }
         private string _nome;
@@ -41,9 +41,9 @@ namespace Model.Entidades
         public string Nome
         {
             get { return _nome; }
-            set 
+            set
             {
-               
+
                 if (value.Length == 0)
                 {
                     MyErro.MyCustomException("Nome não pode ser vazio.");
@@ -54,9 +54,9 @@ namespace Model.Entidades
                 }
                 else
                 {
-                    _nome = value; 
+                    _nome = value;
                 }
-               
+
             }
         }
         private int _categoria;
@@ -64,7 +64,7 @@ namespace Model.Entidades
         public int Categoria
         {
             get { return _categoria; }
-            set 
+            set
             {
                 if (value <= 0)
                 {
@@ -74,7 +74,7 @@ namespace Model.Entidades
                 {
                     _categoria = value;
                 }
-                
+
             }
         }
         private decimal _precoCompra;
@@ -82,7 +82,7 @@ namespace Model.Entidades
         public decimal PrecoCompra
         {
             get { return _precoCompra; }
-            set 
+            set
             {
                 if (value < 0)
                 {
@@ -96,7 +96,7 @@ namespace Model.Entidades
                 {
                     _precoCompra = value;
                 }
-              
+
             }
         }
         private decimal _precoVenda;
@@ -104,7 +104,7 @@ namespace Model.Entidades
         public decimal PrecoVenda
         {
             get { return _precoVenda; }
-            set 
+            set
             {
                 if (value < _precoCompra)
                 {
@@ -118,7 +118,7 @@ namespace Model.Entidades
                 {
                     _precoVenda = value;
                 }
-               
+
             }
         }
         private string _descricao;
@@ -126,7 +126,7 @@ namespace Model.Entidades
         public string Descricao
         {
             get { return _descricao; }
-            set 
+            set
             {
                 if (value.Length > 70)
                 {
@@ -134,9 +134,9 @@ namespace Model.Entidades
                 }
                 else
                 {
-                    _descricao = value; 
+                    _descricao = value;
                 }
-                
+
             }
         }
         private Nullable<int> _porcentagem;
@@ -144,22 +144,22 @@ namespace Model.Entidades
         public Nullable<int> Porcentagem
         {
             get { return _porcentagem; }
-            set 
+            set
             {
-              
-                 if (value > int.MaxValue)
+
+                if (value > int.MaxValue)
                 {
                     MyErro.MyCustomException("Porcentagem não pode ser muito alta.");
                 }
-                 else if (value < 0)
-                 {
-                     MyErro.MyCustomException("Porcentagem não pode ser menor que zero.");
-                 }
+                else if (value < 0)
+                {
+                    MyErro.MyCustomException("Porcentagem não pode ser menor que zero.");
+                }
                 else
                 {
-                    _porcentagem = value; 
+                    _porcentagem = value;
                 }
-               
+
             }
         }
         private int _tipoCadastro;
@@ -170,7 +170,7 @@ namespace Model.Entidades
             set { _tipoCadastro = value; }
         }
 
-        private bool  _gerenciarEstoque;
+        private bool _gerenciarEstoque;
 
         public bool GerenciarEstoque
         {

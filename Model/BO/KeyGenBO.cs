@@ -20,7 +20,6 @@ namespace Model.BO
             try
             {
                 return _banco.Datas.FirstOrDefault(c => c.Data == data.Data);
-
             }
             catch (CustomException erro)
             {

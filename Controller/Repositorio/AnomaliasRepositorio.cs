@@ -80,10 +80,7 @@ namespace Controller.Repositorio
             {
                 var data = DateTime.Now;
                 if (this.GetQuantidade() > 0)
-                {
-                    data =  _Banco.Anomalias.Max(c => c.Data);
-
-                }
+                    data = _Banco.Anomalias.Max(c => c.Data);
                 return data;
             }
             catch (CustomException error)
@@ -104,9 +101,7 @@ namespace Controller.Repositorio
             {
                 var data = DateTime.Now;
                 if (this.GetQuantidade() > 0)
-                {
                     data = _Banco.Anomalias.Min(c => c.Data);
-                }
                 return data;
             }
             catch (CustomException error)

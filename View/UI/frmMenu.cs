@@ -186,13 +186,9 @@ namespace View
         private void InstanciarTipoPagamentoRepositorio() => _tipoPagamentoRepositorio = new TipoPagamentoRepositorio();
 
         private void InstanciarTipoCadastroRepositorio()
-        {
-            _tipoCadastroRepositorio = new TipoCadastroRepositorio();
-        }
+                     => _tipoCadastroRepositorio = new TipoCadastroRepositorio();
         private void btnGerenciar_Click(object sender, EventArgs e)
         {
-
-
             try
             {
                 OpenMdiForm.LoadNewKeepAnother(this, new frmGerenciarLogin());
@@ -230,9 +226,7 @@ namespace View
         private static void Sair()
         {
             if (DialogMessage.MessageFullQuestion("Deseja realmente sair?", "Aviso") == DialogResult.Yes)
-            {
                 Application.Exit();
-            }
         }
 
         private void btnGerenciarComanda_Click(object sender, EventArgs e)
@@ -427,13 +421,8 @@ namespace View
                 report.GerarRelatoriosComParametrosDefinidosNaQueryPDF();
                 espere.CancelarTask();
                 if (espere.Cancel.IsCancellationRequested)
-                {
-                    if (frmEspera != null)
-                    {
-                        frmEspera.Close();
-                    }
+                    frmEspera?.Close();
 
-                }
             }
             catch (CustomException error)
             {
@@ -448,13 +437,7 @@ namespace View
             {
                 espere.CancelarTask();
                 if (espere.Cancel.IsCancellationRequested)
-                {
-                    if (frmEspera != null)
-                    {
-                        frmEspera.Close();
-                    }
-
-                }
+                    frmEspera?.Close();
             }
         }
 
@@ -501,13 +484,7 @@ namespace View
                 });
                 espere.CancelarTask();
                 if (espere.Cancel.IsCancellationRequested)
-                {
-                    if (frmEspera != null)
-                    {
-                        frmEspera.Close();
-                    }
-
-                }
+                    frmEspera?.Close();
             }
             catch (CustomException error)
             {
@@ -522,19 +499,12 @@ namespace View
             {
                 espere.CancelarTask();
                 if (espere.Cancel.IsCancellationRequested)
-                {
-                    if (frmEspera != null)
-                    {
-                        frmEspera.Close();
-                    }
-
-                }
+                    frmEspera?.Close();
             }
         }
 
         private void btnSangria_Click(object sender, EventArgs e)
         {
-
             try
             {
                 OpenMdiForm.LoadNewKeepAnother(this, new frmSangria());

@@ -157,10 +157,8 @@ namespace View.UI.ViewSangria
                 int idSangria = Convert.ToInt32(dgvSangria.CurrentRow.Cells[0].Value);
                 InstanciarSangriaRepositorio();
                 SangriaViewModel sangriaViewModel = _sangriaRepositorio.GetViewModelPorID(id: idSangria);
-                if (OpenMdiForm.OpenForWithShowDialog(new frmCriarSangria(EnumSangria.Exibir, sangriaViewModel)) == DialogResult.Yes)
-                {
-                    MessageBox.Show("Test");
-                }
+                if (OpenMdiForm.OpenForWithShowDialog(new frmCriarSangria(EnumSangria.Exibir, sangriaViewModel)) == DialogResult.Yes) ;
+               
             }
             catch (CustomException error)
             {

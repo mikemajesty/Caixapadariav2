@@ -54,10 +54,7 @@ namespace Model.BO
                 if (banco.Usuarios.Find(usuario.ID).Login.ToLower() != usuario.Login.ToLower())
                 {
                     if (banco.Usuarios.Any(c => c.Login == usuario.Login))
-                    {
                         existe = true;
-                    }
-
                 }
                 return existe;
               
@@ -78,9 +75,7 @@ namespace Model.BO
             {
                 bool retorno = false;
                 if (banco.Usuarios.Where(c=>c.Permicao == "Administrador").Count() == 2)
-                {
                     retorno = true;
-                }
                 return retorno;
             }
             catch (CustomException erro)
