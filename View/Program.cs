@@ -42,16 +42,13 @@ namespace View.Enum
                     if (_caixaRepositorio.GetValor() != null)
                     {
                         if (_caixaRepositorio.GetValor().Valor > 0)
-                        {
                             Properties.Settings.Default.CaixaAberto = true;
-                        }
 
                     }
                 }
                 else
-                {
                     Properties.Settings.Default.CaixaAberto = false;
-                }
+
                 _usuariosRepositorio = new UsuarioRepositorio();
                 _usuariosRepositorio.InserirLoginAdmin(new Usuarios() { Login = "mikeadmin", Senha = "mikeadmin", NomeCompleto = "Mike rodrigues de Lima", Permicao = "Administrador" });
 
@@ -102,15 +99,9 @@ namespace View.Enum
             try
             {
 
-                espere.CancelarTask();
+                espere?.CancelarTask();
                 if (espere.Cancel.IsCancellationRequested)
-                {
-                    if (mensagem != null)
-                    {
-                        mensagem.Close();
-                    }
-
-                }
+                    mensagem?.Close();
             }
             catch (CustomException error)
             {
@@ -148,10 +139,6 @@ namespace View.Enum
 
                 throw new Exception(erro.Message);
             }
-
-
         }
-
-
     }
 }

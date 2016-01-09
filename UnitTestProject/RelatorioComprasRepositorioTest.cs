@@ -1,10 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Model.Entidades;
 using Mike.Utilities.Desktop;
-using Model.BO;
 using Controller.Repositorio;
-using System.Linq;
 namespace UnitTestProject
 {
     [TestClass]

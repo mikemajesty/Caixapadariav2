@@ -116,10 +116,7 @@ namespace Controller.Repositorio
                     return _banco.SaveChanges() == Sucesso ? Sucesso : Insucesso;
                 }
                 else
-                {
                     throw new CustomException("Não é possível deletar uma Categoria associada a um produto.");
-                }
-
             }
             catch (CustomException erro)
             {
@@ -251,8 +248,8 @@ namespace Controller.Repositorio
         {
             try
             {
-                Categoria categoria = _banco.Categoria.OrderByDescending(c => c.ID).FirstOrDefault();
-                return categoria.Nome;
+                return _banco.Categoria.OrderByDescending(c => c.ID).FirstOrDefault()?.Nome;
+                
             }
             catch (CustomException erro)
             {
