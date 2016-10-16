@@ -176,8 +176,6 @@ namespace Controller.Repositorio
                 throw new Exception(erro.Message);
             }
         }
-
-
     }
 }
 
