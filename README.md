@@ -1,4 +1,7 @@
-<h1> **Programa de gerenciamento comercial**</h1> <br/>
+## Programa de gerenciamento comercial
+
+</h1> 
+
 Sistema de comanda eletrônica - Caixa.  Esse sistema possui muitas funcionalidade e módulos, entre eles estão 
 
   **1. Gerenciamento de usuários** <br/>
@@ -38,3 +41,11 @@ Sistema de comanda eletrônica - Caixa.  Esse sistema possui muitas funcionalida
    **9. Relatórios** <br/>
 	9.1. Relatórios de compras <br/>
 	9.2. Relatório de conferencia de estoque.  <br/>
+	
+<hr>
+
+### License
+
+It is available under the MIT license.
+[License](https://opensource.org/licenses/mit-license.php)
+
